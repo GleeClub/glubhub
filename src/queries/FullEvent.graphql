@@ -1,0 +1,54 @@
+query FullEvent($id: Int!) {
+  event(id: $id) {
+    name
+    semester
+    type
+    callTime
+    releaseTime
+    points
+    comments
+    location
+    gigCount
+    defaultAttend
+    gig {
+      summary
+      description
+    }
+    userAttendance {
+      shouldAttend
+    	didAttend
+    	confirmed
+      minutesLate
+      rsvpIssue
+      approvedAbsence
+      denyCredit
+    }
+    allAttendance(emptyIfNotPermitted: true) {
+      member {
+        fullName
+        email
+        semester {
+          section
+        }
+      }
+      didAttend
+      shouldAttend
+      confirmed
+      minutesLate
+    }
+    carpools {
+      driver {
+        email
+        fullName
+      }
+      passengers {
+        fullName
+        email
+      }
+    }
+    setlist {
+      title
+      id
+    }
+  }
+}

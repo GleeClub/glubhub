@@ -1,0 +1,92 @@
+query SiteContext {
+  user {
+    email
+    firstName
+    preferredName
+    lastName
+    fullName
+    phoneNumber
+    picture
+    passengers
+    location
+    onCampus
+    about
+    major
+    minor
+    hometown
+    arrivedAtTech
+    gatewayDrug
+    conflicts
+    dietaryRestrictions
+    semester {
+      semester
+      enrollment
+      section
+    }
+    positions {
+      name
+    }
+    permissions {
+      name
+      eventType
+    }
+    semesters {
+      semester
+      enrollment
+      section
+    }
+    grades {
+      grade
+      volunteerGigsAttended
+      eventsWithChanges {
+        event {
+          name
+          id
+        }
+        change {
+          partialScore
+          reason
+        }
+      }
+    }
+    transactions {
+      id
+      time
+      amount
+      description
+      semester
+      type
+      resolved
+    }
+  }
+  static {
+    sections {
+      name
+    }
+    permissions {
+      name
+      description
+      type
+    }
+    roles {
+      name
+      rank
+      maxQuantity
+    }
+    mediaTypes {
+      name
+    }
+    eventTypes {
+      name
+      weight
+    }
+    transactionTypes {
+      name
+    }
+    mediaTypes {
+      name
+      order
+      storage
+    }
+  }
+}

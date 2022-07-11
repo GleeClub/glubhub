@@ -1,0 +1,5 @@
+mutation RegisterForSemester($newSemester: RegisterForSemesterForm!) {
+  registerForSemester(newSemester: $newSemester) {
+    email
+  }
+}

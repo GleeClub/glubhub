@@ -1,0 +1,51 @@
+<script lang="ts">
+  import AdminLinks from './AdminLinks.svelte'
+  import DocumentLinks from './DocumentLinks.svelte'
+  import Navlink from './Navlink.svelte'
+  import HomeLogo from './HomeLogo.svelte'
+  import BurgerButton from './BurgerButton.svelte'
+
+  import { routeEvents, routeMinutes, routeRepertoire, routeRoster, routeProfile } from 'route/constructors'
+  import { renderRoute } from 'route/render'
+  import { route } from 'store/route'
+  import { siteContext } from 'store/context'
+
+  let expanded = false
+</script>
+
+<nav
+  class="navbar is-primary is-fixed-top"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div class="navbar-brand">
+    <HomeLogo />
+    {#if $siteContext.user}
+      <BurgerButton {expanded} toggleExpanded={() => expanded = !expanded} />
+    {/if}
+  </div>
+  <div class={'navbar-menu' + (expanded ? ' is-active' : '')}>
+    {#if $siteContext.user}
+      <div class="navbar-start">
+        <Navlink route={routeEvents(null, null)} />
+        <Navlink route={routeRepertoire(null, null)} />
+        <Navlink route={routeRoster} />
+        <Navlink route={routeMinutes(null, null)} />
+        <DocumentLinks />
+        <AdminLinks />
+      </div>
+      <div class="navbar-end">
+        <a
+          class={'navbar-item' +
+            ($route?.route === 'profile' &&
+            $route.email === $siteContext.user?.email
+              ? ' is-active'
+              : '')}
+          href={renderRoute(routeProfile($siteContext.user.email, null))}
+        >
+          {$siteContext.user.fullName}
+        </a>
+      </div>
+    {/if}
+  </div>
+</nav>

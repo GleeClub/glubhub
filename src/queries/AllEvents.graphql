@@ -1,0 +1,12 @@
+query AllEvents {
+  events {
+    id
+    name
+    callTime
+    releaseTime
+    userAttendance {
+      shouldAttend
+      confirmed
+    }
+  }
+}

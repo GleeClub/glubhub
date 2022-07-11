@@ -1,0 +1,14 @@
+schema: https://api.glubhub.org
+documents: './src/**/*.graphql'
+generates:
+  ./src/gql-operations.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+      - urql-svelte-operations-store
+    config:
+      scalars:
+        GqlDate: string
+        GqlDateTime: string
+        UniformColor: string

@@ -1,0 +1,12 @@
+query ConfirmSemesterForm {
+  user {
+    location
+    onCampus
+    previousSemester {
+      enrollment
+      section
+    }
+    dietaryRestrictions
+    conflicts
+  }
+}

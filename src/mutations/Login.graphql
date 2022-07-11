@@ -1,0 +1,3 @@
+mutation Login($email: String!, $passHash: String!) {
+    login(email: $email, passHash: $passHash)
+}

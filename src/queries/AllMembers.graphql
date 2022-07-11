@@ -1,0 +1,11 @@
+query AllMembers {
+  members {
+    email
+    phoneNumber
+    fullName
+    location
+    semester {
+      section
+    }
+  }
+}
