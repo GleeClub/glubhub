@@ -1,0 +1,6 @@
+query AllDocumentLinks {
+  links {
+    name
+    url
+  }
+}

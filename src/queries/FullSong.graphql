@@ -1,0 +1,20 @@
+query FullSong($id: Int!) {
+  song(id: $id) {
+    id
+    title
+    info
+    current
+    key
+    startingPitch
+    mode
+    linkSections {
+      name
+      links {
+        id
+        name
+        type
+        target
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation CreateMinutes($name: String!) {
+  createMeetingMinutes(name: $name) {
+    id
+  }
+}

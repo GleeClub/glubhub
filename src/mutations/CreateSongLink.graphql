@@ -1,0 +1,5 @@
+mutation CreateSongLink($songId: Int!, $newLink: NewSongLink!) {
+  createSongLink(songId: $songId, newLink: $newLink) {
+    id
+  }
+}

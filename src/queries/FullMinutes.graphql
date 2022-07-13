@@ -1,0 +1,9 @@
+query FullMinutes($id: Int!) {
+  meetingMinutes(id: $id) {
+    id
+    name
+    date
+    public
+    private
+  }
+}

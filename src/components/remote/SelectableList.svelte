@@ -5,31 +5,29 @@
   import Box from 'components/bulma/Box.svelte'
   import Remote from 'components/remote/Remote.svelte'
 
-  import type { RemoteData } from 'state/types'
+  import { LazyRemoteData, mapLazyLoaded } from 'state/types'
   import { GOLD_COLOR } from 'utils/constants'
-  import { mapLoaded } from 'state/types'
+  import { createEventDispatcher } from 'svelte';
 
   type T = $$Generic
 
   interface $$Props {
-    itemGroups: RemoteData<T[][]>
-    title: string | undefined
-    isSelected: (item: T) => boolean
-    select: (item: T) => void
-    messageIfEmpty: string
+    itemGroups: LazyRemoteData<T[][]>;
+    isSelected: (item: T) => boolean;
+    render: (item: T) => string;
+    title: string;
+    messageIfEmpty: string;
   }
 
-  interface $$Slots {
-    [key: string]: T
-  }
+  export let itemGroups: LazyRemoteData<T[][]>;
+  export let isSelected: (item: T) => boolean;
+  export let render: (item: T) => string;
+  export let title: string = ""
+  export let messageIfEmpty: string
 
-  export let itemGroups: RemoteData<T[][]>
-  export let title: string | undefined = undefined
-  export let isSelected: (item: T) => boolean
-  export let select: (item: T) => void
-  export let messageIfEmpty: string | undefined = undefined
+  const dispatch = createEventDispatcher<{ select: T }>();
 
-  $: nonEmptyGroups = mapLoaded(itemGroups, (gs) => gs.filter((g) => g.length))
+  $: nonEmptyGroups = mapLazyLoaded(itemGroups, (gs) => gs.filter((g) => g.length))
 </script>
 
 <Column narrow>
@@ -49,12 +47,10 @@
               {#each groups as group, groupIndex}
                 {#each group as item}
                   <tr
-                    style="background-color: {isSelected(item)
-                       ? GOLD_COLOR
-                      : ''}"
-                    on:click={() => select(item)}
+                    style:background-color={isSelected(item) ? GOLD_COLOR : ''}
+                    on:click={() => dispatch("select", item)}
                   >
-                    <slot {item} />
+                    <td>{render(item)}</td>
                   </tr>
                 {/each}
                 {#if groupIndex < groups.length - 1}

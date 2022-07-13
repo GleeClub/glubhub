@@ -1,0 +1,5 @@
+mutation CreateUniform($newUniform: NewUniform!) {
+  createUniform(newUniform: $newUniform) {
+    id
+  }
+}

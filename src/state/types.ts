@@ -1,4 +1,5 @@
 import type { CombinedError } from '@urql/svelte';
+import { FullSongQuery, SiteContextQuery } from 'gql-operations';
 import type { Readable } from 'svelte/store';
 
 export interface NotLoaded {
@@ -32,7 +33,7 @@ export type RemoteData<Data = null> =
 export type MutationResult<Data = any> = 
   Loaded<Data> | RemoteError;
 
-export type LazyRemoteData<Data> =
+export type LazyRemoteData<Data = null> =
   NotLoaded | Loading | Loaded<Data> | RemoteError;
 
 export type RemoteStore<Data> = Readable<RemoteData<Data>>;
@@ -43,6 +44,22 @@ export function mapLoaded<Data, Mapped>(data: RemoteData<Data>, mapper: (loaded:
     return loaded(mapper(data.data));
   } else {
     return data;
+  }
+}
+
+export function mapLazyLoaded<Data, Mapped>(data: LazyRemoteData<Data>, mapper: (loaded: Data) => Mapped): LazyRemoteData<Mapped> {
+  if (data.type === 'loaded') {
+    return loaded(mapper(data.data));
+  } else {
+    return data;
+  }
+}
+
+export function stateFromResult(result: MutationResult<any>): RemoteData {
+  if (result.type === "loaded") {
+    return emptyLoaded;
+  } else {
+    return result;
   }
 }
 
@@ -71,3 +88,14 @@ export interface HasAttendanceIconContext {
   confirmed: boolean
   shouldAttend: boolean
 }
+
+export interface HoveredEvent {
+  event: UserGradesEvent;
+  x: number;
+  y: number;
+}
+
+export type UserGrades = Exclude<SiteContextQuery['user'], null | undefined>['grades'];
+export type UserGradesEvent = UserGrades['eventsWithChanges'][number];
+export type UserVolunteerGig = UserGrades['volunteerGigsAttended'][number];
+export type FullSongLink = FullSongQuery['song']['linkSections'][number]['links'][number];

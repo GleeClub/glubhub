@@ -1,0 +1,8 @@
+query AllUniforms {
+  uniforms {
+    id
+    name
+    color
+    description
+  }
+}

@@ -14,8 +14,8 @@ export function query<Data = any, Variables = object>(query: TypedDocumentNode<D
   });
 }
 
-export function lazyQuery<Data = any, Variables = object>(query: TypedDocumentNode<Data, Variables>): [Readable<LazyRemoteData<Data>>, (variables: Variables) => void] {
-  const operation = operationStore(query);
+export function reexecutableQuery<Data = any, Variables = object>(query: TypedDocumentNode<Data, Variables>, variables: Variables): [Readable<LazyRemoteData<Data>>, (variables: Variables) => void] {
+  const operation = operationStore(query, variables);
   const reexecute = (variables: Variables) => {
     operation.variables = variables;
     operation.reexecute();

@@ -1,4 +1,10 @@
 query SiteContext {
+  currentSemester {
+    name
+    startDate
+    endDate
+    gigRequirement
+  }
   user {
     email
     firstName
@@ -37,13 +43,21 @@ query SiteContext {
     }
     grades {
       grade
-      volunteerGigsAttended
+      volunteerGigsAttended {
+        id
+        name
+        callTime
+        releaseTime
+      }
       eventsWithChanges {
         event {
-          name
           id
+          name
+          callTime
+          releaseTime
         }
         change {
+          change
           partialScore
           reason
         }

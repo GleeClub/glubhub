@@ -1,0 +1,5 @@
+mutation UpdateSong($id: Int!, $update: SongUpdate!) {
+  updateSong(id: $id, update: $update) {
+    id
+  }
+}

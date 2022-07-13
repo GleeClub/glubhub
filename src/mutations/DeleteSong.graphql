@@ -1,0 +1,5 @@
+mutation DeleteSong($id: Int!) {
+  deleteSong(id: $id) {
+    id
+  }
+}
