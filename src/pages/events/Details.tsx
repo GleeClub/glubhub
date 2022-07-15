@@ -1,25 +1,3 @@
-import React, { useState, useCallback, useContext } from "react";
-import { routeEvents, eventRequestAbsence, eventEdit } from "state/route";
-import DeleteModal from "components/DeleteModal";
-import { eventIsOver } from "utils/helpers";
-import { post, deleteRequest } from "utils/request";
-import { viewEventPrivateDetails } from "state/permissions";
-import { GlubEvent, SimpleAttendance, Uniform, Gig } from "state/models";
-import {
-  SubmissionState,
-  notSentYet,
-  sending,
-  errorSending,
-  isSending,
-  failedToSend
-} from "state/types";
-import { Divider, PhoneLink, EmailLink } from "components/Basics";
-import { Button } from "components/Buttons";
-import { fullDateTimeFormatter, timeFormatter } from "utils/datetime";
-import { GlubHubContext, useGlubRoute } from "utils/context";
-import ErrorBox from "components/ErrorBox";
-import { RequiresPermission } from "components/Complex";
-
 interface DetailsProps {
   event: GlubEvent;
   deletedEvent: () => void;
@@ -175,7 +153,7 @@ const AttendanceBlock: React.FC<AttendanceBlockProps> = ({
     );
   } else {
     // Can't confirm or RSVP, so show the error
-    return <p className="has-text-grey-light is-italic">{rsvpIssue}</p>;
+    return <p class="has-text-grey-light is-italic">{rsvpIssue}</p>;
   }
 };
 

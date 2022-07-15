@@ -1,0 +1,3 @@
+mutation AddOfficership($role: String!, $email: String!) {
+  addOfficership(role: $role, email: $email)
+}

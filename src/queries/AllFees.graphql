@@ -1,0 +1,7 @@
+query AllFees {
+  fees {
+    name
+    description
+    amount
+  }
+}

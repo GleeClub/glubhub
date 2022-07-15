@@ -1,0 +1,5 @@
+mutation CreateSemester($newSemester: NewSemester!) {
+  createSemester(newSemester: $newSemester) {
+    name
+  }
+}

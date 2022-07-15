@@ -1,0 +1,3 @@
+mutation RemoveOfficership($role: String!, $email: String!) {
+  removeOfficership(role: $role, email: $email)
+}

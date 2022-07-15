@@ -1,0 +1,3 @@
+mutation LoginAs($email: String!) {
+  loginAs(email: $email)
+}

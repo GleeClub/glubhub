@@ -1,0 +1,12 @@
+query MemberSemesters($email: String!) {
+  member(email: $email) {
+    semesters {
+      semester
+      enrollment
+      section
+      grades {
+        grade
+      }
+    }
+  }
+}

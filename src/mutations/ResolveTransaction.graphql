@@ -1,0 +1,5 @@
+mutation ResolveTransaction($id: Int!, $resolved: Boolean!) {
+  resolveTransaction(id: $id, resolved: $resolved) {
+    id
+  }
+}

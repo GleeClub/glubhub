@@ -1,22 +1,5 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { Member, Grades, SimpleAttendance, GlubEvent } from "state/models";
-import {
-  RemoteData,
-  loading,
-  isLoaded,
-  notSentYet,
-  sending,
-  mapLoaded,
-  resultToRemote,
-  resultToSubmissionState,
-  loaded
-} from "state/types";
-import { get, post } from "utils/request";
-import { RemoteContent, SubmissionStateBox } from "components/Complex";
-import { routeEvents, renderRoute } from "state/route";
-import { CheckboxInput, TextInput, numberType } from "components/Forms";
-import { dateFormatter } from "utils/datetime";
-import { Table } from "components/Table";
+<script lang="ts">
+</script>
 
 export const Attendance: React.FC<{ member: Member }> = ({ member }) => {
   const [grades, updateGrades] = useState<RemoteData<Grades>>(loading);

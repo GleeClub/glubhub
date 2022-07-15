@@ -1,3 +1,6 @@
+import { Enrollment, Period, Pitch, Semester, SiteContextQuery, SongMode, Uniform } from "gql-operations";
+import { titleCase } from "utils/helpers";
+
 export interface FormInputType<T> {
   toString: (t: T) => string;
   fromString: (s: string) => T;
@@ -55,33 +58,38 @@ export const numberType: FormInputType<number | null> = {
   textType: "number"
 };
 
-export function sectionType()
+export const sectionType = (
+  context: SiteContextQuery | null
 ): FormInputType<string | null> => ({
   toString: x => x || "No Section",
-  fromString: x => (info?.sections || []).find(s => s === x) || null,
+  fromString: x => context?.static.sections?.find(s => s.name === x)?.name || null,
   textType: "text"
 });
 
 export const uniformType = (
-  info: Info | null
+  uniforms: Uniform[]
 ): FormInputType<Uniform | null> => ({
   toString: u => u?.name || "(no uniform)",
-  fromString: u =>
-    (info?.uniforms || []).find(uniform => uniform.name === u) || null,
+  fromString: u => uniforms.find(uniform => uniform.name === u) || null,
   textType: "text"
 });
 
+export interface SimpleMember {
+  email: string;
+  fullName: string;
+}
+
 export const memberType = (
-  members: Member[]
-): FormInputType<Member | null> => ({
-  toString: member => (member ? fullName(member) : "(nobody)"),
-  fromString: name => members.find(m => fullName(m) === name) || null,
+  members: SimpleMember[]
+): FormInputType<SimpleMember | null> => ({
+  toString: member => member ? member.fullName : "(nobody)",
+  fromString: name => members.find(m => m.fullName === name) || null,
   textType: "text"
 });
 
 export const enrollmentType: FormInputType<Enrollment | null> = {
   toString: x => x || "Inactive",
-  fromString: x => (x === "Class" || x === "Club" ? x : null),
+  fromString: x => (x === "Class" || x === "Club" ? (x.toUpperCase() as Enrollment) : null),
   textType: "text"
 };
 
@@ -94,13 +102,19 @@ export const semesterType = (
 });
 
 export const pitchType: FormInputType<Pitch | null> = {
-  toString: p => (p ? pitchToUnicode(p) : "?"),
+  toString: p => p ? pitchToUnicode(p) : "?",
   fromString: pitchFromUnicode,
   textType: "text"
 };
 
 export const songModeType: FormInputType<SongMode | null> = {
   toString: sm => sm || "(no mode)",
-  fromString: sm => (["Major", "Minor"].includes(sm) ? (sm as SongMode) : null),
+  fromString: sm => (["Major", "Minor"].includes(sm) ? (sm.toUpperCase() as SongMode) : null),
+  textType: "text"
+};
+
+export const periodType: FormInputType<Period | null> = {
+  toString: x => x ? titleCase(x) : "No",
+  fromString: x => x === "No" ? null : x.toUpperCase() as Period,
   textType: "text"
 };

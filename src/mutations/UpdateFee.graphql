@@ -1,0 +1,5 @@
+mutation UpdateFee($name: String!, $amount: Int!) {
+  updateFeeAmount(name: $name, amount: $amount) {
+    name
+  }
+}

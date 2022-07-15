@@ -1,0 +1,5 @@
+mutation CreateEvent($newEvent: NewEvent!, $gigRequestId: Int) {
+  createEvent(newEvent: $newEvent, gigRequestId: $gigRequestId) {
+    id
+  }
+}

@@ -1,0 +1,15 @@
+query GigRequestForNewEvent($id: Int!) {
+  gigRequest(id: $id) {
+    id
+    time
+  	name
+    organization
+    contactName
+    contactPhone
+    contactEmail
+    startTime
+    location
+    comments
+    status
+  }
+}

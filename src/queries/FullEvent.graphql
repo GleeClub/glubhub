@@ -47,8 +47,11 @@ query FullEvent($id: Int!) {
       }
     }
     setlist {
-      title
       id
+      title
+      key
+      mode
+      startingPitch
     }
   }
 }

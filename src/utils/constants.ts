@@ -1,4 +1,4 @@
-import { Pitch, SongMode } from "gql-operations";
+import { Period, Pitch, SongMode } from "gql-operations";
 
 export const GREASE_TOKEN_NAME = "grease-token";
 export const GREASE_OLD_TOKEN_NAME = "grease-old-token";
@@ -10,8 +10,15 @@ export const NO_SECTION = "Homeless";
 export const OFFICER_LIST_EMAIL = "gleeclub_officers@lists.gatech.edu";
 export const ATTENDANCE_ISSUE_EMAIL = `${OFFICER_LIST_EMAIL}?subject=Attendance%20Issue`;
 
-export const ALL_MODES: SongMode[] = [SongMode.Major, SongMode.Minor];
-export const ALL_PITCHES: Pitch[] = [
+export const ALL_PERIODS = [
+  Period.Daily,
+  Period.Weekly,
+  Period.Biweekly,
+  Period.Monthly,
+  Period.Yearly,
+];
+export const ALL_MODES = [SongMode.Major, SongMode.Minor];
+export const ALL_PITCHES = [
   Pitch.AFlat,
   Pitch.A,
   Pitch.ASharp,

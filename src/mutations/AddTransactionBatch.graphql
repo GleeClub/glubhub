@@ -1,0 +1,5 @@
+mutation AddTransactionBatch($batch: TransactionBatch!) {
+  addBatchOfTransactions(batch: $batch) {
+    id
+  }
+}

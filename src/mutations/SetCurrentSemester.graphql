@@ -1,0 +1,5 @@
+mutation SetCurrentSemester($name: String!) {
+  setCurrentSemester(name: $name) {
+    name
+  }
+}

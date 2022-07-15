@@ -1,21 +1,6 @@
-import type { RolePermission } from "gql-operations";
 import dayjs from "dayjs";
-import type { AdminRoute } from 'route/types'
-import {
-  adminCreateEvent,
-  adminGigRequests,
-  adminAbsenceRequests,
-  adminSemesters,
-  adminDocumentLinks,
-  adminOfficerPositions,
-  adminUniforms,
-  adminSitePermissions,
-  adminWebmasterTools,
-  adminMoney
-} from "route/constructors";
-import type { HasEventTimes, HasPermissions, HasPositions } from "state/types";
-import { derived } from "svelte/store";
-import { siteContext } from "store/context";
+import type { NewRolePermission } from "gql-operations";
+import { HasEventTimes, HasPermissions } from "state/types";
 
 export const formatPhone = (phone: string) =>
   phone.length !== 10
@@ -28,14 +13,16 @@ export const permittedTo = (user: HasPermissions, permission: string, eventType?
 export const eventIsOver = (event: HasEventTimes): boolean =>
   dayjs() > (dayjs(event.releaseTime) || dayjs(event.callTime));
 
+export const titleCase = (s: string): string => s[0].toUpperCase() + s.slice(1).toLowerCase();
+
 // export const playPitch = (pitch: Pitch): void => {
 //   const synth = new Tone.Synth().toMaster();
 //   synth.triggerAttackRelease(Tone.Midi(`${pitchToUnicode(pitch)}4`), "1n");
 // };
 
 export const rolePermissionsAreEqual = (
-  permission1: RolePermission,
-  permission2: RolePermission
+  permission1: NewRolePermission,
+  permission2: NewRolePermission
 ): boolean =>
   permission1.role === permission2.role &&
   permission1.permission === permission2.permission &&

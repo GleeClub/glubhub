@@ -1,0 +1,57 @@
+query FullMember($email: String!) {
+  member(email: $email) {
+    email
+    firstName
+    preferredName
+    lastName
+    phoneNumber
+    picture
+    passengers
+    location
+    onCampus
+    about
+    major
+    minor
+    hometown
+    arrivedAtTech
+    gatewayDrug
+    conflicts
+    dietaryRestrictions
+    fullName
+    semester {
+      enrollment
+      section
+    }
+    positions {
+      name
+    }
+    semesters {
+      semester
+      enrollment
+      section
+      grades {
+        grade
+        eventsWithChanges {
+          event {
+            id
+            name
+          }
+          change {
+            reason
+            change
+            partialScore
+          }
+        }
+      }
+    }
+    transactions {
+      id
+      time
+      amount
+      description
+      semester
+      type
+      resolved
+    }
+  }
+}

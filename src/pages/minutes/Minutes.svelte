@@ -1,5 +1,6 @@
 <script lang="ts">
-  import dayjs from "dayjs";
+  import Remote from "components/remote/Remote.svelte";
+import dayjs from "dayjs";
   import { AllMinutesDocument, CreateMinutesDocument, FullMinutesDocument } from "gql-operations";
   import { routeMinutes } from "route/constructors";
   import { MinutesTab } from "route/types";
@@ -52,8 +53,7 @@
       />
       <Column>
         <Box>
-          <RemoteContent
-            data={selected}
+          <Remote data={$selectedMinutes}>
             notAsked={<p>Select Minutes</p>}
             render={selected => (
               <>
@@ -70,7 +70,7 @@
                 />
               </>
             )}
-          />
+          </Remote>
         </Box>
       </Column>
     </Columns>

@@ -1,0 +1,15 @@
+query TransactionsForSemester {
+  transactions {
+  	id
+    member {
+      email
+      fullName
+    }
+    time
+    amount
+    description
+    semester
+    type
+    resolved
+  }
+}
