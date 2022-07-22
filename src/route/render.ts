@@ -7,7 +7,7 @@ import type {
 } from 'route/types'
 
 export const renderRoute = (route: GlubRoute): string =>
-  buildRoute(route).join('/')
+  `#/${buildRoute(route).join('/')}`;
 
 const buildAdminRoute = (base: string, tab: AdminRoute | null): string[] => {
   if (tab === null) {
