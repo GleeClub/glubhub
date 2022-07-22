@@ -1,16 +1,17 @@
 <script lang="ts">
-  import StateBox from "components/complex/StateBox.svelte";
+  import StateBox from "components/remote/StateBox.svelte";
   import CheckboxInput from "components/forms/CheckboxInput.svelte";
   import TextInput from "components/forms/TextInput.svelte";
-  import Table from "components/Table.svelte";
+  import Table from "components/bulma/Table.svelte";
 
-  import { AttendanceUpdate, FullEventQuery, UpdateAttendanceDocument } from "gql-operations";
+  import { AttendanceUpdate, FullEventQuery } from "gql-operations";
   import { numberType } from "state/input";
-  import { mutation } from "state/query";
-  import { emptyLoaded, loading, RemoteData } from "state/types";
+  import { query } from "state/query";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
   import { SECTION_ORDER, NO_SECTION } from "utils/constants";
 
   export let eventId: number;
+  // TODO: this is updated differently than everything else, we should pick a single approach 
   export let attendees: FullEventQuery['event']['allAttendance'];
 
   let state: RemoteData = emptyLoaded;
@@ -26,13 +27,14 @@
       minutesLate: attendee.minutesLate,
       ...update
     };
-    const response = await mutation(UpdateAttendanceDocument, { eventId, member: email, update: attendance });
+    const result = await query(
+      "UpdateAttendance", 
+      { eventId, member: email, update: attendance }
+    );
 
-    if (response.type === "loaded") {
-      state = emptyLoaded;
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
       Object.assign(attendee, attendance);
-    } else {
-      state = response;
     }
   }
 

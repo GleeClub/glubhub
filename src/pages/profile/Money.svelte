@@ -1,118 +1,73 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { Member, Transaction } from "state/models";
-import {
-  RemoteData,
-  loading,
-  notSentYet,
-  sending,
-  resultToSubmissionState,
-  loaded,
-  resultToRemote,
-  isLoaded
-} from "state/types";
-import { post, get } from "utils/request";
-import { RemoteContent, SubmissionStateBox } from "components/Complex";
-import { Button } from "components/Buttons";
-import { simpleDateWithYearFormatter } from "utils/datetime";
-import { Column } from "components/Basics";
-import { Table } from "components/Table";
+<script lang="ts">
+  import Column from "components/bulma/Column.svelte";
+  import Table from "components/bulma/Table.svelte";
+  import Button from "components/buttons/Button.svelte";
+  import StateBox from "components/remote/StateBox.svelte";
 
-export const Money: React.FC<{ member: Member }> = ({ member }) => {
-  const [transactions, updateTransactions] = useState<
-    RemoteData<Transaction[]>
-  >(loading);
-  const [state, setState] = useState(notSentYet);
+  import { query } from "state/query";
+  import { FullMemberQuery } from "gql-operations";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
+  import { simpleDateWithYearFormatter } from "utils/datetime";
 
-  const resolveTransaction = useCallback(
-    async (transactionId: number, resolved: boolean) => {
-      if (!isLoaded(transactions)) return;
+  export let transactions: FullMemberQuery['member']['transactions'];
+  export let onUpdate: () => void;
 
-      setState(sending);
-      updateTransactions(
-        loaded(
-          transactions.data.map(t =>
-            t.id === transactionId ? { ...t, resolved } : t
-          )
-        )
-      );
+  let state: RemoteData = emptyLoaded;
 
-      const url = `transactions/${transactionId}/resolve/${resolved}`;
-      const update = await post(url, {});
-      setState(resultToSubmissionState(update));
-    },
-    [transactions, setState, updateTransactions]
-  );
+  async function resolveTransaction(transactionId: number, resolved: boolean) {
+    state = loading;
+    const result = await query("ResolveTransaction", {
+      id: transactionId, resolved,
+    });
 
-  useEffect(() => {
-    const loadTransactions = async () => {
-      const result = await get<Transaction[]>(`transactions/${member.email}`);
-      updateTransactions(resultToRemote(result));
-    };
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
+      onUpdate();
+    }
+  }
+</script>
 
-    loadTransactions();
-  }, [member, updateTransactions]);
-
-  return (
-    <Column>
-      <RemoteContent
-        data={transactions}
-        render={transactions => (
-          <Table striped>
-            <tbody>
-              {transactions
-                .sort((t1, t2) => t2.time - t1.time)
-                .map(transaction => (
-                  <TransactionRow
-                    transaction={transaction}
-                    resolve={resolveTransaction}
-                  />
-                ))}
-            </tbody>
-          </Table>
-        )}
-      />
-      <SubmissionStateBox state={state} />
-    </Column>
-  );
-};
-
-interface TransactionRowProps {
-  transaction: Transaction;
-  resolve: (transactionId: number, resolved: boolean) => void;
-}
-
-const TransactionRow: React.FC<TransactionRowProps> = ({
-  transaction,
-  resolve
-}) => (
-  <tr className="no-bottom-border">
-    <td>{simpleDateWithYearFormatter(transaction.time)}</td>
-    <td>
-      {transaction.type}
-      {transaction.description && ` (${transaction.description})`}
-    </td>
-    <td>
-      {transaction.amount < 0 ? (
-        <span style={{ color: "green" }}>{-1 * transaction.amount}</span>
-      ) : (
-        <>{transaction.amount}</>
-      )}
-    </td>
-    <td>{transaction.resolved ? "Resolved" : "Outstanding"}</td>
-    <td>
-      {transaction.resolved ? (
-        <Button size="is-small" onClick={() => resolve(transaction.id, false)}>
-          Unresolve
-        </Button>
-      ) : (
-        <Button
-          size="is-small"
-          color="is-primary"
-          onClick={() => resolve(transaction.id, true)}
-        >
-          Resolve
-        </Button>
-      )}
-    </td>
-  </tr>
-);
+<Column>
+  <Table striped>
+    <tbody>
+      {#each transactions as transaction}
+        <tr class="no-bottom-border">
+          <td>{simpleDateWithYearFormatter(transaction.time)}</td>
+          <td>
+            {transaction.type}
+            {#if transaction.description}
+              {` (${transaction.description})`}
+            {/if}
+          </td>
+          <td>
+            {#if transaction.amount < 0}
+              <span style:color="green">{-1 * transaction.amount}</span>
+            {:else}
+              {transaction.amount}
+            {/if}
+          </td>
+          <td>{transaction.resolved ? "Resolved" : "Outstanding"}</td>
+          <td>
+            {#if transaction.resolved}
+              <Button
+                size="is-small"
+                click={() => resolveTransaction(transaction.id, false)}
+              >
+                Unresolve
+              </Button>
+            {:else}
+              <Button
+                size="is-small"
+                color="is-primary"
+                click={() => resolveTransaction(transaction.id, true)}
+              >
+                Resolve
+              </Button>
+            {/if}
+          </td>
+        </tr>
+      {/each}
+    </tbody>
+  </Table>
+  <StateBox {state} />
+</Column>

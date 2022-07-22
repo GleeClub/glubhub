@@ -1,0 +1,5 @@
+mutation ConfirmForEvent($id: Int!) {
+  confirmForEvent(id: $id) {
+    confirmed
+  }
+}

@@ -62,7 +62,7 @@ export interface RouteForgotPassword {
 export interface RouteResetPassword {
   name: 'Reset Password';
   route: 'reset-password';
-  token: string | null;
+  token: string;
 }
 
 export interface RouteAdmin {

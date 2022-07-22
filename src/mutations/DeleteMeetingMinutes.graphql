@@ -1,0 +1,5 @@
+mutation DeleteMeetingMinutes($id: Int!) {
+  deleteMeetingMinutes(id: $id) {
+    id
+  }
+}

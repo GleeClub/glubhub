@@ -3,9 +3,12 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import includePaths from 'rollup-plugin-includepaths';
+import replace from 'rollup-plugin-replace';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
-import css from 'rollup-plugin-css-only';
+import postcss from 'rollup-plugin-postcss';
+import path from 'path';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -33,12 +36,16 @@ function serve() {
 export default {
 	input: 'src/main.ts',
 	output: {
-		sourcemap: true,
+		sourcemap: !production,
 		format: 'iife',
 		name: 'app',
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		includePaths({ paths: ["src/"] }),
+    replace({
+			'process.env.NODE_ENV': JSON.stringify( 'production' )
+		}),
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
@@ -48,7 +55,9 @@ export default {
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
-		css({ output: 'bundle.css' }),
+		postcss({
+			output: path.resolve('public/build/bundle.css')
+		}),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In

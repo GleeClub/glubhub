@@ -6,14 +6,8 @@
   import MiddleColumn from "./MiddleColumn.svelte";
   import RightColumn from "./RightColumn.svelte";
 
-  import { 
-    NewGig,
-    NewEventFields,
-    NewEventPeriod,
-    GigRequestForNewEventDocument,
-    CreateEventDocument
-  } from "gql-operations";
-  import { mutation, query } from "state/query";
+  import { NewGig, NewEventFields, NewEventPeriod } from "gql-operations";
+  import { query } from "state/query";
   import { goToRoute } from "store/route";
   import { routeEvents } from "route/constructors";
   import { get } from "svelte/store";
@@ -53,7 +47,7 @@
 
   async function createEvent() {
     state = loading;
-    const result = await mutation(CreateEventDocument, {
+    const result = await query("CreateEvent", {
       newEvent: {
         event, gig, repeat,
       }, gigRequestId
@@ -66,7 +60,7 @@
   }
 
   if (gigRequestId !== null) {
-    query(GigRequestForNewEventDocument, { id: gigRequestId }).subscribe(result => {
+    query("GigRequestForNewEvent", { id: gigRequestId }).then(result => {
       if (result.type === "loaded") {
         const request = result.data.gigRequest;
 

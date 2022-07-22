@@ -1,5 +1,6 @@
 query FullEvent($id: Int!) {
   event(id: $id) {
+    id
     name
     semester
     type
@@ -11,8 +12,20 @@ query FullEvent($id: Int!) {
     gigCount
     defaultAttend
     gig {
+      public
       summary
       description
+      contactName
+      contactEmail
+      contactPhone
+      price
+      performanceTime
+      uniform {
+        id
+        name
+        description
+        color
+      }
     }
     userAttendance {
       shouldAttend
@@ -22,6 +35,9 @@ query FullEvent($id: Int!) {
       rsvpIssue
       approvedAbsence
       denyCredit
+      absenceRequest {
+        state
+      }
     }
     allAttendance(emptyIfNotPermitted: true) {
       member {
@@ -40,10 +56,14 @@ query FullEvent($id: Int!) {
       driver {
         email
         fullName
+        location
+        passengers
       }
       passengers {
-        fullName
         email
+        fullName
+        location
+        passengers
       }
     }
     setlist {

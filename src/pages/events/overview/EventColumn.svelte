@@ -1,28 +1,58 @@
 <script lang="ts">
-  import SelectableList from "components/remote/SelectableList.svelte";
   import EventRow from "./EventRow.svelte";
+  import Column from "components/bulma/Column.svelte";
+  import Title from "components/bulma/Title.svelte";
+  import Box from "components/bulma/Box.svelte";
+  import Remote from "components/remote/Remote.svelte";
+  import Table from "components/bulma/Table.svelte";
 
-  import { Event } from "gql-operations";
+  import { GOLD_COLOR } from "utils/constants";
+  import { AllEventsQuery } from "gql-operations";
   import { routeEvents } from "route/constructors";
-  import { mapLoaded, RemoteData } from "state/types";
+  import { mapLazyLoaded, LazyRemoteData } from "state/types";
   import { replaceRoute } from "store/route";
 
   export let title: string;
   export let allowedEventTypes: string[];
-  export let events: RemoteData<Event[]>;
+  export let events: LazyRemoteData<AllEventsQuery['events']>;
   export let selectedId: number | null;
 
-  $: eventGroups = mapLoaded(events, all => [all.filter(event => allowedEventTypes.includes(event.type))])
+  $: eventGroups = mapLazyLoaded(events, all => [all.filter(event => allowedEventTypes.includes(event.type))])
 </script>
 
-<div class="column is-one-quarter is-centered">
-  <SelectableList
-    title={title}
-    itemGroups={eventGroups}
-    isSelected={event => event.id === selectedId}
-    select={event => replaceRoute(routeEvents(event.id, null))}
-    messageIfEmpty="No events here, misster."
-  >
-    <EventRow let:event={rowEvent} event={rowEvent} />
-  </SelectableList>
-</div>
+<Column centered oneQuarter>
+  <Column narrow>
+    <Title>{title}</Title>
+    <Box>
+      <Remote data={eventGroups}>
+        <svelte:fragment slot="loaded" let:data={groups}>
+          {#if groups.length === 0}
+            <p>No events here, misster.</p>
+          {:else}
+            <Table fullwidth hoverable className="no-bottom-border">
+              <thead />
+              <tbody>
+                {#each groups as group, groupIndex}
+                  {#each group as event}
+                    <tr
+                      style:background-color={event.id === selectedId ? GOLD_COLOR : ''}
+                      on:click={() => replaceRoute(routeEvents(event.id, null))}
+                    >
+                      <EventRow {event} />
+                    </tr>
+                  {/each}
+                  {#if groupIndex < groups.length - 1}
+                    <!-- Divider Row -->
+                    <tr class="not-hoverable">
+                      <div class="is-divider" style="margin: 1rem" />
+                    </tr>
+                  {/if}
+                {/each}
+              </tbody>
+            </Table>
+          {/if}
+        </svelte:fragment>
+      </Remote>
+    </Box>
+  </Column>
+</Column>

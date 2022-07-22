@@ -6,25 +6,15 @@
   import TextInput from "components/forms/TextInput.svelte";
   import StateBox from "components/remote/StateBox.svelte";
   import NewPerformanceSection from "./NewPerformanceSection.svelte";
+  import EditFileType from "./EditFileType.svelte";
 
-  import { DeleteSongLinkDocument, FullSongQuery, UpdateSongDocument } from "gql-operations";
+  import { FullSongQuery } from "gql-operations";
   import { repertoireDetails, routeRepertoire } from "route/constructors";
   import { pitchType, songModeType, stringType } from "state/input";
-  import { mutation } from "state/query";
-  import { emptyLoaded, FullSongLink, loading, RemoteData } from "state/types";
+  import { query } from "state/query";
+  import { emptyLoaded, FullSongLink, loading, RemoteData, stateFromResult } from "state/types";
   import { replaceRoute } from "store/route";
   import { ALL_PITCHES, ALL_MODES } from "utils/constants";
-import EditFileType from "./EditFileType.svelte";
-
-  interface NewFileLink {
-    name: string;
-    file: File | null;
-  }
-
-  interface NewUrlLink {
-    name: string;
-    url: string;
-  }
 
   export let song: FullSongQuery['song'];
   export let onUpdate: () => void;
@@ -33,28 +23,24 @@ import EditFileType from "./EditFileType.svelte";
 
   async function updateSong(song: FullSongQuery['song']) {
     state = loading;
-    const response = await mutation(UpdateSongDocument, {
+    const result = await query("UpdateSong", {
       id: song.id,
       update: song,
     });
 
-    if (response.type === "loaded") {
-      state = emptyLoaded;
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
       onUpdate();
-    } else {
-      state = response;
     }
   }
 
   async function deleteLink(link: FullSongLink) {
     state = loading;
-    const response = await mutation(DeleteSongLinkDocument, { id: link.id });
+    const result = await query("DeleteSongLink", { id: link.id });
 
-    if (response.type === "loaded") {
-      state = emptyLoaded;
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
       onUpdate();
-    } else {
-      state = response;
     }
   }
 </script>
@@ -115,7 +101,7 @@ import EditFileType from "./EditFileType.svelte";
 
 <ul style="list-style: none; padding-bottom: 10px;">
   <!-- TODO: replace all uses of link types with constants -->
-  <EditFileType typeName="Sheet Music" {song} {onUpdate} onDelete={deleteLink} />
-  <EditFileType typeName="MIDIs" {song} {onUpdate} onDelete={deleteLink} />
-  <NewPerformanceSection {song} {onUpdate} onDelete={deleteLink} />
+  <EditFileType typeName="Sheet Music" {song} {onUpdate} {deleteLink} />
+  <EditFileType typeName="MIDIs" {song} {onUpdate} {deleteLink} />
+  <NewPerformanceSection {song} {onUpdate} {deleteLink} />
 </ul>

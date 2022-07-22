@@ -1,0 +1,5 @@
+mutation UpdateSemester($name: String!, $update: NewSemester!) {
+  updateSemester(name: $name, update: $update) {
+    name
+  }
+}

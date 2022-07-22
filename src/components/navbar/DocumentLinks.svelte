@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { DocumentLinksDocument } from 'gql-operations'
-  import { query } from 'state/query';
   import { derived } from 'svelte/store';
+  import { eagerQuery } from 'state/query';
 
-  const links = derived(
-    query(DocumentLinksDocument),
+  const [links, _reloadLinks] = eagerQuery("AllDocumentLinks", {});
+  const loadedLinks = derived(links,
     result => result.type === "loaded" ? result.data.links : []
   );
 </script>
@@ -12,7 +11,7 @@
 <div class="navbar-item has-dropdown is-hoverable">
   <a class="navbar-link">Documents</a>
   <div class="navbar-dropdown">
-    {#each $links as link}
+    {#each $loadedLinks as link}
       <a
         class="navbar-item"
         target="_blank"

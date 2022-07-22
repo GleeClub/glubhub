@@ -8,6 +8,6 @@
   export let eventId: number;
 </script>
 
-<li class={tab.route === currentTab?.route ? "is-active" : undefined}>
+<li class:is-active={tab.route === currentTab?.route}>
   <a href={renderRoute(routeEvents(eventId, tab))}>{tab.name}</a>
 </li>

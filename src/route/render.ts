@@ -53,7 +53,7 @@ const buildRoute = (route: GlubRoute): string[] => {
   } else if (route.route === 'profile') {
     return [route.route, route.email, ...(route.tab ? [route.tab.route] : [])];
   } else if (route.route === 'reset-password') {
-    return [route.route, ...(route.token ? [route.token] : [])];
+    return [route.route, route.token];
   } else if (route.route === 'edit-carpools') {
     return [route.route, `${route.eventId}`];
   } else {

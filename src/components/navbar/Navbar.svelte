@@ -13,18 +13,14 @@
   let expanded = false
 </script>
 
-<nav
-  class="navbar is-primary is-fixed-top"
-  role="navigation"
-  aria-label="main navigation"
->
+<nav class="navbar is-primary is-fixed-top" aria-label="main navigation">
   <div class="navbar-brand">
     <HomeLogo />
     {#if $siteContext.user}
       <BurgerButton {expanded} toggleExpanded={() => expanded = !expanded} />
     {/if}
   </div>
-  <div class={'navbar-menu' + (expanded ? ' is-active' : '')}>
+  <div class="navbar-menu" class:is-active={expanded}>
     {#if $siteContext.user}
       <div class="navbar-start">
         <Navlink route={routeEvents(null, null)} />
@@ -36,11 +32,11 @@
       </div>
       <div class="navbar-end">
         <a
-          class={'navbar-item' +
-            ($route?.route === 'profile' &&
+          class="navbar-item"
+          class:is-active={
+            $route?.route === 'profile' &&
             $route.email === $siteContext.user?.email
-              ? ' is-active'
-              : '')}
+          }
           href={renderRoute(routeProfile($siteContext.user.email, null))}
         >
           {$siteContext.user.fullName}

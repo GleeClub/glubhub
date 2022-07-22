@@ -5,13 +5,13 @@
   import ErrorBox from "components/remote/ErrorBox.svelte";
   import SongLinkButton from "../SongLinkButton.svelte";
 
-  import { CreateSongLinkDocument, FullSongQuery } from "gql-operations";
+  import { FullSongQuery } from "gql-operations";
   import { stringType } from "state/input";
-  import { mutation } from "state/query";
-  import { emptyLoaded, FullSongLink, loading, RemoteData } from "state/types";
+  import { query } from "state/query";
+  import { emptyLoaded, FullSongLink, loading, RemoteData, stateFromResult } from "state/types";
 
   export let song: FullSongQuery['song'];
-  export let onDelete: (link: FullSongLink) => void;
+  export let deleteLink: (link: FullSongLink) => void;
   export let onUpdate: () => void;
 
   let name = "";
@@ -22,7 +22,7 @@
 
   async function addPerformanceToSong() {
     state = loading;
-    const response = await mutation(CreateSongLinkDocument, {
+    const result = await query("CreateSongLink", {
       songId: song.id,
       newLink: {
         name,
@@ -31,13 +31,11 @@
       }
     });
 
-    if (response.type === "loaded") {
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
       name = "";
       url = "";
-      state = emptyLoaded;
       onUpdate();
-    } else {
-      state = response;
     }
   }
 </script>
@@ -45,7 +43,7 @@
 <Divider content="Performances" />
 {#if linkSection}
   {#each linkSection.links as link}
-    <SongLinkButton {link} {onDelete} />
+    <SongLinkButton {link} {deleteLink} />
   {/each}
 {:else}
   <br />

@@ -1,0 +1,5 @@
+mutation DismissGigRequest($id: Int!) {
+  dismissGigRequest(id: $id) {
+    id
+  }
+}

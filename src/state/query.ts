@@ -1,47 +1,43 @@
-import { TypedDocumentNode, operationStore, query as urqlQuery, mutation as urqlMutation } from '@urql/svelte';
-import { loaded, loading, error, MutationResult, RemoteData, LazyRemoteData, notLoaded } from 'state/types';
-import { derived, Readable } from 'svelte/store';
+import { getSdk, Sdk } from 'gql-operations';
+import { GraphQLClient } from 'graphql-request';
+import { loaded, loading, error, QueryResult, LazyRemoteData, notLoaded } from 'state/types';
+import { Readable, writable } from 'svelte/store';
+import { API_URL } from 'utils/constants';
+import { getToken } from 'utils/token';
 
-export function query<Data = any, Variables = object>(query: TypedDocumentNode<Data, Variables>, variables: Variables): Readable<RemoteData<Data>> {
-  return derived(urqlQuery(operationStore(query, variables)), (result) => {
-     if (result.error) {
-      return error(result.error);
-    } else if (result.data) {
-      return loaded(result.data);
-    } else {
-      return loading;
-    }
-  });
-}
-
-export function reexecutableQuery<Data = any, Variables = object>(query: TypedDocumentNode<Data, Variables>, variables: Variables): [Readable<LazyRemoteData<Data>>, (variables: Variables) => void] {
-  const operation = operationStore(query, variables);
-  const reexecute = (variables: Variables) => {
-    operation.variables = variables;
-    operation.reexecute();
-  };
-  const store = derived(urqlQuery(operation), (result) => {
-     if (result.error) {
-      return error(result.error);
-    } else if (result.data) {
-      return loaded(result.data);
-    } else if (result.fetching) {
-      return loading;
-    } else {
-      return notLoaded;
-    }
-  });
-  
-  return [store, reexecute];
-}
-
-export async function mutation<Data = any, Variables = object>(mutation: TypedDocumentNode<Data, Variables>, variables: Variables): Promise<MutationResult<Data>> {
-  const executor = urqlMutation(operationStore(mutation));
-  const result = await executor(variables);
-
-  if (result.error) {
-    return error(result.error);
-  } else {
-    return loaded(result.data!);
+export const gqlClient = getSdk(new GraphQLClient(API_URL, {
+  headers: () => {
+    const token = getToken();
+    return token ? { GREASE_TOKEN: token } : undefined;
   }
+}));
+
+export async function query<K extends keyof Sdk>(queryName: K, ...args: Parameters<Sdk[K]>): Promise<QueryResult<Awaited<ReturnType<Sdk[K]>>>> {
+  const action = gqlClient[queryName] as ((...args: Parameters<Sdk[K]>) => Promise<ReturnType<Sdk[K]>>);
+  return action(...args)
+    .then((result: Awaited<ReturnType<Sdk[K]>>) => loaded(result))
+    .catch(err => error(err));
+}
+
+export function lazyQuery<K extends keyof Sdk>(queryName: K): [
+  Readable<LazyRemoteData<Awaited<ReturnType<Sdk[K]>>>>,
+  (...args: Parameters<Sdk[K]>) => void
+] {
+  const resultStore = writable<LazyRemoteData<Awaited<ReturnType<Sdk[K]>>>>(notLoaded);
+  const makeQuery = (...args: Parameters<Sdk[K]>) => {
+    resultStore.set(loading);
+    query(queryName, ...args).then(result => resultStore.set(result));
+  };
+  
+  return [resultStore, makeQuery];
+}
+
+export function eagerQuery<K extends keyof Sdk>(queryName: K, ...args: Parameters<Sdk[K]>): [
+  Readable<LazyRemoteData<Awaited<ReturnType<Sdk[K]>>>>,
+  (...args: Parameters<Sdk[K]>) => void
+] {
+  const [resultStore, makeQuery] = lazyQuery(queryName);
+  makeQuery(...args);
+  
+  return [resultStore, makeQuery];
 }

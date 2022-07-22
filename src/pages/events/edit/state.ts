@@ -1,4 +1,4 @@
-import { Uniform, GlubEvent } from "state/models";
+import { FullEventQuery, NewEvent, Uniform } from "gql-operations";
 import {
   twentyFourHourTimeFormatter,
   hyphenDateFormatter,
@@ -26,13 +26,13 @@ export interface GigForm {
   contactName: string;
   contactEmail: string;
   contactPhone: string;
-  price: number | null;
+  price: number | null | undefined;
   public: boolean;
   summary: string;
   description: string;
 }
 
-export const eventFormFromEvent = (event: GlubEvent): EventForm => ({
+export const eventFormFromEvent = (event: FullEventQuery['event']): EventForm => ({
   name: event.name,
   semester: event.semester,
   type: event.type,
@@ -61,17 +61,14 @@ export const emptyGigForm: GigForm = {
   description: ""
 };
 
-export const gigFormFromEvent = (
-  event: GlubEvent,
-  allUniforms: Uniform[]
-): GigForm => {
+export const gigFormFromEvent = (event: FullEventQuery['event']): GigForm => {
   if (!event.gig) {
     return emptyGigForm;
   }
 
   return {
     performanceTime: twentyFourHourTimeFormatter(event.gig.performanceTime),
-    uniform: allUniforms.find(u => u.id === event.gig?.uniform) || null,
+    uniform: event.gig?.uniform,
     contactName: event.gig.contactName || "",
     contactEmail: event.gig.contactEmail || "",
     contactPhone: event.gig.contactPhone || "",
@@ -82,7 +79,8 @@ export const gigFormFromEvent = (
   };
 };
 
-export const buildUpdateBody = (event: EventForm, gig: GigForm) => {
+export const buildUpdateBody = (event: EventForm, gig: GigForm): NewEvent => {
+  // TODO: make less fragile
   const includeGig = !!(
     gig.performanceTime ||
     gig.uniform ||
@@ -95,26 +93,28 @@ export const buildUpdateBody = (event: EventForm, gig: GigForm) => {
   );
 
   return {
-    name: event.name,
-    semester: event.semester,
-    type: event.type,
-    callTime: parseFormDateAndTimeString(event.callDate, event.callTime),
-    releaseTime: parseFormDateAndTimeString(
-      event.releaseDate,
-      event.releaseTime
-    ),
-    points: event.points || 5,
-    comments: event.comments,
-    location: event.location,
-    gigCount: event.gigCount,
-    defaultAttend: event.defaultAttend,
+    event: {
+      name: event.name,
+      semester: event.semester,
+      type: event.type,
+      callTime: parseFormDateAndTimeString(event.callDate, event.callTime)!,
+      releaseTime: parseFormDateAndTimeString(
+        event.releaseDate,
+        event.releaseTime
+      ),
+      points: event.points || 5,
+      comments: event.comments,
+      location: event.location,
+      gigCount: event.gigCount,
+      defaultAttend: event.defaultAttend,
+    },
     gig: includeGig
       ? {
           performanceTime: parseFormDateAndTimeString(
             event.callDate,
             gig.performanceTime
-          ),
-          uniform: gig.uniform?.id || null,
+          )!,
+          uniform: gig.uniform!.id,
           contactName: gig.contactName,
           contactEmail: gig.contactEmail,
           contactPhone: gig.contactPhone,

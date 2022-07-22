@@ -2,11 +2,14 @@ query AllEvents {
   events {
     id
     name
+    type
     callTime
     releaseTime
     userAttendance {
       shouldAttend
+      didAttend
       confirmed
+      minutesLate
     }
   }
 }

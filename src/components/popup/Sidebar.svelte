@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Spinner from "components/basic/Spinner.svelte";
-  import ErrorBox from "components/ErrorBox.svelte"
+  import Spinner from "components/remote/Spinner.svelte";
+  import ErrorBox from "components/remote/ErrorBox.svelte"
 
   import { LazyRemoteData } from "state/types"
 

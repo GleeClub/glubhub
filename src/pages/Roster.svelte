@@ -1,18 +1,17 @@
 <script lang="ts">
-  import Box from "components/basic/Box.svelte";
-  import Container from "components/basic/Container.svelte";
-  import EmailLink from "components/basic/EmailLink.svelte";
-  import PhoneLink from "components/basic/PhoneLink.svelte";
-  import Section from "components/basic/Section.svelte";
-  import Remote from "components/complex/Remote.svelte";
-  import Table from "components/Table.svelte";
+  import Box from "components/bulma/Box.svelte";
+  import Container from "components/bulma/Container.svelte";
+  import EmailLink from "components/member/EmailLink.svelte";
+  import PhoneLink from "components/member/PhoneLink.svelte";
+  import Section from "components/bulma/Section.svelte";
+  import Remote from "components/remote/Remote.svelte";
+  import Table from "components/bulma/Table.svelte";
 
-  import { AllMembersDocument } from "gql-operations";
   import { routeProfile } from "route/constructors";
   import { renderRoute } from "route/render";
-  import { query } from "state/query";
+  import { eagerQuery } from "state/query";
 
-  const members = query(AllMembersDocument, {});
+  const [members, _reloadMembers] = eagerQuery("AllMembers");
 </script>
 
 <Section>

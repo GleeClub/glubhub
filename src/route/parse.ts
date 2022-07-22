@@ -35,7 +35,7 @@ export const parseRoute = (segments: string[]): GlubRoute | null => {
     case r.routeForgotPassword.route:
       return r.routeForgotPassword;
 
-    case r.routeResetPassword(null).route:
+    case r.routeResetPassword("").route:
       return parseResetPasswordRoute(segments.slice(1));
 
     case r.routeAdmin(null).route:
@@ -178,7 +178,7 @@ const parseMinutesRoute = (segments: string[]): GlubRoute | null => {
 };
 
 const parseResetPasswordRoute = (segments: string[]): GlubRoute | null => {
-  return r.routeResetPassword(segments[0] || null);
+  return segments.length >= 1 ? r.routeResetPassword(segments[0]) : null;
 };
 
 const parseAdminRoute = (segments: string[]): GlubRoute | null => {

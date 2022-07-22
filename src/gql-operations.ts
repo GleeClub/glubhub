@@ -1,5 +1,6 @@
-import type { OperationStore } from '@urql/svelte';
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+import { GraphQLClient } from 'graphql-request';
+import * as Dom from 'graphql-request/dist/types.dom';
+import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -1192,6 +1193,13 @@ export type ChargeLateDuesMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type ChargeLateDuesMutation = { __typename?: 'MutationRoot', chargeLateDues: Array<{ __typename?: 'ClubTransaction', id: number }> };
 
+export type ConfirmForEventMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type ConfirmForEventMutation = { __typename?: 'MutationRoot', confirmForEvent: { __typename?: 'Attendance', confirmed: boolean } };
+
 export type CreateDocumentLinkMutationVariables = Exact<{
   name: Scalars['String'];
   url: Scalars['String'];
@@ -1251,6 +1259,20 @@ export type DeleteDocumentLinkMutationVariables = Exact<{
 
 export type DeleteDocumentLinkMutation = { __typename?: 'MutationRoot', deleteLink: { __typename?: 'DocumentLink', name: string, url: string } };
 
+export type DeleteEventMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteEventMutation = { __typename?: 'MutationRoot', deleteEvent: number };
+
+export type DeleteMeetingMinutesMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteMeetingMinutesMutation = { __typename?: 'MutationRoot', deleteMeetingMinutes: { __typename?: 'Minutes', id: number } };
+
 export type DeleteMemberMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -1285,6 +1307,13 @@ export type DisableRolePermissionMutationVariables = Exact<{
 
 
 export type DisableRolePermissionMutation = { __typename?: 'MutationRoot', removePermissionFromRole: boolean };
+
+export type DismissGigRequestMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DismissGigRequestMutation = { __typename?: 'MutationRoot', dismissGigRequest: { __typename?: 'GigRequest', id: number } };
 
 export type EnableRolePermissionMutationVariables = Exact<{
   rolePermission: NewRolePermission;
@@ -1327,6 +1356,13 @@ export type RegisterForSemesterMutationVariables = Exact<{
 
 export type RegisterForSemesterMutation = { __typename?: 'MutationRoot', registerForSemester: { __typename?: 'Member', email: string } };
 
+export type RegisterMemberMutationVariables = Exact<{
+  newMember: NewMember;
+}>;
+
+
+export type RegisterMemberMutation = { __typename?: 'MutationRoot', registerMember: { __typename?: 'Member', email: string } };
+
 export type RemoveOfficershipMutationVariables = Exact<{
   role: Scalars['String'];
   email: Scalars['String'];
@@ -1334,6 +1370,21 @@ export type RemoveOfficershipMutationVariables = Exact<{
 
 
 export type RemoveOfficershipMutation = { __typename?: 'MutationRoot', removeOfficership: boolean };
+
+export type ReopenGigRequestMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type ReopenGigRequestMutation = { __typename?: 'MutationRoot', reopenGigRequest: { __typename?: 'GigRequest', id: number } };
+
+export type RequestAbsenceMutationVariables = Exact<{
+  eventId: Scalars['Int'];
+  reason: Scalars['String'];
+}>;
+
+
+export type RequestAbsenceMutation = { __typename?: 'MutationRoot', submitAbsenceRequest: { __typename?: 'AbsenceRequest', reason: string } };
 
 export type ResetPasswordMutationVariables = Exact<{
   token: Scalars['String'];
@@ -1351,6 +1402,23 @@ export type ResolveTransactionMutationVariables = Exact<{
 
 export type ResolveTransactionMutation = { __typename?: 'MutationRoot', resolveTransaction: { __typename?: 'ClubTransaction', id: number } };
 
+export type RespondToAbsenceRequestMutationVariables = Exact<{
+  eventId: Scalars['Int'];
+  email: Scalars['String'];
+  approved: Scalars['Boolean'];
+}>;
+
+
+export type RespondToAbsenceRequestMutation = { __typename?: 'MutationRoot', respondToAbsenceRequest: { __typename?: 'AbsenceRequest', reason: string } };
+
+export type RsvpForEventMutationVariables = Exact<{
+  id: Scalars['Int'];
+  attending: Scalars['Boolean'];
+}>;
+
+
+export type RsvpForEventMutation = { __typename?: 'MutationRoot', rsvpForEvent: { __typename?: 'Attendance', shouldAttend: boolean } };
+
 export type SetCurrentSemesterMutationVariables = Exact<{
   name: Scalars['String'];
 }>;
@@ -1367,6 +1435,22 @@ export type UpdateAttendanceMutationVariables = Exact<{
 
 export type UpdateAttendanceMutation = { __typename?: 'MutationRoot', updateAttendance: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number } };
 
+export type UpdateCarpoolsMutationVariables = Exact<{
+  eventId: Scalars['Int'];
+  carpools: Array<UpdatedCarpool> | UpdatedCarpool;
+}>;
+
+
+export type UpdateCarpoolsMutation = { __typename?: 'MutationRoot', updateCarpools: Array<{ __typename?: 'Carpool', id: number }> };
+
+export type UpdateEventMutationVariables = Exact<{
+  id: Scalars['Int'];
+  newEvent: NewEvent;
+}>;
+
+
+export type UpdateEventMutation = { __typename?: 'MutationRoot', updateEvent: { __typename?: 'Event', id: number } };
+
 export type UpdateFeeMutationVariables = Exact<{
   name: Scalars['String'];
   amount: Scalars['Int'];
@@ -1374,6 +1458,30 @@ export type UpdateFeeMutationVariables = Exact<{
 
 
 export type UpdateFeeMutation = { __typename?: 'MutationRoot', updateFeeAmount: { __typename?: 'Fee', name: string } };
+
+export type UpdateMeetingMinutesMutationVariables = Exact<{
+  id: Scalars['Int'];
+  update: UpdatedMeetingMinutes;
+}>;
+
+
+export type UpdateMeetingMinutesMutation = { __typename?: 'MutationRoot', updateMeetingMinutes: { __typename?: 'Minutes', id: number } };
+
+export type UpdateMemberMutationVariables = Exact<{
+  email: Scalars['String'];
+  update: MemberUpdate;
+}>;
+
+
+export type UpdateMemberMutation = { __typename?: 'MutationRoot', updateMember: { __typename?: 'Member', email: string } };
+
+export type UpdateSemesterMutationVariables = Exact<{
+  name: Scalars['String'];
+  update: NewSemester;
+}>;
+
+
+export type UpdateSemesterMutation = { __typename?: 'MutationRoot', updateSemester: { __typename?: 'Semester', name: string } };
 
 export type UpdateSongMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -1391,6 +1499,11 @@ export type UpdateUniformMutationVariables = Exact<{
 
 export type UpdateUniformMutation = { __typename?: 'MutationRoot', updateUniform: { __typename?: 'Uniform', id: number } };
 
+export type AllAbsenceRequestsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllAbsenceRequestsQuery = { __typename?: 'QueryRoot', absenceRequests: Array<{ __typename?: 'AbsenceRequest', time: string, reason: string, state: AbsenceRequestStatus, event: { __typename?: 'Event', id: number, name: string, location?: string | null, callTime: string }, member: { __typename?: 'Member', email: string, fullName: string } }> };
+
 export type AllDocumentLinksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1399,12 +1512,17 @@ export type AllDocumentLinksQuery = { __typename?: 'QueryRoot', links: Array<{ _
 export type AllEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllEventsQuery = { __typename?: 'QueryRoot', events: Array<{ __typename?: 'Event', id: number, name: string, callTime: string, releaseTime?: string | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, confirmed: boolean } | null }> };
+export type AllEventsQuery = { __typename?: 'QueryRoot', events: Array<{ __typename?: 'Event', id: number, name: string, type: string, callTime: string, releaseTime?: string | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number } | null }> };
 
 export type AllFeesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllFeesQuery = { __typename?: 'QueryRoot', fees: Array<{ __typename?: 'Fee', name: string, description: string, amount: number }> };
+
+export type AllGigRequestsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllGigRequestsQuery = { __typename?: 'QueryRoot', gigRequests: Array<{ __typename?: 'GigRequest', id: number, time: string, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, startTime: string, location: string, comments?: string | null, status: GigRequestStatus, event?: { __typename?: 'Event', id: number, name: string } | null }> };
 
 export type AllMembersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1446,24 +1564,26 @@ export type CurrentOfficersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CurrentOfficersQuery = { __typename?: 'QueryRoot', officers: Array<{ __typename?: 'MemberRole', role: string, member: { __typename?: 'Member', email: string, fullName: string } }>, members: Array<{ __typename?: 'Member', email: string, fullName: string }> };
 
-export type DocumentLinksQueryVariables = Exact<{ [key: string]: never; }>;
+export type EditCarpoolContextQueryVariables = Exact<{
+  eventId: Scalars['Int'];
+}>;
 
 
-export type DocumentLinksQuery = { __typename?: 'QueryRoot', links: Array<{ __typename?: 'DocumentLink', name: string, url: string }> };
+export type EditCarpoolContextQuery = { __typename?: 'QueryRoot', members: Array<{ __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }>, event: { __typename?: 'Event', name: string, carpools: Array<{ __typename?: 'Carpool', driver: { __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }, passengers: Array<{ __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }> }> } };
 
 export type FullEventQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type FullEventQuery = { __typename?: 'QueryRoot', event: { __typename?: 'Event', name: string, semester: string, type: string, callTime: string, releaseTime?: string | null, points: number, comments?: string | null, location?: string | null, gigCount: boolean, defaultAttend: boolean, gig?: { __typename?: 'Gig', summary?: string | null, description?: string | null } | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number, rsvpIssue?: string | null, approvedAbsence: boolean, denyCredit: boolean } | null, allAttendance: Array<{ __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number, member: { __typename?: 'Member', fullName: string, email: string, semester?: { __typename?: 'ActiveSemester', section?: string | null } | null } }>, carpools: Array<{ __typename?: 'Carpool', driver: { __typename?: 'Member', email: string, fullName: string }, passengers: Array<{ __typename?: 'Member', fullName: string, email: string }> }>, setlist: Array<{ __typename?: 'Song', id: number, title: string, key?: Pitch | null, mode?: SongMode | null, startingPitch?: Pitch | null }> } };
+export type FullEventQuery = { __typename?: 'QueryRoot', event: { __typename?: 'Event', id: number, name: string, semester: string, type: string, callTime: string, releaseTime?: string | null, points: number, comments?: string | null, location?: string | null, gigCount: boolean, defaultAttend: boolean, gig?: { __typename?: 'Gig', public: boolean, summary?: string | null, description?: string | null, contactName?: string | null, contactEmail?: string | null, contactPhone?: string | null, price?: number | null, performanceTime: string, uniform: { __typename?: 'Uniform', id: number, name: string, description?: string | null, color?: string | null } } | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number, rsvpIssue?: string | null, approvedAbsence: boolean, denyCredit: boolean, absenceRequest?: { __typename?: 'AbsenceRequest', state: AbsenceRequestStatus } | null } | null, allAttendance: Array<{ __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number, member: { __typename?: 'Member', fullName: string, email: string, semester?: { __typename?: 'ActiveSemester', section?: string | null } | null } }>, carpools: Array<{ __typename?: 'Carpool', driver: { __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }, passengers: Array<{ __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }> }>, setlist: Array<{ __typename?: 'Song', id: number, title: string, key?: Pitch | null, mode?: SongMode | null, startingPitch?: Pitch | null }> } };
 
 export type FullMemberQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type FullMemberQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, phoneNumber: string, picture?: string | null, passengers: number, location: string, onCampus?: boolean | null, about?: string | null, major?: string | null, minor?: string | null, hometown?: string | null, arrivedAtTech?: number | null, gatewayDrug?: string | null, conflicts?: string | null, dietaryRestrictions?: string | null, fullName: string, semester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section?: string | null } | null, positions: Array<{ __typename?: 'Role', name: string }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section?: string | null, grades: { __typename?: 'Grades', grade: number, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string }, change: { __typename?: 'GradeChange', reason: string, change: number, partialScore: number } }> } }>, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }> } };
+export type FullMemberQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, phoneNumber: string, picture?: string | null, passengers: number, location: string, onCampus?: boolean | null, about?: string | null, major?: string | null, minor?: string | null, hometown?: string | null, arrivedAtTech?: number | null, gatewayDrug?: string | null, conflicts?: string | null, dietaryRestrictions?: string | null, fullName: string, semester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section?: string | null } | null, positions: Array<{ __typename?: 'Role', name: string }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section?: string | null, grades: { __typename?: 'Grades', grade: number } }>, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }>, grades: { __typename?: 'Grades', grade: number, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, type: string, callTime: string, attendance: { __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number } }, change: { __typename?: 'GradeChange', reason: string, change: number, partialScore: number } }> } } };
 
 export type FullMinutesQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -1504,105 +1624,1039 @@ export type TransactionsForSemesterQueryVariables = Exact<{ [key: string]: never
 export type TransactionsForSemesterQuery = { __typename?: 'QueryRoot', transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean, member: { __typename?: 'Member', email: string, fullName: string } }> };
 
 
-export const AddOfficershipDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddOfficership"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"role"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addOfficership"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"role"},"value":{"kind":"Variable","name":{"kind":"Name","value":"role"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}]}}]} as unknown as DocumentNode<AddOfficershipMutation, AddOfficershipMutationVariables>;
-export const AddTransactionBatchDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddTransactionBatch"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"batch"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"TransactionBatch"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addBatchOfTransactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"batch"},"value":{"kind":"Variable","name":{"kind":"Name","value":"batch"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AddTransactionBatchMutation, AddTransactionBatchMutationVariables>;
-export const ChargeDuesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChargeDues"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chargeDues"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<ChargeDuesMutation, ChargeDuesMutationVariables>;
-export const ChargeLateDuesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChargeLateDues"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chargeLateDues"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<ChargeLateDuesMutation, ChargeLateDuesMutationVariables>;
-export const CreateDocumentLinkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateDocumentLink"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createLink"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"Argument","name":{"kind":"Name","value":"url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"url"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<CreateDocumentLinkMutation, CreateDocumentLinkMutationVariables>;
-export const CreateEventDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateEvent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newEvent"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NewEvent"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"gigRequestId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createEvent"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newEvent"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newEvent"}}},{"kind":"Argument","name":{"kind":"Name","value":"gigRequestId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"gigRequestId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateEventMutation, CreateEventMutationVariables>;
-export const CreateMinutesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateMinutes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createMeetingMinutes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateMinutesMutation, CreateMinutesMutationVariables>;
-export const CreateSemesterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateSemester"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newSemester"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NewSemester"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createSemester"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newSemester"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newSemester"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<CreateSemesterMutation, CreateSemesterMutationVariables>;
-export const CreateSongDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateSong"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createSong"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newSong"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateSongMutation, CreateSongMutationVariables>;
-export const CreateSongLinkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateSongLink"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"songId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newLink"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NewSongLink"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createSongLink"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"songId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"songId"}}},{"kind":"Argument","name":{"kind":"Name","value":"newLink"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newLink"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateSongLinkMutation, CreateSongLinkMutationVariables>;
-export const CreateUniformDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUniform"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newUniform"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NewUniform"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUniform"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newUniform"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newUniform"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateUniformMutation, CreateUniformMutationVariables>;
-export const DeleteDocumentLinkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteDocumentLink"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteLink"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<DeleteDocumentLinkMutation, DeleteDocumentLinkMutationVariables>;
-export const DeleteMemberDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteMember"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteMember"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}]}}]} as unknown as DocumentNode<DeleteMemberMutation, DeleteMemberMutationVariables>;
-export const DeleteSongDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteSong"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteSong"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteSongMutation, DeleteSongMutationVariables>;
-export const DeleteSongLinkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteSongLink"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteSongLink"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteSongLinkMutation, DeleteSongLinkMutationVariables>;
-export const DeleteUniformDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteUniform"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteUniform"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteUniformMutation, DeleteUniformMutationVariables>;
-export const DisableRolePermissionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DisableRolePermission"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"rolePermission"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NewRolePermission"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"removePermissionFromRole"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"rolePermission"},"value":{"kind":"Variable","name":{"kind":"Name","value":"rolePermission"}}}]}]}}]} as unknown as DocumentNode<DisableRolePermissionMutation, DisableRolePermissionMutationVariables>;
-export const EnableRolePermissionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"EnableRolePermission"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"rolePermission"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NewRolePermission"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addPermissionToRole"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"rolePermission"},"value":{"kind":"Variable","name":{"kind":"Name","value":"rolePermission"}}}]}]}}]} as unknown as DocumentNode<EnableRolePermissionMutation, EnableRolePermissionMutationVariables>;
-export const ForgotPasswordDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ForgotPassword"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"forgotPassword"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}]}}]} as unknown as DocumentNode<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
-export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"passHash"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"passHash"},"value":{"kind":"Variable","name":{"kind":"Name","value":"passHash"}}}]}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
-export const LoginAsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LoginAs"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loginAs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}]}}]} as unknown as DocumentNode<LoginAsMutation, LoginAsMutationVariables>;
-export const LogoutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Logout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logout"}}]}}]} as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>;
-export const RegisterForSemesterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RegisterForSemester"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newSemester"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RegisterForSemesterForm"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"registerForSemester"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newSemester"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newSemester"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<RegisterForSemesterMutation, RegisterForSemesterMutationVariables>;
-export const RemoveOfficershipDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RemoveOfficership"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"role"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"removeOfficership"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"role"},"value":{"kind":"Variable","name":{"kind":"Name","value":"role"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}]}}]} as unknown as DocumentNode<RemoveOfficershipMutation, RemoveOfficershipMutationVariables>;
-export const ResetPasswordDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ResetPassword"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"token"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"passHash"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resetPassword"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"token"},"value":{"kind":"Variable","name":{"kind":"Name","value":"token"}}},{"kind":"Argument","name":{"kind":"Name","value":"passHash"},"value":{"kind":"Variable","name":{"kind":"Name","value":"passHash"}}}]}]}}]} as unknown as DocumentNode<ResetPasswordMutation, ResetPasswordMutationVariables>;
-export const ResolveTransactionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ResolveTransaction"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"resolved"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resolveTransaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"resolved"},"value":{"kind":"Variable","name":{"kind":"Name","value":"resolved"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<ResolveTransactionMutation, ResolveTransactionMutationVariables>;
-export const SetCurrentSemesterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetCurrentSemester"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setCurrentSemester"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<SetCurrentSemesterMutation, SetCurrentSemesterMutationVariables>;
-export const UpdateAttendanceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateAttendance"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"eventId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"member"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"update"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AttendanceUpdate"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateAttendance"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"eventId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"eventId"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"member"}}},{"kind":"Argument","name":{"kind":"Name","value":"update"},"value":{"kind":"Variable","name":{"kind":"Name","value":"update"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shouldAttend"}},{"kind":"Field","name":{"kind":"Name","value":"didAttend"}},{"kind":"Field","name":{"kind":"Name","value":"confirmed"}},{"kind":"Field","name":{"kind":"Name","value":"minutesLate"}}]}}]}}]} as unknown as DocumentNode<UpdateAttendanceMutation, UpdateAttendanceMutationVariables>;
-export const UpdateFeeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateFee"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"amount"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateFeeAmount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"Argument","name":{"kind":"Name","value":"amount"},"value":{"kind":"Variable","name":{"kind":"Name","value":"amount"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UpdateFeeMutation, UpdateFeeMutationVariables>;
-export const UpdateSongDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateSong"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"update"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SongUpdate"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateSong"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"update"},"value":{"kind":"Variable","name":{"kind":"Name","value":"update"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateSongMutation, UpdateSongMutationVariables>;
-export const UpdateUniformDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUniform"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"update"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NewUniform"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateUniform"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"update"},"value":{"kind":"Variable","name":{"kind":"Name","value":"update"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateUniformMutation, UpdateUniformMutationVariables>;
-export const AllDocumentLinksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllDocumentLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<AllDocumentLinksQuery, AllDocumentLinksQueryVariables>;
-export const AllEventsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllEvents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"events"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"callTime"}},{"kind":"Field","name":{"kind":"Name","value":"releaseTime"}},{"kind":"Field","name":{"kind":"Name","value":"userAttendance"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shouldAttend"}},{"kind":"Field","name":{"kind":"Name","value":"confirmed"}}]}}]}}]}}]} as unknown as DocumentNode<AllEventsQuery, AllEventsQueryVariables>;
-export const AllFeesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllFees"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fees"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}}]}}]}}]} as unknown as DocumentNode<AllFeesQuery, AllFeesQueryVariables>;
-export const AllMembersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllMembers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phoneNumber"}},{"kind":"Field","name":{"kind":"Name","value":"fullName"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"semester"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"section"}}]}}]}}]}}]} as unknown as DocumentNode<AllMembersQuery, AllMembersQueryVariables>;
-export const AllMinutesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllMinutes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allMeetingMinutes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<AllMinutesQuery, AllMinutesQueryVariables>;
-export const AllRolePermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllRolePermissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currentPermissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"permission"}},{"kind":"Field","name":{"kind":"Name","value":"eventType"}}]}}]}}]} as unknown as DocumentNode<AllRolePermissionsQuery, AllRolePermissionsQueryVariables>;
-export const AllSemestersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllSemesters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"semesters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AllSemestersQuery, AllSemestersQueryVariables>;
-export const AllSongsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllSongs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"songs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"current"}}]}}]}}]} as unknown as DocumentNode<AllSongsQuery, AllSongsQueryVariables>;
-export const AllUniformsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllUniforms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uniforms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<AllUniformsQuery, AllUniformsQueryVariables>;
-export const ConfirmSemesterFormDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ConfirmSemesterForm"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"onCampus"}},{"kind":"Field","name":{"kind":"Name","value":"previousSemester"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"enrollment"}},{"kind":"Field","name":{"kind":"Name","value":"section"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dietaryRestrictions"}},{"kind":"Field","name":{"kind":"Name","value":"conflicts"}}]}}]}}]} as unknown as DocumentNode<ConfirmSemesterFormQuery, ConfirmSemesterFormQueryVariables>;
-export const CurrentOfficersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CurrentOfficers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"officers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"member"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"fullName"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"fullName"}}]}}]}}]} as unknown as DocumentNode<CurrentOfficersQuery, CurrentOfficersQueryVariables>;
-export const DocumentLinksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DocumentLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<DocumentLinksQuery, DocumentLinksQueryVariables>;
-export const FullEventDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FullEvent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"semester"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"callTime"}},{"kind":"Field","name":{"kind":"Name","value":"releaseTime"}},{"kind":"Field","name":{"kind":"Name","value":"points"}},{"kind":"Field","name":{"kind":"Name","value":"comments"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"gigCount"}},{"kind":"Field","name":{"kind":"Name","value":"defaultAttend"}},{"kind":"Field","name":{"kind":"Name","value":"gig"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"summary"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"userAttendance"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shouldAttend"}},{"kind":"Field","name":{"kind":"Name","value":"didAttend"}},{"kind":"Field","name":{"kind":"Name","value":"confirmed"}},{"kind":"Field","name":{"kind":"Name","value":"minutesLate"}},{"kind":"Field","name":{"kind":"Name","value":"rsvpIssue"}},{"kind":"Field","name":{"kind":"Name","value":"approvedAbsence"}},{"kind":"Field","name":{"kind":"Name","value":"denyCredit"}}]}},{"kind":"Field","name":{"kind":"Name","value":"allAttendance"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"emptyIfNotPermitted"},"value":{"kind":"BooleanValue","value":true}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"semester"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"section"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"didAttend"}},{"kind":"Field","name":{"kind":"Name","value":"shouldAttend"}},{"kind":"Field","name":{"kind":"Name","value":"confirmed"}},{"kind":"Field","name":{"kind":"Name","value":"minutesLate"}}]}},{"kind":"Field","name":{"kind":"Name","value":"carpools"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"driver"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"fullName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"passengers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"setlist"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"mode"}},{"kind":"Field","name":{"kind":"Name","value":"startingPitch"}}]}}]}}]}}]} as unknown as DocumentNode<FullEventQuery, FullEventQueryVariables>;
-export const FullMemberDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FullMember"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"preferredName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"phoneNumber"}},{"kind":"Field","name":{"kind":"Name","value":"picture"}},{"kind":"Field","name":{"kind":"Name","value":"passengers"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"onCampus"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"major"}},{"kind":"Field","name":{"kind":"Name","value":"minor"}},{"kind":"Field","name":{"kind":"Name","value":"hometown"}},{"kind":"Field","name":{"kind":"Name","value":"arrivedAtTech"}},{"kind":"Field","name":{"kind":"Name","value":"gatewayDrug"}},{"kind":"Field","name":{"kind":"Name","value":"conflicts"}},{"kind":"Field","name":{"kind":"Name","value":"dietaryRestrictions"}},{"kind":"Field","name":{"kind":"Name","value":"fullName"}},{"kind":"Field","name":{"kind":"Name","value":"semester"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"enrollment"}},{"kind":"Field","name":{"kind":"Name","value":"section"}}]}},{"kind":"Field","name":{"kind":"Name","value":"positions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"semesters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"semester"}},{"kind":"Field","name":{"kind":"Name","value":"enrollment"}},{"kind":"Field","name":{"kind":"Name","value":"section"}},{"kind":"Field","name":{"kind":"Name","value":"grades"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"grade"}},{"kind":"Field","name":{"kind":"Name","value":"eventsWithChanges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reason"}},{"kind":"Field","name":{"kind":"Name","value":"change"}},{"kind":"Field","name":{"kind":"Name","value":"partialScore"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"time"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"semester"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"resolved"}}]}}]}}]}}]} as unknown as DocumentNode<FullMemberQuery, FullMemberQueryVariables>;
-export const FullMinutesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FullMinutes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"meetingMinutes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"public"}},{"kind":"Field","name":{"kind":"Name","value":"private"}}]}}]}}]} as unknown as DocumentNode<FullMinutesQuery, FullMinutesQueryVariables>;
-export const FullSongDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FullSong"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"song"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"info"}},{"kind":"Field","name":{"kind":"Name","value":"current"}},{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"startingPitch"}},{"kind":"Field","name":{"kind":"Name","value":"mode"}},{"kind":"Field","name":{"kind":"Name","value":"linkSections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"target"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FullSongQuery, FullSongQueryVariables>;
-export const GigRequestForNewEventDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GigRequestForNewEvent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gigRequest"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"time"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"organization"}},{"kind":"Field","name":{"kind":"Name","value":"contactName"}},{"kind":"Field","name":{"kind":"Name","value":"contactPhone"}},{"kind":"Field","name":{"kind":"Name","value":"contactEmail"}},{"kind":"Field","name":{"kind":"Name","value":"startTime"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"comments"}},{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]} as unknown as DocumentNode<GigRequestForNewEventQuery, GigRequestForNewEventQueryVariables>;
-export const MemberSemestersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MemberSemesters"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"semesters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"semester"}},{"kind":"Field","name":{"kind":"Name","value":"enrollment"}},{"kind":"Field","name":{"kind":"Name","value":"section"}},{"kind":"Field","name":{"kind":"Name","value":"grades"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"grade"}}]}}]}}]}}]}}]} as unknown as DocumentNode<MemberSemestersQuery, MemberSemestersQueryVariables>;
-export const SiteContextDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SiteContext"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currentSemester"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"startDate"}},{"kind":"Field","name":{"kind":"Name","value":"endDate"}},{"kind":"Field","name":{"kind":"Name","value":"gigRequirement"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"preferredName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"fullName"}},{"kind":"Field","name":{"kind":"Name","value":"phoneNumber"}},{"kind":"Field","name":{"kind":"Name","value":"picture"}},{"kind":"Field","name":{"kind":"Name","value":"passengers"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"onCampus"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"major"}},{"kind":"Field","name":{"kind":"Name","value":"minor"}},{"kind":"Field","name":{"kind":"Name","value":"hometown"}},{"kind":"Field","name":{"kind":"Name","value":"arrivedAtTech"}},{"kind":"Field","name":{"kind":"Name","value":"gatewayDrug"}},{"kind":"Field","name":{"kind":"Name","value":"conflicts"}},{"kind":"Field","name":{"kind":"Name","value":"dietaryRestrictions"}},{"kind":"Field","name":{"kind":"Name","value":"semester"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"semester"}},{"kind":"Field","name":{"kind":"Name","value":"enrollment"}},{"kind":"Field","name":{"kind":"Name","value":"section"}}]}},{"kind":"Field","name":{"kind":"Name","value":"positions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"eventType"}}]}},{"kind":"Field","name":{"kind":"Name","value":"semesters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"semester"}},{"kind":"Field","name":{"kind":"Name","value":"enrollment"}},{"kind":"Field","name":{"kind":"Name","value":"section"}}]}},{"kind":"Field","name":{"kind":"Name","value":"grades"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"grade"}},{"kind":"Field","name":{"kind":"Name","value":"volunteerGigsAttended"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"callTime"}},{"kind":"Field","name":{"kind":"Name","value":"releaseTime"}}]}},{"kind":"Field","name":{"kind":"Name","value":"eventsWithChanges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"event"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"callTime"}},{"kind":"Field","name":{"kind":"Name","value":"releaseTime"}}]}},{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"change"}},{"kind":"Field","name":{"kind":"Name","value":"partialScore"}},{"kind":"Field","name":{"kind":"Name","value":"reason"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"time"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"semester"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"resolved"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"static"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"roles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"rank"}},{"kind":"Field","name":{"kind":"Name","value":"maxQuantity"}}]}},{"kind":"Field","name":{"kind":"Name","value":"mediaTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"eventTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"weight"}}]}},{"kind":"Field","name":{"kind":"Name","value":"transactionTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"mediaTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"order"}},{"kind":"Field","name":{"kind":"Name","value":"storage"}}]}}]}}]}}]} as unknown as DocumentNode<SiteContextQuery, SiteContextQueryVariables>;
-export const TransactionsForSemesterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"TransactionsForSemester"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transactions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"member"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"fullName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"time"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"semester"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"resolved"}}]}}]}}]} as unknown as DocumentNode<TransactionsForSemesterQuery, TransactionsForSemesterQueryVariables>;
-export type AddOfficershipMutationStore = OperationStore<AddOfficershipMutation, AddOfficershipMutationVariables>;
-export type AddTransactionBatchMutationStore = OperationStore<AddTransactionBatchMutation, AddTransactionBatchMutationVariables>;
-export type ChargeDuesMutationStore = OperationStore<ChargeDuesMutation, ChargeDuesMutationVariables>;
-export type ChargeLateDuesMutationStore = OperationStore<ChargeLateDuesMutation, ChargeLateDuesMutationVariables>;
-export type CreateDocumentLinkMutationStore = OperationStore<CreateDocumentLinkMutation, CreateDocumentLinkMutationVariables>;
-export type CreateEventMutationStore = OperationStore<CreateEventMutation, CreateEventMutationVariables>;
-export type CreateMinutesMutationStore = OperationStore<CreateMinutesMutation, CreateMinutesMutationVariables>;
-export type CreateSemesterMutationStore = OperationStore<CreateSemesterMutation, CreateSemesterMutationVariables>;
-export type CreateSongMutationStore = OperationStore<CreateSongMutation, CreateSongMutationVariables>;
-export type CreateSongLinkMutationStore = OperationStore<CreateSongLinkMutation, CreateSongLinkMutationVariables>;
-export type CreateUniformMutationStore = OperationStore<CreateUniformMutation, CreateUniformMutationVariables>;
-export type DeleteDocumentLinkMutationStore = OperationStore<DeleteDocumentLinkMutation, DeleteDocumentLinkMutationVariables>;
-export type DeleteMemberMutationStore = OperationStore<DeleteMemberMutation, DeleteMemberMutationVariables>;
-export type DeleteSongMutationStore = OperationStore<DeleteSongMutation, DeleteSongMutationVariables>;
-export type DeleteSongLinkMutationStore = OperationStore<DeleteSongLinkMutation, DeleteSongLinkMutationVariables>;
-export type DeleteUniformMutationStore = OperationStore<DeleteUniformMutation, DeleteUniformMutationVariables>;
-export type DisableRolePermissionMutationStore = OperationStore<DisableRolePermissionMutation, DisableRolePermissionMutationVariables>;
-export type EnableRolePermissionMutationStore = OperationStore<EnableRolePermissionMutation, EnableRolePermissionMutationVariables>;
-export type ForgotPasswordMutationStore = OperationStore<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
-export type LoginMutationStore = OperationStore<LoginMutation, LoginMutationVariables>;
-export type LoginAsMutationStore = OperationStore<LoginAsMutation, LoginAsMutationVariables>;
-export type LogoutMutationStore = OperationStore<LogoutMutation, LogoutMutationVariables>;
-export type RegisterForSemesterMutationStore = OperationStore<RegisterForSemesterMutation, RegisterForSemesterMutationVariables>;
-export type RemoveOfficershipMutationStore = OperationStore<RemoveOfficershipMutation, RemoveOfficershipMutationVariables>;
-export type ResetPasswordMutationStore = OperationStore<ResetPasswordMutation, ResetPasswordMutationVariables>;
-export type ResolveTransactionMutationStore = OperationStore<ResolveTransactionMutation, ResolveTransactionMutationVariables>;
-export type SetCurrentSemesterMutationStore = OperationStore<SetCurrentSemesterMutation, SetCurrentSemesterMutationVariables>;
-export type UpdateAttendanceMutationStore = OperationStore<UpdateAttendanceMutation, UpdateAttendanceMutationVariables>;
-export type UpdateFeeMutationStore = OperationStore<UpdateFeeMutation, UpdateFeeMutationVariables>;
-export type UpdateSongMutationStore = OperationStore<UpdateSongMutation, UpdateSongMutationVariables>;
-export type UpdateUniformMutationStore = OperationStore<UpdateUniformMutation, UpdateUniformMutationVariables>;
-export type AllDocumentLinksQueryStore = OperationStore<AllDocumentLinksQuery, AllDocumentLinksQueryVariables>;
-export type AllEventsQueryStore = OperationStore<AllEventsQuery, AllEventsQueryVariables>;
-export type AllFeesQueryStore = OperationStore<AllFeesQuery, AllFeesQueryVariables>;
-export type AllMembersQueryStore = OperationStore<AllMembersQuery, AllMembersQueryVariables>;
-export type AllMinutesQueryStore = OperationStore<AllMinutesQuery, AllMinutesQueryVariables>;
-export type AllRolePermissionsQueryStore = OperationStore<AllRolePermissionsQuery, AllRolePermissionsQueryVariables>;
-export type AllSemestersQueryStore = OperationStore<AllSemestersQuery, AllSemestersQueryVariables>;
-export type AllSongsQueryStore = OperationStore<AllSongsQuery, AllSongsQueryVariables>;
-export type AllUniformsQueryStore = OperationStore<AllUniformsQuery, AllUniformsQueryVariables>;
-export type ConfirmSemesterFormQueryStore = OperationStore<ConfirmSemesterFormQuery, ConfirmSemesterFormQueryVariables>;
-export type CurrentOfficersQueryStore = OperationStore<CurrentOfficersQuery, CurrentOfficersQueryVariables>;
-export type DocumentLinksQueryStore = OperationStore<DocumentLinksQuery, DocumentLinksQueryVariables>;
-export type FullEventQueryStore = OperationStore<FullEventQuery, FullEventQueryVariables>;
-export type FullMemberQueryStore = OperationStore<FullMemberQuery, FullMemberQueryVariables>;
-export type FullMinutesQueryStore = OperationStore<FullMinutesQuery, FullMinutesQueryVariables>;
-export type FullSongQueryStore = OperationStore<FullSongQuery, FullSongQueryVariables>;
-export type GigRequestForNewEventQueryStore = OperationStore<GigRequestForNewEventQuery, GigRequestForNewEventQueryVariables>;
-export type MemberSemestersQueryStore = OperationStore<MemberSemestersQuery, MemberSemestersQueryVariables>;
-export type SiteContextQueryStore = OperationStore<SiteContextQuery, SiteContextQueryVariables>;
-export type TransactionsForSemesterQueryStore = OperationStore<TransactionsForSemesterQuery, TransactionsForSemesterQueryVariables>;
+export const AddOfficershipDocument = gql`
+    mutation AddOfficership($role: String!, $email: String!) {
+  addOfficership(role: $role, email: $email)
+}
+    `;
+export const AddTransactionBatchDocument = gql`
+    mutation AddTransactionBatch($batch: TransactionBatch!) {
+  addBatchOfTransactions(batch: $batch) {
+    id
+  }
+}
+    `;
+export const ChargeDuesDocument = gql`
+    mutation ChargeDues {
+  chargeDues {
+    id
+  }
+}
+    `;
+export const ChargeLateDuesDocument = gql`
+    mutation ChargeLateDues {
+  chargeLateDues {
+    id
+  }
+}
+    `;
+export const ConfirmForEventDocument = gql`
+    mutation ConfirmForEvent($id: Int!) {
+  confirmForEvent(id: $id) {
+    confirmed
+  }
+}
+    `;
+export const CreateDocumentLinkDocument = gql`
+    mutation CreateDocumentLink($name: String!, $url: String!) {
+  createLink(name: $name, url: $url) {
+    name
+    url
+  }
+}
+    `;
+export const CreateEventDocument = gql`
+    mutation CreateEvent($newEvent: NewEvent!, $gigRequestId: Int) {
+  createEvent(newEvent: $newEvent, gigRequestId: $gigRequestId) {
+    id
+  }
+}
+    `;
+export const CreateMinutesDocument = gql`
+    mutation CreateMinutes($name: String!) {
+  createMeetingMinutes(name: $name) {
+    id
+  }
+}
+    `;
+export const CreateSemesterDocument = gql`
+    mutation CreateSemester($newSemester: NewSemester!) {
+  createSemester(newSemester: $newSemester) {
+    name
+  }
+}
+    `;
+export const CreateSongDocument = gql`
+    mutation CreateSong($title: String!) {
+  createSong(newSong: {title: $title}) {
+    id
+  }
+}
+    `;
+export const CreateSongLinkDocument = gql`
+    mutation CreateSongLink($songId: Int!, $newLink: NewSongLink!) {
+  createSongLink(songId: $songId, newLink: $newLink) {
+    id
+  }
+}
+    `;
+export const CreateUniformDocument = gql`
+    mutation CreateUniform($newUniform: NewUniform!) {
+  createUniform(newUniform: $newUniform) {
+    id
+  }
+}
+    `;
+export const DeleteDocumentLinkDocument = gql`
+    mutation DeleteDocumentLink($name: String!) {
+  deleteLink(name: $name) {
+    name
+    url
+  }
+}
+    `;
+export const DeleteEventDocument = gql`
+    mutation DeleteEvent($id: Int!) {
+  deleteEvent(id: $id)
+}
+    `;
+export const DeleteMeetingMinutesDocument = gql`
+    mutation DeleteMeetingMinutes($id: Int!) {
+  deleteMeetingMinutes(id: $id) {
+    id
+  }
+}
+    `;
+export const DeleteMemberDocument = gql`
+    mutation DeleteMember($email: String!) {
+  deleteMember(email: $email)
+}
+    `;
+export const DeleteSongDocument = gql`
+    mutation DeleteSong($id: Int!) {
+  deleteSong(id: $id) {
+    id
+  }
+}
+    `;
+export const DeleteSongLinkDocument = gql`
+    mutation DeleteSongLink($id: Int!) {
+  deleteSongLink(id: $id) {
+    id
+  }
+}
+    `;
+export const DeleteUniformDocument = gql`
+    mutation DeleteUniform($id: Int!) {
+  deleteUniform(id: $id) {
+    id
+  }
+}
+    `;
+export const DisableRolePermissionDocument = gql`
+    mutation DisableRolePermission($rolePermission: NewRolePermission!) {
+  removePermissionFromRole(rolePermission: $rolePermission)
+}
+    `;
+export const DismissGigRequestDocument = gql`
+    mutation DismissGigRequest($id: Int!) {
+  dismissGigRequest(id: $id) {
+    id
+  }
+}
+    `;
+export const EnableRolePermissionDocument = gql`
+    mutation EnableRolePermission($rolePermission: NewRolePermission!) {
+  addPermissionToRole(rolePermission: $rolePermission)
+}
+    `;
+export const ForgotPasswordDocument = gql`
+    mutation ForgotPassword($email: String!) {
+  forgotPassword(email: $email)
+}
+    `;
+export const LoginDocument = gql`
+    mutation Login($email: String!, $passHash: String!) {
+  login(email: $email, passHash: $passHash)
+}
+    `;
+export const LoginAsDocument = gql`
+    mutation LoginAs($email: String!) {
+  loginAs(email: $email)
+}
+    `;
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout
+}
+    `;
+export const RegisterForSemesterDocument = gql`
+    mutation RegisterForSemester($newSemester: RegisterForSemesterForm!) {
+  registerForSemester(newSemester: $newSemester) {
+    email
+  }
+}
+    `;
+export const RegisterMemberDocument = gql`
+    mutation RegisterMember($newMember: NewMember!) {
+  registerMember(newMember: $newMember) {
+    email
+  }
+}
+    `;
+export const RemoveOfficershipDocument = gql`
+    mutation RemoveOfficership($role: String!, $email: String!) {
+  removeOfficership(role: $role, email: $email)
+}
+    `;
+export const ReopenGigRequestDocument = gql`
+    mutation ReopenGigRequest($id: Int!) {
+  reopenGigRequest(id: $id) {
+    id
+  }
+}
+    `;
+export const RequestAbsenceDocument = gql`
+    mutation RequestAbsence($eventId: Int!, $reason: String!) {
+  submitAbsenceRequest(eventId: $eventId, reason: $reason) {
+    reason
+  }
+}
+    `;
+export const ResetPasswordDocument = gql`
+    mutation ResetPassword($token: String!, $passHash: String!) {
+  resetPassword(token: $token, passHash: $passHash)
+}
+    `;
+export const ResolveTransactionDocument = gql`
+    mutation ResolveTransaction($id: Int!, $resolved: Boolean!) {
+  resolveTransaction(id: $id, resolved: $resolved) {
+    id
+  }
+}
+    `;
+export const RespondToAbsenceRequestDocument = gql`
+    mutation RespondToAbsenceRequest($eventId: Int!, $email: String!, $approved: Boolean!) {
+  respondToAbsenceRequest(eventId: $eventId, email: $email, approved: $approved) {
+    reason
+  }
+}
+    `;
+export const RsvpForEventDocument = gql`
+    mutation RsvpForEvent($id: Int!, $attending: Boolean!) {
+  rsvpForEvent(id: $id, attending: $attending) {
+    shouldAttend
+  }
+}
+    `;
+export const SetCurrentSemesterDocument = gql`
+    mutation SetCurrentSemester($name: String!) {
+  setCurrentSemester(name: $name) {
+    name
+  }
+}
+    `;
+export const UpdateAttendanceDocument = gql`
+    mutation UpdateAttendance($eventId: Int!, $member: String!, $update: AttendanceUpdate!) {
+  updateAttendance(eventId: $eventId, email: $member, update: $update) {
+    shouldAttend
+    didAttend
+    confirmed
+    minutesLate
+  }
+}
+    `;
+export const UpdateCarpoolsDocument = gql`
+    mutation UpdateCarpools($eventId: Int!, $carpools: [UpdatedCarpool!]!) {
+  updateCarpools(eventId: $eventId, carpools: $carpools) {
+    id
+  }
+}
+    `;
+export const UpdateEventDocument = gql`
+    mutation UpdateEvent($id: Int!, $newEvent: NewEvent!) {
+  updateEvent(id: $id, newEvent: $newEvent) {
+    id
+  }
+}
+    `;
+export const UpdateFeeDocument = gql`
+    mutation UpdateFee($name: String!, $amount: Int!) {
+  updateFeeAmount(name: $name, amount: $amount) {
+    name
+  }
+}
+    `;
+export const UpdateMeetingMinutesDocument = gql`
+    mutation UpdateMeetingMinutes($id: Int!, $update: UpdatedMeetingMinutes!) {
+  updateMeetingMinutes(id: $id, update: $update) {
+    id
+  }
+}
+    `;
+export const UpdateMemberDocument = gql`
+    mutation UpdateMember($email: String!, $update: MemberUpdate!) {
+  updateMember(email: $email, newMember: $update) {
+    email
+  }
+}
+    `;
+export const UpdateSemesterDocument = gql`
+    mutation UpdateSemester($name: String!, $update: NewSemester!) {
+  updateSemester(name: $name, update: $update) {
+    name
+  }
+}
+    `;
+export const UpdateSongDocument = gql`
+    mutation UpdateSong($id: Int!, $update: SongUpdate!) {
+  updateSong(id: $id, update: $update) {
+    id
+  }
+}
+    `;
+export const UpdateUniformDocument = gql`
+    mutation UpdateUniform($id: Int!, $update: NewUniform!) {
+  updateUniform(id: $id, update: $update) {
+    id
+  }
+}
+    `;
+export const AllAbsenceRequestsDocument = gql`
+    query AllAbsenceRequests {
+  absenceRequests {
+    time
+    reason
+    state
+    event {
+      id
+      name
+      location
+      callTime
+    }
+    member {
+      email
+      fullName
+    }
+  }
+}
+    `;
+export const AllDocumentLinksDocument = gql`
+    query AllDocumentLinks {
+  links {
+    name
+    url
+  }
+}
+    `;
+export const AllEventsDocument = gql`
+    query AllEvents {
+  events {
+    id
+    name
+    type
+    callTime
+    releaseTime
+    userAttendance {
+      shouldAttend
+      didAttend
+      confirmed
+      minutesLate
+    }
+  }
+}
+    `;
+export const AllFeesDocument = gql`
+    query AllFees {
+  fees {
+    name
+    description
+    amount
+  }
+}
+    `;
+export const AllGigRequestsDocument = gql`
+    query AllGigRequests {
+  gigRequests {
+    id
+    time
+    name
+    organization
+    contactName
+    contactPhone
+    contactEmail
+    startTime
+    location
+    comments
+    status
+    event {
+      id
+      name
+    }
+  }
+}
+    `;
+export const AllMembersDocument = gql`
+    query AllMembers {
+  members {
+    email
+    phoneNumber
+    fullName
+    location
+    semester {
+      section
+    }
+  }
+}
+    `;
+export const AllMinutesDocument = gql`
+    query AllMinutes {
+  allMeetingMinutes {
+    id
+    name
+    date
+  }
+}
+    `;
+export const AllRolePermissionsDocument = gql`
+    query AllRolePermissions {
+  currentPermissions {
+    id
+    role
+    permission
+    eventType
+  }
+}
+    `;
+export const AllSemestersDocument = gql`
+    query AllSemesters {
+  semesters {
+    name
+  }
+}
+    `;
+export const AllSongsDocument = gql`
+    query AllSongs {
+  songs {
+    id
+    title
+    current
+  }
+}
+    `;
+export const AllUniformsDocument = gql`
+    query AllUniforms {
+  uniforms {
+    id
+    name
+    color
+    description
+  }
+}
+    `;
+export const ConfirmSemesterFormDocument = gql`
+    query ConfirmSemesterForm {
+  user {
+    location
+    onCampus
+    previousSemester {
+      enrollment
+      section
+    }
+    dietaryRestrictions
+    conflicts
+  }
+}
+    `;
+export const CurrentOfficersDocument = gql`
+    query CurrentOfficers {
+  officers {
+    role
+    member {
+      email
+      fullName
+    }
+  }
+  members {
+    email
+    fullName
+  }
+}
+    `;
+export const EditCarpoolContextDocument = gql`
+    query EditCarpoolContext($eventId: Int!) {
+  members {
+    email
+    fullName
+    location
+    passengers
+  }
+  event(id: $eventId) {
+    name
+    carpools {
+      driver {
+        email
+        fullName
+        location
+        passengers
+      }
+      passengers {
+        email
+        fullName
+        location
+        passengers
+      }
+    }
+  }
+}
+    `;
+export const FullEventDocument = gql`
+    query FullEvent($id: Int!) {
+  event(id: $id) {
+    id
+    name
+    semester
+    type
+    callTime
+    releaseTime
+    points
+    comments
+    location
+    gigCount
+    defaultAttend
+    gig {
+      public
+      summary
+      description
+      contactName
+      contactEmail
+      contactPhone
+      price
+      performanceTime
+      uniform {
+        id
+        name
+        description
+        color
+      }
+    }
+    userAttendance {
+      shouldAttend
+      didAttend
+      confirmed
+      minutesLate
+      rsvpIssue
+      approvedAbsence
+      denyCredit
+      absenceRequest {
+        state
+      }
+    }
+    allAttendance(emptyIfNotPermitted: true) {
+      member {
+        fullName
+        email
+        semester {
+          section
+        }
+      }
+      didAttend
+      shouldAttend
+      confirmed
+      minutesLate
+    }
+    carpools {
+      driver {
+        email
+        fullName
+        location
+        passengers
+      }
+      passengers {
+        email
+        fullName
+        location
+        passengers
+      }
+    }
+    setlist {
+      id
+      title
+      key
+      mode
+      startingPitch
+    }
+  }
+}
+    `;
+export const FullMemberDocument = gql`
+    query FullMember($email: String!) {
+  member(email: $email) {
+    email
+    firstName
+    preferredName
+    lastName
+    phoneNumber
+    picture
+    passengers
+    location
+    onCampus
+    about
+    major
+    minor
+    hometown
+    arrivedAtTech
+    gatewayDrug
+    conflicts
+    dietaryRestrictions
+    fullName
+    semester {
+      enrollment
+      section
+    }
+    positions {
+      name
+    }
+    semesters {
+      semester
+      enrollment
+      section
+      grades {
+        grade
+      }
+    }
+    transactions {
+      id
+      time
+      amount
+      description
+      semester
+      type
+      resolved
+    }
+    grades {
+      grade
+      eventsWithChanges {
+        event {
+          id
+          name
+          type
+          callTime
+          attendance(member: $email) {
+            didAttend
+            shouldAttend
+            confirmed
+            minutesLate
+          }
+        }
+        change {
+          reason
+          change
+          partialScore
+        }
+      }
+    }
+  }
+}
+    `;
+export const FullMinutesDocument = gql`
+    query FullMinutes($id: Int!) {
+  meetingMinutes(id: $id) {
+    id
+    name
+    date
+    public
+    private
+  }
+}
+    `;
+export const FullSongDocument = gql`
+    query FullSong($id: Int!) {
+  song(id: $id) {
+    id
+    title
+    info
+    current
+    key
+    startingPitch
+    mode
+    linkSections {
+      name
+      links {
+        id
+        name
+        type
+        target
+      }
+    }
+  }
+}
+    `;
+export const GigRequestForNewEventDocument = gql`
+    query GigRequestForNewEvent($id: Int!) {
+  gigRequest(id: $id) {
+    id
+    time
+    name
+    organization
+    contactName
+    contactPhone
+    contactEmail
+    startTime
+    location
+    comments
+    status
+  }
+}
+    `;
+export const MemberSemestersDocument = gql`
+    query MemberSemesters($email: String!) {
+  member(email: $email) {
+    semesters {
+      semester
+      enrollment
+      section
+      grades {
+        grade
+      }
+    }
+  }
+}
+    `;
+export const SiteContextDocument = gql`
+    query SiteContext {
+  currentSemester {
+    name
+    startDate
+    endDate
+    gigRequirement
+  }
+  user {
+    email
+    firstName
+    preferredName
+    lastName
+    fullName
+    phoneNumber
+    picture
+    passengers
+    location
+    onCampus
+    about
+    major
+    minor
+    hometown
+    arrivedAtTech
+    gatewayDrug
+    conflicts
+    dietaryRestrictions
+    semester {
+      semester
+      enrollment
+      section
+    }
+    positions {
+      name
+    }
+    permissions {
+      name
+      eventType
+    }
+    semesters {
+      semester
+      enrollment
+      section
+    }
+    grades {
+      grade
+      volunteerGigsAttended {
+        id
+        name
+        callTime
+        releaseTime
+      }
+      eventsWithChanges {
+        event {
+          id
+          name
+          callTime
+          releaseTime
+        }
+        change {
+          change
+          partialScore
+          reason
+        }
+      }
+    }
+    transactions {
+      id
+      time
+      amount
+      description
+      semester
+      type
+      resolved
+    }
+  }
+  static {
+    sections {
+      name
+    }
+    permissions {
+      name
+      description
+      type
+    }
+    roles {
+      name
+      rank
+      maxQuantity
+    }
+    mediaTypes {
+      name
+    }
+    eventTypes {
+      name
+      weight
+    }
+    transactionTypes {
+      name
+    }
+    mediaTypes {
+      name
+      order
+      storage
+    }
+  }
+}
+    `;
+export const TransactionsForSemesterDocument = gql`
+    query TransactionsForSemester {
+  transactions {
+    id
+    member {
+      email
+      fullName
+    }
+    time
+    amount
+    description
+    semester
+    type
+    resolved
+  }
+}
+    `;
+
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
+
+
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
+
+export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
+  return {
+    AddOfficership(variables: AddOfficershipMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddOfficershipMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AddOfficershipMutation>(AddOfficershipDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AddOfficership', 'mutation');
+    },
+    AddTransactionBatch(variables: AddTransactionBatchMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddTransactionBatchMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AddTransactionBatchMutation>(AddTransactionBatchDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AddTransactionBatch', 'mutation');
+    },
+    ChargeDues(variables?: ChargeDuesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ChargeDuesMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ChargeDuesMutation>(ChargeDuesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ChargeDues', 'mutation');
+    },
+    ChargeLateDues(variables?: ChargeLateDuesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ChargeLateDuesMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ChargeLateDuesMutation>(ChargeLateDuesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ChargeLateDues', 'mutation');
+    },
+    ConfirmForEvent(variables: ConfirmForEventMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ConfirmForEventMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ConfirmForEventMutation>(ConfirmForEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ConfirmForEvent', 'mutation');
+    },
+    CreateDocumentLink(variables: CreateDocumentLinkMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateDocumentLinkMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateDocumentLinkMutation>(CreateDocumentLinkDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateDocumentLink', 'mutation');
+    },
+    CreateEvent(variables: CreateEventMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateEventMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateEventMutation>(CreateEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateEvent', 'mutation');
+    },
+    CreateMinutes(variables: CreateMinutesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateMinutesMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateMinutesMutation>(CreateMinutesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateMinutes', 'mutation');
+    },
+    CreateSemester(variables: CreateSemesterMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateSemesterMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateSemesterMutation>(CreateSemesterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateSemester', 'mutation');
+    },
+    CreateSong(variables: CreateSongMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateSongMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateSongMutation>(CreateSongDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateSong', 'mutation');
+    },
+    CreateSongLink(variables: CreateSongLinkMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateSongLinkMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateSongLinkMutation>(CreateSongLinkDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateSongLink', 'mutation');
+    },
+    CreateUniform(variables: CreateUniformMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateUniformMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateUniformMutation>(CreateUniformDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateUniform', 'mutation');
+    },
+    DeleteDocumentLink(variables: DeleteDocumentLinkMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteDocumentLinkMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteDocumentLinkMutation>(DeleteDocumentLinkDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteDocumentLink', 'mutation');
+    },
+    DeleteEvent(variables: DeleteEventMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteEventMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteEventMutation>(DeleteEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteEvent', 'mutation');
+    },
+    DeleteMeetingMinutes(variables: DeleteMeetingMinutesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteMeetingMinutesMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMeetingMinutesMutation>(DeleteMeetingMinutesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteMeetingMinutes', 'mutation');
+    },
+    DeleteMember(variables: DeleteMemberMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteMemberMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMemberMutation>(DeleteMemberDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteMember', 'mutation');
+    },
+    DeleteSong(variables: DeleteSongMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteSongMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteSongMutation>(DeleteSongDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteSong', 'mutation');
+    },
+    DeleteSongLink(variables: DeleteSongLinkMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteSongLinkMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteSongLinkMutation>(DeleteSongLinkDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteSongLink', 'mutation');
+    },
+    DeleteUniform(variables: DeleteUniformMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteUniformMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteUniformMutation>(DeleteUniformDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteUniform', 'mutation');
+    },
+    DisableRolePermission(variables: DisableRolePermissionMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DisableRolePermissionMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DisableRolePermissionMutation>(DisableRolePermissionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DisableRolePermission', 'mutation');
+    },
+    DismissGigRequest(variables: DismissGigRequestMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DismissGigRequestMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DismissGigRequestMutation>(DismissGigRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DismissGigRequest', 'mutation');
+    },
+    EnableRolePermission(variables: EnableRolePermissionMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<EnableRolePermissionMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<EnableRolePermissionMutation>(EnableRolePermissionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EnableRolePermission', 'mutation');
+    },
+    ForgotPassword(variables: ForgotPasswordMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ForgotPasswordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ForgotPasswordMutation>(ForgotPasswordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ForgotPassword', 'mutation');
+    },
+    Login(variables: LoginMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LoginMutation>(LoginDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Login', 'mutation');
+    },
+    LoginAs(variables: LoginAsMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAsMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LoginAsMutation>(LoginAsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'LoginAs', 'mutation');
+    },
+    Logout(variables?: LogoutMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LogoutMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LogoutMutation>(LogoutDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Logout', 'mutation');
+    },
+    RegisterForSemester(variables: RegisterForSemesterMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RegisterForSemesterMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RegisterForSemesterMutation>(RegisterForSemesterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RegisterForSemester', 'mutation');
+    },
+    RegisterMember(variables: RegisterMemberMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RegisterMemberMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RegisterMemberMutation>(RegisterMemberDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RegisterMember', 'mutation');
+    },
+    RemoveOfficership(variables: RemoveOfficershipMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveOfficershipMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveOfficershipMutation>(RemoveOfficershipDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RemoveOfficership', 'mutation');
+    },
+    ReopenGigRequest(variables: ReopenGigRequestMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ReopenGigRequestMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ReopenGigRequestMutation>(ReopenGigRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ReopenGigRequest', 'mutation');
+    },
+    RequestAbsence(variables: RequestAbsenceMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RequestAbsenceMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RequestAbsenceMutation>(RequestAbsenceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RequestAbsence', 'mutation');
+    },
+    ResetPassword(variables: ResetPasswordMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ResetPasswordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ResetPasswordMutation>(ResetPasswordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ResetPassword', 'mutation');
+    },
+    ResolveTransaction(variables: ResolveTransactionMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ResolveTransactionMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ResolveTransactionMutation>(ResolveTransactionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ResolveTransaction', 'mutation');
+    },
+    RespondToAbsenceRequest(variables: RespondToAbsenceRequestMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RespondToAbsenceRequestMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RespondToAbsenceRequestMutation>(RespondToAbsenceRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RespondToAbsenceRequest', 'mutation');
+    },
+    RsvpForEvent(variables: RsvpForEventMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RsvpForEventMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RsvpForEventMutation>(RsvpForEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RsvpForEvent', 'mutation');
+    },
+    SetCurrentSemester(variables: SetCurrentSemesterMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SetCurrentSemesterMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SetCurrentSemesterMutation>(SetCurrentSemesterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SetCurrentSemester', 'mutation');
+    },
+    UpdateAttendance(variables: UpdateAttendanceMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateAttendanceMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateAttendanceMutation>(UpdateAttendanceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateAttendance', 'mutation');
+    },
+    UpdateCarpools(variables: UpdateCarpoolsMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateCarpoolsMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateCarpoolsMutation>(UpdateCarpoolsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateCarpools', 'mutation');
+    },
+    UpdateEvent(variables: UpdateEventMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateEventMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateEventMutation>(UpdateEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateEvent', 'mutation');
+    },
+    UpdateFee(variables: UpdateFeeMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateFeeMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateFeeMutation>(UpdateFeeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateFee', 'mutation');
+    },
+    UpdateMeetingMinutes(variables: UpdateMeetingMinutesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateMeetingMinutesMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMeetingMinutesMutation>(UpdateMeetingMinutesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateMeetingMinutes', 'mutation');
+    },
+    UpdateMember(variables: UpdateMemberMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateMemberMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMemberMutation>(UpdateMemberDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateMember', 'mutation');
+    },
+    UpdateSemester(variables: UpdateSemesterMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateSemesterMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateSemesterMutation>(UpdateSemesterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateSemester', 'mutation');
+    },
+    UpdateSong(variables: UpdateSongMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateSongMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateSongMutation>(UpdateSongDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateSong', 'mutation');
+    },
+    UpdateUniform(variables: UpdateUniformMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateUniformMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUniformMutation>(UpdateUniformDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateUniform', 'mutation');
+    },
+    AllAbsenceRequests(variables?: AllAbsenceRequestsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllAbsenceRequestsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllAbsenceRequestsQuery>(AllAbsenceRequestsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllAbsenceRequests', 'query');
+    },
+    AllDocumentLinks(variables?: AllDocumentLinksQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllDocumentLinksQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllDocumentLinksQuery>(AllDocumentLinksDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllDocumentLinks', 'query');
+    },
+    AllEvents(variables?: AllEventsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllEventsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllEventsQuery>(AllEventsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllEvents', 'query');
+    },
+    AllFees(variables?: AllFeesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllFeesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllFeesQuery>(AllFeesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllFees', 'query');
+    },
+    AllGigRequests(variables?: AllGigRequestsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllGigRequestsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllGigRequestsQuery>(AllGigRequestsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllGigRequests', 'query');
+    },
+    AllMembers(variables?: AllMembersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllMembersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllMembersQuery>(AllMembersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllMembers', 'query');
+    },
+    AllMinutes(variables?: AllMinutesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllMinutesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllMinutesQuery>(AllMinutesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllMinutes', 'query');
+    },
+    AllRolePermissions(variables?: AllRolePermissionsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllRolePermissionsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllRolePermissionsQuery>(AllRolePermissionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllRolePermissions', 'query');
+    },
+    AllSemesters(variables?: AllSemestersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllSemestersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllSemestersQuery>(AllSemestersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllSemesters', 'query');
+    },
+    AllSongs(variables?: AllSongsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllSongsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllSongsQuery>(AllSongsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllSongs', 'query');
+    },
+    AllUniforms(variables?: AllUniformsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllUniformsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AllUniformsQuery>(AllUniformsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllUniforms', 'query');
+    },
+    ConfirmSemesterForm(variables?: ConfirmSemesterFormQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ConfirmSemesterFormQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ConfirmSemesterFormQuery>(ConfirmSemesterFormDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ConfirmSemesterForm', 'query');
+    },
+    CurrentOfficers(variables?: CurrentOfficersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CurrentOfficersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CurrentOfficersQuery>(CurrentOfficersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CurrentOfficers', 'query');
+    },
+    EditCarpoolContext(variables: EditCarpoolContextQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<EditCarpoolContextQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<EditCarpoolContextQuery>(EditCarpoolContextDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditCarpoolContext', 'query');
+    },
+    FullEvent(variables: FullEventQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FullEventQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FullEventQuery>(FullEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FullEvent', 'query');
+    },
+    FullMember(variables: FullMemberQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FullMemberQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FullMemberQuery>(FullMemberDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FullMember', 'query');
+    },
+    FullMinutes(variables: FullMinutesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FullMinutesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FullMinutesQuery>(FullMinutesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FullMinutes', 'query');
+    },
+    FullSong(variables: FullSongQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FullSongQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FullSongQuery>(FullSongDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FullSong', 'query');
+    },
+    GigRequestForNewEvent(variables: GigRequestForNewEventQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GigRequestForNewEventQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GigRequestForNewEventQuery>(GigRequestForNewEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GigRequestForNewEvent', 'query');
+    },
+    MemberSemesters(variables: MemberSemestersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MemberSemestersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<MemberSemestersQuery>(MemberSemestersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'MemberSemesters', 'query');
+    },
+    SiteContext(variables?: SiteContextQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SiteContextQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SiteContextQuery>(SiteContextDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SiteContext', 'query');
+    },
+    TransactionsForSemester(variables?: TransactionsForSemesterQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TransactionsForSemesterQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TransactionsForSemesterQuery>(TransactionsForSemesterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'TransactionsForSemester', 'query');
+    }
+  };
+}
+export type Sdk = ReturnType<typeof getSdk>;

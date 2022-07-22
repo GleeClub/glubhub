@@ -5,9 +5,12 @@
   import Container from "components/bulma/Container.svelte";
   import Section from "components/bulma/Section.svelte";
   import Remote from "components/remote/Remote.svelte";
-  import Attendance from "pages/events/Attendance.svelte";
   import UserDetailColumn from "./UserDetailColumn.svelte";
   import UserActions from "./UserActions.svelte";
+  import Attendance from "./Attendance.svelte";
+  import Semesters from "./Semesters.svelte";
+  import Details from "./Details.svelte";
+  import Money from "./Money.svelte";
 
   import {
     profileAttendance,
@@ -16,16 +19,15 @@
     profileSemesters,
   routeProfile
   } from "route/constructors";
-  import { FullMemberDocument } from "gql-operations";
   import { ProfileTab } from "route/types";
-  import { reexecutableQuery } from "state/query";
+  import { eagerQuery } from "state/query";
   import { siteContext } from "store/context";
   import { renderRoute } from "route/render";
 
   export let email: string;
   export let tab: ProfileTab | null;
 
-  $: [member, reloadMember] = reexecutableQuery(FullMemberDocument, { email });
+  $: [member, reloadMember] = eagerQuery("FullMember", { email });
 
   const allProfileTabs = [profileDetails, profileMoney, profileAttendance, profileSemesters];
 </script>
@@ -72,13 +74,13 @@
             </div>
 
             {#if tab?.route === "attendance"}
-              <Attendance member={member.member} />
+              <Attendance member={member.member} onUpdate={() => reloadMember({ email })} />
             {:else if tab?.route === "semesters"}
-              <Semesters member={member.member} />
+              <Semesters email={member.member.email}  />
             {:else if tab?.route === "money"}
-              <Money member={member.member} />
+              <Money transactions={member.member.transactions} onUpdate={() => reloadMember({ email })} />
             {:else if tab?.route === "details"}
-              <Details member={member.member} onUpdate={reloadMember} />
+              <Details member={member.member} onUpdate={() => reloadMember({ email })} />
             {/if}
           </svelte:fragment>
         </Remote>

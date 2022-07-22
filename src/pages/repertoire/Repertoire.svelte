@@ -5,35 +5,41 @@
   import Sidebar from "components/popup/Sidebar.svelte";
   import SongColumn from "./SongColumn.svelte";
   import SongInfo from "./SongInfo.svelte";
+  import EditSong from "./edit/EditSong.svelte";
 
-  import { AllSongsDocument, AllSongsQuery, CreateSongDocument, FullSongDocument } from "gql-operations";
+  import { 
+    emptyLoaded,
+    LazyRemoteData,
+    loading,
+    mapLazyLoaded,
+    notLoaded,
+    RemoteData,
+    stateFromResult
+  } from "state/types";
   import { routeRepertoire } from "route/constructors";
   import { RepertoireTab } from "route/types";
-  import { mutation, reexecutableQuery } from "state/query";
-  import { emptyLoaded, LazyRemoteData, loading, mapLazyLoaded, notLoaded, RemoteData } from "state/types";
   import { replaceRoute } from "store/route";
   import { derived, Readable, readable } from "svelte/store";
-import EditSong from "./edit/EditSong.svelte";
+  import { eagerQuery, query } from "state/query";
+  import { AllSongsQuery } from "gql-operations";
 
   export let songId: number | null;
   export let tab: RepertoireTab | null;
 
   let createState: RemoteData = emptyLoaded;
 
-  const [songs, reloadAllSongs] = reexecutableQuery(AllSongsDocument, {});
+  const [songs, reloadAllSongs] = eagerQuery("AllSongs");
   const [selectedSong, reloadSelectedSong] = songId 
-    ? reexecutableQuery(FullSongDocument, { id: songId }) 
+    ? eagerQuery("FullSong", { id: songId }) 
     : [readable(notLoaded), (_vars: { id: number }) => {}];
 
   async function createSong() {
     createState = loading;
-    const response = await mutation(CreateSongDocument, { title: "New Song" });
+    const result = await query("CreateSong", { title: "New Song" });
 
-    if (response.type === "loaded") {
-      createState = emptyLoaded;
-      replaceRoute(routeRepertoire(response.data.createSong.id, null));
-    } else {
-      createState = response;
+    createState = stateFromResult(result);
+    if (result.type === "loaded") {
+      replaceRoute(routeRepertoire(result.data.createSong.id, null));
     }
   }
  
@@ -72,7 +78,7 @@ import EditSong from "./edit/EditSong.svelte";
         onUpdate={() => reloadSelectedSong({ id: song.song.id })}
       />
     {:else }
-      <SongInfo song={song.song} {reloadAllSongs} />
+      <SongInfo song={song.song} reloadAllSongs={() => reloadAllSongs({})} />
     {/if}
   </svelte:fragment>
 </Sidebar>

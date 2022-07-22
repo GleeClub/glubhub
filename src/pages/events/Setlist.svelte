@@ -4,6 +4,7 @@
   import { FullEventQuery } from "gql-operations";
   import { routeRepertoire } from "route/constructors";
   import { renderRoute } from "route/render";
+  import { pitchToUnicode } from "state/pitch";
 
   export let songs: FullEventQuery['event']['setlist'];
 </script>

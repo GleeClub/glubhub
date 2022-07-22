@@ -5,17 +5,15 @@
   import Remote from "components/remote/Remote.svelte";
   import StateBox from "components/remote/StateBox.svelte";
 
-  import { AddOfficershipDocument, CurrentOfficersDocument, RemoveOfficershipDocument } from "gql-operations";
   import { memberType } from "state/input";
-  import { mutation, reexecutableQuery } from "state/query";
+  import { eagerQuery, query } from "state/query";
   import { emptyLoaded, loading, mapLazyLoaded, RemoteData } from "state/types";
   import { siteContext } from "store/context";
   import { derived } from "svelte/store";
 
   let state: RemoteData = emptyLoaded;
 
-  const [currentOfficers, reloadCurrentOfficers] = 
-    reexecutableQuery(CurrentOfficersDocument, {});
+  const [currentOfficers, reloadCurrentOfficers] = eagerQuery("CurrentOfficers", {});
 
   const roleGroups = derived(
     [siteContext, currentOfficers],
@@ -36,7 +34,7 @@
     state = loading;
 
     if (fromEmail) {
-      const result = await mutation(RemoveOfficershipDocument, { role, email: fromEmail });
+      const result = await query("RemoveOfficership", { role, email: fromEmail });
       if (result.type === "error") {
         state = result;
         return;
@@ -44,7 +42,7 @@
     }
 
     if (toEmail) {
-      const result = await mutation(AddOfficershipDocument, { role, email: toEmail });
+      const result = await query("AddOfficership", { role, email: toEmail });
       if (result.type === "error") {
         state = result;
         return;
@@ -52,7 +50,7 @@
     }
 
     state = emptyLoaded;
-    reloadCurrentOfficers({});
+    reloadCurrentOfficers();
   }
 </script>
 

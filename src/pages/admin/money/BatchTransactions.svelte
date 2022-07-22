@@ -12,11 +12,10 @@
 
   import { adminMoney, routeAdmin } from "route/constructors";
   import { numberType, stringType } from "state/input";
-  import { mutation, query } from "state/query";
+  import { eagerQuery, query } from "state/query";
   import { replaceRoute } from "store/route";
   import { siteContext } from "store/context";
   import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
-  import { AddTransactionBatchDocument, AllMembersDocument } from "gql-operations";
 
   let batchType = "";
   let description = "";
@@ -24,7 +23,7 @@
   let includedMembers: string[] = [];
   let state: RemoteData = emptyLoaded;
 
-  const allMembers = query(AllMembersDocument, {});
+  const [allMembers, _reloadAllMembers] = eagerQuery("AllMembers");
 
   function closeSidebar() {
     replaceRoute(routeAdmin(adminMoney(null)));
@@ -40,7 +39,7 @@
 
   async function sendBatch() {
     state = loading;
-    const result = await mutation(AddTransactionBatchDocument, {
+    const result = await query("AddTransactionBatch", {
       batch: {
         members: includedMembers,
         type: batchType,

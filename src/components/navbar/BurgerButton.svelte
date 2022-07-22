@@ -7,9 +7,9 @@
   role="button"
   aria-label="menu"
   aria-expanded={expanded}
-  class="navbar-burger{expanded ? ' is-active' : ''}"
+  class="navbar-burger"
+  class:is-active={expanded}
   onClick={toggleExpanded}
-  href="javascript:void(0);"
 >
   <span aria-hidden="true" />
   <span aria-hidden="true" />

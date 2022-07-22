@@ -10,12 +10,11 @@
   import SelectInput from "components/forms/SelectInput.svelte";
   import TextInput from "components/forms/TextInput.svelte";
 
-  import { ConfirmSemesterFormDocument, Enrollment, RegisterForSemesterDocument } from "gql-operations";
+  import { query } from "state/query";
+  import { Enrollment } from "gql-operations";
   import { sectionType, stringType } from "state/input";
-  import { mutation, query } from "state/query";
-  import { emptyLoaded, loading, RemoteData } from "state/types";
-  import { reloadContext, siteContext } from "store/context";
-  import { onDestroy } from "svelte";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
+  import { reloadSiteContext, siteContext } from "store/context";
 
   export let close: () => void
 
@@ -29,8 +28,10 @@
   let dietaryRestrictions = ""
 
   async function confirmAccount() {
+    if (!section) return;
+
     state = loading;
-    const response = await mutation(RegisterForSemesterDocument, {
+    const result = await query("RegisterForSemester", {
       newSemester: {
         enrollment,
         location,
@@ -41,16 +42,15 @@
       }
     });
 
-    if (response.type === "loaded") {
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
       close();
-      reloadContext();
-    } else {
-      state = response;
+      reloadSiteContext();
     }
   }
 
   // Try to load last semester's data for convenience
-  const unsubscribe = query(ConfirmSemesterFormDocument, {}).subscribe(result => {
+  query("ConfirmSemesterForm").then(result => {
     if (result.type === "loaded" && result.data.user) {
       const form = result.data.user;
 
@@ -62,8 +62,6 @@
       conflicts = form.conflicts || "";
     }
   });
-
-  onDestroy(unsubscribe);
 </script>
 
 <Modal close={close}>
@@ -100,7 +98,7 @@
     </InputWrapper>
     <InputWrapper horizontal title="Voice Part">
       <SelectInput
-        type={sectionType()}
+        type={sectionType($siteContext)}
         values={[...$siteContext.static.sections.map(s => s.name), null]}
         selected={section}
         onInput={newSection => section = newSection}

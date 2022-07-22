@@ -1,0 +1,5 @@
+mutation UpdateEvent($id: Int!, $newEvent: NewEvent!) {
+  updateEvent(id: $id, newEvent: $newEvent) {
+    id
+  }
+}

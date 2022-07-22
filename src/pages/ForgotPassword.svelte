@@ -1,19 +1,18 @@
 <script lang="ts">
-  import Box from "components/basic/Box.svelte";
-  import Column from "components/basic/Column.svelte";
-  import Title4 from "components/basic/Title4.svelte";
+  import Box from "components/bulma/Box.svelte";
+  import Column from "components/bulma/Column.svelte";
+  import Title from "components/bulma/Title.svelte";
   import ButtonGroup from "components/buttons/ButtonGroup.svelte";
   import LinkButton from "components/buttons/LinkButton.svelte";
   import SubmitButton from "components/buttons/SubmitButton.svelte";
-  import ErrorBox from "components/ErrorBox.svelte";
+  import ErrorBox from "components/remote/ErrorBox.svelte";
   import TextInput from "components/forms/TextInput.svelte";
-  import { ForgotPasswordDocument } from "gql-operations";
 
   import { routeLogin } from "route/constructors";
   import { emailType } from "state/input";
-  import { mutation } from "state/query";
-  import { emptyLoaded, loading, RemoteData } from "state/types";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
   import { goToRoute } from "store/route"
+  import { query } from "state/query";
 
   let state: RemoteData = emptyLoaded;
 
@@ -27,15 +26,14 @@
     }
 
     state = loading;
-    const response = await mutation(ForgotPasswordDocument, { email });
+    const result = await query("ForgotPassword", { email });
 
-    if (response.type === "loaded") {
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
       goToRoute(routeLogin);
       alert(
         "Check your email for a password reset link, it should be there in a few minutes."
       );
-    } else {
-      state = response;
     }
   }
 </script>
@@ -45,7 +43,7 @@
     <Column narrow>
       <form on:submit|preventDefault={submit} style="padding: 10px">
         <Box>
-          <Title4>Forgot your password?</Title4>
+          <Title is4>Forgot your password?</Title>
           <p>
             That sucks. But don't "oh geez, oh frick", just slap some emails
             down and we will send you an email with a reset link.

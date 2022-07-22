@@ -4,12 +4,12 @@
   import TextInput from "components/forms/TextInput.svelte";
   import ErrorBox from "components/remote/ErrorBox.svelte";
 
-  import { Semester } from "gql-operations";
+  import { NewSemester } from "gql-operations";
   import { RemoteData } from "state/types";
   import { dateType, numberType, stringType } from "state/input";
 
-  export let semester: Semester;
-  export let update: (semester: Semester) => void;
+  export let semester: NewSemester;
+  export let update: (semester: NewSemester) => void;
   export let state: RemoteData;
   export let submitMessage: string;
   export let submit: () => void;

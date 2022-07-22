@@ -1,21 +1,18 @@
 <script lang="ts">
-  import Container from "components/basic/Container.svelte";
-  import Columns from "components/basic/Columns.svelte";
-  import Column from "components/basic/Column.svelte";
-  import Box from "components/basic/Box.svelte";
+  import Container from "components/bulma/Container.svelte";
+  import Columns from "components/bulma/Columns.svelte";
+  import Column from "components/bulma/Column.svelte";
+  import Box from "components/bulma/Box.svelte";
   import TextInput from "components/forms/TextInput.svelte";
   import SubmitButton from "components/buttons/SubmitButton.svelte";
   import Control from "components/forms/Control.svelte";
   import LinkButton from "components/buttons/LinkButton.svelte";
 
-  import { setToken } from "utils/token";
-  import { routeEditProfile, routeForgotPassword, routeHome } from "route/constructors";
-  import { emptyLoaded, loading, RemoteData } from "state/types";
-  import { goToRoute } from "store/route";
-  import { mutation } from "state/query";
-  import { LoginDocument } from "gql-operations";
   import { Md5 } from "ts-md5";
-  import { reloadContext } from "store/context";
+  import { query } from "state/query";
+  import { setToken } from "utils/token";
+  import { routeEditProfile, routeForgotPassword } from "route/constructors";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
   import { emailType, passwordType } from "state/input";
 
   let email = "";
@@ -24,14 +21,13 @@
 
   async function submit() {
     state = loading;
-    const response = await mutation(LoginDocument, { email, passHash: Md5.hashStr(password) });
+    const result = await query("Login", { email, passHash: Md5.hashStr(password) });
 
-    if (response.type === "loaded") {
-      setToken(response.data.login);
-      reloadContext();
-      goToRoute(routeHome);
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
+      setToken(result.data.login);
+      window.location.reload();
     } else {
-      state = response;
       alert("Your username and/or password were incorrect.");
     }
   }
@@ -42,7 +38,7 @@
     <Column narrow>
       <Box>
         <form on:submit|preventDefault={submit}>
-          <img style="width: 100%" alt="" src="./glubhub.svg" />
+          <img style="width: 100%" alt="" src="/glubhub.svg" />
           <TextInput
             type={emailType}
             value={email}

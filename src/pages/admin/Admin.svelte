@@ -1,79 +1,65 @@
-import React, { useContext } from "react";
-import { loaded } from "state/types";
-import { SelectableList } from "components/List";
-import { visibleAdminTabs } from "utils/helpers";
-import { AdminRoute, routeAdmin } from "state/route";
-import { GlubHubContext, useGlubRoute } from "utils/context";
-import { Section, Container, Columns, Box } from "components/Basics";
-import { AbsenceRequests } from "./AbsenceRequests";
-import { CreateEvent } from "./create-event/Page";
-import { DocumentLinks } from "./DocumentLinks";
-import { GigRequests } from "./GigRequests";
-import { Money } from "./Money";
-import { OfficerPositions } from "./OfficerPositions";
-import { Semesters } from "./Semesters";
-import { SitePermissions } from "./SitePermissions";
-import { Uniforms } from "./Uniforms";
-import { WebmasterTools } from "./WebmasterTools";
+<script lang="ts">
+  import Box from "components/bulma/Box.svelte";
+  import Columns from "components/bulma/Columns.svelte";
+  import Container from "components/bulma/Container.svelte";
+  import Section from "components/bulma/Section.svelte";
+  import DocumentLinks from "components/navbar/DocumentLinks.svelte";
+  import SelectableList from "components/remote/SelectableList.svelte";
+  import AbsenceRequests from "./absence-requests/AbsenceRequests.svelte";
+  import CreateEvent from "./create-event/CreateEvent.svelte";
+  import GigRequests from "./gig-requests/GigRequests.svelte";
+  import Money from "./money/Money.svelte";
+  import OfficerPositions from "./OfficerPositions.svelte";
+  import Semesters from "./semesters/Semesters.svelte";
+  import SitePermissions from "./SitePermissions.svelte";
+  import Uniforms from "./uniforms/Uniforms.svelte";
+  import WebmasterTools from "./WebmasterTools.svelte";
 
-export const Admin: React.FC<{ tab: AdminRoute | null }> = ({ tab }) => {
-  const { goToRoute } = useGlubRoute();
-  const { user } = useContext(GlubHubContext);
+  import { routeAdmin } from "route/constructors";
+  import { AdminRoute } from "route/types";
+  import { loaded } from "state/types";
+  import { goToRoute } from "store/route";
+  import { visibleAdminTabs } from "utils/admin";
 
-  return (
-    <Section>
-      <Container>
-        <Columns>
-          <SelectableList
-            listItems={loaded(user ? visibleAdminTabs(user) : [])}
-            isSelected={t => t.route === tab?.route}
-            messageIfEmpty="You have no officer permissions. Perish."
-            onSelect={t => goToRoute(routeAdmin(t))}
-            render={t => <td>{t.name}</td>}
-          />
-          <div>
-            {tab ? (
-              <TabContent tab={tab} />
-            ) : (
-              <Box>Please select a menu item</Box>
-            )}
-          </div>
-        </Columns>
-      </Container>
-    </Section>
-  );
-};
+  export let tab: AdminRoute | null;
+</script>
 
-const TabContent: React.FC<{ tab: AdminRoute }> = ({ tab }) => {
-  switch (tab.route) {
-    case "absence-requests":
-      return <AbsenceRequests />;
-
-    case "create-event":
-      return <CreateEvent gigRequestId={tab.gigRequestId} />;
-
-    case "document-links":
-      return <DocumentLinks />;
-
-    case "gig-requests":
-      return <GigRequests />;
-
-    case "money":
-      return <Money tab={tab.tab} />;
-
-    case "officer-positions":
-      return <OfficerPositions />;
-
-    case "semesters":
-      return <Semesters tab={tab.tab} />;
-
-    case "site-permissions":
-      return <SitePermissions />;
-
-    case "uniforms":
-      return <Uniforms />;
-
-    case "webmaster-tools":
-      return <WebmasterTools />;
-  }
-};
+<Section>
+  <Container>
+    <Columns>
+      <SelectableList
+        title="Domains"
+        itemGroups={loaded($visibleAdminTabs)}
+        isSelected={t => t.route === tab?.route}
+        messageIfEmpty="You have no officer permissions. Perish."
+        on:select={t => goToRoute(routeAdmin(t.detail))}
+        render={t => t.name}
+      />
+      <div>
+        {#if tab?.route === "absence-requests"}
+          <AbsenceRequests />
+        {:else if tab?.route === "create-event"}
+          <CreateEvent gigRequestId={tab.gigRequestId} />
+        {:else if tab?.route === "document-links"}
+          <DocumentLinks />
+        {:else if tab?.route === "gig-requests"}
+          <GigRequests />
+        {:else if tab?.route === "money"}
+          <Money tab={tab.tab} />
+        {:else if tab?.route === "officer-positions"}
+          <OfficerPositions />
+        {:else if tab?.route === "semesters"}
+          <Semesters tab={tab.tab} />
+        {:else if tab?.route === "site-permissions"}
+          <SitePermissions />
+        {:else if tab?.route === "uniforms"}
+          <Uniforms />
+        {:else if tab?.route === "webmaster-tools"}
+          <WebmasterTools />
+        {:else}
+          <Box>Please select a menu item</Box>
+        {/if}
+      </div>
+    </Columns>
+  </Container>
+</Section>

@@ -1,23 +1,22 @@
 <script lang="ts">
-  import Box from "components/basic/Box.svelte";
-  import Column from "components/basic/Column.svelte";
-  import Columns from "components/basic/Columns.svelte";
-  import Container from "components/basic/Container.svelte";
-  import Title4 from "components/basic/Title4.svelte";
+  import Box from "components/bulma/Box.svelte";
+  import Column from "components/bulma/Column.svelte";
+  import Columns from "components/bulma/Columns.svelte";
+  import Container from "components/bulma/Container.svelte";
+  import Title from "components/bulma/Title.svelte";
   import ButtonGroup from "components/buttons/ButtonGroup.svelte";
   import SubmitButton from "components/buttons/SubmitButton.svelte";
-  import ErrorBox from "components/ErrorBox.svelte";
+  import ErrorBox from "components/remote/ErrorBox.svelte";
   import TextInput from "components/forms/TextInput.svelte";
 
-  import { ResetPasswordDocument } from "gql-operations";
   import { routeLogin } from "route/constructors";
   import { passwordType } from "state/input";
-  import { mutation } from "state/query";
-  import { emptyLoaded, loading, RemoteData } from "state/types";
+  import { query } from "state/query";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
   import { goToRoute } from "store/route"
   import { Md5 } from "ts-md5";
 
-  export let token: string | null;
+  export let token: string;
 
   let state: RemoteData = emptyLoaded;
 
@@ -31,16 +30,15 @@
     }
 
     state = loading;
-    const response = await mutation(
-      ResetPasswordDocument,
+    const result = await query(
+      "ResetPassword",
       { token, passHash: Md5.hashStr(password) }
     );
 
-    if (response.type === "loaded") {
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
       goToRoute(routeLogin);
       alert("Your password has been successfully reset!");
-    } else {
-      state = response;
     }
   }
 </script>
@@ -50,7 +48,7 @@
     <Column narrow>
       <form on:submit|preventDefault={resetPassword} style="padding: 10px">
         <Box>
-          <Title4>Reset your Password</Title4>
+          <Title is4>Reset your Password</Title>
           <p>
             Good job getting this far. Gimme a new password, and you'll be
             reborn like it's Avatar 2009.

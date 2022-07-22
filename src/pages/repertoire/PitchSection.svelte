@@ -2,6 +2,8 @@
   import Tooltip from "components/bulma/Tooltip.svelte";
 
   import { Pitch, SongMode } from "gql-operations";
+  import { pitchToUnicode } from "state/pitch";
+  import { titleCase } from "utils/helpers";
 
   export let title: string;
   export let pitch: Pitch | null | undefined;
@@ -10,11 +12,12 @@
 <p>
   {title}:
   {#if pitch}
-    <b onClick={() => playPitch(pitch)}>
+    <!-- TODO: playPitch -->
+    <b>
       <Tooltip content="hey kid, wanna pitch?">
         {pitchToUnicode(pitch)}
         {#if mode}
-          {" " + readableMode(mode)}}
+          {" " + titleCase(mode)}}
         {/if}
       </Tooltip>
     </b>

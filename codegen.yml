@@ -5,8 +5,7 @@ generates:
     plugins:
       - typescript
       - typescript-operations
-      - typed-document-node
-      - urql-svelte-operations-store
+      - typescript-graphql-request
     config:
       scalars:
         GqlDate: string

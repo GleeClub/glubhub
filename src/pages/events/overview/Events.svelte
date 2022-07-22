@@ -5,24 +5,24 @@
   import TabContent from "./TabContent.svelte";
   import EventColumns from "./EventColumns.svelte";
 
-  import { notLoaded } from "state/types";
   import { routeEvents } from "route/constructors";
   import { EventTab } from "route/types";
-  import { lazyQuery, query } from "state/query";
-  import { mapLoaded } from "state/types";
+  import { eagerQuery } from "state/query";
   import { goToRoute } from "store/route";
   import { eventIsOver } from "utils/helpers";
-  import { AllEventsDocument, FullEventDocument } from "gql-operations";
   import { derived, readable } from "svelte/store";
+  import { mapLazyLoaded, notLoaded } from "state/types";
 
   export let eventId: number | null;
   export let tab: EventTab | null;
 
-  const events = query(AllEventsDocument, {});
+  const [events, _reloadEvents] = eagerQuery("AllEvents", {});
 
-  $: upcomingEvents = derived(events, $events => mapLoaded($events, es => es.events.filter(e => !eventIsOver(e))));
-  $: pastEvents = derived(events, $events => mapLoaded($events, es => es.events.filter(e => eventIsOver(e))));
-  $: [selectedEvent, reexecute] = eventId ? lazyQuery(FullEventDocument) : [readable(notLoaded), (_vars) => {}]
+  $: upcomingEvents = derived(events, $events => mapLazyLoaded($events, es => es.events.filter(e => !eventIsOver(e))));
+  $: pastEvents = derived(events, $events => mapLazyLoaded($events, es => es.events.filter(e => eventIsOver(e))));
+  $: [selectedEvent, reexecute] = eventId
+    ? eagerQuery("FullEvent", { id: eventId })
+    : [readable(notLoaded), (_vars: { id: number }) => {}];
 </script>
 
 <Section>
@@ -36,7 +36,8 @@
 >
   <TabContent slot="loaded" let:data={event}
     {tab}
-    {event}
-    onUpdate={() => reexecute({ id: event.id })}
+    event={event.event}
+    onUpdate={() => reexecute({ id: event.event.id })}
+    onDelete={() => reexecute({ id: event.event.id })}
   />
 </Sidebar>

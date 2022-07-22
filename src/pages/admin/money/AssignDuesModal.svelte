@@ -1,11 +1,13 @@
 <script lang="ts">
   import Title from "components/bulma/Title.svelte";
-import Button from "components/buttons/Button.svelte";
-import Modal from "components/popup/Modal.svelte";
+  import Button from "components/buttons/Button.svelte";
+  import Modal from "components/popup/Modal.svelte";
   import ErrorBox from "components/remote/ErrorBox.svelte";
+  import BeholdThe from "./BeholdThe.svelte";
+  import CancelModalButton from "./CancelModalButton.svelte";
 
   import { adminMoney, routeAdmin } from "route/constructors";
-  import { mutation } from "state/query";
+  import { query } from "state/query";
   import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
   import { replaceRoute } from "store/route";
 
@@ -13,7 +15,7 @@ import Modal from "components/popup/Modal.svelte";
 
   async function assignDues() {
     state = loading;
-    const result = await mutation(ChargeDuesDocument, {});
+    const result = await query("ChargeDues", {});
 
     state = stateFromResult(result);
     if (result.type === "loaded") {
@@ -44,7 +46,7 @@ import Modal from "components/popup/Modal.svelte";
     >
       Dolla dolla bill, y'all
     </Button>
-    <CancelButton />
+    <CancelModalButton />
     <br />
   </div>
 </Modal>

@@ -12,15 +12,9 @@
   import Columns from "components/bulma/Columns.svelte";
   import TextInput from "components/forms/TextInput.svelte";
 
-  import {
-    AllFeesDocument,
-    ResolveTransactionDocument,
-    TransactionsForSemesterDocument,
-    UpdateFeeDocument
-  } from "gql-operations";
-  import { numberType } from "state/input";
+  import { eagerQuery, query } from "state/query";
   import { MoneyTab } from "route/types";
-  import { mutation, reexecutableQuery } from "state/query";
+  import { numberType } from "state/input";
   import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
   import { moneyAssignDues, moneyAssignLateDues, moneyBatchTransactions } from "route/constructors";
 
@@ -29,13 +23,12 @@
   let feeState: RemoteData = emptyLoaded;
   let transactionState: RemoteData = emptyLoaded;
 
-  const [allFees, reloadAllFees] = reexecutableQuery(AllFeesDocument, {});
-  const [allTransactions, reloadAllTransactions] =
-    reexecutableQuery(TransactionsForSemesterDocument, {});
+  const [allFees, reloadAllFees] = eagerQuery("AllFees", {});
+  const [allTransactions, reloadAllTransactions] = eagerQuery("TransactionsForSemester", {});
 
   async function resolveTransaction(id: number, resolved: boolean) {
     transactionState = loading;
-    const result = await mutation(ResolveTransactionDocument, { id, resolved });
+    const result = await query("ResolveTransaction", { id, resolved });
 
     transactionState = stateFromResult(result);
     if (result.type === "loaded") {
@@ -45,7 +38,7 @@
 
   async function updateFeeAmount(name: string, amount: number) {
     feeState = loading;
-    const result = await mutation(UpdateFeeDocument, { name, amount });
+    const result = await query("UpdateFee", { name, amount });
 
     feeState = stateFromResult(result);
     if (result.type === "loaded") {

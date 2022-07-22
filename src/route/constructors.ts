@@ -73,7 +73,7 @@ export const routeForgotPassword: RouteForgotPassword = {
 
 
 export const routeResetPassword = (
-  token: string | null
+  token: string
 ): RouteResetPassword => ({
   name: 'Reset Password',
   route: 'reset-password',

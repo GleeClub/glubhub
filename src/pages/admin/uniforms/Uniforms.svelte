@@ -9,15 +9,9 @@
   import StateBox from "components/remote/StateBox.svelte";
   import UniformRow from "./UniformRow.svelte";
 
-  import {
-    AllUniformsDocument,
-    CreateUniformDocument,
-    DeleteUniformDocument,
-    Uniform,
-    UpdateUniformDocument
-  } from "gql-operations";
+  import { Uniform } from "gql-operations";
   import { stringType } from "state/input";
-  import { mutation, reexecutableQuery } from "state/query";
+  import { eagerQuery, query } from "state/query";
   import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
 
   let name = "";
@@ -26,11 +20,11 @@
   let uniformToDelete: Uniform | null = null;
   let deleteState: RemoteData = emptyLoaded;
 
-  const [allUniforms, reloadAllUniforms] = reexecutableQuery(AllUniformsDocument, {});
+  const [allUniforms, reloadAllUniforms] = eagerQuery("AllUniforms", {});
 
   async function updateUniform(uniform: Uniform) {
     state = loading;
-    const result = await mutation(UpdateUniformDocument, {
+    const result = await query("UpdateUniform", {
       id: uniform.id, update: uniform,
     });
 
@@ -42,7 +36,7 @@
 
   async function deleteUniform(id: number) {
     deleteState = loading;
-    const result = await mutation(DeleteUniformDocument, { id });
+    const result = await query("DeleteUniform", { id });
 
     deleteState = stateFromResult(result);
     if (result.type === "loaded") {
@@ -52,7 +46,7 @@
 
   async function createUniform() {
     state = loading;
-    const result = await mutation(CreateUniformDocument, {
+    const result = await query("CreateUniform", {
       newUniform: { name, description }
     });
 
@@ -128,7 +122,7 @@
       <DeleteModal
         title="Delete uniform {uniformToDelete.name}?"
         cancel={() => uniformToDelete = null}
-        confirm={() => deleteUniform(uniformToDelete.id)}
+        confirm={() => uniformToDelete && deleteUniform(uniformToDelete.id)}
         state={deleteState}
       >
         <p>Are you sure you want to delete the {uniformToDelete.name} uniform?</p>

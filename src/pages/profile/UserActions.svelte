@@ -6,19 +6,14 @@
   import DeleteModal from "components/popup/DeleteModal.svelte";
   import ErrorBox from "components/remote/ErrorBox.svelte";
 
-  import {
-    DeleteMemberDocument,
-    FullMemberQuery,
-    LoginAsDocument,
-    LogoutDocument
-  } from "gql-operations";
-  import { routeEditProfile, routeRoster } from "route/constructors";
-  import { deleteUser, switchUser } from "state/permissions";
-  import { mutation } from "state/query";
-  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
-  import { siteContext } from "store/context";
+  import { query } from "state/query";
   import { goToRoute } from "store/route";
+  import { siteContext } from "store/context";
+  import { FullMemberQuery } from "gql-operations";
+  import { deleteUser, switchUser } from "state/permissions";
+  import { routeEditProfile, routeRoster } from "route/constructors";
   import { getOldToken, getToken, setOldToken, setToken } from "utils/token";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
 
   export let member: FullMemberQuery['member'];
 
@@ -37,7 +32,7 @@
     if (!oldToken) return;
 
     loginAsState = loading;
-    const logoutResult = await mutation(LogoutDocument, {});
+    const logoutResult = await query("Logout");
 
     if (logoutResult.type === "loaded") {
       setOldToken(null);
@@ -48,7 +43,7 @@
 
   async function loginAsMember() {
     loginAsState = loading;
-    const result = await mutation(LoginAsDocument, { email: member.email });
+    const result = await query("LoginAs", { email: member.email });
 
     loginAsState = stateFromResult(result);
     if (result.type === "loaded") {
@@ -62,7 +57,7 @@
  
   async function deleteMember() {
     deleteState = loading;
-    const result = await mutation(DeleteMemberDocument, { email: member.email });
+    const result = await query("DeleteMember", { email: member.email });
 
     deleteState = stateFromResult(result);
     if (result.type === "loaded") {

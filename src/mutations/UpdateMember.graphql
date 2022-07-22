@@ -1,0 +1,5 @@
+mutation UpdateMember($email: String!, $update: MemberUpdate!) {
+  updateMember(email: $email, newMember: $update) {
+    email
+  }
+}

@@ -1,0 +1,17 @@
+query AllAbsenceRequests {
+  absenceRequests {
+    time
+    reason
+    state
+    event {
+      id
+      name
+      location
+      callTime
+    }
+    member {
+      email
+      fullName
+    }
+  }
+}

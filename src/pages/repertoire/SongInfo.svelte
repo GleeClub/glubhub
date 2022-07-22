@@ -8,12 +8,12 @@
   import SongLinkButton from "./SongLinkButton.svelte";
   import PitchSection from "./PitchSection.svelte";
 
-  import { DeleteSongDocument, FullSongQuery } from "gql-operations";
+  import { FullSongQuery } from "gql-operations";
   import { repertoireEdit, routeRepertoire } from "route/constructors";
   import { editRepertoire } from "state/permissions";
   import { replaceRoute } from "store/route";
-  import { emptyLoaded, loading, RemoteData } from "state/types";
-  import { mutation } from "state/query";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
+  import { query } from "state/query";
 
   export let song: FullSongQuery['song'];
   export let reloadAllSongs: () => void;
@@ -22,13 +22,12 @@
 
   async function deleteSong() {
     deleteState = loading;
-    const response = await mutation(DeleteSongDocument, { id: song.id });
+    const result = await query("DeleteSong", { id: song.id });
 
-    if (response.type === "loaded") {
-      reloadSongs();
+    deleteState = stateFromResult(result);
+    if (result.type === "loaded") {
+      reloadAllSongs();
       replaceRoute(routeRepertoire(null, null));
-    } else {
-      deleteState = response;
     }
   }
 </script>

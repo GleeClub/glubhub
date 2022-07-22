@@ -22,8 +22,8 @@
   export let itemGroups: LazyRemoteData<T[][]>;
   export let isSelected: (item: T) => boolean;
   export let render: (item: T) => string;
-  export let title: string = ""
   export let messageIfEmpty: string
+  export let title = ""
 
   const dispatch = createEventDispatcher<{ select: T }>();
 

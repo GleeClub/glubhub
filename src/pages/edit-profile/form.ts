@@ -1,92 +1,51 @@
-import type { Member } from "gql-operations";
+import { Enrollment, MemberUpdate, SectionType, SiteContextQuery } from "gql-operations";
 
-interface ProfileForm {
-  firstName: string;
-  preferredName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phoneNumber: string;
-  location: string;
-  onCampus: boolean;
-  major: string;
-  hometown: string;
-  passengers: number;
-  enrollment: Enrollment | null;
-  section: string | null;
-  about: string;
-  picture: string;
-  arrivedAtTech: number | null;
-  gatewayDrug: string;
-  conflicts: string;
-  dietaryRestrictions: string;
+export function buildProfileForm(siteContext: SiteContextQuery): MemberUpdate {
+  if (siteContext.user) {
+    return formForUser(siteContext.user);
+  } else {
+    return emptyProfileForm(siteContext.static.sections);
+  }
 }
 
-const formForUser = (user: Member): ProfileForm => ({
+export const formForUser = (user: Exclude<SiteContextQuery['user'], null | undefined>): MemberUpdate => ({
   firstName: user.firstName,
   preferredName: user.preferredName || "",
   lastName: user.lastName,
   email: user.email,
-  password: "",
-  confirmPassword: "",
   phoneNumber: user.phoneNumber,
   location: user.location,
   onCampus: user.onCampus || false,
   major: user.major || "",
   hometown: user.hometown || "",
   passengers: user.passengers,
-  enrollment: user.enrollment,
-  section: user.section,
   about: user.about || "",
   picture: user.picture || "",
   arrivedAtTech: user.arrivedAtTech,
   gatewayDrug: user.gatewayDrug || "",
   conflicts: user.conflicts || "",
-  dietaryRestrictions: user.dietaryRestrictions || ""
+  dietaryRestrictions: user.dietaryRestrictions || "",
+  enrollment: user.semester?.enrollment,
+  section: user.semester?.section,
 });
 
-const emptyProfileForm = (info: Info | null): ProfileForm => ({
+export const emptyProfileForm = (sections: SectionType[]): MemberUpdate => ({
   firstName: "",
   preferredName: "",
   lastName: "",
   email: "",
-  password: "",
-  confirmPassword: "",
   phoneNumber: "",
   location: "",
   onCampus: true,
   major: "",
   hometown: "",
   passengers: 0,
-  enrollment: "Class",
-  section: info?.sections[0] || null,
+  enrollment: Enrollment.Class,
+  section: sections[0]?.name || null,
   about: "",
   picture: "",
   arrivedAtTech: new Date().getFullYear(),
   gatewayDrug: "",
   conflicts: "",
   dietaryRestrictions: ""
-});
-
-const buildProfileBody = (form: ProfileForm, passHash: string | null) => ({
-  email: form.email,
-  firstName: form.firstName,
-  preferredName: form.preferredName,
-  lastName: form.lastName,
-  passHash,
-  phoneNumber: form.phoneNumber,
-  picture: form.picture,
-  passengers: form.passengers,
-  location: form.location,
-  onCampus: form.onCampus,
-  about: form.about,
-  major: form.major,
-  hometown: form.hometown,
-  arrivedAtTech: form.arrivedAtTech,
-  gatewayDrug: form.gatewayDrug,
-  conflicts: form.conflicts,
-  dietaryRestrictions: form.dietaryRestrictions,
-  section: form.section,
-  enrollment: form.enrollment
 });

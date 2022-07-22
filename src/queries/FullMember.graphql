@@ -31,17 +31,6 @@ query FullMember($email: String!) {
       section
       grades {
         grade
-        eventsWithChanges {
-          event {
-            id
-            name
-          }
-          change {
-            reason
-            change
-            partialScore
-          }
-        }
       }
     }
     transactions {
@@ -52,6 +41,28 @@ query FullMember($email: String!) {
       semester
       type
       resolved
+    }
+    grades {
+      grade
+      eventsWithChanges {
+        event {
+          id
+          name
+          type
+          callTime
+          attendance(member: $email) {
+            didAttend
+            shouldAttend
+            confirmed
+            minutesLate
+          }
+        }
+        change {
+          reason
+          change
+          partialScore
+        }
+      }
     }
   }
 }

@@ -1,43 +1,41 @@
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 // TODO: update the formats of these
 
-export const fullDateTimeFormatter = (datetime: string): string =>
+export const fullDateTimeFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format("dddd, MMMM D, YYYY h:mm A");
 
-export const simpleDateTimeFormatter = (datetime: string): string =>
+export const simpleDateTimeFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format("MMM D h:mm A");
 
-export const timeFormatter = (datetime: string): string =>
+export const timeFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format("H:mm A");
 
-export const hyphenDateFormatter = (datetime: string): string =>
+export const hyphenDateFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format("YYYY-MM-DD");
 
-export const twentyFourHourTimeFormatter = (datetime: string): string =>
+export const twentyFourHourTimeFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format("HH:MM");
 
-export const dateFormatter = (datetime: string): string =>
+export const dateFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format("dddd, MMMM Do");
 
-export const simpleDateWithYearFormatter = (datetime: string): string =>
+export const simpleDateWithYearFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format("MMM DD, YYYY");
 
-export const simpleDateFormatter = (datetime: string): string =>
+export const simpleDateFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format("M/D");
 
-export const timeFromNow = (datetime: string): string =>
-  dayjs(datetime).fromNow();
+// export const timeFromNow = (datetime: string): string =>
+//   dayjs(datetime).fromNow();
 
-export const parseFormDateString = (date: string): number | null =>
+export const parseFormDateString = (date: string): string | null =>
   dayjs(date)
-    ?.toDate()
-    ?.getTime();
+    ?.format("YYYY-MM-DD");
 
 export const parseFormDateAndTimeString = (
   date: string,
   time: string
-): number | null =>
+): string | null =>
   dayjs(`${date} ${time}`)
-    ?.toDate()
-    ?.getTime() || null;
+    ?.format("YYYY-MM-DDTHH:MM:SSZ") || null;

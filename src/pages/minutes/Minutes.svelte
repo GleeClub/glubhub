@@ -1,41 +1,47 @@
 <script lang="ts">
   import Remote from "components/remote/Remote.svelte";
-import dayjs from "dayjs";
-  import { AllMinutesDocument, CreateMinutesDocument, FullMinutesDocument } from "gql-operations";
-  import { routeMinutes } from "route/constructors";
+  import Section from "components/bulma/Section.svelte";
+  import Container from "components/bulma/Container.svelte";
+  import Columns from "components/bulma/Columns.svelte";
+  import MinutesList from "./MinutesList.svelte";
+  import Column from "components/bulma/Column.svelte";
+  import Box from "components/bulma/Box.svelte";
+  import RequiresPermission from "components/member/RequiresPermission.svelte";
+  import EditMinutes from "./EditMinutes.svelte";
+
+  import { minutesEdit, minutesPrivate, minutesPublic, routeMinutes } from "route/constructors";
   import { MinutesTab } from "route/types";
-  import { mutation, query } from "state/query";
-  import { emptyLoaded, loading, notLoaded, RemoteData } from "state/types";
+  import { emptyLoaded, loading, notLoaded, RemoteData, stateFromResult } from "state/types";
   import { replaceRoute } from "store/route";
-  import { get } from "svelte/store";
+  import { readable } from "svelte/store";
   import { dateFormatter } from "utils/datetime";
+  import { editMinutes, viewCompleteMinutes } from "state/permissions";
+  import { renderRoute } from "route/render";
+  import { eagerQuery, query } from "state/query";
+  import dayjs from "dayjs";
 
   export let minutesId: number | null;
   export let tab: MinutesTab | null;
 
-  let showAllMinutes = false;
   let createState: RemoteData = emptyLoaded;
 
-  const [allMinutes, reloadAllMinutes] = lazyQuery(AllMinutesDocument, {});
+  const [allMinutes, reloadAllMinutes] = eagerQuery("AllMinutes", {});
   $: [selectedMinutes, reloadSelectedMinutes] = minutesId
-    ? lazyQuery(FullMinutesDocument, {}) 
-    : [readable(notLoaded), (_vars: { id: number }) => void];
+    ? eagerQuery("FullMinutes", { id: minutesId }) 
+    : [readable(notLoaded), (_vars: { id: number }) => {}];
 
   async function createNewMinutes() {
-    if (get(selectedMinutes).type !== "loaded") return;
-
     createState = loading;
     const now = dayjs();
-    const response = await mutation(CreateMinutesDocument, {
+    const result = await query("CreateMinutes", {
       name: `Meeting on ${dateFormatter(now)}` 
     });
 
-    if(response.type === "loaded") {
+    createState = stateFromResult(result);
+    if(result.type === "loaded") {
       createState = emptyLoaded;
-      reloadAllMinutes();
-      replaceRoute(routeMinutes(response.data.createMeetingMinutes.id, null));
-    } else {
-      createState = response;
+      reloadAllMinutes({});
+      replaceRoute(routeMinutes(result.data.createMeetingMinutes.id, null));
     }
   }
 </script>
@@ -44,169 +50,59 @@ import dayjs from "dayjs";
   <Container>
     <Columns>
       <MinutesList
-        minutes={minutes}
-        showAllMinutes={showAllMinutes}
-        createState={createState}
-        selectedId={isLoaded(selected) ? selected.data.id : null}
-        createNewMinutes={createNewMinutes}
-        toggleShowAllMinutes={() => setShowAllMinutes(!showAllMinutes)}
+        allMinutes={$allMinutes} 
+        selectedId={minutesId} 
+        {createNewMinutes} 
+        {createState}
       />
+
       <Column>
         <Box>
           <Remote data={$selectedMinutes}>
-            notAsked={<p>Select Minutes</p>}
-            render={selected => (
-              <>
-                <MinutesTabList
-                  minutes={selected}
-                  tab={tab || minutesPublic}
+            <svelte:fragment slot="loaded" let:data={minutes}>
+              <RequiresPermission permission={viewCompleteMinutes}>
+                <div class="tabs">
+                  <ul>
+                    <li class:is-active={tab?.route === minutesPublic.route}>
+                      <a href={renderRoute(routeMinutes(minutes.meetingMinutes.id, minutesPublic))}>
+                        {minutesPublic.name}
+                      </a>
+                    </li>
+                    <li class:is-active={tab?.route === minutesPrivate.route}>
+                      <a href={renderRoute(routeMinutes(minutes.meetingMinutes.id, minutesPrivate))}>
+                        {minutesPrivate.name}
+                      </a>
+                    </li>
+                    <RequiresPermission permission={editMinutes}>
+                      <li class:is-active={tab?.route === minutesEdit.route}>
+                        <a href={renderRoute(routeMinutes(minutes.meetingMinutes.id, minutesEdit))}>
+                          {minutesEdit.name}
+                        </a>
+                      </li>
+                    </RequiresPermission>
+                  </ul>
+                </div>
+              </RequiresPermission>
+
+              {#if tab?.route === "private"}
+                <RequiresPermission permission={viewCompleteMinutes}>
+                  <div>{@html minutes.meetingMinutes.private}</div>
+                </RequiresPermission>
+              {:else if tab?.route === "edit"}
+                <EditMinutes
+                  minutes={minutes.meetingMinutes} 
+                  onUpdate={() => minutesId && reloadSelectedMinutes({ id: minutesId })}
+                  onDelete={() => reloadAllMinutes({})}
                 />
-                <TabContent
-                  minutes={selected}
-                  tab={tab || minutesPublic}
-                  updateMinutes={propagateUpdateMinutes}
-                  savedMinutes={savedMinutes}
-                  deletedMinutes={deletedMinutes}
-                />
-              </>
-            )}
+              {:else}
+                <div>{@html minutes.meetingMinutes.public}</div>
+              {/if}
+            </svelte:fragment>
+
+            <p slot="not-loaded">Select Minutes</p>
           </Remote>
         </Box>
       </Column>
     </Columns>
   </Container>
 </Section>
-
-interface MinutesListProps {
-  minutes: RemoteData<MeetingMinutes[]>;
-  showAllMinutes: boolean;
-  createState: SubmissionState;
-  selectedId: number | null;
-  createNewMinutes: () => void;
-  toggleShowAllMinutes: () => void;
-}
-
-const MinutesList: React.FC<MinutesListProps> = ({
-  minutes,
-  showAllMinutes,
-  createNewMinutes,
-  createState,
-  selectedId,
-  toggleShowAllMinutes
-}) => {
-  const { replaceRoute } = useGlubRoute();
-
-  return (
-    <SelectableList
-      listItems={
-        showAllMinutes
-          ? mapLoaded(minutes, m => [m])
-          : mapLoaded(minutes, m => [m.slice(0, 10)])
-      }
-      isSelected={m => m.id === selectedId}
-      onSelect={m => replaceRoute(routeMinutes(m.id, null))}
-      messageIfEmpty="No minutes"
-      render={m => <td>{m.name}</td>}
-      contentAtTop={
-        <RequiresPermission permission={editMinutes}>
-          <div style={{ paddingBottom: "5px" }}>
-            <ButtonGroup alignment="is-centered">
-              <Button
-                color="is-primary"
-                onClick={createNewMinutes}
-                loading={isSending(createState)}
-              >
-                + Add New Minutes
-              </Button>
-              {failedToSend(createState) && (
-                <ErrorBox error={createState.error} />
-              )}
-            </ButtonGroup>
-          </div>
-        </RequiresPermission>
-      }
-      contentAtBottom={
-        <>
-          {isLoaded(minutes) && minutes.data.length > 10 && (
-            <div style={{ paddingBottom: "5px" }}>
-              <ButtonGroup alignment="is-centered">
-                <Button onClick={toggleShowAllMinutes}>
-                  {showAllMinutes ? "Hide" : "Show"} old minutes...
-                </Button>
-              </ButtonGroup>
-            </div>
-          )}
-        </>
-      }
-    />
-  );
-};
-
-interface MinutesTabListProps {
-  minutes: MeetingMinutes;
-  tab: MinutesTab;
-}
-
-const MinutesTabList: React.FC<MinutesTabListProps> = ({ minutes, tab }) => (
-  <RequiresPermission permission={viewCompleteMinutes}>
-    <div className="tabs">
-      <ul>
-        <SingleTab minutes={minutes} currentTab={tab} tab={minutesPublic} />
-        <SingleTab minutes={minutes} currentTab={tab} tab={minutesPrivate} />
-        <RequiresPermission permission={editMinutes}>
-          <SingleTab minutes={minutes} currentTab={tab} tab={minutesEdit} />
-        </RequiresPermission>
-      </ul>
-    </div>
-  </RequiresPermission>
-);
-
-interface SingleTabProps {
-  minutes: MeetingMinutes;
-  tab: MinutesTab;
-  currentTab: MinutesTab;
-}
-
-const SingleTab: React.FC<SingleTabProps> = ({ minutes, tab, currentTab }) => (
-  <li className={tab.route === currentTab.route ? "is-active" : undefined}>
-    <a href={renderRoute(routeMinutes(minutes.id, tab))}>{tab.name}</a>
-  </li>
-);
-
-interface TabContentProps {
-  minutes: MeetingMinutes;
-  tab: MinutesTab;
-  updateMinutes: (minutes: MeetingMinutes) => void;
-  savedMinutes: (minutes: MeetingMinutes) => void;
-  deletedMinutes: (minutes: MeetingMinutes) => void;
-}
-
-const TabContent: React.FC<TabContentProps> = ({
-  minutes,
-  tab,
-  updateMinutes,
-  savedMinutes,
-  deletedMinutes
-}) => {
-  switch (tab.route) {
-    case "public":
-      return <div dangerouslySetInnerHTML={{ __html: minutes.public || "" }} />;
-
-    case "private":
-      return (
-        <RequiresPermission permission={viewCompleteMinutes}>
-          <div dangerouslySetInnerHTML={{ __html: minutes.private || "" }} />
-        </RequiresPermission>
-      );
-
-    default:
-      return (
-        <EditMinutes
-          minutes={minutes}
-          update={updateMinutes}
-          saved={savedMinutes}
-          deleted={deletedMinutes}
-        />
-      );
-  }
-};

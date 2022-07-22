@@ -4,13 +4,8 @@
   import SelectInput from "components/forms/SelectInput.svelte";
   import TextareaInput from "components/forms/TextareaInput.svelte";
 
-  import {
-    AllSemestersDocument,
-    AllUniformsDocument,
-    NewEventFields,
-    NewGig
-  } from "gql-operations";
-  import { query } from "state/query";
+  import { NewEventFields, NewGig } from "gql-operations";
+  import { eagerQuery } from "state/query";
   import { siteContext } from "store/context";
   import { derived } from "svelte/store";
   import { stringType, uniformType } from "state/input";
@@ -20,8 +15,8 @@
   export let updateEvent: (event: NewEventFields) => void;
   export let updateGig: (gig: NewGig) => void;
 
-  const allSemesters = query(AllSemestersDocument, {});
-  const allUniforms = query(AllUniformsDocument, {});
+  const [allSemesters, _reloadAllSemesters] = eagerQuery("AllSemesters");
+  const [allUniforms, _reloadAllUniforms] = eagerQuery("AllUniforms");
 
   const loadedUniforms = derived(
     allUniforms,

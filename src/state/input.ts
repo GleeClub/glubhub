@@ -1,5 +1,6 @@
-import { Enrollment, Period, Pitch, Semester, SiteContextQuery, SongMode, Uniform } from "gql-operations";
+import { Enrollment, Period, Pitch, SiteContextQuery, SongMode, Uniform } from "gql-operations";
 import { titleCase } from "utils/helpers";
+import { pitchFromUnicode, pitchToUnicode } from "./pitch";
 
 export interface FormInputType<T> {
   toString: (t: T) => string;
@@ -59,10 +60,10 @@ export const numberType: FormInputType<number | null> = {
 };
 
 export const sectionType = (
-  context: SiteContextQuery | null
+  context: SiteContextQuery
 ): FormInputType<string | null> => ({
   toString: x => x || "No Section",
-  fromString: x => context?.static.sections?.find(s => s.name === x)?.name || null,
+  fromString: x => context.static.sections.find(s => s.name === x)?.name || null,
   textType: "text"
 });
 
@@ -94,10 +95,10 @@ export const enrollmentType: FormInputType<Enrollment | null> = {
 };
 
 export const semesterType = (
-  semesters: Semester[]
-): FormInputType<Semester | null> => ({
-  toString: x => x?.name || "(no semester)",
-  fromString: x => semesters.find(s => s.name === x) || null,
+  semesterNames: string[]
+): FormInputType<string | null> => ({
+  toString: x => x || "(no semester)",
+  fromString: x => semesterNames.find(s => s === x) || null,
   textType: "text"
 });
 

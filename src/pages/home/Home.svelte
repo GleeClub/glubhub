@@ -8,17 +8,21 @@
   import EventHoverBox from "./EventHoverBox.svelte";
   import GradesBlock from "./GradesBlock.svelte";
   import Volunteerism from "./Volunteerism.svelte";
-  import { ThisWeek } from "./ThisWeek";
+  import ThisWeek from "./ThisWeek.svelte";
 
   import { HoveredEvent } from "state/types";
+  import { siteContext } from "store/context";
+  import { derived } from "svelte/store";
 
   let hovered: HoveredEvent | null = null;
+
+  const events = derived(siteContext, context => context.user!.grades.eventsWithChanges);
 </script>
 
 <Container fullheight>
-  <GradesBlock on:hover={e => hovered = e} />
+  <GradesBlock hoverEvent={event => hovered = event} />
   {#if hovered}
-    <EventHoverBox {hovered} />
+    <EventHoverBox {...hovered} />
   {/if}
   <Section>
     <Container>
@@ -27,7 +31,10 @@
           <Title>This Week</Title>
           <Box>
             <div class="timeline">
-              <ThisWeek />
+              <ThisWeek
+                events={$events}
+                on:hover={e => hovered = e.detail}
+              />
             </div>
           </Box>
         </Column>

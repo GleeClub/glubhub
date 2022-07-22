@@ -5,10 +5,9 @@
   import Modal from "components/popup/Modal.svelte";
   import ErrorBox from "components/remote/ErrorBox.svelte";
 
-  import { AllSemestersDocument, SetCurrentSemesterDocument } from "gql-operations";
   import { adminSemesters, routeAdmin } from "route/constructors";
   import { semesterType } from "state/input";
-  import { mutation, query } from "state/query";
+  import { eagerQuery, query } from "state/query";
   import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
   import { siteContext } from "store/context";
   import { replaceRoute } from "store/route";
@@ -17,7 +16,7 @@
   let selected = get(siteContext).currentSemester.name;
   let state: RemoteData = emptyLoaded;
 
-  const allSemesters = query(AllSemestersDocument, {});
+  const [allSemesters, _reloadAllSemesters] = eagerQuery("AllSemesters", {});
   const loadedSemesters = derived(
     [siteContext, allSemesters],
     ([context, ss]) => ss.type === "loaded"
@@ -33,7 +32,7 @@
     if (!selected || selected === get(siteContext).currentSemester.name) return;
 
     state = loading;
-    const result = await mutation(SetCurrentSemesterDocument, { name: selected });
+    const result = await query("SetCurrentSemester", { name: selected });
 
     state = stateFromResult(result);
     if (result.type === "loaded") {

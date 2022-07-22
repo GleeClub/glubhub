@@ -1,14 +1,13 @@
 <script lang="ts">
   import BackButton from "components/buttons/BackButton.svelte";
   import Sidebar from "components/popup/Sidebar.svelte";
+  import EditSemesterForm from "./EditSemesterForm.svelte";
 
-  import { mutation } from "state/query";
+  import { query } from "state/query";
   import { replaceRoute } from "store/route";
   import { adminSemesters, routeAdmin } from "route/constructors";
-  import { CreateSemesterDocument, NewSemester } from "gql-operations";
-  import { emptyLoaded, loaded, loading, RemoteData, stateFromResult } from "state/types";
-
-  export let onCreate: () => void;
+  import { NewSemester } from "gql-operations";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
 
   // TODO: set name from `Semester Year`
   let semester: NewSemester = {
@@ -25,17 +24,16 @@
 
   async function createSemester() {
     state = loading;
-    const result = await mutation(CreateSemesterDocument, { newSemester: semester });
+    const result = await query("CreateSemester", { newSemester: semester });
 
     state = stateFromResult(result);
     if (result.type === "loaded") {
-      onCreate();
       closeSidebar();
     }
   }
 </script>
 
-<Sidebar data={loaded({})} close={closeSidebar}>
+<Sidebar data={emptyLoaded} close={closeSidebar}>
   <svelte:fragment slot="loaded">
     <BackButton content="cancel" click={closeSidebar} />
     <div class="column" style:text-align="center">
@@ -48,7 +46,7 @@
 
       <br />
       <EditSemesterForm
-        form={semester}
+        {semester}
         update={updatedSemester => semester = updatedSemester}
         submit={createSemester}
         submitMessage="Break your water"

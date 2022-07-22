@@ -2,10 +2,10 @@
   import Columns from "components/bulma/Columns.svelte";
   import EventColumn from "./EventColumn.svelte";
 
-  import { RemoteData } from "state/types";
+  import { LazyRemoteData } from "state/types";
   import { AllEventsQuery } from "gql-operations";
 
-  export let events: RemoteData<AllEventsQuery['events']>;
+  export let events: LazyRemoteData<AllEventsQuery['events']>;
   export let selectedId: number | null;
 </script>
 

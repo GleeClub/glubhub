@@ -1,5 +1,4 @@
-import type { CombinedError } from '@urql/svelte';
-import { FullSongQuery, SiteContextQuery } from 'gql-operations';
+import { FullEventQuery, FullSongQuery, SiteContextQuery } from 'gql-operations';
 import type { Readable } from 'svelte/store';
 
 export interface NotLoaded {
@@ -14,7 +13,7 @@ export interface Loaded<Data> {
 };
 export interface RemoteError {
   type: 'error';
-  error: CombinedError;
+  error: TypeError;
 };
 
 export const notLoaded: NotLoaded = { type: 'not-loaded' };
@@ -23,14 +22,14 @@ export function loaded<Data>(data: Data): Loaded<Data> {
   return { type: 'loaded', data };
 }
 export const emptyLoaded = loaded(null);
-export function error(error: CombinedError): RemoteError {
+export function error(error: TypeError): RemoteError {
   return { type: 'error', error };
 }
 
 export type RemoteData<Data = null> =
   Loading | Loaded<Data> | RemoteError;
 
-export type MutationResult<Data = any> = 
+export type QueryResult<Data = any> = 
   Loaded<Data> | RemoteError;
 
 export type LazyRemoteData<Data = null> =
@@ -55,7 +54,7 @@ export function mapLazyLoaded<Data, Mapped>(data: LazyRemoteData<Data>, mapper: 
   }
 }
 
-export function stateFromResult(result: MutationResult<any>): RemoteData {
+export function stateFromResult(result: QueryResult<any>): RemoteData {
   if (result.type === "loaded") {
     return emptyLoaded;
   } else {
@@ -84,9 +83,11 @@ export interface HasEventTimes {
   releaseTime?: string | null
 }
 
-export interface HasAttendanceIconContext {
+export interface SimpleAttendance {
   confirmed: boolean
   shouldAttend: boolean
+  didAttend: boolean
+  minutesLate: number
 }
 
 export interface HoveredEvent {
@@ -95,7 +96,16 @@ export interface HoveredEvent {
   y: number;
 }
 
+export interface CarpoolMember {
+  email: string
+  fullName: string
+  location: string
+  passengers: number
+}
+
 export type UserGrades = Exclude<SiteContextQuery['user'], null | undefined>['grades'];
 export type UserGradesEvent = UserGrades['eventsWithChanges'][number];
 export type UserVolunteerGig = UserGrades['volunteerGigsAttended'][number];
 export type FullSongLink = FullSongQuery['song']['linkSections'][number]['links'][number];
+export type FullEventGig = Exclude<FullEventQuery['event']['gig'], null | undefined>;
+export type FullEventUserAttendance = Exclude<FullEventQuery['event']['userAttendance'], null | undefined>;

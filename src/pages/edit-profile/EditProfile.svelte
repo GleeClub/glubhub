@@ -1,40 +1,64 @@
 <script lang="ts">
-  import { emptyLoaded, loading, RemoteData } from "state/types";
-  import { siteContext } from "store/context";
-  import { get } from "svelte/store";
+  import Box from "components/bulma/Box.svelte";
+  import Container from "components/bulma/Container.svelte";
+  import Section from "components/bulma/Section.svelte";
+  import Title from "components/bulma/Title.svelte";
+  import HeaderText from "./HeaderText.svelte";
+  import ErrorBox from "components/remote/ErrorBox.svelte";
+  import FormFields from "./FormFields.svelte";
 
+  import { routeLogin, routeProfile } from "route/constructors";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
+  import { reloadSiteContext, siteContext } from "store/context";
+  import { get } from "svelte/store";
+  import { MemberUpdate } from "gql-operations";
+  import { buildProfileForm } from "./form";
+  import { Md5 } from "ts-md5";
+  import { query } from "state/query";
+  import { goToRoute } from "store/route";
+
+  let password = "";
+  let confirmPassword = "";
   let state: RemoteData = emptyLoaded;
+  let form: MemberUpdate = buildProfileForm(get(siteContext));
 
   async function updateProfile() {
-    state = loading;
+    const loggedIn = !!get(siteContext).user;
 
     const enteredPassword = !!(password || confirmPassword);
-    if (!enteredPassword && !get(siteContext).user) {
+    if (!enteredPassword && !loggedIn) {
       alert("You must enter a password.");
       return;
     } else if (password !== confirmPassword) {
       alert("Your passwords don't match.");
       return;
-    } else if (!section) {
+    } else if (!form.section) {
+      // TODO: is this actually needed?
       alert("You need a section, bucko.");
       return;
     }
 
-    const passHash = enteredPassword
-      ? (Md5.hashStr(password) as string)
-      : null;
-    const result = await post(user ? "members/profile" : "members", body);
+    state = loading;
+    form.passHash = enteredPassword ? Md5.hashStr(password) : null;
+    const result = loggedIn
+      ? await query("UpdateMember", { email: get(siteContext).user!.email, update: form })
+      : await query("RegisterMember", { newMember: {
+        ...form,
+        enrollment: form.enrollment!,
+        passHash: form.passHash!,
+      }});
 
-    setState(resultToSubmissionState(result));
-    if (result.successful) {
-      if (user) {
-        goToRoute(routeProfile(user.email, null));
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
+      if (loggedIn) {
+        goToRoute(routeProfile(form.email, null));
+        reloadSiteContext();
       } else {
         goToRoute(routeLogin);
-        alert(`You have successfully created an account with email ${body.email}!`);
+        alert(`You have successfully created an account with email ${form.email}!`);
       }
     }
-  }, [setState, form, user, goToRoute]);
+  }
 </script>
 
 <Section>
@@ -44,217 +68,20 @@
       <HeaderText />
       <br />
       <FormFields
-        form={form}
-        update={updateForm}
-        user={user}
-        submit={submit}
-        state={state}
+        loggedIn={!!$siteContext.user}
+        {form}
+        updateForm={updatedForm => form = updatedForm}
+        {password}
+        updatePassword={newPassword => password = newPassword}
+        {confirmPassword}
+        updateConfirmPassword={newConfirmPassword => confirmPassword = newConfirmPassword}
+        {state}
+        on:submit={updateProfile}
       />
 
-    <form onSubmit={submit}>
-      <Title4>Really Important Stuff</Title4>
-      <InputWrapper horizontal title="Name">
-        <TextInput
-          type={stringType}
-          value={form.firstName}
-          onInput={firstName => update({ ...form, firstName })}
-          required
-          placeholder="First"
-        />
-        <TextInput
-          type={stringType}
-          value={form.preferredName}
-          onInput={preferredName => update({ ...form, preferredName })}
-          placeholder="Preferred (optional)"
-        />
-        <TextInput
-          type={stringType}
-          value={form.lastName}
-          onInput={lastName => update({ ...form, lastName })}
-          required
-          placeholder="Last"
-        />
-      </InputWrapper>
-      <TextInput
-        type={emailType}
-        value={form.email}
-        onInput={email => update({ ...form, email })}
-        horizontal
-        required
-        title="E-mail"
-        placeholder="gburdell3@gatech.edu"
-      />
-      <TextInput
-        type={phoneType}
-        value={form.phoneNumber}
-        onInput={phoneNumber => update({ ...form, phoneNumber })}
-        horizontal
-        required
-        title="Phone Number"
-        placeholder="6788675309"
-      />
-      <InputWrapper horizontal title="Password">
-        <TextInput
-          type={passwordType}
-          value={form.password}
-          onInput={password => update({ ...form, password })}
-          required
-          placeholder="Password"
-        />
-        <TextInput
-          type={passwordType}
-          value={form.confirmPassword}
-          onInput={confirmPassword => update({ ...form, confirmPassword })}
-          required
-          placeholder="Confirm Password"
-        />
-      </InputWrapper>
-      <InputWrapper horizontal title="Location">
-        <TextInput
-          type={stringType}
-          value={form.location}
-          onInput={location => update({ ...form, location })}
-          placeholder="Glenn"
-        />
-        <Control>
-          <ButtonGroup connected>
-            <Button
-              color={form.onCampus ? "is-primary" : undefined}
-              onClick={() => update({ ...form, onCampus: true })}
-            >
-              On-campus
-            </Button>
-            <Button
-              color={!form.onCampus ? "is-primary" : undefined}
-              onClick={() => update({ ...form, onCampus: false })}
-            >
-              Off-campus
-            </Button>
-          </ButtonGroup>
-        </Control>
-      </InputWrapper>
-      <TextInput
-        type={stringType}
-        value={form.major}
-        onInput={major => update({ ...form, major })}
-        required
-        horizontal
-        title="Major"
-        placeholder="Undecided Engineering"
-      />
-      <TextInput
-        type={stringType}
-        value={form.hometown}
-        onInput={hometown => update({ ...form, hometown })}
-        required
-        horizontal
-        title="Hometown"
-        placeholder="Winslow, Arizona"
-      />
-      <InputWrapper horizontal title="Car">
-        <TextInput
-          type={stringType}
-          value={form.location}
-          onInput={location => update({ ...form, location })}
-          placeholder="Glenn"
-        />
-        <Control>
-          <ButtonGroup connected>
-            <Button
-              color={form.onCampus ? "is-primary" : undefined}
-              onClick={() => update({ ...form, onCampus: true })}
-            >
-              On-campus
-            </Button>
-            <Button
-              color={!form.onCampus ? "is-primary" : undefined}
-              onClick={() => update({ ...form, onCampus: false })}
-            >
-              Off-campus
-            </Button>
-          </ButtonGroup>
-        </Control>
-      </InputWrapper>
-      <InputWrapper horizontal title="Enrollment">
-        <InputWrapper horizontal>
-          <Control>
-            <ButtonGroup connected>
-              {user && (
-                <EnrollmentOption form={form} update={update} enrollment={null} />
-    <Button
-      color={form.enrollment === enrollment ? "is-primary" : undefined}
-      onClick={() => update({ ...form, enrollment })}
-    >
-      {enrollment || "Inactive"}
-    </Button>
-              )}
-    <Button
-      color={form.enrollment === enrollment ? "is-primary" : undefined}
-      onClick={() => update({ ...form, enrollment })}
-    >
-      {enrollment || "Inactive"}
-    </Button>
-              <EnrollmentOption form={form} update={update} enrollment={"Class"} />
-              <EnrollmentOption form={form} update={update} enrollment={"Club"} />
-
-    <Button
-      color={form.enrollment === enrollment ? "is-primary" : undefined}
-      onClick={() => update({ ...form, enrollment })}
-    >
-      {enrollment || "Inactive"}
-    </Button>
-            </ButtonGroup>
-          </Control>
-          <span style={{ width: "15px" }} />
-          <SelectInput
-            type={sectionType(info)}
-            values={info?.sections || []}
-            selected={form.section}
-            onInput={section => update({ ...form, section })}
-          />
-        </InputWrapper>
-      </InputWrapper>
-
-      <Title4>Nice to Know</Title4>
-      <TextInput
-        type={stringType}
-        value={form.about}
-        onInput={about => update({ ...form, about })}
-        horizontal
-        title="About"
-        placeholder="I like big butts and I cannot lie"
-      />
-      <TextInput
-        type={stringType}
-        value={form.picture}
-        onInput={picture => update({ ...form, picture })}
-        horizontal
-        title="Picture URL"
-        placeholder="https://create.mylittlepony.movie/images/ponyparticon_bodybig.png"
-      />
-      <TextInput
-        type={numberType}
-        value={form.arrivedAtTech}
-        onInput={arrivedAtTech =>
-          update({
-            ...form,
-            arrivedAtTech: arrivedAtTech || new Date().getFullYear()
-          })
-        }
-        horizontal
-        title="Arrived at Tech"
-        placeholder="2099"
-      />
-      <ButtonGroup alignment="is-right">
-        {user && (
-          <LinkButton route={routeProfile(user.email, null)}>Back</LinkButton>
-        )}
-        <SubmitButton color="is-primary" loading={isSending(state)}>
-          Save
-        </SubmitButton>
-      </ButtonGroup>
-    </form>
-      {failedToSend(state) && <ErrorBox error={state.error} />}
+      {#if state.type === "error"}
+        <ErrorBox error={state.error} />
+      {/if}
     </Box>
   </Container>
 </Section>

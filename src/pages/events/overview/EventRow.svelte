@@ -8,7 +8,7 @@
 </script>
 
 <td style="text-align: center;">
-  <AttendanceIcon event={event} />
+  <AttendanceIcon {event} attendance={event.userAttendance} />
 </td>
 <td>{simpleDateFormatter(event.callTime)}</td>
 <td>{event.name}</td>

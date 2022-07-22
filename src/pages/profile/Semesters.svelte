@@ -2,13 +2,12 @@
   import Table from "components/bulma/Table.svelte";
   import Remote from "components/remote/Remote.svelte";
 
-  import { query } from "state/query";
+  import { eagerQuery } from "state/query";
   import { roundToTwoDigits } from "utils/helpers";
-  import { MemberSemestersDocument } from "gql-operations";
 
   export let email: string;
 
-  $: semesters = query(MemberSemestersDocument, { email });
+  $: [semesters, _reloadSemesters] = eagerQuery("MemberSemesters", { email });
 </script>
 
 <Remote data={$semesters}>

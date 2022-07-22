@@ -6,23 +6,16 @@
   import CheckboxInput from "components/forms/CheckboxInput.svelte";
   import StateBox from "components/remote/StateBox.svelte";
 
-  import {
-    AllRolePermissionsDocument,
-    DisableRolePermissionDocument,
-    EnableRolePermissionDocument,
-    NewRolePermission,
-    Permission,
-    PermissionType
-  } from "gql-operations";
-  import { mutation, query } from "state/query";
   import { siteContext } from "store/context";
   import { rolePermissionsAreEqual } from "utils/helpers";
   import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
   import { derived } from "svelte/store";
+  import { eagerQuery, query } from "state/query";
+  import { NewRolePermission, Permission, PermissionType } from "gql-operations";
 
   let state: RemoteData = emptyLoaded;
 
-  const rolePermissions = query(AllRolePermissionsDocument, {});
+  const [rolePermissions, _reload] = eagerQuery("AllRolePermissions", {});
   const eventTypes = derived(
     siteContext,
     context => [null, ...context.static.eventTypes.map(et => et.name)]
@@ -42,8 +35,8 @@
   async function toggleRolePermission(rolePermission: NewRolePermission, enabled: boolean) {
     state = loading;
     const result = enabled
-      ? await mutation(EnableRolePermissionDocument, { rolePermission })
-      : await mutation(DisableRolePermissionDocument, { rolePermission });
+      ? await query("EnableRolePermission", { rolePermission })
+      : await query("DisableRolePermission", { rolePermission });
 
     state = stateFromResult(result);
   }

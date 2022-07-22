@@ -7,32 +7,25 @@
   import Remote from "components/remote/Remote.svelte";
   import StateBox from "components/remote/StateBox.svelte";
 
-  import {
-    AllDocumentLinksDocument,
-    CreateDocumentLinkDocument,
-    DeleteDocumentLinkDocument,
-    DocumentLink
-  } from "gql-operations";
+  import { DocumentLink } from "gql-operations";
   import { stringType } from "state/input";
-  import { mutation, reexecutableQuery } from "state/query";
-  import { emptyLoaded, loading, RemoteData } from "state/types";
+  import { eagerQuery, query } from "state/query";
+  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
   import { get } from "svelte/store";
 
   let name = "";
   let url = "";
   let state: RemoteData = emptyLoaded;
 
-  const [allLinks, reloadAllLinks] = reexecutableQuery(AllDocumentLinksDocument, {});
+  const [allLinks, reloadAllLinks] = eagerQuery("AllDocumentLinks", {});
 
   async function updateLink(link: DocumentLink) {
     state = loading;
-    const response = await mutation(CreateDocumentLinkDocument, link);
+    const result = await query("CreateDocumentLink", link);
 
-    if (response.type === "loaded") {
-      state = emptyLoaded;
-      reloadAllLinks({});
-    } else {
-      state = response;
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
+      reloadAllLinks();
     }
   }
 
@@ -44,13 +37,11 @@
     if (!link) return;
 
     state = loading;
-    const response = await mutation(DeleteDocumentLinkDocument, { name: link.name });
+    const result = await query("DeleteDocumentLink", { name: link.name });
 
-    if (response.type === "loaded") {
-      state = emptyLoaded;
-      reloadAllLinks({});
-    } else {
-      state = response;
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
+      reloadAllLinks();
     }
   }
 
@@ -59,15 +50,13 @@
     if (links.type !== "loaded" || !name || !url) return;
 
     state = loading;
-    const response = await mutation(CreateDocumentLinkDocument, { name, url });
+    const result = await query("CreateDocumentLink", { name, url });
 
-    if (response.type === "loaded") {
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
       name = "";
       url = "";
-      state = emptyLoaded;
-      reloadAllLinks({});
-    } else {
-      state = response;
+      reloadAllLinks();
     }
   }
 </script>

@@ -2,15 +2,15 @@
   import { FullSongLink } from "state/types";
 
   export let link: FullSongLink;
-  export let onDelete: ((link: FullSongLink) => void) | undefined = undefined;
+  export let deleteLink: ((link: FullSongLink) => void) | undefined = undefined;
 </script>
 
-<span style:display={onDelete ? "inline" : ""}>
-  {#if onDelete}
+<span style:display={deleteLink ? "inline" : ""}>
+  {#if deleteLink}
     <button
       class="delete"
       style:margin="8px"
-      on:click={() => onDelete(link)}
+      on:click={() => deleteLink && deleteLink(link)}
     />
   {/if}
 

@@ -7,6 +7,9 @@
   import { siteContext } from "store/context";
   import { derived } from "svelte/store";
   import { ATTENDANCE_ISSUE_EMAIL } from "utils/constants";
+  import { HoveredEvent } from "state/types";
+
+  export let hoverEvent: (event: HoveredEvent | null) => void;
 
   const finalGrade = derived(siteContext, context => {
     const grade = context.user?.grades.grade;
@@ -51,7 +54,7 @@
     </p>
     {#if $siteContext.user?.grades.eventsWithChanges?.length}
       <div class="graph-wrapper">
-        <AttendanceGraph />
+        <AttendanceGraph {hoverEvent} />
       </div>
       <p>
         <br />

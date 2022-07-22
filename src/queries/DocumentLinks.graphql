@@ -1,6 +1,0 @@
-query DocumentLinks {
-  links {
-    name
-    url
-  }
-}

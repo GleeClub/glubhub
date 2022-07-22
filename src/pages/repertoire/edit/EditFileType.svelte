@@ -6,16 +6,16 @@
   import ErrorBox from "components/remote/ErrorBox.svelte";
   import SongLinkButton from "../SongLinkButton.svelte";
 
+  import { query } from "state/query";
   import { stringType } from "state/input";
-  import { mutation } from "state/query";
   import { fileToBase64 } from "utils/helpers";
-  import { CreateSongLinkDocument, FullSongQuery } from "gql-operations";
-  import { emptyLoaded, FullSongLink, loading, RemoteData } from "state/types";
+  import { FullSongQuery } from "gql-operations";
+  import { emptyLoaded, FullSongLink, loading, RemoteData, stateFromResult } from "state/types";
 
   export let song: FullSongQuery['song'];
   export let typeName: string;
   export let deleteLink: (link: FullSongLink) => void;
-  export let onDelete: () => void;
+  export let onUpdate: () => void;
 
   let name = "";
   let file: File | null = null;
@@ -28,7 +28,7 @@
     state = loading;
 
     const content = await fileToBase64(file);
-    const response = await mutation(CreateSongLinkDocument, {
+    const result = await query("CreateSongLink", {
       songId: song.id,
       newLink: {
         name,
@@ -38,11 +38,9 @@
       }
     });
 
-    if (response.type === "loaded") {
-      state = emptyLoaded;
+    state = stateFromResult(result);
+    if (result.type === "loaded") {
       onUpdate();
-    } else {
-      state = response;
     }
   }
 </script>
@@ -50,7 +48,7 @@
 <Divider content={typeName} />
 {#if linkSection}
   {#each linkSection.links as link}
-    <SongLinkButton {link} {onDelete} />
+    <SongLinkButton {link} {deleteLink} />
     <br />
   {/each}
 {:else}

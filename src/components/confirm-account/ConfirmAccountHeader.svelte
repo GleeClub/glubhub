@@ -10,7 +10,7 @@
 </script>
 
 <!-- only show for inactive members -->
-{#if !$siteContext.user?.semester?.enrollment && !ignoreConfirm}
+{#if $siteContext.user && !$siteContext.user?.semester?.enrollment && !ignoreConfirm}
   <section
     style="margin: 2em; margin-bottom: -1em; padding-top: 40px"
   >
