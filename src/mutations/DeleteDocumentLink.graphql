@@ -1,6 +1,0 @@
-mutation DeleteDocumentLink($name: String!) {
-  deleteLink(name: $name) {
-    name
-    url
-  }
-}

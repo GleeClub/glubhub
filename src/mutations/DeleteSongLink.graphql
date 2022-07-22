@@ -1,5 +1,0 @@
-mutation DeleteSongLink($id: Int!) {
-  deleteSongLink(id: $id) {
-    id
-  }
-}

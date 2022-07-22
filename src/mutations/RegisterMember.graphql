@@ -1,5 +1,0 @@
-mutation RegisterMember($newMember: NewMember!) {
-  registerMember(newMember: $newMember) {
-    email
-  }
-}

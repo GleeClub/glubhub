@@ -1,3 +1,0 @@
-mutation EnableRolePermission($rolePermission: NewRolePermission!) {
-  addPermissionToRole(rolePermission: $rolePermission)
-}

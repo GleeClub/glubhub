@@ -1,3 +1,0 @@
-mutation DisableRolePermission($rolePermission: NewRolePermission!) {
-  removePermissionFromRole(rolePermission: $rolePermission)
-}

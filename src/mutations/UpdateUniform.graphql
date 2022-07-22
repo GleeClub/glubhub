@@ -1,5 +1,0 @@
-mutation UpdateUniform($id: Int!, $update: NewUniform!) {
-  updateUniform(id: $id, update: $update) {
-    id
-  }
-}

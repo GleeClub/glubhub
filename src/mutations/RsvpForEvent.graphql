@@ -1,5 +1,0 @@
-mutation RsvpForEvent($id: Int!, $attending: Boolean!) {
-  rsvpForEvent(id: $id, attending: $attending) {
-    shouldAttend
-  }
-}

@@ -1,7 +1,0 @@
-query AllMinutes {
-  allMeetingMinutes {
-    id
-    name
-    date
-  }
-}

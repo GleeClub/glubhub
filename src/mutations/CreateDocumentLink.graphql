@@ -1,6 +1,0 @@
-mutation CreateDocumentLink($name: String!, $url: String!) {
-  createLink(name: $name, url: $url) {
-    name
-    url
-  }
-}

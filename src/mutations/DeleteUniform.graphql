@@ -1,5 +1,0 @@
-mutation DeleteUniform($id: Int!) {
-  deleteUniform(id: $id) {
-    id
-  }
-}

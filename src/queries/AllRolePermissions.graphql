@@ -1,8 +1,0 @@
-query AllRolePermissions {
-  currentPermissions {
-    id
-    role
-    permission
-    eventType
-  }
-}

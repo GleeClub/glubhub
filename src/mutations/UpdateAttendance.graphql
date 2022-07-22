@@ -1,8 +1,0 @@
-mutation UpdateAttendance($eventId: Int!, $member: String!, $update: AttendanceUpdate!) {
-  updateAttendance(eventId: $eventId, email: $member, update: $update) {
-    shouldAttend
-    didAttend
-    confirmed
-    minutesLate
-  }
-}

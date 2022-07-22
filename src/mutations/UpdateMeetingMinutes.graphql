@@ -1,5 +1,0 @@
-mutation UpdateMeetingMinutes($id: Int!, $update: UpdatedMeetingMinutes!) {
-  updateMeetingMinutes(id: $id, update: $update) {
-    id
-  }
-}

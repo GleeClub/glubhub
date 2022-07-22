@@ -1,7 +1,0 @@
-query AllSongs {
-  songs {
-    id
-    title
-    current
-  }
-}

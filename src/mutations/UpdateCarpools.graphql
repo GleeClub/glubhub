@@ -1,5 +1,0 @@
-mutation UpdateCarpools($eventId: Int!, $carpools: [UpdatedCarpool!]!) {
-  updateCarpools(eventId: $eventId, carpools: $carpools) {
-    id
-  }
-}
