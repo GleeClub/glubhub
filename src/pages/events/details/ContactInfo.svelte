@@ -1,10 +1,10 @@
 <script lang="ts">
-  import EmailLink from "components/member/EmailLink.svelte";
-  import PhoneLink from "components/member/PhoneLink.svelte";
+  import EmailLink from 'components/member/EmailLink.svelte'
+  import PhoneLink from 'components/member/PhoneLink.svelte'
 
-  import { FullEventGig } from "state/types";
+  import { FullEventGig } from 'state/types'
 
-  export let gig: FullEventGig;
+  export let gig: FullEventGig
 </script>
 
 {#if !gig.contactName && !gig.contactEmail && !gig.contactPhone}

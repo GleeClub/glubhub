@@ -1,38 +1,40 @@
-import { FullEventQuery, NewEvent, Uniform } from "gql-operations";
+import { FullEventQuery, NewEvent, Uniform } from 'gql-operations'
 import {
   twentyFourHourTimeFormatter,
   hyphenDateFormatter,
-  parseFormDateAndTimeString
-} from "utils/datetime";
+  parseFormDateAndTimeString,
+} from 'utils/datetime'
 
 export interface EventForm {
-  name: string;
-  semester: string;
-  type: string;
-  callTime: string;
-  callDate: string;
-  releaseTime: string;
-  releaseDate: string;
-  points: number | null;
-  comments: string;
-  location: string;
-  gigCount: boolean;
-  defaultAttend: boolean;
+  name: string
+  semester: string
+  type: string
+  callTime: string
+  callDate: string
+  releaseTime: string
+  releaseDate: string
+  points: number | null
+  comments: string
+  location: string
+  gigCount: boolean
+  defaultAttend: boolean
 }
 
 export interface GigForm {
-  performanceTime: string;
-  uniform: Uniform | null;
-  contactName: string;
-  contactEmail: string;
-  contactPhone: string;
-  price: number | null | undefined;
-  public: boolean;
-  summary: string;
-  description: string;
+  performanceTime: string
+  uniform: Uniform | null
+  contactName: string
+  contactEmail: string
+  contactPhone: string
+  price: number | null | undefined
+  public: boolean
+  summary: string
+  description: string
 }
 
-export const eventFormFromEvent = (event: FullEventQuery['event']): EventForm => ({
+export const eventFormFromEvent = (
+  event: FullEventQuery['event']
+): EventForm => ({
   name: event.name,
   semester: event.semester,
   type: event.type,
@@ -40,44 +42,44 @@ export const eventFormFromEvent = (event: FullEventQuery['event']): EventForm =>
   callDate: hyphenDateFormatter(event.callTime),
   releaseTime: event.releaseTime
     ? twentyFourHourTimeFormatter(event.releaseTime)
-    : "",
-  releaseDate: event.releaseTime ? hyphenDateFormatter(event.releaseTime) : "",
+    : '',
+  releaseDate: event.releaseTime ? hyphenDateFormatter(event.releaseTime) : '',
   points: event.points,
-  comments: event.comments || "",
-  location: event.location || "",
+  comments: event.comments || '',
+  location: event.location || '',
   gigCount: event.gigCount,
-  defaultAttend: event.defaultAttend
-});
+  defaultAttend: event.defaultAttend,
+})
 
 export const emptyGigForm: GigForm = {
-  performanceTime: "",
+  performanceTime: '',
   uniform: null,
-  contactName: "",
-  contactEmail: "",
-  contactPhone: "",
+  contactName: '',
+  contactEmail: '',
+  contactPhone: '',
   price: null,
   public: false,
-  summary: "",
-  description: ""
-};
+  summary: '',
+  description: '',
+}
 
 export const gigFormFromEvent = (event: FullEventQuery['event']): GigForm => {
   if (!event.gig) {
-    return emptyGigForm;
+    return emptyGigForm
   }
 
   return {
     performanceTime: twentyFourHourTimeFormatter(event.gig.performanceTime),
     uniform: event.gig?.uniform,
-    contactName: event.gig.contactName || "",
-    contactEmail: event.gig.contactEmail || "",
-    contactPhone: event.gig.contactPhone || "",
+    contactName: event.gig.contactName || '',
+    contactEmail: event.gig.contactEmail || '',
+    contactPhone: event.gig.contactPhone || '',
     price: event.gig.price,
     public: event.gig.public,
-    summary: event.gig.summary || "",
-    description: event.gig.description || ""
-  };
-};
+    summary: event.gig.summary || '',
+    description: event.gig.description || '',
+  }
+}
 
 export const buildUpdateBody = (event: EventForm, gig: GigForm): NewEvent => {
   // TODO: make less fragile
@@ -90,7 +92,7 @@ export const buildUpdateBody = (event: EventForm, gig: GigForm): NewEvent => {
     gig.price ||
     gig.summary ||
     gig.description
-  );
+  )
 
   return {
     event: {
@@ -121,8 +123,8 @@ export const buildUpdateBody = (event: EventForm, gig: GigForm): NewEvent => {
           price: gig.price,
           public: gig.public,
           summary: gig.summary,
-          description: gig.description
+          description: gig.description,
         }
-      : null
-  };
-};
+      : null,
+  }
+}

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Table from "components/bulma/Table.svelte";
+  import Table from 'components/bulma/Table.svelte'
 
-  import { FullEventQuery } from "gql-operations";
-  import { routeRepertoire } from "route/constructors";
-  import { renderRoute } from "route/render";
-  import { pitchToUnicode } from "state/pitch";
+  import { FullEventQuery } from 'gql-operations'
+  import { routeRepertoire } from 'route/constructors'
+  import { renderRoute } from 'route/render'
+  import { pitchToUnicode } from 'state/pitch'
 
-  export let songs: FullEventQuery['event']['setlist'];
+  export let songs: FullEventQuery['event']['setlist']
 </script>
 
 {#if songs.length === 0}
@@ -15,7 +15,7 @@
   <Table striped>
     <tbody>
       {#each songs as song, index}
-        <tr >
+        <tr>
           <td>{index + 1}</td>
           <td>
             <a href={renderRoute(routeRepertoire(song.id, null))}>
@@ -23,11 +23,11 @@
             </a>
           </td>
           <!-- TODO: show mode as well -->
-          <td>{song.key ? pitchToUnicode(song.key) : "No key"}</td>
+          <td>{song.key ? pitchToUnicode(song.key) : 'No key'}</td>
           <td>
             {song.startingPitch
               ? pitchToUnicode(song.startingPitch)
-              : "No starting pitch"}
+              : 'No starting pitch'}
           </td>
         </tr>
       {/each}

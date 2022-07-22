@@ -7,27 +7,29 @@
 
   import { LazyRemoteData, mapLazyLoaded } from 'state/types'
   import { GOLD_COLOR } from 'utils/constants'
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte'
 
   type T = $$Generic
 
   interface $$Props {
-    itemGroups: LazyRemoteData<T[][]>;
-    isSelected: (item: T) => boolean;
-    render: (item: T) => string;
-    title: string;
-    messageIfEmpty: string;
+    itemGroups: LazyRemoteData<T[][]>
+    isSelected: (item: T) => boolean
+    render: (item: T) => string
+    title: string
+    messageIfEmpty: string
   }
 
-  export let itemGroups: LazyRemoteData<T[][]>;
-  export let isSelected: (item: T) => boolean;
-  export let render: (item: T) => string;
+  export let itemGroups: LazyRemoteData<T[][]>
+  export let isSelected: (item: T) => boolean
+  export let render: (item: T) => string
   export let messageIfEmpty: string
-  export let title = ""
+  export let title = ''
 
-  const dispatch = createEventDispatcher<{ select: T }>();
+  const dispatch = createEventDispatcher<{ select: T }>()
 
-  $: nonEmptyGroups = mapLazyLoaded(itemGroups, (gs) => gs.filter((g) => g.length))
+  $: nonEmptyGroups = mapLazyLoaded(itemGroups, (gs) =>
+    gs.filter((g) => g.length)
+  )
 </script>
 
 <Column narrow>
@@ -48,7 +50,7 @@
                 {#each group as item}
                   <tr
                     style:background-color={isSelected(item) ? GOLD_COLOR : ''}
-                    on:click={() => dispatch("select", item)}
+                    on:click={() => dispatch('select', item)}
                   >
                     <td>{render(item)}</td>
                   </tr>

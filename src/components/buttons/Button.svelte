@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { ButtonColor, ButtonSize } from "utils/helpers";
+  import { ButtonColor, ButtonSize } from 'utils/helpers'
 
-  export let color: ButtonColor | undefined = undefined;
-  export let size: ButtonSize | undefined = undefined;
-  export let loading = false;
-  export let inverted = false;
-  export let outlined = false;
-  export let fullwidth = false;
-  export let className = '';
+  export let color: ButtonColor | undefined = undefined
+  export let size: ButtonSize | undefined = undefined
+  export let loading = false
+  export let inverted = false
+  export let outlined = false
+  export let fullwidth = false
+  export let className = ''
   // TODO: should this be required?
-  export let click: (() => void) | undefined = undefined;
-  export let element: 'a' | 'button' = 'button';
+  export let click: (() => void) | undefined = undefined
+  export let element: 'a' | 'button' = 'button'
 </script>
 
 <svelte:element

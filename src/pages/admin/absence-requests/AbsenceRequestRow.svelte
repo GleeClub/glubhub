@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { AllAbsenceRequestsQuery } from "gql-operations";
-  import { routeEvents, routeProfile } from "route/constructors";
-  import { renderRoute } from "route/render";
-  import { dateFormatter, timeFormatter } from "utils/datetime";
+  import { AllAbsenceRequestsQuery } from 'gql-operations'
+  import { routeEvents, routeProfile } from 'route/constructors'
+  import { renderRoute } from 'route/render'
+  import { dateFormatter, timeFormatter } from 'utils/datetime'
 
-  export let absenceRequest: AllAbsenceRequestsQuery['absenceRequests'][number];
+  export let absenceRequest: AllAbsenceRequestsQuery['absenceRequests'][number]
 </script>
 
 <tr class="no-bottom-border">
@@ -23,7 +23,7 @@
     <br />
     {timeFormatter(absenceRequest.event.callTime)}
     <br />
-    {absenceRequest.event.location || ""}
+    {absenceRequest.event.location || ''}
   </td>
   <td>
     <a href={renderRoute(routeProfile(absenceRequest.member.email, null))}>

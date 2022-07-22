@@ -1,28 +1,33 @@
 <script lang="ts">
-  import Divider from "components/bulma/Divider.svelte";
-  import RequiresPermission from "components/member/RequiresPermission.svelte";
-  import DeleteModal from "components/popup/DeleteModal.svelte";
-  import ContactInfo from "./ContactInfo.svelte";
+  import Divider from 'components/bulma/Divider.svelte'
+  import RequiresPermission from 'components/member/RequiresPermission.svelte'
+  import DeleteModal from 'components/popup/DeleteModal.svelte'
+  import ContactInfo from './ContactInfo.svelte'
 
-  import { FullEventQuery } from "gql-operations";
-  import { eventEdit, routeEvents } from "route/constructors";
-  import { viewEventPrivateDetails } from "state/permissions";
-  import { query } from "state/query";
-  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
-  import { replaceRoute } from "store/route";
+  import { FullEventQuery } from 'gql-operations'
+  import { eventEdit, routeEvents } from 'route/constructors'
+  import { viewEventPrivateDetails } from 'state/permissions'
+  import { query } from 'state/query'
+  import {
+    emptyLoaded,
+    loading,
+    RemoteData,
+    stateFromResult,
+  } from 'state/types'
+  import { replaceRoute } from 'store/route'
 
-  export let event: FullEventQuery['event'];
-  export let onDelete: () => void;
+  export let event: FullEventQuery['event']
+  export let onDelete: () => void
 
-  let deleteState: RemoteData | null = null;
+  let deleteState: RemoteData | null = null
 
   async function deleteEvent() {
-    deleteState = loading;
-    const result = await query("DeleteEvent", { id: event.id });
+    deleteState = loading
+    const result = await query('DeleteEvent', { id: event.id })
 
-    deleteState = stateFromResult(result);
-    if (result.type === "loaded") {
-      onDelete();
+    deleteState = stateFromResult(result)
+    if (result.type === 'loaded') {
+      onDelete()
     }
   }
 </script>
@@ -31,12 +36,12 @@
   <Divider />
   {#if event.gig}
     <ContactInfo gig={event.gig} />
-    {#if typeof event.gig.price === "number"}
+    {#if typeof event.gig.price === 'number'}
       Price: {event.gig.price}
     {/if}
   {/if}
   <br />
-  <button 
+  <button
     class="button"
     type="button"
     on:click={() => replaceRoute(routeEvents(event.id, eventEdit))}
@@ -48,7 +53,7 @@
   <button
     class="button is-danger is-outlined"
     type="button"
-    on:click={() => deleteState = emptyLoaded}
+    on:click={() => (deleteState = emptyLoaded)}
     style:margin-bottom="5px"
   >
     Yeet this bitch into the void
@@ -57,7 +62,7 @@
   {#if deleteState}
     <DeleteModal
       title={`Delete ${event.name}?`}
-      cancel={() => deleteState = null}
+      cancel={() => (deleteState = null)}
       confirm={deleteEvent}
       state={deleteState}
     >

@@ -1,15 +1,15 @@
-import { SiteContextQuery } from "gql-operations";
-import { eagerQuery } from "state/query";
-import { emptyLoaded, LazyRemoteData } from "state/types";
-import { derived, Readable } from "svelte/store";
+import { SiteContextQuery } from 'gql-operations'
+import { eagerQuery } from 'state/query'
+import { emptyLoaded, LazyRemoteData } from 'state/types'
+import { derived, Readable } from 'svelte/store'
 
 const defaultSiteContext: SiteContextQuery = {
   user: null,
   currentSemester: {
-    name: "",
+    name: '',
     gigRequirement: 0,
-    startDate: "",
-    endDate: "",
+    startDate: '',
+    endDate: '',
   },
   static: {
     permissions: [],
@@ -18,13 +18,16 @@ const defaultSiteContext: SiteContextQuery = {
     sections: [],
     eventTypes: [],
     transactionTypes: [],
-  }
-};
+  },
+}
 
-const [siteContextInner, reloadSiteContext] = eagerQuery("SiteContext");
-export { reloadSiteContext };
+const [siteContextInner, reloadSiteContext] = eagerQuery('SiteContext')
+export { reloadSiteContext }
 
-export const siteContext = derived(
-  siteContextInner, inner => inner.type === "loaded" ? inner.data : defaultSiteContext);
+export const siteContext = derived(siteContextInner, (inner) =>
+  inner.type === 'loaded' ? inner.data : defaultSiteContext
+)
 export const siteContextStatus: Readable<LazyRemoteData> = derived(
-  siteContextInner, inner => inner.type === "loaded" ? emptyLoaded : inner);
+  siteContextInner,
+  (inner) => (inner.type === 'loaded' ? emptyLoaded : inner)
+)

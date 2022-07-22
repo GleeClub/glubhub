@@ -1,13 +1,19 @@
 <script lang="ts">
-  import RequiresPermission from "components/member/RequiresPermission.svelte";
-  import TabLink from "./TabLink.svelte";
+  import RequiresPermission from 'components/member/RequiresPermission.svelte'
+  import TabLink from './TabLink.svelte'
 
-  import { eventAttendance, eventAttendees, eventCarpools, eventDetails, eventSetlist } from "route/constructors";
-  import { EventTab } from "route/types";
-  import { editAttendance } from "state/permissions";
+  import {
+    eventAttendance,
+    eventAttendees,
+    eventCarpools,
+    eventDetails,
+    eventSetlist,
+  } from 'route/constructors'
+  import { EventTab } from 'route/types'
+  import { editAttendance } from 'state/permissions'
 
-  export let eventId: number;
-  export let currentTab: EventTab | null;
+  export let eventId: number
+  export let currentTab: EventTab | null
 </script>
 
 <div class="tabs">

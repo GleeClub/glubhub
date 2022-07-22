@@ -1,77 +1,70 @@
 <script lang="ts">
-  import Box from "components/bulma/Box.svelte";
-  import Title from "components/bulma/Title.svelte";
-  import Button from "components/buttons/Button.svelte";
-  import DeleteButton from "components/buttons/DeleteButton.svelte";
-  import TextInput from "components/forms/TextInput.svelte";
-  import Remote from "components/remote/Remote.svelte";
-  import StateBox from "components/remote/StateBox.svelte";
+  import Box from 'components/bulma/Box.svelte'
+  import Title from 'components/bulma/Title.svelte'
+  import Button from 'components/buttons/Button.svelte'
+  import DeleteButton from 'components/buttons/DeleteButton.svelte'
+  import TextInput from 'components/forms/TextInput.svelte'
+  import Remote from 'components/remote/Remote.svelte'
+  import StateBox from 'components/remote/StateBox.svelte'
 
-  import { DocumentLink } from "gql-operations";
-  import { stringType } from "state/input";
-  import { eagerQuery, query } from "state/query";
-  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
-  import { get } from "svelte/store";
+  import { DocumentLink } from 'gql-operations'
+  import { stringType } from 'state/input'
+  import { eagerQuery, query } from 'state/query'
+  import {
+    emptyLoaded,
+    loading,
+    RemoteData,
+    stateFromResult,
+  } from 'state/types'
+  import { get } from 'svelte/store'
 
-  let name = "";
-  let url = "";
-  let state: RemoteData = emptyLoaded;
+  let name = ''
+  let url = ''
+  let state: RemoteData = emptyLoaded
 
-  const [allLinks, reloadAllLinks] = eagerQuery("AllDocumentLinks", {});
+  const [allLinks, reloadAllLinks] = eagerQuery('AllDocumentLinks', {})
 
   async function updateLink(link: DocumentLink) {
-    state = loading;
-    const result = await query("CreateDocumentLink", link);
+    state = loading
+    const result = await query('CreateDocumentLink', link)
 
-    state = stateFromResult(result);
-    if (result.type === "loaded") {
-      reloadAllLinks();
+    state = stateFromResult(result)
+    if (result.type === 'loaded') {
+      reloadAllLinks()
     }
   }
 
   async function deleteLink(index: number) {
-    const links = get(allLinks);
-    if (links.type !== "loaded") return;
+    const links = get(allLinks)
+    if (links.type !== 'loaded') return
 
-    const link = links.data.links[index];
-    if (!link) return;
+    const link = links.data.links[index]
+    if (!link) return
 
-    state = loading;
-    const result = await query("DeleteDocumentLink", { name: link.name });
+    state = loading
+    const result = await query('DeleteDocumentLink', { name: link.name })
 
-    state = stateFromResult(result);
-    if (result.type === "loaded") {
-      reloadAllLinks();
+    state = stateFromResult(result)
+    if (result.type === 'loaded') {
+      reloadAllLinks()
     }
   }
 
   async function createLink() {
-    const links = get(allLinks);
-    if (links.type !== "loaded" || !name || !url) return;
+    const links = get(allLinks)
+    if (links.type !== 'loaded' || !name || !url) return
 
-    state = loading;
-    const result = await query("CreateDocumentLink", { name, url });
+    state = loading
+    const result = await query('CreateDocumentLink', { name, url })
 
-    state = stateFromResult(result);
-    if (result.type === "loaded") {
-      name = "";
-      url = "";
-      reloadAllLinks();
+    state = stateFromResult(result)
+    if (result.type === 'loaded') {
+      name = ''
+      url = ''
+      reloadAllLinks()
     }
   }
 </script>
-
-<style>
-.link-table {
-  border-spacing: 5px;
-  border-collapse: separate;
-}
-
-.inline-middle {
-  display: inline-block;
-  vertical-align: middle;
-}
-</style>
 
 <Title>Document Links</Title>
 <Box>
@@ -88,7 +81,7 @@
             <TextInput
               type={stringType}
               value={url}
-              onInput={url => updateLink({ ...link, url })}
+              onInput={(url) => updateLink({ ...link, url })}
               placeholder="URL"
             />
           </td>
@@ -110,7 +103,7 @@
           <TextInput
             type={stringType}
             value={name}
-            onInput={newName => name = newName}
+            onInput={(newName) => (name = newName)}
             placeholder="Name"
           />
         </td>
@@ -118,7 +111,7 @@
           <TextInput
             type={stringType}
             value={url}
-            onInput={newUrl => url = newUrl}
+            onInput={(newUrl) => (url = newUrl)}
             placeholder="URL"
           />
         </td>
@@ -130,3 +123,15 @@
   </Remote>
   <StateBox {state} />
 </Box>
+
+<style>
+  .link-table {
+    border-spacing: 5px;
+    border-collapse: separate;
+  }
+
+  .inline-middle {
+    display: inline-block;
+    vertical-align: middle;
+  }
+</style>

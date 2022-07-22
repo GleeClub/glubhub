@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { FullSongLink } from "state/types";
+  import { FullSongLink } from 'state/types'
 
-  export let link: FullSongLink;
-  export let deleteLink: ((link: FullSongLink) => void) | undefined = undefined;
+  export let link: FullSongLink
+  export let deleteLink: ((link: FullSongLink) => void) | undefined = undefined
 </script>
 
-<span style:display={deleteLink ? "inline" : ""}>
+<span style:display={deleteLink ? 'inline' : ''}>
   {#if deleteLink}
     <button
       class="delete"
@@ -14,7 +14,7 @@
     />
   {/if}
 
-  {#if link.type === "Sheet Music"}
+  {#if link.type === 'Sheet Music'}
     <a
       class="button is-outlined is-primary"
       href="https://gleeclub.gatech.edu/music/{link.target}"
@@ -26,7 +26,7 @@
       </span>
       <span>{link.name}</span>
     </a>
-  {:else if link.type === "MIDIs"}
+  {:else if link.type === 'MIDIs'}
     <a
       class="button is-outlined is-primary"
       href="https://gleeclub.gatech.edu/music/{link.target}"
@@ -38,15 +38,17 @@
       </span>
       <span>{link.name}</span>
     </a>
-  {:else if link.type === "Performances"}
+  {:else if link.type === 'Performances'}
     <span style="display: inline; align-items: center">
-      <span
-        class="icon has-text-grey-lighter"
-        style:margin-right=".5rem"
-      >
+      <span class="icon has-text-grey-lighter" style:margin-right=".5rem">
         <i class="fas fa-external-link-alt" />
       </span>
-      <a class="button" href="https://youtu.be/{link.target}" target="_blank" rel="noopener noreferrer">
+      <a
+        class="button"
+        href="https://youtu.be/{link.target}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <span class="icon has-text-danger">
           <i class="fab fa-youtube" />
         </span>
@@ -54,7 +56,12 @@
       <span style:padding-left="5px">{link.name}</span>
     </span>
   {:else}
-    <a class="button" target="_blank" href={link.target} rel="noopener noreferrer">
+    <a
+      class="button"
+      target="_blank"
+      href={link.target}
+      rel="noopener noreferrer"
+    >
       {link.name}
     </a>
   {/if}

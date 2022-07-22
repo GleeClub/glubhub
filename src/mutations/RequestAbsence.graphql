@@ -1,5 +1,5 @@
 mutation RequestAbsence($eventId: Int!, $reason: String!) {
-	submitAbsenceRequest(eventId: $eventId, reason: $reason) {
+  submitAbsenceRequest(eventId: $eventId, reason: $reason) {
     reason
   }
 }

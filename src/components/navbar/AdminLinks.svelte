@@ -6,9 +6,7 @@
 
 {#if $visibleAdminTabs.length > 0}
   <div class="navbar-item has-dropdown is-hoverable">
-    <a class="navbar-link" href={renderRoute(routeAdmin(null))}>
-      Admin
-    </a>
+    <a class="navbar-link" href={renderRoute(routeAdmin(null))}> Admin </a>
     <div class="navbar-dropdown">
       {#each $visibleAdminTabs as tabGroup, tabIndex}
         {#each tabGroup as tab}

@@ -1,23 +1,25 @@
 <script lang="ts">
-  import EventRow from "./EventRow.svelte";
-  import Column from "components/bulma/Column.svelte";
-  import Title from "components/bulma/Title.svelte";
-  import Box from "components/bulma/Box.svelte";
-  import Remote from "components/remote/Remote.svelte";
-  import Table from "components/bulma/Table.svelte";
+  import EventRow from './EventRow.svelte'
+  import Column from 'components/bulma/Column.svelte'
+  import Title from 'components/bulma/Title.svelte'
+  import Box from 'components/bulma/Box.svelte'
+  import Remote from 'components/remote/Remote.svelte'
+  import Table from 'components/bulma/Table.svelte'
 
-  import { GOLD_COLOR } from "utils/constants";
-  import { AllEventsQuery } from "gql-operations";
-  import { routeEvents } from "route/constructors";
-  import { mapLazyLoaded, LazyRemoteData } from "state/types";
-  import { replaceRoute } from "store/route";
+  import { GOLD_COLOR } from 'utils/constants'
+  import { AllEventsQuery } from 'gql-operations'
+  import { routeEvents } from 'route/constructors'
+  import { mapLazyLoaded, LazyRemoteData } from 'state/types'
+  import { replaceRoute } from 'store/route'
 
-  export let title: string;
-  export let allowedEventTypes: string[];
-  export let events: LazyRemoteData<AllEventsQuery['events']>;
-  export let selectedId: number | null;
+  export let title: string
+  export let allowedEventTypes: string[]
+  export let events: LazyRemoteData<AllEventsQuery['events']>
+  export let selectedId: number | null
 
-  $: eventGroups = mapLazyLoaded(events, all => [all.filter(event => allowedEventTypes.includes(event.type))])
+  $: eventGroups = mapLazyLoaded(events, (all) => [
+    all.filter((event) => allowedEventTypes.includes(event.type)),
+  ])
 </script>
 
 <Column centered oneQuarter>
@@ -35,7 +37,9 @@
                 {#each groups as group, groupIndex}
                   {#each group as event}
                     <tr
-                      style:background-color={event.id === selectedId ? GOLD_COLOR : ''}
+                      style:background-color={event.id === selectedId
+                        ? GOLD_COLOR
+                        : ''}
                       on:click={() => replaceRoute(routeEvents(event.id, null))}
                     >
                       <EventRow {event} />

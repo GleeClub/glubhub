@@ -1,28 +1,34 @@
 <script lang="ts">
-  import Column from "components/bulma/Column.svelte";
-  import Table from "components/bulma/Table.svelte";
-  import Button from "components/buttons/Button.svelte";
-  import StateBox from "components/remote/StateBox.svelte";
+  import Column from 'components/bulma/Column.svelte'
+  import Table from 'components/bulma/Table.svelte'
+  import Button from 'components/buttons/Button.svelte'
+  import StateBox from 'components/remote/StateBox.svelte'
 
-  import { query } from "state/query";
-  import { FullMemberQuery } from "gql-operations";
-  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
-  import { simpleDateWithYearFormatter } from "utils/datetime";
+  import { query } from 'state/query'
+  import { FullMemberQuery } from 'gql-operations'
+  import {
+    emptyLoaded,
+    loading,
+    RemoteData,
+    stateFromResult,
+  } from 'state/types'
+  import { simpleDateWithYearFormatter } from 'utils/datetime'
 
-  export let transactions: FullMemberQuery['member']['transactions'];
-  export let onUpdate: () => void;
+  export let transactions: FullMemberQuery['member']['transactions']
+  export let onUpdate: () => void
 
-  let state: RemoteData = emptyLoaded;
+  let state: RemoteData = emptyLoaded
 
   async function resolveTransaction(transactionId: number, resolved: boolean) {
-    state = loading;
-    const result = await query("ResolveTransaction", {
-      id: transactionId, resolved,
-    });
+    state = loading
+    const result = await query('ResolveTransaction', {
+      id: transactionId,
+      resolved,
+    })
 
-    state = stateFromResult(result);
-    if (result.type === "loaded") {
-      onUpdate();
+    state = stateFromResult(result)
+    if (result.type === 'loaded') {
+      onUpdate()
     }
   }
 </script>
@@ -46,7 +52,7 @@
               {transaction.amount}
             {/if}
           </td>
-          <td>{transaction.resolved ? "Resolved" : "Outstanding"}</td>
+          <td>{transaction.resolved ? 'Resolved' : 'Outstanding'}</td>
           <td>
             {#if transaction.resolved}
               <Button

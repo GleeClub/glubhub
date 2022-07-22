@@ -1,17 +1,22 @@
 <script lang="ts">
-  import InputWrapper from "./InputWrapper.svelte";
+  import InputWrapper from './InputWrapper.svelte'
 
-  export let file: File | null;
-  export let selectFile: (file: File | null) => void;
-  export let title = "";
-  export let horizontal = false;
-  export let helpText = "";
+  export let file: File | null
+  export let selectFile: (file: File | null) => void
+  export let title = ''
+  export let horizontal = false
+  export let helpText = ''
 </script>
 
-<InputWrapper title={title} horizontal={horizontal} helpText={helpText}>
+<InputWrapper {title} {horizontal} {helpText}>
   <div class="file has-name">
     <label class="file-label">
-      <input class="file-input" type="file" on:change={event => selectFile(event.currentTarget.files?.item(0) || null)} />
+      <input
+        class="file-input"
+        type="file"
+        on:change={(event) =>
+          selectFile(event.currentTarget.files?.item(0) || null)}
+      />
       <span class="file-cta">
         <span class="file-icon">
           <i class="fas fa-upload" />

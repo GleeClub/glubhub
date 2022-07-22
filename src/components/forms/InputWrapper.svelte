@@ -1,7 +1,7 @@
 <script lang="ts">
-  export let title = "";
-  export let horizontal = false;
-  export let helpText = "";
+  export let title = ''
+  export let horizontal = false
+  export let helpText = ''
 </script>
 
 <div class="field {horizontal ? ' is-horizontal' : ''}">

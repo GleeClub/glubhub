@@ -1,34 +1,38 @@
 <script lang="ts">
-  import Column from "components/bulma/Column.svelte";
-  import Title from "components/bulma/Title.svelte";
-  import AttendeeTable from "./AttendeeTable.svelte";
+  import Column from 'components/bulma/Column.svelte'
+  import Title from 'components/bulma/Title.svelte'
+  import AttendeeTable from './AttendeeTable.svelte'
 
-  import { FullEventQuery } from "gql-operations";
-  import { NO_SECTION, SECTION_ORDER } from "utils/constants";
+  import { FullEventQuery } from 'gql-operations'
+  import { NO_SECTION, SECTION_ORDER } from 'utils/constants'
 
-  export let attendees: FullEventQuery['event']['allAttendance'];
+  export let attendees: FullEventQuery['event']['allAttendance']
 
-  $: attending = separateByConfirmed(attendees.filter(a => a.shouldAttend));
-  $: notAttending = separateByConfirmed(attendees.filter(a => !a.shouldAttend));
+  $: attending = separateByConfirmed(attendees.filter((a) => a.shouldAttend))
+  $: notAttending = separateByConfirmed(
+    attendees.filter((a) => !a.shouldAttend)
+  )
 
-  function separateByConfirmed(attendees: FullEventQuery['event']['allAttendance']) {
+  function separateByConfirmed(
+    attendees: FullEventQuery['event']['allAttendance']
+  ) {
     return new Map(
-      SECTION_ORDER.map(section => {
+      SECTION_ORDER.map((section) => {
         const inSection = attendees.filter(
-          a => a.member.semester?.section === section
-        );
+          (a) => a.member.semester?.section === section
+        )
 
         return [
           section,
           inSection.length
             ? {
-                confirmed: inSection.filter(a => a.confirmed),
-                notConfirmed: inSection.filter(a => !a.confirmed)
+                confirmed: inSection.filter((a) => a.confirmed),
+                notConfirmed: inSection.filter((a) => !a.confirmed),
               }
-            : null
-        ];
+            : null,
+        ]
       })
-    );
+    )
   }
 </script>
 

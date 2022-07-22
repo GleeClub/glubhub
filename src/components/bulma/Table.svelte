@@ -8,7 +8,8 @@
 </script>
 
 <div class:table-container={scrollable}>
-  <table class="table {className}"
+  <table
+    class="table {className}"
     class:is-fullwidth={fullwidth}
     class:is-striped={striped}
     class:is-hoverable={hoverable}

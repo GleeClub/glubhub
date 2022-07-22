@@ -1,5 +1,13 @@
-mutation RespondToAbsenceRequest($eventId: Int!, $email: String!, $approved: Boolean!) {
-  respondToAbsenceRequest(eventId: $eventId, email: $email, approved: $approved) {
+mutation RespondToAbsenceRequest(
+  $eventId: Int!
+  $email: String!
+  $approved: Boolean!
+) {
+  respondToAbsenceRequest(
+    eventId: $eventId
+    email: $email
+    approved: $approved
+  ) {
     reason
   }
 }

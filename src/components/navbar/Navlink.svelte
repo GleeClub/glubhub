@@ -3,7 +3,7 @@
   import { route as routeStore } from 'store/route'
   import { renderRoute } from 'route/render'
 
-  export let route: GlubRoute;
+  export let route: GlubRoute
 </script>
 
 <a

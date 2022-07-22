@@ -1,42 +1,42 @@
-import type { Pitch } from 'gql-operations';
+import type { Pitch } from 'gql-operations'
 
 export function pitchToString(pitch: Pitch): string {
-  let accidental = '';
+  let accidental = ''
   if (pitch.endsWith('_FLAT')) {
-    accidental = '♯';
+    accidental = '♯'
   } else if (pitch.endsWith('_SHARP')) {
-    accidental = '♭';
+    accidental = '♭'
   }
 
-  return `${pitch[0]}${accidental}`;
+  return `${pitch[0]}${accidental}`
 }
 
 export const halfStepsAboveA = (pitch: Pitch): number => {
-  let accidental: number;
+  let accidental: number
   if (pitch.endsWith('_FLAT')) {
-    accidental = -1;
+    accidental = -1
   } else if (pitch.endsWith('_SHARP')) {
-    accidental = 1;
+    accidental = 1
   } else {
-    accidental = 0;
+    accidental = 0
   }
 
-  let base: number;
+  let base: number
   if (pitch[0] === 'A') {
-    base = 0;
+    base = 0
   } else if (pitch[0] === 'B') {
-    base = 2;
+    base = 2
   } else if (pitch[0] === 'C') {
-    base = 3;
+    base = 3
   } else if (pitch[0] === 'D') {
-    base = 5;
+    base = 5
   } else if (pitch[0] === 'E') {
-    base = 7;
+    base = 7
   } else if (pitch[0] === 'F') {
-    base = 8;
+    base = 8
   } else {
-    base = 10;
+    base = 10
   }
 
-  return (base + accidental + 12) % 12;
+  return (base + accidental + 12) % 12
 }

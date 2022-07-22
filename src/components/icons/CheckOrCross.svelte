@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let checked: boolean;
+  export let checked: boolean
 </script>
 
 <span class="icon is-medium">

@@ -1,12 +1,16 @@
 <script lang="ts">
-  import Table from "components/bulma/Table.svelte";
-  import AbsenceRequestButtons from "./AbsenceRequestButtons.svelte";
-  import AbsenceRequestRow from "./AbsenceRequestRow.svelte";
+  import Table from 'components/bulma/Table.svelte'
+  import AbsenceRequestButtons from './AbsenceRequestButtons.svelte'
+  import AbsenceRequestRow from './AbsenceRequestRow.svelte'
 
-  import { AllAbsenceRequestsQuery } from "gql-operations";
+  import { AllAbsenceRequestsQuery } from 'gql-operations'
 
-  export let absenceRequests: AllAbsenceRequestsQuery['absenceRequests'];
-  export let respond: (eventId: number, member: string, approved: boolean) => void;
+  export let absenceRequests: AllAbsenceRequestsQuery['absenceRequests']
+  export let respond: (
+    eventId: number,
+    member: string,
+    approved: boolean
+  ) => void
 </script>
 
 <Table scrollable fullwidth>

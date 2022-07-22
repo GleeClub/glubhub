@@ -1,6 +1,6 @@
 query TransactionsForSemester {
   transactions {
-  	id
+    id
     member {
       email
       fullName

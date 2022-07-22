@@ -2,12 +2,12 @@
   export let centered = false
 </script>
 
-<style>
-.centered {
-  text-align: center;
-}
-</style>
-
-<h3 class="subtitle is-3" class:centered={centered}>
+<h3 class="subtitle is-3" class:centered>
   <slot />
 </h3>
+
+<style>
+  .centered {
+    text-align: center;
+  }
+</style>

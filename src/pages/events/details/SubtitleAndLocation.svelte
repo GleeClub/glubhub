@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { FullEventQuery } from "gql-operations";
-  import { fullDateTimeFormatter } from "utils/datetime";
+  import { FullEventQuery } from 'gql-operations'
+  import { fullDateTimeFormatter } from 'utils/datetime'
 
-  export let event: FullEventQuery['event'];
+  export let event: FullEventQuery['event']
 </script>
 
 <p class="subtitle is-5">
@@ -18,4 +18,3 @@
     </a>
   {/if}
 </p>
-

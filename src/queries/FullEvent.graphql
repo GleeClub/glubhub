@@ -29,8 +29,8 @@ query FullEvent($id: Int!) {
     }
     userAttendance {
       shouldAttend
-    	didAttend
-    	confirmed
+      didAttend
+      confirmed
       minutesLate
       rsvpIssue
       approvedAbsence

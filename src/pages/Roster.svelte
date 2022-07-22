@@ -1,17 +1,17 @@
 <script lang="ts">
-  import Box from "components/bulma/Box.svelte";
-  import Container from "components/bulma/Container.svelte";
-  import EmailLink from "components/member/EmailLink.svelte";
-  import PhoneLink from "components/member/PhoneLink.svelte";
-  import Section from "components/bulma/Section.svelte";
-  import Remote from "components/remote/Remote.svelte";
-  import Table from "components/bulma/Table.svelte";
+  import Box from 'components/bulma/Box.svelte'
+  import Container from 'components/bulma/Container.svelte'
+  import EmailLink from 'components/member/EmailLink.svelte'
+  import PhoneLink from 'components/member/PhoneLink.svelte'
+  import Section from 'components/bulma/Section.svelte'
+  import Remote from 'components/remote/Remote.svelte'
+  import Table from 'components/bulma/Table.svelte'
 
-  import { routeProfile } from "route/constructors";
-  import { renderRoute } from "route/render";
-  import { eagerQuery } from "state/query";
+  import { routeProfile } from 'route/constructors'
+  import { renderRoute } from 'route/render'
+  import { eagerQuery } from 'state/query'
 
-  const [members, _reloadMembers] = eagerQuery("AllMembers");
+  const [members, _reloadMembers] = eagerQuery('AllMembers')
 </script>
 
 <Section>
@@ -36,7 +36,7 @@
                     {member.fullName}
                   </a>
                 </td>
-                <td>{member.semester?.section || "Homeless"}</td>
+                <td>{member.semester?.section || 'Homeless'}</td>
                 <td>
                   <EmailLink email={member.email} />
                 </td>
@@ -44,8 +44,8 @@
                   <PhoneLink phone={member.phoneNumber} />
                 </td>
                 <td>{member.location}</td>
-              </tr>          
-            {/each}  
+              </tr>
+            {/each}
           </tbody>
         </Table>
       </Box>

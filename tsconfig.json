@@ -13,15 +13,13 @@
     "importsNotUsedAsValues": "remove",
     "baseUrl": "./src",
 
-    "plugins": [{
-      "name": "typescript-eslint-language-service"
-    }]
+    "plugins": [
+      {
+        "name": "typescript-eslint-language-service"
+      }
+    ]
   },
 
   "include": ["src/**/*"],
-  "exclude": [
-    "node_modules/*",
-    "__sapper__/*",
-    "public/*"
-  ]
+  "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
 }

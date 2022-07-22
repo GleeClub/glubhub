@@ -2,7 +2,7 @@ query GigRequestForNewEvent($id: Int!) {
   gigRequest(id: $id) {
     id
     time
-  	name
+    name
     organization
     contactName
     contactPhone

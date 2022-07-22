@@ -1,34 +1,41 @@
 <script lang="ts">
-  import BackButton from "components/buttons/BackButton.svelte";
-  import Sidebar from "components/popup/Sidebar.svelte";
-  import EditSemesterForm from "./EditSemesterForm.svelte";
+  import BackButton from 'components/buttons/BackButton.svelte'
+  import Sidebar from 'components/popup/Sidebar.svelte'
+  import EditSemesterForm from './EditSemesterForm.svelte'
 
-  import { get } from "svelte/store";
-  import { query } from "state/query";
-  import { replaceRoute } from "store/route";
-  import { reloadSiteContext, siteContext } from "store/context";
-  import { adminSemesters, routeAdmin } from "route/constructors";
-  import { emptyLoaded, loaded, loading, RemoteData, stateFromResult } from "state/types";
+  import { get } from 'svelte/store'
+  import { query } from 'state/query'
+  import { replaceRoute } from 'store/route'
+  import { reloadSiteContext, siteContext } from 'store/context'
+  import { adminSemesters, routeAdmin } from 'route/constructors'
+  import {
+    emptyLoaded,
+    loaded,
+    loading,
+    RemoteData,
+    stateFromResult,
+  } from 'state/types'
 
-  let semester = get(siteContext).currentSemester;
-  let state: RemoteData = emptyLoaded;
+  let semester = get(siteContext).currentSemester
+  let state: RemoteData = emptyLoaded
 
-  const oldName = semester.name;
+  const oldName = semester.name
 
   function closeSidebar() {
-    replaceRoute(routeAdmin(adminSemesters(null)));
+    replaceRoute(routeAdmin(adminSemesters(null)))
   }
 
   async function editSemester() {
-    state = loading;
-    const result = await query("UpdateSemester", {
-      name: oldName, update: semester
-    });
+    state = loading
+    const result = await query('UpdateSemester', {
+      name: oldName,
+      update: semester,
+    })
 
-    state = stateFromResult(result);
-    if (state.type === "loaded") {
-      reloadSiteContext();
-      closeSidebar();
+    state = stateFromResult(result)
+    if (state.type === 'loaded') {
+      reloadSiteContext()
+      closeSidebar()
     }
   }
 </script>
@@ -44,7 +51,7 @@
     <br />
     <EditSemesterForm
       {semester}
-      update={updatedSemester => semester = updatedSemester}
+      update={(updatedSemester) => (semester = updatedSemester)}
       {state}
       submit={editSemester}
       submitMessage="Do this please"

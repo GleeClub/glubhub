@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Box from "components/bulma/Box.svelte";
+  import Box from 'components/bulma/Box.svelte'
 
-  export let close: () => void;
+  export let close: () => void
 </script>
 
 <div class="modal is-active">

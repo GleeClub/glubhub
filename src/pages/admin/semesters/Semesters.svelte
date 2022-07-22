@@ -1,22 +1,22 @@
 <script lang="ts">
-  import Box from "components/bulma/Box.svelte";
-  import Title from "components/bulma/Title.svelte";
-  import ButtonGroup from "components/buttons/ButtonGroup.svelte";
-  import LinkButton from "components/buttons/LinkButton.svelte";
-  import ChangeSemesterModal from "./ChangeSemesterModal.svelte";
-  import CreateSemesterSidebar from "./CreateSemesterSidebar.svelte";
-  import EditSemesterSidebar from "./EditSemesterSidebar.svelte";
+  import Box from 'components/bulma/Box.svelte'
+  import Title from 'components/bulma/Title.svelte'
+  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
+  import LinkButton from 'components/buttons/LinkButton.svelte'
+  import ChangeSemesterModal from './ChangeSemesterModal.svelte'
+  import CreateSemesterSidebar from './CreateSemesterSidebar.svelte'
+  import EditSemesterSidebar from './EditSemesterSidebar.svelte'
 
   import {
     adminSemesters,
     routeAdmin,
     semesterChange,
     semesterCreate,
-    semesterEdit
-  } from "route/constructors";
-  import { SemesterTab } from "route/types";
+    semesterEdit,
+  } from 'route/constructors'
+  import { SemesterTab } from 'route/types'
 
-  export let tab: SemesterTab | null;
+  export let tab: SemesterTab | null
 </script>
 
 <Title>Edit the Semester</Title>
@@ -29,8 +29,8 @@
   <p>
     Changing the current semester will change the entire face of the website.
     Only stuff from the current semester is shown on the main website. In new
-    semesters, every member's status is by default 'inactive' until they log
-    in and confirm themself.
+    semesters, every member's status is by default 'inactive' until they log in
+    and confirm themself.
   </p>
   <br />
   <p>
@@ -43,20 +43,17 @@
 
 <ButtonGroup alignment="is-centered">
   {#each [semesterChange, semesterEdit, semesterCreate] as option}
-    <LinkButton
-      color="is-primary"
-      route={routeAdmin(adminSemesters(option))}
-    >
+    <LinkButton color="is-primary" route={routeAdmin(adminSemesters(option))}>
       {option.name}
     </LinkButton>
   {/each}
 </ButtonGroup>
 <br />
 
-{#if tab?.route === "change"}
+{#if tab?.route === 'change'}
   <ChangeSemesterModal />
-{:else if tab?.route === "edit"}
+{:else if tab?.route === 'edit'}
   <EditSemesterSidebar />
-{:else if tab?.route === "create"}
+{:else if tab?.route === 'create'}
   <CreateSemesterSidebar />
 {/if}

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { SimpleAttendance } from "state/types";
+  import { SimpleAttendance } from 'state/types'
 
-  export let points: number;
-  export let attendance: SimpleAttendance;
+  export let points: number
+  export let attendance: SimpleAttendance
 </script>
 
 {#if attendance.didAttend}
@@ -11,15 +11,13 @@
   {:else}
     Wow, thanks for coming. What a guy!
   {/if}
+{:else if attendance.shouldAttend}
+  You <b>weren't there</b>, and that's <b>not ok</b>. You lost{' '}
+  {`${points}`} points.{' '}
+  <a href="mailto:gleeclub_officers@lists.gatech.edu?subject=Attendance Issue">
+    Email the officers
+  </a>{' '}
+  if you think that's not right.
 {:else}
-  {#if attendance.shouldAttend}
-    You <b>weren't there</b>, and that's <b>not ok</b>. You lost{" "}
-    {`${points}`} points.{" "}
-    <a href="mailto:gleeclub_officers@lists.gatech.edu?subject=Attendance Issue">
-      Email the officers
-    </a>{" "}
-    if you think that's not right.
-  {:else}
-    You <b>weren't there</b>, but that's <b>ok</b>.
-  {/if}
+  You <b>weren't there</b>, but that's <b>ok</b>.
 {/if}

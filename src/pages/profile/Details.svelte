@@ -1,83 +1,89 @@
 <script lang="ts">
-  import Column from "components/bulma/Column.svelte";
-  import Table from "components/bulma/Table.svelte";
-  import Button from "components/buttons/Button.svelte";
-  import ButtonGroup from "components/buttons/ButtonGroup.svelte";
-  import EditProfileForm from "./EditProfileForm.svelte";
+  import Column from 'components/bulma/Column.svelte'
+  import Table from 'components/bulma/Table.svelte'
+  import Button from 'components/buttons/Button.svelte'
+  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
+  import EditProfileForm from './EditProfileForm.svelte'
 
-  import { query } from "state/query";
-  import { FullMemberQuery, NewMember } from "gql-operations";
-  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
+  import { query } from 'state/query'
+  import { FullMemberQuery, NewMember } from 'gql-operations'
+  import {
+    emptyLoaded,
+    loading,
+    RemoteData,
+    stateFromResult,
+  } from 'state/types'
 
-  export let member: FullMemberQuery['member'];
-  export let onUpdate: () => void;
+  export let member: FullMemberQuery['member']
+  export let onUpdate: () => void
 
-  let state: RemoteData = emptyLoaded;
-  let form: NewMember | null = null;
+  let state: RemoteData = emptyLoaded
+  let form: NewMember | null = null
 
   $: readonlyRows = [
-    ["First Name", member.firstName],
-    ["Preferred Name", member.preferredName || ""],
-    ["Last Name", member.lastName],
-    ["Email", member.email],
-    ["Phone Number", member.phoneNumber],
-    ["Location", member.location],
-    ["On Campus", `${!!member.onCampus}`],
-    ["Enrollment", member.semester?.enrollment || "Inactive"],
-    ["Section", member.semester?.section || "Homeless"],
-    ["About", member.about || ""],
-    ["Picture", member.picture || ""],
-    ["Arrived At Tech", member.arrivedAtTech ? `${member.arrivedAtTech}` : ""],
-    ["Gateway Drug", member.gatewayDrug || ""],
-    ["Conflicts", member.conflicts || ""],
-    ["Dietary Restrictions", member.dietaryRestrictions || ""]
-  ];
+    ['First Name', member.firstName],
+    ['Preferred Name', member.preferredName || ''],
+    ['Last Name', member.lastName],
+    ['Email', member.email],
+    ['Phone Number', member.phoneNumber],
+    ['Location', member.location],
+    ['On Campus', `${!!member.onCampus}`],
+    ['Enrollment', member.semester?.enrollment || 'Inactive'],
+    ['Section', member.semester?.section || 'Homeless'],
+    ['About', member.about || ''],
+    ['Picture', member.picture || ''],
+    ['Arrived At Tech', member.arrivedAtTech ? `${member.arrivedAtTech}` : ''],
+    ['Gateway Drug', member.gatewayDrug || ''],
+    ['Conflicts', member.conflicts || ''],
+    ['Dietary Restrictions', member.dietaryRestrictions || ''],
+  ]
 
   async function updateMember() {
-    if (!form) return;
+    if (!form) return
 
-    state = loading;
-    const result = await query("UpdateMember", {
-      email: member.email, update: form,
-    });
+    state = loading
+    const result = await query('UpdateMember', {
+      email: member.email,
+      update: form,
+    })
 
-    state = stateFromResult(result);
-    if (result.type === "loaded") {
-      form = null;
-      onUpdate();
+    state = stateFromResult(result)
+    if (result.type === 'loaded') {
+      form = null
+      onUpdate()
     }
   }
 
   const formForMember = (): NewMember => ({
     firstName: member.firstName,
-    preferredName: member.preferredName || "",
+    preferredName: member.preferredName || '',
     lastName: member.lastName,
     email: member.email,
     phoneNumber: member.phoneNumber,
     location: member.location,
     onCampus: !!member.onCampus,
-    major: member.major || "",
-    hometown: member.hometown || "",
+    major: member.major || '',
+    hometown: member.hometown || '',
     passengers: member.passengers,
     // TODO: remove these exclams
     enrollment: member.semester!.enrollment,
     section: member.semester!.section,
-    about: member.about || "",
-    picture: member.picture || "",
+    about: member.about || '',
+    picture: member.picture || '',
     arrivedAtTech: member.arrivedAtTech,
-    gatewayDrug: member.gatewayDrug || "",
-    conflicts: member.conflicts || "",
-    dietaryRestrictions: member.dietaryRestrictions || "",
-    passHash: "",
-  });
+    gatewayDrug: member.gatewayDrug || '',
+    conflicts: member.conflicts || '',
+    dietaryRestrictions: member.dietaryRestrictions || '',
+    passHash: '',
+  })
 </script>
 
 {#if form}
   <EditProfileForm
     {form}
-    updateForm={updatedForm => form = updatedForm}
+    updateForm={(updatedForm) => (form = updatedForm)}
     {state}
-    cancel={() => form = null}
+    cancel={() => (form = null)}
     submit={updateMember}
   />
 {:else}
@@ -96,8 +102,7 @@
     </Table>
 
     <ButtonGroup alignment="is-right">
-      <Button click={() => form = formForMember()}>Edit</Button>
+      <Button click={() => (form = formForMember())}>Edit</Button>
     </ButtonGroup>
   </Column>
 {/if}
-

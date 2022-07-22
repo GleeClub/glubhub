@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Table from "components/bulma/Table.svelte";
-  import GigRequestButtons from "./GigRequestButtons.svelte";
-  import SingleGigRequest from "./SingleGigRequest.svelte";
+  import Table from 'components/bulma/Table.svelte'
+  import GigRequestButtons from './GigRequestButtons.svelte'
+  import SingleGigRequest from './SingleGigRequest.svelte'
 
-  import { AllGigRequestsQuery } from "gql-operations";
+  import { AllGigRequestsQuery } from 'gql-operations'
 
-  export let gigRequests: AllGigRequestsQuery['gigRequests'];
-  export let reopen: (id: number) => void;
-  export let dismiss: (id: number) => void;
+  export let gigRequests: AllGigRequestsQuery['gigRequests']
+  export let reopen: (id: number) => void
+  export let dismiss: (id: number) => void
 </script>
 
 <Table scrollable fullwidth>

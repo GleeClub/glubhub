@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Spinner from "components/remote/Spinner.svelte"
-  import ErrorBox from "components/remote/ErrorBox.svelte"
+  import Spinner from 'components/remote/Spinner.svelte'
+  import ErrorBox from 'components/remote/ErrorBox.svelte'
 
-  import { LazyRemoteData } from "state/types"
+  import { LazyRemoteData } from 'state/types'
 
   type T = $$Generic
 
@@ -17,18 +17,18 @@
   export let data: LazyRemoteData<T>
 
   // TODO: cleaner way to do this?
-  $: loadedData = (data.type === "loaded" ? data.data : null!)
+  $: loadedData = data.type === 'loaded' ? data.data : null!
 </script>
 
-{#if data.type === "loading"}
+{#if data.type === 'loading'}
   <slot name="loading">
     <Spinner />
   </slot>
-{:else if data.type === "error"}
+{:else if data.type === 'error'}
   <slot name="error">
     <ErrorBox error={data.error} />
   </slot>
-{:else if data.type === "loaded"}
+{:else if data.type === 'loaded'}
   <slot name="loaded" data={loadedData} />
 {:else}
   <slot name="not-loaded" />

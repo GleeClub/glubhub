@@ -5,7 +5,13 @@
   import HomeLogo from './HomeLogo.svelte'
   import BurgerButton from './BurgerButton.svelte'
 
-  import { routeEvents, routeMinutes, routeRepertoire, routeRoster, routeProfile } from 'route/constructors'
+  import {
+    routeEvents,
+    routeMinutes,
+    routeRepertoire,
+    routeRoster,
+    routeProfile,
+  } from 'route/constructors'
   import { renderRoute } from 'route/render'
   import { route } from 'store/route'
   import { siteContext } from 'store/context'
@@ -17,7 +23,7 @@
   <div class="navbar-brand">
     <HomeLogo />
     {#if $siteContext.user}
-      <BurgerButton {expanded} toggleExpanded={() => expanded = !expanded} />
+      <BurgerButton {expanded} toggleExpanded={() => (expanded = !expanded)} />
     {/if}
   </div>
   <div class="navbar-menu" class:is-active={expanded}>
@@ -33,10 +39,8 @@
       <div class="navbar-end">
         <a
           class="navbar-item"
-          class:is-active={
-            $route?.route === 'profile' &&
-            $route.email === $siteContext.user?.email
-          }
+          class:is-active={$route?.route === 'profile' &&
+            $route.email === $siteContext.user?.email}
           href={renderRoute(routeProfile($siteContext.user.email, null))}
         >
           {$siteContext.user.fullName}

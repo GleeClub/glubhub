@@ -1,19 +1,14 @@
 <script lang="ts">
-  import { siteContext } from "store/context";
-  import { derived } from "svelte/store";
+  import { siteContext } from 'store/context'
+  import { derived } from 'svelte/store'
 
-  const loggedIn = derived(siteContext, context => !!context.user);
+  const loggedIn = derived(siteContext, (context) => !!context.user)
 </script>
-
-<style>
-.stricken {
-  text-decoration: line-through;
-}
-</style>
 
 {#if $loggedIn}
   <p>
-    You can make changes to your stats here. It's important we know as much about you as possible to
+    You can make changes to your stats here. It's important we know as much
+    about you as possible to
     <span class="stricken">creep</span>
     <span class="stricken">better serve you</span>
     make you drive carpools. It'll also help your new friends get to know you!
@@ -25,3 +20,9 @@
     work out alternate means of registration.
   </p>
 {/if}
+
+<style>
+  .stricken {
+    text-decoration: line-through;
+  }
+</style>

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Table from "components/bulma/Table.svelte";
-  import AttendeeNameList from "./AttendeeNameList.svelte";
+  import Table from 'components/bulma/Table.svelte'
+  import AttendeeNameList from './AttendeeNameList.svelte'
 
-  import { FullEventQuery } from "gql-operations";
+  import { FullEventQuery } from 'gql-operations'
 
-  export let section: string;
-  export let confirmed: FullEventQuery['event']['allAttendance'];
-  export let notConfirmed: FullEventQuery['event']['allAttendance'];
+  export let section: string
+  export let confirmed: FullEventQuery['event']['allAttendance']
+  export let notConfirmed: FullEventQuery['event']['allAttendance']
 </script>
 
 <Table fullwidth scrollable>

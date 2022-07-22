@@ -1,31 +1,56 @@
 <script lang="ts">
-  import Box from "components/bulma/Box.svelte";
-  import Title from "components/bulma/Title.svelte";
-  import Remote from "components/remote/Remote.svelte";
-  import StateBox from "components/remote/StateBox.svelte";
-  import AbsenceRequestTable from "./AbsenceRequestTable.svelte";
+  import Box from 'components/bulma/Box.svelte'
+  import Title from 'components/bulma/Title.svelte'
+  import Remote from 'components/remote/Remote.svelte'
+  import StateBox from 'components/remote/StateBox.svelte'
+  import AbsenceRequestTable from './AbsenceRequestTable.svelte'
 
-  import { AbsenceRequestStatus } from "gql-operations";
-  import { derived } from "svelte/store";
-  import { eagerQuery, query } from "state/query";
-  import { emptyLoaded, loading, mapLazyLoaded, RemoteData, stateFromResult } from "state/types";
+  import { AbsenceRequestStatus } from 'gql-operations'
+  import { derived } from 'svelte/store'
+  import { eagerQuery, query } from 'state/query'
+  import {
+    emptyLoaded,
+    loading,
+    mapLazyLoaded,
+    RemoteData,
+    stateFromResult,
+  } from 'state/types'
 
-  let state: RemoteData = emptyLoaded;
+  let state: RemoteData = emptyLoaded
 
-  const [allAbsenceRequests, reloadAllAbsenceRequests] = eagerQuery("AllAbsenceRequests");
+  const [allAbsenceRequests, reloadAllAbsenceRequests] =
+    eagerQuery('AllAbsenceRequests')
 
-  const openAbsenceRequests = derived(allAbsenceRequests, requests => mapLazyLoaded(
-      requests, reqs => reqs.absenceRequests.filter(r => r.state === AbsenceRequestStatus.Pending))); 
-  const closedAbsenceRequests = derived(allAbsenceRequests, requests => mapLazyLoaded(
-      requests, reqs => reqs.absenceRequests.filter(r => r.state !== AbsenceRequestStatus.Pending))); 
+  const openAbsenceRequests = derived(allAbsenceRequests, (requests) =>
+    mapLazyLoaded(requests, (reqs) =>
+      reqs.absenceRequests.filter(
+        (r) => r.state === AbsenceRequestStatus.Pending
+      )
+    )
+  )
+  const closedAbsenceRequests = derived(allAbsenceRequests, (requests) =>
+    mapLazyLoaded(requests, (reqs) =>
+      reqs.absenceRequests.filter(
+        (r) => r.state !== AbsenceRequestStatus.Pending
+      )
+    )
+  )
 
-  async function respondToAbsenceRequest(eventId: number, email: string, approved: boolean) {
-    state = loading;
-    const result = await query("RespondToAbsenceRequest", { eventId, email, approved });
+  async function respondToAbsenceRequest(
+    eventId: number,
+    email: string,
+    approved: boolean
+  ) {
+    state = loading
+    const result = await query('RespondToAbsenceRequest', {
+      eventId,
+      email,
+      approved,
+    })
 
-    state = stateFromResult(result);
-    if (result.type === "loaded") {
-      reloadAllAbsenceRequests({});
+    state = stateFromResult(result)
+    if (result.type === 'loaded') {
+      reloadAllAbsenceRequests({})
     }
   }
 </script>
@@ -37,7 +62,7 @@
       <AbsenceRequestTable
         slot="loaded"
         let:data={absenceRequests}
-        {absenceRequests}      
+        {absenceRequests}
         respond={respondToAbsenceRequest}
       />
     </Remote>
@@ -48,7 +73,7 @@
       <AbsenceRequestTable
         slot="loaded"
         let:data={absenceRequests}
-        {absenceRequests}      
+        {absenceRequests}
         respond={respondToAbsenceRequest}
       />
     </Remote>

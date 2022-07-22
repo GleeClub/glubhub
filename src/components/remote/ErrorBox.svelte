@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { SUBMISSION_STATE_BOX_ID } from 'utils/constants';
+  import { SUBMISSION_STATE_BOX_ID } from 'utils/constants'
 
-  export let error: TypeError;
+  export let error: TypeError
 </script>
 
 <article

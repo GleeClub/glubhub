@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Column from "components/bulma/Column.svelte";
-  import Columns from "components/bulma/Columns.svelte";
-  import Container from "components/bulma/Container.svelte";
-  import Title from "components/bulma/Title.svelte";
-  import EmailLink from "components/member/EmailLink.svelte";
+  import Column from 'components/bulma/Column.svelte'
+  import Columns from 'components/bulma/Columns.svelte'
+  import Container from 'components/bulma/Container.svelte'
+  import Title from 'components/bulma/Title.svelte'
+  import EmailLink from 'components/member/EmailLink.svelte'
 </script>
 
 <Container fullheight>

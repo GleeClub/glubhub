@@ -1,6 +1,6 @@
 <script lang="ts">
-  export let content: string;
-  export let alignment: 'left' | 'right' | 'multiline' | undefined = undefined;
+  export let content: string
+  export let alignment: 'left' | 'right' | 'multiline' | undefined = undefined
 </script>
 
 <span

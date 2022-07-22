@@ -1,33 +1,38 @@
 <script lang="ts">
-  import Table from "components/bulma/Table.svelte";
-  import Title from "components/bulma/Title.svelte";
-  import Button from "components/buttons/Button.svelte";
-  import BackButton from "components/buttons/BackButton.svelte";
-  import RequiresPermission from "components/member/RequiresPermission.svelte";
-  import DeleteModal from "components/popup/DeleteModal.svelte";
-  import SongLinkButton from "./SongLinkButton.svelte";
-  import PitchSection from "./PitchSection.svelte";
+  import Table from 'components/bulma/Table.svelte'
+  import Title from 'components/bulma/Title.svelte'
+  import Button from 'components/buttons/Button.svelte'
+  import BackButton from 'components/buttons/BackButton.svelte'
+  import RequiresPermission from 'components/member/RequiresPermission.svelte'
+  import DeleteModal from 'components/popup/DeleteModal.svelte'
+  import SongLinkButton from './SongLinkButton.svelte'
+  import PitchSection from './PitchSection.svelte'
 
-  import { FullSongQuery } from "gql-operations";
-  import { repertoireEdit, routeRepertoire } from "route/constructors";
-  import { editRepertoire } from "state/permissions";
-  import { replaceRoute } from "store/route";
-  import { emptyLoaded, loading, RemoteData, stateFromResult } from "state/types";
-  import { query } from "state/query";
+  import { FullSongQuery } from 'gql-operations'
+  import { repertoireEdit, routeRepertoire } from 'route/constructors'
+  import { editRepertoire } from 'state/permissions'
+  import { replaceRoute } from 'store/route'
+  import {
+    emptyLoaded,
+    loading,
+    RemoteData,
+    stateFromResult,
+  } from 'state/types'
+  import { query } from 'state/query'
 
-  export let song: FullSongQuery['song'];
-  export let reloadAllSongs: () => void;
+  export let song: FullSongQuery['song']
+  export let reloadAllSongs: () => void
 
-  let deleteState: RemoteData | null = null;
+  let deleteState: RemoteData | null = null
 
   async function deleteSong() {
-    deleteState = loading;
-    const result = await query("DeleteSong", { id: song.id });
+    deleteState = loading
+    const result = await query('DeleteSong', { id: song.id })
 
-    deleteState = stateFromResult(result);
-    if (result.type === "loaded") {
-      reloadAllSongs();
-      replaceRoute(routeRepertoire(null, null));
+    deleteState = stateFromResult(result)
+    if (result.type === 'loaded') {
+      reloadAllSongs()
+      replaceRoute(routeRepertoire(null, null))
     }
   }
 </script>
@@ -45,19 +50,14 @@
 {/if}
 <p>
   {song.key}:
-
 </p>
 <PitchSection title="Key" pitch={song.key} mode={song.mode} />
-<PitchSection
-  title="Starting Pitch"
-  pitch={song.startingPitch}
-  mode={null}
-/>
+<PitchSection title="Starting Pitch" pitch={song.startingPitch} mode={null} />
 <br />
 
 <Table fullwidth>
   <tbody>
-    {#each song.linkSections.filter(links => links.links.length) as linkSection}
+    {#each song.linkSections.filter((links) => links.links.length) as linkSection}
       <tr style:border="none">
         <td style:border="none">{linkSection.name}</td>
         <td style:border="none">
@@ -72,12 +72,14 @@
 
 <RequiresPermission permission={editRepertoire}>
   <div>
-    <Button click={() => replaceRoute(routeRepertoire(song.id, repertoireEdit))}>
+    <Button
+      click={() => replaceRoute(routeRepertoire(song.id, repertoireEdit))}
+    >
       Edit Song
     </Button>
     <br />
     <br />
-    <Button color="is-danger" click={() => deleteState = emptyLoaded}>
+    <Button color="is-danger" click={() => (deleteState = emptyLoaded)}>
       Delete Song
     </Button>
   </div>
@@ -86,7 +88,7 @@
 {#if deleteState}
   <DeleteModal
     title="Are you sure you want to delete {song.title}?"
-    cancel={() => deleteState = null}
+    cancel={() => (deleteState = null)}
     confirm={() => deleteSong()}
     state={deleteState}
   >

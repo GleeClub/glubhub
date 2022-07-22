@@ -1,46 +1,38 @@
 <script lang="ts">
-  import Container from "components/bulma/Container.svelte";
-  import Section from "components/bulma/Section.svelte";
-  import Title from "components/bulma/Title.svelte";
-  import AttendanceGraph from "./AttendanceGraph.svelte";
+  import Container from 'components/bulma/Container.svelte'
+  import Section from 'components/bulma/Section.svelte'
+  import Title from 'components/bulma/Title.svelte'
+  import AttendanceGraph from './AttendanceGraph.svelte'
 
-  import { siteContext } from "store/context";
-  import { derived } from "svelte/store";
-  import { ATTENDANCE_ISSUE_EMAIL } from "utils/constants";
-  import { HoveredEvent } from "state/types";
+  import { siteContext } from 'store/context'
+  import { derived } from 'svelte/store'
+  import { ATTENDANCE_ISSUE_EMAIL } from 'utils/constants'
+  import { HoveredEvent } from 'state/types'
 
-  export let hoverEvent: (event: HoveredEvent | null) => void;
+  export let hoverEvent: (event: HoveredEvent | null) => void
 
-  const finalGrade = derived(siteContext, context => {
-    const grade = context.user?.grades.grade;
-    return typeof grade === 'number' ? grade : 100;
-  });
+  const finalGrade = derived(siteContext, (context) => {
+    const grade = context.user?.grades.grade
+    return typeof grade === 'number' ? grade : 100
+  })
 
-  const attendanceMessage = derived(siteContext, context => {
+  const attendanceMessage = derived(siteContext, (context) => {
     if (!context.user?.semester?.enrollment) {
-      return "Do you even go here?";
+      return 'Do you even go here?'
     }
 
-    const finalGrade = context.user?.grades.grade!;
+    const finalGrade = context.user?.grades.grade!
     if (finalGrade >= 90.0) {
-      return "Ayy lamo nice.";
+      return 'Ayy lamo nice.'
     } else if (finalGrade >= 80.0) {
-      return "OK not bad, I guess";
+      return 'OK not bad, I guess'
     } else if (finalGrade >= 70.0) {
-      return "Pls";
+      return 'Pls'
     } else {
-      return "BRUH get it together.";
+      return 'BRUH get it together.'
     }
-  });
+  })
 </script>
-
-<style>
-.graph-wrapper {
-  width: 100%;
-  margin: auto;
-  overflow-x: scroll;
-}
-</style>
 
 <Section>
   <Container>
@@ -59,9 +51,7 @@
       <p>
         <br />
         Do you have an issue? Do you need a daddy tissue?
-        <a href="mailto:{ATTENDANCE_ISSUE_EMAIL}">
-          Email the officers
-        </a>
+        <a href="mailto:{ATTENDANCE_ISSUE_EMAIL}"> Email the officers </a>
         to cry about it.
       </p>
     {:else}
@@ -71,3 +61,11 @@
     {/if}
   </Container>
 </Section>
+
+<style>
+  .graph-wrapper {
+    width: 100%;
+    margin: auto;
+    overflow-x: scroll;
+  }
+</style>
