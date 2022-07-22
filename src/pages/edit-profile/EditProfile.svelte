@@ -31,10 +31,7 @@
     const loggedIn = !!get(siteContext).user
 
     const enteredPassword = !!(password || confirmPassword)
-    if (!enteredPassword && !loggedIn) {
-      alert('You must enter a password.')
-      return
-    } else if (password !== confirmPassword) {
+    if (password !== confirmPassword) {
       alert("Your passwords don't match.")
       return
     } else if (!form.section) {

@@ -8,7 +8,7 @@
   class="columns"
   class:is-centered={centered}
   class:is-vcentered={vcentered}
-  style="display: {flex ? 'flex' : 'block'}"
+  style:display={flex ? 'flex' : undefined}
 >
   <slot />
 </div>
