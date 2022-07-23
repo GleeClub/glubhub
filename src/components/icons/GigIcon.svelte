@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Tooltip from 'components/bulma/Tooltip.svelte'
+  import Tooltip from 'src/components/bulma/Tooltip.svelte'
 
-  import { HasEventTimes } from 'state/types'
-  import { dateFormatter } from 'utils/datetime'
+  import { HasEventTimes } from 'src/state/types'
+  import { dateFormatter } from 'src/utils/datetime'
 
   export let gig: (HasEventTimes & { name: string }) | null
 </script>

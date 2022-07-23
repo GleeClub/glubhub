@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import RequiresPermission from 'components/member/RequiresPermission.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
-  import SelectableList from 'components/remote/SelectableList.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
+  import SelectableList from 'src/components/remote/SelectableList.svelte'
 
-  import { AllSongsQuery } from 'gql-operations'
-  import { routeRepertoire } from 'route/constructors'
-  import { editRepertoire } from 'state/permissions'
-  import { LazyRemoteData, RemoteData } from 'state/types'
-  import { replaceRoute } from 'store/route'
+  import { AllSongsQuery } from 'src/gql-operations'
+  import { routeRepertoire } from 'src/route/constructors'
+  import { editRepertoire } from 'src/state/permissions'
+  import { LazyRemoteData, RemoteData } from 'src/state/types'
+  import { replaceRoute } from 'src/store/route'
 
   export let title: string
   export let songs: LazyRemoteData<AllSongsQuery['songs'][]>

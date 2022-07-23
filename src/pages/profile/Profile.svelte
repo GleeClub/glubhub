@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Columns from 'components/bulma/Columns.svelte'
-  import Container from 'components/bulma/Container.svelte'
-  import Section from 'components/bulma/Section.svelte'
-  import Remote from 'components/remote/Remote.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Section from 'src/components/bulma/Section.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
   import UserDetailColumn from './UserDetailColumn.svelte'
   import UserActions from './UserActions.svelte'
   import Attendance from './Attendance.svelte'
@@ -18,11 +18,11 @@
     profileMoney,
     profileSemesters,
     routeProfile,
-  } from 'route/constructors'
-  import { ProfileTab } from 'route/types'
-  import { eagerQuery } from 'state/query'
-  import { siteContext } from 'store/context'
-  import { renderRoute } from 'route/render'
+  } from 'src/route/constructors'
+  import { ProfileTab } from 'src/route/types'
+  import { eagerQuery } from 'src/state/query'
+  import { siteContext } from 'src/store/context'
+  import { renderRoute } from 'src/route/render'
 
   export let email: string
   export let tab: ProfileTab | null

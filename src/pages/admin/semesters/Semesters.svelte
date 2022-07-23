@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import LinkButton from 'components/buttons/LinkButton.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import LinkButton from 'src/components/buttons/LinkButton.svelte'
   import ChangeSemesterModal from './ChangeSemesterModal.svelte'
   import CreateSemesterSidebar from './CreateSemesterSidebar.svelte'
   import EditSemesterSidebar from './EditSemesterSidebar.svelte'
@@ -13,8 +13,8 @@
     semesterChange,
     semesterCreate,
     semesterEdit,
-  } from 'route/constructors'
-  import { SemesterTab } from 'route/types'
+  } from 'src/route/constructors'
+  import { SemesterTab } from 'src/route/types'
 
   export let tab: SemesterTab | null
 </script>

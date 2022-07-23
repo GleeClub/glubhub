@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Table from 'components/bulma/Table.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
 
-  import { FullEventQuery } from 'gql-operations'
-  import { routeRepertoire } from 'route/constructors'
-  import { renderRoute } from 'route/render'
-  import { pitchToUnicode } from 'state/pitch'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { routeRepertoire } from 'src/route/constructors'
+  import { renderRoute } from 'src/route/render'
+  import { pitchToUnicode } from 'src/state/pitch'
 
   export let songs: FullEventQuery['event']['setlist']
 </script>

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Title from 'components/bulma/Title.svelte'
-  import BackButton from 'components/buttons/BackButton.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import BackButton from 'src/components/buttons/BackButton.svelte'
   import EventTabs from './EventTabs.svelte'
   import Attendance from '../Attendance.svelte'
   import Setlist from '../Setlist.svelte'
@@ -10,10 +10,10 @@
   import EventCarpools from '../carpools/EventCarpools.svelte'
   import Attendees from '../attendees/Attendees.svelte'
 
-  import { EventTab } from 'route/types'
-  import { FullEventQuery } from 'gql-operations'
-  import { replaceRoute } from 'store/route'
-  import { eventDetails, routeEvents } from 'route/constructors'
+  import { EventTab } from 'src/route/types'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { replaceRoute } from 'src/store/route'
+  import { eventDetails, routeEvents } from 'src/route/constructors'
 
   export let event: FullEventQuery['event']
   export let tab: EventTab | null

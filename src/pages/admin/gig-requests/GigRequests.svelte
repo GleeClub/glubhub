@@ -1,20 +1,20 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import Remote from 'components/remote/Remote.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
   import GigRequestTable from './GigRequestTable.svelte'
 
-  import { GigRequestStatus } from 'gql-operations'
+  import { GigRequestStatus } from 'src/gql-operations'
   import { derived } from 'svelte/store'
-  import { eagerQuery, query } from 'state/query'
+  import { eagerQuery, query } from 'src/state/query'
   import {
     emptyLoaded,
     loading,
     mapLazyLoaded,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   let state: RemoteData = emptyLoaded
 

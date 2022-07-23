@@ -1,26 +1,26 @@
 <script lang="ts">
-  import BackButton from 'components/buttons/BackButton.svelte'
-  import CheckboxInput from 'components/forms/CheckboxInput.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import TextareaInput from 'components/forms/TextareaInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
+  import BackButton from 'src/components/buttons/BackButton.svelte'
+  import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import TextareaInput from 'src/components/forms/TextareaInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
   import NewPerformanceSection from './NewPerformanceSection.svelte'
   import EditFileType from './EditFileType.svelte'
 
-  import { FullSongQuery } from 'gql-operations'
-  import { repertoireDetails, routeRepertoire } from 'route/constructors'
-  import { pitchType, songModeType, stringType } from 'state/input'
-  import { query } from 'state/query'
+  import { FullSongQuery } from 'src/gql-operations'
+  import { repertoireDetails, routeRepertoire } from 'src/route/constructors'
+  import { pitchType, songModeType, stringType } from 'src/state/input'
+  import { query } from 'src/state/query'
   import {
     emptyLoaded,
     FullSongLink,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { replaceRoute } from 'store/route'
-  import { ALL_PITCHES, ALL_MODES } from 'utils/constants'
+  } from 'src/state/types'
+  import { replaceRoute } from 'src/store/route'
+  import { ALL_PITCHES, ALL_MODES } from 'src/utils/constants'
 
   export let song: FullSongQuery['song']
   export let onUpdate: () => void

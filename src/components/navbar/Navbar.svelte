@@ -11,10 +11,10 @@
     routeRepertoire,
     routeRoster,
     routeProfile,
-  } from 'route/constructors'
-  import { renderRoute } from 'route/render'
-  import { route } from 'store/route'
-  import { siteContext } from 'store/context'
+  } from 'src/route/constructors'
+  import { renderRoute } from 'src/route/render'
+  import { route } from 'src/store/route'
+  import { siteContext } from 'src/store/context'
 
   let expanded = false
 </script>

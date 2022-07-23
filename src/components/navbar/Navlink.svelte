@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { GlubRoute } from 'route/types'
-  import { route as routeStore } from 'store/route'
-  import { renderRoute } from 'route/render'
+  import type { GlubRoute } from 'src/route/types'
+  import { route as routeStore } from 'src/store/route'
+  import { renderRoute } from 'src/route/render'
 
   export let route: GlubRoute
 </script>

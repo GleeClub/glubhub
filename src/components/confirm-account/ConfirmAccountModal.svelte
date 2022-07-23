@@ -1,25 +1,25 @@
 <script lang="ts">
-  import Title from 'components/bulma/Title.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import Modal from 'components/popup/Modal.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
-  import Control from 'components/forms/Control.svelte'
-  import InputWrapper from 'components/forms/InputWrapper.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import Modal from 'src/components/popup/Modal.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
+  import Control from 'src/components/forms/Control.svelte'
+  import InputWrapper from 'src/components/forms/InputWrapper.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
 
-  import { query } from 'state/query'
-  import { Enrollment } from 'gql-operations'
-  import { sectionType, stringType } from 'state/input'
+  import { query } from 'src/state/query'
+  import { Enrollment } from 'src/gql-operations'
+  import { sectionType, stringType } from 'src/state/input'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { reloadSiteContext, siteContext } from 'store/context'
+  } from 'src/state/types'
+  import { reloadSiteContext, siteContext } from 'src/store/context'
 
   export let close: () => void
 

@@ -1,4 +1,4 @@
-import { Pitch } from 'gql-operations'
+import { Pitch } from 'src/gql-operations'
 
 export const pitchToUnicode = (pitch: Pitch): string => {
   switch (pitch) {

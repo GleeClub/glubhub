@@ -1,8 +1,8 @@
 <script lang="ts">
-  import EmailLink from 'components/member/EmailLink.svelte'
-  import PhoneLink from 'components/member/PhoneLink.svelte'
+  import EmailLink from 'src/components/member/EmailLink.svelte'
+  import PhoneLink from 'src/components/member/PhoneLink.svelte'
 
-  import { FullMemberQuery } from 'gql-operations'
+  import { FullMemberQuery } from 'src/gql-operations'
 
   export let member: FullMemberQuery['member']
 </script>

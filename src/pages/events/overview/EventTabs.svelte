@@ -1,5 +1,5 @@
 <script lang="ts">
-  import RequiresPermission from 'components/member/RequiresPermission.svelte'
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
   import TabLink from './TabLink.svelte'
 
   import {
@@ -8,9 +8,9 @@
     eventCarpools,
     eventDetails,
     eventSetlist,
-  } from 'route/constructors'
-  import { EventTab } from 'route/types'
-  import { editAttendance } from 'state/permissions'
+  } from 'src/route/constructors'
+  import { EventTab } from 'src/route/types'
+  import { editAttendance } from 'src/state/permissions'
 
   export let eventId: number
   export let currentTab: EventTab | null

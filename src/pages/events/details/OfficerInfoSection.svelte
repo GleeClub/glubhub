@@ -1,20 +1,20 @@
 <script lang="ts">
-  import Divider from 'components/bulma/Divider.svelte'
-  import RequiresPermission from 'components/member/RequiresPermission.svelte'
-  import DeleteModal from 'components/popup/DeleteModal.svelte'
+  import Divider from 'src/components/bulma/Divider.svelte'
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
+  import DeleteModal from 'src/components/popup/DeleteModal.svelte'
   import ContactInfo from './ContactInfo.svelte'
 
-  import { FullEventQuery } from 'gql-operations'
-  import { eventEdit, routeEvents } from 'route/constructors'
-  import { viewEventPrivateDetails } from 'state/permissions'
-  import { query } from 'state/query'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { eventEdit, routeEvents } from 'src/route/constructors'
+  import { viewEventPrivateDetails } from 'src/state/permissions'
+  import { query } from 'src/state/query'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { replaceRoute } from 'store/route'
+  } from 'src/state/types'
+  import { replaceRoute } from 'src/store/route'
 
   export let event: FullEventQuery['event']
   export let onDelete: () => void

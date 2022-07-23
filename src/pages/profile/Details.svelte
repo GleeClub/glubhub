@@ -1,18 +1,18 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import Table from 'components/bulma/Table.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
   import EditProfileForm from './EditProfileForm.svelte'
 
-  import { query } from 'state/query'
-  import { FullMemberQuery, NewMember } from 'gql-operations'
+  import { query } from 'src/state/query'
+  import { FullMemberQuery, NewMember } from 'src/gql-operations'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   export let member: FullMemberQuery['member']
   export let onUpdate: () => void

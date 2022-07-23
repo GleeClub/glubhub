@@ -1,22 +1,22 @@
 <script lang="ts">
-  import Subtitle from 'components/bulma/Subtitle.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import BackButton from 'components/buttons/BackButton.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import TextareaInput from 'components/forms/TextareaInput.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Subtitle from 'src/components/bulma/Subtitle.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import BackButton from 'src/components/buttons/BackButton.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import TextareaInput from 'src/components/forms/TextareaInput.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { query } from 'state/query'
-  import { replaceRoute } from 'store/route'
-  import { eventDetails, routeEvents } from 'route/constructors'
-  import { FullEventQuery } from 'gql-operations'
+  import { query } from 'src/state/query'
+  import { replaceRoute } from 'src/store/route'
+  import { eventDetails, routeEvents } from 'src/route/constructors'
+  import { FullEventQuery } from 'src/gql-operations'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   export let event: FullEventQuery['event']
   export let onUpdate: () => void

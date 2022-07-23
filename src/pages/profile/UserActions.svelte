@@ -1,24 +1,24 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import LinkButton from 'components/buttons/LinkButton.svelte'
-  import RequiresPermission from 'components/member/RequiresPermission.svelte'
-  import DeleteModal from 'components/popup/DeleteModal.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import LinkButton from 'src/components/buttons/LinkButton.svelte'
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
+  import DeleteModal from 'src/components/popup/DeleteModal.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { query } from 'state/query'
-  import { goToRoute } from 'store/route'
-  import { siteContext } from 'store/context'
-  import { FullMemberQuery } from 'gql-operations'
-  import { deleteUser, switchUser } from 'state/permissions'
-  import { routeEditProfile, routeRoster } from 'route/constructors'
-  import { getOldToken, getToken, setOldToken, setToken } from 'utils/token'
+  import { query } from 'src/state/query'
+  import { goToRoute } from 'src/store/route'
+  import { siteContext } from 'src/store/context'
+  import { FullMemberQuery } from 'src/gql-operations'
+  import { deleteUser, switchUser } from 'src/state/permissions'
+  import { routeEditProfile, routeRoster } from 'src/route/constructors'
+  import { getOldToken, getToken, setOldToken, setToken } from 'src/utils/token'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   export let member: FullMemberQuery['member']
 

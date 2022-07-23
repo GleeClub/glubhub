@@ -1,17 +1,17 @@
 <script lang="ts">
-  import Table from 'components/bulma/Table.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
   import AttendanceRow from './AttendanceRow.svelte'
 
-  import { query } from 'state/query'
-  import { FullMemberQuery } from 'gql-operations'
+  import { query } from 'src/state/query'
+  import { FullMemberQuery } from 'src/gql-operations'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     SimpleAttendance,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   export let member: FullMemberQuery['member']
   export let onUpdate: () => void

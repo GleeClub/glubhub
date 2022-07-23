@@ -4,7 +4,7 @@ import type {
   GlubRoute,
   MinutesTab,
   RepertoireTab,
-} from 'route/types'
+} from 'src/route/types'
 
 export const renderRoute = (route: GlubRoute): string =>
   `#/${buildRoute(route).join('/')}`;

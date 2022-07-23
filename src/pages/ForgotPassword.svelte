@@ -1,23 +1,23 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import LinkButton from 'components/buttons/LinkButton.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import LinkButton from 'src/components/buttons/LinkButton.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
 
-  import { routeLogin } from 'route/constructors'
-  import { emailType } from 'state/input'
+  import { routeLogin } from 'src/route/constructors'
+  import { emailType } from 'src/state/input'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { goToRoute } from 'store/route'
-  import { query } from 'state/query'
+  } from 'src/state/types'
+  import { goToRoute } from 'src/store/route'
+  import { query } from 'src/state/query'
 
   let state: RemoteData = emptyLoaded
 

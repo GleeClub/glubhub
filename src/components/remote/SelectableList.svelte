@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import Table from 'components/bulma/Table.svelte'
-  import Box from 'components/bulma/Box.svelte'
-  import Remote from 'components/remote/Remote.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
 
-  import { LazyRemoteData, mapLazyLoaded } from 'state/types'
-  import { GOLD_COLOR } from 'utils/constants'
+  import { LazyRemoteData, mapLazyLoaded } from 'src/state/types'
+  import { GOLD_COLOR } from 'src/utils/constants'
   import { createEventDispatcher } from 'svelte'
 
   type T = $$Generic
@@ -27,9 +27,8 @@
 
   const dispatch = createEventDispatcher<{ select: T }>()
 
-  $: nonEmptyGroups = mapLazyLoaded(itemGroups, (gs) =>
-    gs.filter((g) => g.length)
-  )
+  $: nonEmptyGroups = mapLazyLoaded(
+    itemGroups, gs => gs.filter(g => g.length > 0))
 </script>
 
 <Column narrow>

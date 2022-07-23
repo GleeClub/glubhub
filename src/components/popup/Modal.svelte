@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
 
   export let close: () => void
 </script>

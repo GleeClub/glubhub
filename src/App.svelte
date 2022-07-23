@@ -1,33 +1,31 @@
 <script lang="ts">
-  import 'index.scss'
-
-  import Navbar from 'components/navbar/Navbar.svelte'
-  import ConfirmAccountHeader from 'components/confirm-account/ConfirmAccountHeader.svelte'
-  import ForgotPassword from 'pages/ForgotPassword.svelte'
-  import ResetPassword from 'pages/ResetPassword.svelte'
-  import Admin from 'pages/admin/Admin.svelte'
-  import Events from 'pages/events/overview/Events.svelte'
-  import Minutes from 'pages/minutes/Minutes.svelte'
-  import Profile from 'pages/profile/Profile.svelte'
-  import Repertoire from 'pages/repertoire/Repertoire.svelte'
-  import Roster from 'pages/Roster.svelte'
-  import Home from 'pages/home/Home.svelte'
-  import Spinner from 'components/remote/Spinner.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
-  import Login from 'pages/Login.svelte'
-  import EditProfile from 'pages/edit-profile/EditProfile.svelte'
-  import EditCarpools from 'pages/events/edit-carpools/EditCarpools.svelte'
+  import Navbar from 'src/components/navbar/Navbar.svelte'
+  import ConfirmAccountHeader from 'src/components/confirm-account/ConfirmAccountHeader.svelte'
+  import ForgotPassword from 'src/pages/ForgotPassword.svelte'
+  import ResetPassword from 'src/pages/ResetPassword.svelte'
+  import Admin from 'src/pages/admin/Admin.svelte'
+  import Events from 'src/pages/events/overview/Events.svelte'
+  import Minutes from 'src/pages/minutes/Minutes.svelte'
+  import Profile from 'src/pages/profile/Profile.svelte'
+  import Repertoire from 'src/pages/repertoire/Repertoire.svelte'
+  import Roster from 'src/pages/Roster.svelte'
+  import Home from 'src/pages/home/Home.svelte'
+  import Spinner from 'src/components/remote/Spinner.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
+  import Login from 'src/pages/Login.svelte'
+  import EditProfile from 'src/pages/edit-profile/EditProfile.svelte'
+  import EditCarpools from 'src/pages/events/edit-carpools/EditCarpools.svelte'
 
   import { get } from 'svelte/store'
-  import type { GlubRoute } from 'route/types'
-  import { goToRoute, replaceRoute, route } from 'store/route'
-  import { routeHome, routeLogin } from 'route/constructors'
+  import type { GlubRoute } from 'src/route/types'
+  import { goToRoute, replaceRoute, route } from 'src/store/route'
+  import { routeHome, routeLogin } from 'src/route/constructors'
   import { onDestroy } from 'svelte'
   import {
     reloadSiteContext,
     siteContext,
     siteContextStatus,
-  } from 'store/context'
+  } from 'src/store/context'
 
   reloadSiteContext()
 

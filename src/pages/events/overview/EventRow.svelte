@@ -1,8 +1,8 @@
 <script lang="ts">
-  import AttendanceIcon from 'components/icons/AttendanceIcon.svelte'
+  import AttendanceIcon from 'src/components/icons/AttendanceIcon.svelte'
 
-  import { AllEventsQuery } from 'gql-operations'
-  import { simpleDateFormatter } from 'utils/datetime'
+  import { AllEventsQuery } from 'src/gql-operations'
+  import { simpleDateFormatter } from 'src/utils/datetime'
 
   export let event: AllEventsQuery['events'][number]
 </script>

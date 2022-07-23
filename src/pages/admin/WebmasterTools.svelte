@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Column from 'components/bulma/Column.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
 </script>
 
 <Box>

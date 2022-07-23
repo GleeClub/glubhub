@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
 
-  import { dateType, numberType, stringType, timeType } from 'state/input'
+  import { dateType, numberType, stringType, timeType } from 'src/state/input'
   import { EventForm, GigForm } from './state'
 
   export let event: EventForm

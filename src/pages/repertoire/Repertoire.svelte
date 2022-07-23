@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Columns from 'components/bulma/Columns.svelte'
-  import Container from 'components/bulma/Container.svelte'
-  import Section from 'components/bulma/Section.svelte'
-  import Sidebar from 'components/popup/Sidebar.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Section from 'src/components/bulma/Section.svelte'
+  import Sidebar from 'src/components/popup/Sidebar.svelte'
   import SongColumn from './SongColumn.svelte'
   import SongInfo from './SongInfo.svelte'
   import EditSong from './edit/EditSong.svelte'
@@ -15,13 +15,13 @@
     notLoaded,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { routeRepertoire } from 'route/constructors'
-  import { RepertoireTab } from 'route/types'
-  import { replaceRoute } from 'store/route'
+  } from 'src/state/types'
+  import { routeRepertoire } from 'src/route/constructors'
+  import { RepertoireTab } from 'src/route/types'
+  import { replaceRoute } from 'src/store/route'
   import { derived, Readable, readable } from 'svelte/store'
-  import { eagerQuery, query } from 'state/query'
-  import { AllSongsQuery } from 'gql-operations'
+  import { eagerQuery, query } from 'src/state/query'
+  import { AllSongsQuery } from 'src/gql-operations'
 
   export let songId: number | null
   export let tab: RepertoireTab | null

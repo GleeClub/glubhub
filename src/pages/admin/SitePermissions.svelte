@@ -1,22 +1,22 @@
 <script lang="ts">
-  import Remote from 'components/remote/Remote.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import Box from 'components/bulma/Box.svelte'
-  import Tooltip from 'components/bulma/Tooltip.svelte'
-  import CheckboxInput from 'components/forms/CheckboxInput.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Tooltip from 'src/components/bulma/Tooltip.svelte'
+  import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
 
-  import { siteContext } from 'store/context'
-  import { rolePermissionsAreEqual } from 'utils/helpers'
+  import { siteContext } from 'src/store/context'
+  import { rolePermissionsAreEqual } from 'src/utils/helpers'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
   import { derived } from 'svelte/store'
-  import { eagerQuery, query } from 'state/query'
-  import { NewRolePermission, Permission, PermissionType } from 'gql-operations'
+  import { eagerQuery, query } from 'src/state/query'
+  import { NewRolePermission, Permission, PermissionType } from 'src/gql-operations'
 
   let state: RemoteData = emptyLoaded
 

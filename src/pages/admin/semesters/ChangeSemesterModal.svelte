@@ -1,21 +1,21 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import Modal from 'components/popup/Modal.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import Modal from 'src/components/popup/Modal.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { adminSemesters, routeAdmin } from 'route/constructors'
-  import { semesterType } from 'state/input'
-  import { eagerQuery, query } from 'state/query'
+  import { adminSemesters, routeAdmin } from 'src/route/constructors'
+  import { semesterType } from 'src/state/input'
+  import { eagerQuery, query } from 'src/state/query'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { siteContext } from 'store/context'
-  import { replaceRoute } from 'store/route'
+  } from 'src/state/types'
+  import { siteContext } from 'src/store/context'
+  import { replaceRoute } from 'src/store/route'
   import { derived, get } from 'svelte/store'
 
   let selected = get(siteContext).currentSemester.name

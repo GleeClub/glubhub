@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Title from 'components/bulma/Title.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import Modal from 'components/popup/Modal.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import Modal from 'src/components/popup/Modal.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
   import BeholdThe from './BeholdThe.svelte'
   import CancelModalButton from './CancelModalButton.svelte'
 
@@ -11,10 +11,10 @@
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { replaceRoute } from 'store/route'
-  import { query } from 'state/query'
-  import { adminMoney, routeAdmin } from 'route/constructors'
+  } from 'src/state/types'
+  import { replaceRoute } from 'src/store/route'
+  import { query } from 'src/state/query'
+  import { adminMoney, routeAdmin } from 'src/route/constructors'
 
   let state: RemoteData = emptyLoaded
 

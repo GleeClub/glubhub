@@ -3,7 +3,7 @@ import {
   MemberUpdate,
   SectionType,
   SiteContextQuery,
-} from 'gql-operations'
+} from 'src/gql-operations'
 
 export function buildProfileForm(siteContext: SiteContextQuery): MemberUpdate {
   if (siteContext.user) {

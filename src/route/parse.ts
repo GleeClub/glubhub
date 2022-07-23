@@ -1,5 +1,5 @@
-import * as r from 'route/constructors'
-import type { GlubRoute } from 'route/types'
+import * as r from 'src/route/constructors'
+import type { GlubRoute } from 'src/route/types'
 
 export const parseRoute = (segments: string[]): GlubRoute | null => {
   if (segments.length === 0) {

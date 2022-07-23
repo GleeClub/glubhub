@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
 
-  import { adminMoney, routeAdmin } from 'route/constructors'
-  import { MoneyTab } from 'route/types'
-  import { replaceRoute } from 'store/route'
+  import { adminMoney, routeAdmin } from 'src/route/constructors'
+  import { MoneyTab } from 'src/route/types'
+  import { replaceRoute } from 'src/store/route'
 
   export let tab: MoneyTab
 </script>

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { AllAbsenceRequestsQuery } from 'gql-operations'
-  import { routeEvents, routeProfile } from 'route/constructors'
-  import { renderRoute } from 'route/render'
-  import { dateFormatter, timeFormatter } from 'utils/datetime'
+  import { AllAbsenceRequestsQuery } from 'src/gql-operations'
+  import { routeEvents, routeProfile } from 'src/route/constructors'
+  import { renderRoute } from 'src/route/render'
+  import { dateFormatter, timeFormatter } from 'src/utils/datetime'
 
   export let absenceRequest: AllAbsenceRequestsQuery['absenceRequests'][number]
 </script>

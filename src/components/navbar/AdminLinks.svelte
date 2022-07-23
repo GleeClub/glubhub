@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { visibleAdminTabs } from 'utils/admin'
-  import { renderRoute } from 'route/render'
-  import { routeAdmin } from 'route/constructors'
+  import { visibleAdminTabs } from 'src/utils/admin'
+  import { renderRoute } from 'src/route/render'
+  import { routeAdmin } from 'src/route/constructors'
 </script>
 
 {#if $visibleAdminTabs.length > 0}

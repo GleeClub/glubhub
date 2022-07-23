@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { formatPhone } from 'utils/helpers'
+  import { formatPhone } from 'src/utils/helpers'
 
   export let phone: string
 </script>

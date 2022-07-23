@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import GigIcon from 'components/icons/GigIcon.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import GigIcon from 'src/components/icons/GigIcon.svelte'
 
-  import { romanNumeral } from 'utils/helpers'
-  import { siteContext } from 'store/context'
+  import { romanNumeral } from 'src/utils/helpers'
+  import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
 
   const range5 = Array.from({ length: 5 }, (_, i) => i)

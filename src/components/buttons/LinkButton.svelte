@@ -1,9 +1,9 @@
 <script lang="ts">
   import Button from './Button.svelte'
 
-  import { ButtonColor, ButtonSize } from 'utils/helpers'
-  import type { GlubRoute } from 'route/types'
-  import { goToRoute } from 'store/route'
+  import { ButtonColor, ButtonSize } from 'src/utils/helpers'
+  import type { GlubRoute } from 'src/route/types'
+  import { goToRoute } from 'src/store/route'
 
   export let color: ButtonColor | undefined = undefined
   export let size: ButtonSize | undefined = undefined

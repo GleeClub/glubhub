@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Table from 'components/bulma/Table.svelte'
-  import LinkButton from 'components/buttons/LinkButton.svelte'
-  import RequiresPermission from 'components/member/RequiresPermission.svelte'
-  import CarpoolPartialTable from 'components/carpool/CarpoolPartialTable.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import LinkButton from 'src/components/buttons/LinkButton.svelte'
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
+  import CarpoolPartialTable from 'src/components/carpool/CarpoolPartialTable.svelte'
 
-  import { goToRoute } from 'store/route'
-  import { editCarpool } from 'state/permissions'
-  import { FullEventQuery } from 'gql-operations'
-  import { routeEditCarpools, routeProfile } from 'route/constructors'
+  import { goToRoute } from 'src/store/route'
+  import { editCarpool } from 'src/state/permissions'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { routeEditCarpools, routeProfile } from 'src/route/constructors'
 
   export let event: FullEventQuery['event']
 </script>

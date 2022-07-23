@@ -2,8 +2,8 @@
   import CarpoolRow from './CarpoolRow.svelte'
   import NoMembersCarpoolRow from './NoMembersCarpoolRow.svelte'
 
-  import { EditCarpoolContextQuery } from 'gql-operations'
-  import { CarpoolMember, HasEventTimes, SimpleAttendance } from 'state/types'
+  import { EditCarpoolContextQuery } from 'src/gql-operations'
+  import { CarpoolMember, HasEventTimes, SimpleAttendance } from 'src/state/types'
   import { createEventDispatcher } from 'svelte'
 
   export let carpool: EditCarpoolContextQuery['event']['carpools'][number]

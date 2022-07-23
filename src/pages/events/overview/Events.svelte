@@ -1,17 +1,17 @@
 <script lang="ts">
-  import Sidebar from 'components/popup/Sidebar.svelte'
-  import Section from 'components/bulma/Section.svelte'
-  import Divider from 'components/bulma/Divider.svelte'
+  import Sidebar from 'src/components/popup/Sidebar.svelte'
+  import Section from 'src/components/bulma/Section.svelte'
+  import Divider from 'src/components/bulma/Divider.svelte'
   import TabContent from './TabContent.svelte'
   import EventColumns from './EventColumns.svelte'
 
-  import { routeEvents } from 'route/constructors'
-  import { EventTab } from 'route/types'
-  import { eagerQuery } from 'state/query'
-  import { goToRoute } from 'store/route'
-  import { eventIsOver } from 'utils/helpers'
+  import { routeEvents } from 'src/route/constructors'
+  import { EventTab } from 'src/route/types'
+  import { eagerQuery } from 'src/state/query'
+  import { goToRoute } from 'src/store/route'
+  import { eventIsOver } from 'src/utils/helpers'
   import { derived, readable } from 'svelte/store'
-  import { mapLazyLoaded, notLoaded } from 'state/types'
+  import { mapLazyLoaded, notLoaded } from 'src/state/types'
 
   export let eventId: number | null
   export let tab: EventTab | null

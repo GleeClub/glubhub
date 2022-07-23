@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Table from 'components/bulma/Table.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
   import AttendeeNameList from './AttendeeNameList.svelte'
 
-  import { FullEventQuery } from 'gql-operations'
+  import { FullEventQuery } from 'src/gql-operations'
 
   export let section: string
   export let confirmed: FullEventQuery['event']['allAttendance']

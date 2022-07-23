@@ -1,19 +1,19 @@
 <script lang="ts">
-  import StateBox from 'components/remote/StateBox.svelte'
-  import CheckboxInput from 'components/forms/CheckboxInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import Table from 'components/bulma/Table.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
+  import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
 
-  import { AttendanceUpdate, FullEventQuery } from 'gql-operations'
-  import { numberType } from 'state/input'
-  import { query } from 'state/query'
+  import { AttendanceUpdate, FullEventQuery } from 'src/gql-operations'
+  import { numberType } from 'src/state/input'
+  import { query } from 'src/state/query'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { SECTION_ORDER, NO_SECTION } from 'utils/constants'
+  } from 'src/state/types'
+  import { SECTION_ORDER, NO_SECTION } from 'src/utils/constants'
 
   export let eventId: number
   // TODO: this is updated differently than everything else, we should pick a single approach

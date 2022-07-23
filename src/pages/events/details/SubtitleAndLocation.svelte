@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { FullEventQuery } from 'gql-operations'
-  import { fullDateTimeFormatter } from 'utils/datetime'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { fullDateTimeFormatter } from 'src/utils/datetime'
 
   export let event: FullEventQuery['event']
 </script>

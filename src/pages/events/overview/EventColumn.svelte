@@ -1,16 +1,16 @@
 <script lang="ts">
   import EventRow from './EventRow.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import Box from 'components/bulma/Box.svelte'
-  import Remote from 'components/remote/Remote.svelte'
-  import Table from 'components/bulma/Table.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
 
-  import { GOLD_COLOR } from 'utils/constants'
-  import { AllEventsQuery } from 'gql-operations'
-  import { routeEvents } from 'route/constructors'
-  import { mapLazyLoaded, LazyRemoteData } from 'state/types'
-  import { replaceRoute } from 'store/route'
+  import { GOLD_COLOR } from 'src/utils/constants'
+  import { AllEventsQuery } from 'src/gql-operations'
+  import { routeEvents } from 'src/route/constructors'
+  import { mapLazyLoaded, LazyRemoteData } from 'src/state/types'
+  import { replaceRoute } from 'src/store/route'
 
   export let title: string
   export let allowedEventTypes: string[]
@@ -28,7 +28,7 @@
     <Box>
       <Remote data={eventGroups}>
         <svelte:fragment slot="loaded" let:data={groups}>
-          {#if groups.length === 0}
+          {#if groups[0].length === 0}
             <p>No events here, misster.</p>
           {:else}
             <Table fullwidth hoverable className="no-bottom-border">

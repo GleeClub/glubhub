@@ -1,14 +1,14 @@
 <script lang="ts">
-  import RadioInput from 'components/forms/RadioInput.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import TextareaInput from 'components/forms/TextareaInput.svelte'
+  import RadioInput from 'src/components/forms/RadioInput.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import TextareaInput from 'src/components/forms/TextareaInput.svelte'
 
-  import { NewEventFields, NewGig } from 'gql-operations'
-  import { eagerQuery } from 'state/query'
-  import { siteContext } from 'store/context'
+  import { NewEventFields, NewGig } from 'src/gql-operations'
+  import { eagerQuery } from 'src/state/query'
+  import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
-  import { stringType, uniformType } from 'state/input'
+  import { stringType, uniformType } from 'src/state/input'
 
   export let event: NewEventFields
   export let gig: NewGig

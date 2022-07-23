@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import CheckboxInput from 'components/forms/CheckboxInput.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import TextareaInput from 'components/forms/TextareaInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import TextareaInput from 'src/components/forms/TextareaInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { RemoteData } from 'state/types'
-  import { ALL_PERIODS } from 'utils/constants'
-  import { dateType, periodType, stringType } from 'state/input'
-  import { NewEventFields, NewEventPeriod, NewGig } from 'gql-operations'
+  import { RemoteData } from 'src/state/types'
+  import { ALL_PERIODS } from 'src/utils/constants'
+  import { dateType, periodType, stringType } from 'src/state/input'
+  import { NewEventFields, NewEventPeriod, NewGig } from 'src/gql-operations'
 
   export let event: NewEventFields
   export let gig: NewGig

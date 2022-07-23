@@ -1,20 +1,20 @@
 <script lang="ts">
-  import Divider from 'components/bulma/Divider.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Divider from 'src/components/bulma/Divider.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
   import SongLinkButton from '../SongLinkButton.svelte'
 
-  import { FullSongQuery } from 'gql-operations'
-  import { stringType } from 'state/input'
-  import { query } from 'state/query'
+  import { FullSongQuery } from 'src/gql-operations'
+  import { stringType } from 'src/state/input'
+  import { query } from 'src/state/query'
   import {
     emptyLoaded,
     FullSongLink,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   export let song: FullSongQuery['song']
   export let deleteLink: (link: FullSongLink) => void

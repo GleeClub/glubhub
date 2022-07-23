@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import Remote from 'components/remote/Remote.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
 
-  import { memberType } from 'state/input'
-  import { eagerQuery, query } from 'state/query'
-  import { emptyLoaded, loading, mapLazyLoaded, RemoteData } from 'state/types'
-  import { siteContext } from 'store/context'
+  import { memberType } from 'src/state/input'
+  import { eagerQuery, query } from 'src/state/query'
+  import { emptyLoaded, loading, mapLazyLoaded, RemoteData } from 'src/state/types'
+  import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
 
   let state: RemoteData = emptyLoaded

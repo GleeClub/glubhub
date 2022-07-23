@@ -1,28 +1,28 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Columns from 'components/bulma/Columns.svelte'
-  import Container from 'components/bulma/Container.svelte'
-  import Section from 'components/bulma/Section.svelte'
-  import Table from 'components/bulma/Table.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import LinkButton from 'components/buttons/LinkButton.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Section from 'src/components/bulma/Section.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import LinkButton from 'src/components/buttons/LinkButton.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
   import RemainingMemberTable from './RemainingMemberTable.svelte'
-  import CarpoolPartialTable from 'components/carpool/CarpoolPartialTable.svelte'
+  import CarpoolPartialTable from 'src/components/carpool/CarpoolPartialTable.svelte'
 
-  import { EditCarpoolContextQuery } from 'gql-operations'
+  import { EditCarpoolContextQuery } from 'src/gql-operations'
   import {
     CarpoolMember,
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { eventCarpools, routeEvents } from 'route/constructors'
-  import { query } from 'state/query'
-  import { goToRoute } from 'store/route'
+  } from 'src/state/types'
+  import { eventCarpools, routeEvents } from 'src/route/constructors'
+  import { query } from 'src/state/query'
+  import { goToRoute } from 'src/store/route'
 
   export let eventId: number
 

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Tooltip from 'components/bulma/Tooltip.svelte'
+  import Tooltip from 'src/components/bulma/Tooltip.svelte'
 
-  import { Pitch, SongMode } from 'gql-operations'
-  import { pitchToUnicode } from 'state/pitch'
-  import { titleCase } from 'utils/helpers'
+  import { Pitch, SongMode } from 'src/gql-operations'
+  import { pitchToUnicode } from 'src/state/pitch'
+  import { titleCase } from 'src/utils/helpers'
 
   export let title: string
   export let pitch: Pitch | null | undefined

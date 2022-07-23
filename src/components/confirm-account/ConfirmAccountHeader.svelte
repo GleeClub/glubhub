@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
-  import DeleteButton from 'components/buttons/DeleteButton.svelte'
-  import ConfirmAccountModal from 'components/confirm-account/ConfirmAccountModal.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import DeleteButton from 'src/components/buttons/DeleteButton.svelte'
+  import ConfirmAccountModal from 'src/components/confirm-account/ConfirmAccountModal.svelte'
 
-  import { siteContext } from 'store/context'
+  import { siteContext } from 'src/store/context'
 
   let ignoreConfirm = false
   let confirming = false

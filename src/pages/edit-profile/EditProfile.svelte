@@ -1,26 +1,26 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Container from 'components/bulma/Container.svelte'
-  import Section from 'components/bulma/Section.svelte'
-  import Title from 'components/bulma/Title.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Section from 'src/components/bulma/Section.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
   import HeaderText from './HeaderText.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
   import FormFields from './FormFields.svelte'
 
-  import { routeLogin, routeProfile } from 'route/constructors'
+  import { routeLogin, routeProfile } from 'src/route/constructors'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { reloadSiteContext, siteContext } from 'store/context'
+  } from 'src/state/types'
+  import { reloadSiteContext, siteContext } from 'src/store/context'
   import { get } from 'svelte/store'
-  import { MemberUpdate } from 'gql-operations'
+  import { MemberUpdate } from 'src/gql-operations'
   import { buildProfileForm } from './form'
   import { Md5 } from 'ts-md5'
-  import { query } from 'state/query'
-  import { goToRoute } from 'store/route'
+  import { query } from 'src/state/query'
+  import { goToRoute } from 'src/store/route'
 
   let password = ''
   let confirmPassword = ''

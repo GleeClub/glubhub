@@ -1,24 +1,24 @@
 <script lang="ts">
-  import Title from 'components/bulma/Title.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
   import LeftColumn from './LeftColumn.svelte'
   import MiddleColumn from './MiddleColumn.svelte'
   import RightColumn from './RightColumn.svelte'
 
-  import { FullEventQuery } from 'gql-operations'
-  import { eventDetails, routeEvents } from 'route/constructors'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { eventDetails, routeEvents } from 'src/route/constructors'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { replaceRoute } from 'store/route'
+  } from 'src/state/types'
+  import { replaceRoute } from 'src/store/route'
   import {
     buildUpdateBody,
     eventFormFromEvent,
     gigFormFromEvent,
   } from './state'
-  import { query } from 'state/query'
+  import { query } from 'src/state/query'
 
   export let event: FullEventQuery['event']
   export let onUpdate: () => void

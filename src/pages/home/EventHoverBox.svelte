@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { UserGradesEvent } from 'state/types'
-  import { fullDateTimeFormatter } from 'utils/datetime'
+  import type { UserGradesEvent } from 'src/state/types'
+  import { fullDateTimeFormatter } from 'src/utils/datetime'
 
   export let x: number
   export let y: number

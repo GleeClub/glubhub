@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import RadioInput from 'components/forms/RadioInput.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import TextareaInput from 'components/forms/TextareaInput.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import RadioInput from 'src/components/forms/RadioInput.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import TextareaInput from 'src/components/forms/TextareaInput.svelte'
 
-  import { stringType, uniformType } from 'state/input'
-  import { eagerQuery } from 'state/query'
-  import { siteContext } from 'store/context'
+  import { stringType, uniformType } from 'src/state/input'
+  import { eagerQuery } from 'src/state/query'
+  import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
   import { EventForm, GigForm } from './state'
 

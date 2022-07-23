@@ -2,7 +2,7 @@
   import FieldWrapper from './FieldWrapper.svelte'
   import InputWrapper from './InputWrapper.svelte'
 
-  import type { FormInputType } from 'state/input'
+  import type { FormInputType } from 'src/state/input'
 
   type T = $$Generic
 

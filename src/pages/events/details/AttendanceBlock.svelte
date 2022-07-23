@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
   import RsvpActions from './RsvpActions.svelte'
   import AttendanceSummary from './AttendanceSummary.svelte'
 
-  import { FullEventQuery } from 'gql-operations'
-  import { RemoteData } from 'state/types'
-  import { eventIsOver } from 'utils/helpers'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { RemoteData } from 'src/state/types'
+  import { eventIsOver } from 'src/utils/helpers'
 
   export let event: FullEventQuery['event']
   export let rsvpState: RemoteData

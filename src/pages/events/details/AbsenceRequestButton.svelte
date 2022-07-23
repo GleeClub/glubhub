@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
 
-  import { FullEventQuery } from 'gql-operations'
-  import { eventRequestAbsence, routeEvents } from 'route/constructors'
-  import { replaceRoute } from 'store/route'
-  import { eventIsOver } from 'utils/helpers'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { eventRequestAbsence, routeEvents } from 'src/route/constructors'
+  import { replaceRoute } from 'src/store/route'
+  import { eventIsOver } from 'src/utils/helpers'
 
   export let event: FullEventQuery['event']
 </script>

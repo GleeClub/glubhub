@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
 
-  import { FullEventUserAttendance, RemoteData } from 'state/types'
+  import { FullEventUserAttendance, RemoteData } from 'src/state/types'
 
   export let attendance: FullEventUserAttendance
   export let rsvpState: RemoteData

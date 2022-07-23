@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Uniform } from 'gql-operations'
+  import { Uniform } from 'src/gql-operations'
 
   export let uniform: Uniform
 </script>

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { NewSemester } from 'gql-operations'
-  import { RemoteData } from 'state/types'
-  import { dateType, numberType, stringType } from 'state/input'
+  import { NewSemester } from 'src/gql-operations'
+  import { RemoteData } from 'src/state/types'
+  import { dateType, numberType, stringType } from 'src/state/input'
 
   export let semester: NewSemester
   export let update: (semester: NewSemester) => void

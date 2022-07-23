@@ -1,9 +1,9 @@
-import { FullEventQuery, NewEvent, Uniform } from 'gql-operations'
+import { FullEventQuery, NewEvent, Uniform } from 'src/gql-operations'
 import {
   twentyFourHourTimeFormatter,
   hyphenDateFormatter,
   parseFormDateAndTimeString,
-} from 'utils/datetime'
+} from 'src/utils/datetime'
 
 export interface EventForm {
   name: string

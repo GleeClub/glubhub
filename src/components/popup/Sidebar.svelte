@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Spinner from 'components/remote/Spinner.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Spinner from 'src/components/remote/Spinner.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { LazyRemoteData } from 'state/types'
+  import { LazyRemoteData } from 'src/state/types'
 
   type T = $$Generic
 

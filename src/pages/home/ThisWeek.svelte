@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { UserGradesEvent } from 'state/types'
-  import { renderRoute } from 'route/render'
-  import { routeEvents } from 'route/constructors'
+  import { UserGradesEvent } from 'src/state/types'
+  import { renderRoute } from 'src/route/render'
+  import { routeEvents } from 'src/route/constructors'
   import { scaleTime } from 'd3-scale'
   import { select } from 'd3-selection'
   import { axisLeft } from 'd3-axis'

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Remote from 'components/remote/Remote.svelte'
-  import Section from 'components/bulma/Section.svelte'
-  import Container from 'components/bulma/Container.svelte'
-  import Columns from 'components/bulma/Columns.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
+  import Section from 'src/components/bulma/Section.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
   import MinutesList from './MinutesList.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Box from 'components/bulma/Box.svelte'
-  import RequiresPermission from 'components/member/RequiresPermission.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
   import EditMinutes from './EditMinutes.svelte'
 
   import {
@@ -14,21 +14,21 @@
     minutesPrivate,
     minutesPublic,
     routeMinutes,
-  } from 'route/constructors'
-  import { MinutesTab } from 'route/types'
+  } from 'src/route/constructors'
+  import { MinutesTab } from 'src/route/types'
   import {
     emptyLoaded,
     loading,
     notLoaded,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { replaceRoute } from 'store/route'
+  } from 'src/state/types'
+  import { replaceRoute } from 'src/store/route'
   import { readable } from 'svelte/store'
-  import { dateFormatter } from 'utils/datetime'
-  import { editMinutes, viewCompleteMinutes } from 'state/permissions'
-  import { renderRoute } from 'route/render'
-  import { eagerQuery, query } from 'state/query'
+  import { dateFormatter } from 'src/utils/datetime'
+  import { editMinutes, viewCompleteMinutes } from 'src/state/permissions'
+  import { renderRoute } from 'src/route/render'
+  import { eagerQuery, query } from 'src/state/query'
   import dayjs from 'dayjs'
 
   export let minutesId: number | null

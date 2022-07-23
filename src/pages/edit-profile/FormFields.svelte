@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Title from 'components/bulma/Title.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import LinkButton from 'components/buttons/LinkButton.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import Control from 'components/forms/Control.svelte'
-  import InputWrapper from 'components/forms/InputWrapper.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import LinkButton from 'src/components/buttons/LinkButton.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import Control from 'src/components/forms/Control.svelte'
+  import InputWrapper from 'src/components/forms/InputWrapper.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
 
   import {
     emailType,
@@ -16,11 +16,11 @@
     phoneType,
     sectionType,
     stringType,
-  } from 'state/input'
-  import { Enrollment, MemberUpdate } from 'gql-operations'
-  import { routeProfile } from 'route/constructors'
-  import { RemoteData } from 'state/types'
-  import { siteContext } from 'store/context'
+  } from 'src/state/input'
+  import { Enrollment, MemberUpdate } from 'src/gql-operations'
+  import { routeProfile } from 'src/route/constructors'
+  import { RemoteData } from 'src/state/types'
+  import { siteContext } from 'src/store/context'
   import { createEventDispatcher } from 'svelte'
 
   export let loggedIn: boolean

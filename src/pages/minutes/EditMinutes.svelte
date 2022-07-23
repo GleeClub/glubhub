@@ -1,25 +1,25 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import Control from 'components/forms/Control.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import RequiresPermission from 'components/member/RequiresPermission.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
-  import DeleteModal from 'components/popup/DeleteModal.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import Control from 'src/components/forms/Control.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
+  import DeleteModal from 'src/components/popup/DeleteModal.svelte'
   import Editor from '@tinymce/tinymce-svelte'
 
-  import { FullMinutesQuery } from 'gql-operations'
-  import { minutesPublic, routeMinutes } from 'route/constructors'
-  import { stringType } from 'state/input'
-  import { editMinutes } from 'state/permissions'
-  import { query } from 'state/query'
+  import { FullMinutesQuery } from 'src/gql-operations'
+  import { minutesPublic, routeMinutes } from 'src/route/constructors'
+  import { stringType } from 'src/state/input'
+  import { editMinutes } from 'src/state/permissions'
+  import { query } from 'src/state/query'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { replaceRoute } from 'store/route'
+  } from 'src/state/types'
+  import { replaceRoute } from 'src/store/route'
 
   export let minutes: FullMinutesQuery['meetingMinutes']
   export let onUpdate: () => void

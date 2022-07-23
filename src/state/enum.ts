@@ -1,4 +1,4 @@
-import type { Pitch } from 'gql-operations'
+import type { Pitch } from 'src/gql-operations'
 
 export function pitchToString(pitch: Pitch): string {
   let accidental = ''

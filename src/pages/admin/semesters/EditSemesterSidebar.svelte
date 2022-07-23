@@ -1,20 +1,20 @@
 <script lang="ts">
-  import BackButton from 'components/buttons/BackButton.svelte'
-  import Sidebar from 'components/popup/Sidebar.svelte'
+  import BackButton from 'src/components/buttons/BackButton.svelte'
+  import Sidebar from 'src/components/popup/Sidebar.svelte'
   import EditSemesterForm from './EditSemesterForm.svelte'
 
   import { get } from 'svelte/store'
-  import { query } from 'state/query'
-  import { replaceRoute } from 'store/route'
-  import { reloadSiteContext, siteContext } from 'store/context'
-  import { adminSemesters, routeAdmin } from 'route/constructors'
+  import { query } from 'src/state/query'
+  import { replaceRoute } from 'src/store/route'
+  import { reloadSiteContext, siteContext } from 'src/store/context'
+  import { adminSemesters, routeAdmin } from 'src/route/constructors'
   import {
     emptyLoaded,
     loaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   let semester = get(siteContext).currentSemester
   let state: RemoteData = emptyLoaded

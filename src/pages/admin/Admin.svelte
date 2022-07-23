@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Columns from 'components/bulma/Columns.svelte'
-  import Container from 'components/bulma/Container.svelte'
-  import Section from 'components/bulma/Section.svelte'
-  import DocumentLinks from 'components/navbar/DocumentLinks.svelte'
-  import SelectableList from 'components/remote/SelectableList.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Section from 'src/components/bulma/Section.svelte'
+  import DocumentLinks from 'src/components/navbar/DocumentLinks.svelte'
+  import SelectableList from 'src/components/remote/SelectableList.svelte'
   import AbsenceRequests from './absence-requests/AbsenceRequests.svelte'
   import CreateEvent from './create-event/CreateEvent.svelte'
   import GigRequests from './gig-requests/GigRequests.svelte'
@@ -15,11 +15,11 @@
   import Uniforms from './uniforms/Uniforms.svelte'
   import WebmasterTools from './WebmasterTools.svelte'
 
-  import { routeAdmin } from 'route/constructors'
-  import { AdminRoute } from 'route/types'
-  import { loaded } from 'state/types'
-  import { goToRoute } from 'store/route'
-  import { visibleAdminTabs } from 'utils/admin'
+  import { routeAdmin } from 'src/route/constructors'
+  import { AdminRoute } from 'src/route/types'
+  import { loaded } from 'src/state/types'
+  import { goToRoute } from 'src/store/route'
+  import { visibleAdminTabs } from 'src/utils/admin'
 
   export let tab: AdminRoute | null
 </script>

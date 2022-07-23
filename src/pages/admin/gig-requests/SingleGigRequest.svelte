@@ -1,9 +1,9 @@
 <script lang="ts">
-  import EmailLink from 'components/member/EmailLink.svelte'
-  import PhoneLink from 'components/member/PhoneLink.svelte'
+  import EmailLink from 'src/components/member/EmailLink.svelte'
+  import PhoneLink from 'src/components/member/PhoneLink.svelte'
 
-  import { AllGigRequestsQuery } from 'gql-operations'
-  import { simpleDateWithYearFormatter, timeFormatter } from 'utils/datetime'
+  import { AllGigRequestsQuery } from 'src/gql-operations'
+  import { simpleDateWithYearFormatter, timeFormatter } from 'src/utils/datetime'
 
   export let gigRequest: AllGigRequestsQuery['gigRequests'][number]
 </script>

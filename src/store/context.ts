@@ -1,6 +1,6 @@
-import { SiteContextQuery } from 'gql-operations'
-import { eagerQuery } from 'state/query'
-import { emptyLoaded, LazyRemoteData } from 'state/types'
+import { SiteContextQuery } from 'src/gql-operations'
+import { eagerQuery } from 'src/state/query'
+import { emptyLoaded, LazyRemoteData } from 'src/state/types'
 import { derived, Readable } from 'svelte/store'
 
 const defaultSiteContext: SiteContextQuery = {

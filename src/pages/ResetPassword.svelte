@@ -1,24 +1,24 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Columns from 'components/bulma/Columns.svelte'
-  import Container from 'components/bulma/Container.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
 
-  import { routeLogin } from 'route/constructors'
-  import { passwordType } from 'state/input'
-  import { query } from 'state/query'
+  import { routeLogin } from 'src/route/constructors'
+  import { passwordType } from 'src/state/input'
+  import { query } from 'src/state/query'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { goToRoute } from 'store/route'
+  } from 'src/state/types'
+  import { goToRoute } from 'src/store/route'
   import { Md5 } from 'ts-md5'
 
   export let token: string

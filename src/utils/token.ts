@@ -1,4 +1,4 @@
-import { GREASE_TOKEN_NAME, GREASE_OLD_TOKEN_NAME } from 'utils/constants'
+import { GREASE_TOKEN_NAME, GREASE_OLD_TOKEN_NAME } from 'src/utils/constants'
 
 export const getToken = () => localStorage.getItem(GREASE_TOKEN_NAME)
 

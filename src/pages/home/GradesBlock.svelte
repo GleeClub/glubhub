@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Container from 'components/bulma/Container.svelte'
-  import Section from 'components/bulma/Section.svelte'
-  import Title from 'components/bulma/Title.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Section from 'src/components/bulma/Section.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
   import AttendanceGraph from './AttendanceGraph.svelte'
 
-  import { siteContext } from 'store/context'
+  import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
-  import { ATTENDANCE_ISSUE_EMAIL } from 'utils/constants'
-  import { HoveredEvent } from 'state/types'
+  import { ATTENDANCE_ISSUE_EMAIL } from 'src/utils/constants'
+  import { HoveredEvent } from 'src/state/types'
 
   export let hoverEvent: (event: HoveredEvent | null) => void
 

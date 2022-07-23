@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import RadioInput from 'components/forms/RadioInput.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import RadioInput from 'src/components/forms/RadioInput.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { Enrollment, NewMember } from 'gql-operations'
+  import { Enrollment, NewMember } from 'src/gql-operations'
   import {
     emailType,
     enrollmentType,
@@ -15,9 +15,9 @@
     phoneType,
     sectionType,
     stringType,
-  } from 'state/input'
-  import { RemoteData } from 'state/types'
-  import { siteContext } from 'store/context'
+  } from 'src/state/input'
+  import { RemoteData } from 'src/state/types'
+  import { siteContext } from 'src/store/context'
 
   export let form: NewMember
   export let updateForm: (form: NewMember) => void

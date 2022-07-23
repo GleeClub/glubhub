@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { FullEventQuery } from 'gql-operations'
+  import { FullEventQuery } from 'src/gql-operations'
 
   export let attendees: FullEventQuery['event']['allAttendance']
 </script>

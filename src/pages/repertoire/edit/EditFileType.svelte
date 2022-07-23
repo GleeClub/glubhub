@@ -1,22 +1,22 @@
 <script lang="ts">
-  import Divider from 'components/bulma/Divider.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import FileInput from 'components/forms/FileInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Divider from 'src/components/bulma/Divider.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import FileInput from 'src/components/forms/FileInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
   import SongLinkButton from '../SongLinkButton.svelte'
 
-  import { query } from 'state/query'
-  import { stringType } from 'state/input'
-  import { fileToBase64 } from 'utils/helpers'
-  import { FullSongQuery } from 'gql-operations'
+  import { query } from 'src/state/query'
+  import { stringType } from 'src/state/input'
+  import { fileToBase64 } from 'src/utils/helpers'
+  import { FullSongQuery } from 'src/gql-operations'
   import {
     emptyLoaded,
     FullSongLink,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   export let song: FullSongQuery['song']
   export let typeName: string

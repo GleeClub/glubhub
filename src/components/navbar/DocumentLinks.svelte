@@ -1,6 +1,6 @@
 <script lang="ts">
   import { derived } from 'svelte/store'
-  import { eagerQuery } from 'state/query'
+  import { eagerQuery } from 'src/state/query'
 
   const [links, _reloadLinks] = eagerQuery('AllDocumentLinks', {})
   const loadedLinks = derived(links, (result) =>

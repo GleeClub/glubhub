@@ -1,17 +1,17 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Columns from 'components/bulma/Columns.svelte'
-  import Container from 'components/bulma/Container.svelte'
-  import Section from 'components/bulma/Section.svelte'
-  import Title from 'components/bulma/Title.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Section from 'src/components/bulma/Section.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
   import EventHoverBox from './EventHoverBox.svelte'
   import GradesBlock from './GradesBlock.svelte'
   import Volunteerism from './Volunteerism.svelte'
   import ThisWeek from './ThisWeek.svelte'
 
-  import { HoveredEvent } from 'state/types'
-  import { siteContext } from 'store/context'
+  import { HoveredEvent } from 'src/state/types'
+  import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
 
   let hovered: HoveredEvent | null = null

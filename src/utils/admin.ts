@@ -9,12 +9,12 @@ import {
   adminSitePermissions,
   adminUniforms,
   adminWebmasterTools,
-} from 'route/constructors'
-import type { AdminRoute } from 'route/types'
-import { siteContext } from 'store/context'
+} from 'src/route/constructors'
+import type { AdminRoute } from 'src/route/types'
+import { siteContext } from 'src/store/context'
 import { derived } from 'svelte/store'
 import { permittedTo } from './helpers'
-import * as Permissions from 'state/permissions'
+import * as Permissions from 'src/state/permissions'
 
 export const visibleAdminTabs = derived(siteContext, (context) => {
   const user = context.user

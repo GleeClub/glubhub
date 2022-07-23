@@ -1,31 +1,31 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Remote from 'components/remote/Remote.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
   import AssignDuesModal from './AssignDuesModal.svelte'
   import AssignLateDuesModal from './AssignLateDuesModal.svelte'
   import MoneyActionButton from './MoneyActionButton.svelte'
   import BatchTransactions from './BatchTransactions.svelte'
   import TransactionTable from './TransactionTable.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import Columns from 'components/bulma/Columns.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
 
-  import { eagerQuery, query } from 'state/query'
-  import { MoneyTab } from 'route/types'
-  import { numberType } from 'state/input'
+  import { eagerQuery, query } from 'src/state/query'
+  import { MoneyTab } from 'src/route/types'
+  import { numberType } from 'src/state/input'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
   import {
     moneyAssignDues,
     moneyAssignLateDues,
     moneyBatchTransactions,
-  } from 'route/constructors'
+  } from 'src/route/constructors'
 
   export let tab: MoneyTab | null
 

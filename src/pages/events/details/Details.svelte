@@ -1,20 +1,20 @@
 <script lang="ts">
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
   import AbsenceRequestButton from './AbsenceRequestButton.svelte'
   import OfficerInfoSection from './OfficerInfoSection.svelte'
   import AttendanceBlock from './AttendanceBlock.svelte'
   import SubtitleAndLocation from './SubtitleAndLocation.svelte'
   import UniformSection from './UniformSection.svelte'
 
-  import { FullEventQuery } from 'gql-operations'
-  import { timeFormatter } from 'utils/datetime'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { timeFormatter } from 'src/utils/datetime'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { query } from 'state/query'
+  } from 'src/state/types'
+  import { query } from 'src/state/query'
 
   export let event: FullEventQuery['event']
   export let onUpdate: () => void

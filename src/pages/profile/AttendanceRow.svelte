@@ -1,13 +1,13 @@
 <script lang="ts">
-  import CheckboxInput from 'components/forms/CheckboxInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
+  import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
 
-  import { FullMemberQuery } from 'gql-operations'
-  import { routeEvents } from 'route/constructors'
-  import { renderRoute } from 'route/render'
-  import { numberType } from 'state/input'
-  import { SimpleAttendance } from 'state/types'
-  import { dateFormatter } from 'utils/datetime'
+  import { FullMemberQuery } from 'src/gql-operations'
+  import { routeEvents } from 'src/route/constructors'
+  import { renderRoute } from 'src/route/render'
+  import { numberType } from 'src/state/input'
+  import { SimpleAttendance } from 'src/state/types'
+  import { dateFormatter } from 'src/utils/datetime'
 
   export let event: FullMemberQuery['member']['grades']['eventsWithChanges'][number]
   export let updateAttendance: (

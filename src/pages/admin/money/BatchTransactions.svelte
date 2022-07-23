@@ -1,26 +1,26 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import BackButton from 'components/buttons/BackButton.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import CheckboxInput from 'components/forms/CheckboxInput.svelte'
-  import InputWrapper from 'components/forms/InputWrapper.svelte'
-  import SelectInput from 'components/forms/SelectInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import Sidebar from 'components/popup/Sidebar.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import BackButton from 'src/components/buttons/BackButton.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
+  import InputWrapper from 'src/components/forms/InputWrapper.svelte'
+  import SelectInput from 'src/components/forms/SelectInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import Sidebar from 'src/components/popup/Sidebar.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { adminMoney, routeAdmin } from 'route/constructors'
-  import { numberType, stringType } from 'state/input'
-  import { eagerQuery, query } from 'state/query'
-  import { replaceRoute } from 'store/route'
-  import { siteContext } from 'store/context'
+  import { adminMoney, routeAdmin } from 'src/route/constructors'
+  import { numberType, stringType } from 'src/state/input'
+  import { eagerQuery, query } from 'src/state/query'
+  import { replaceRoute } from 'src/store/route'
+  import { siteContext } from 'src/store/context'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   let batchType = ''
   let description = ''

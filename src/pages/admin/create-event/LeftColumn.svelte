@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
   import dayjs from 'dayjs'
   import customParseFormat from 'dayjs/plugin/customParseFormat'
 
-  import { NewEventFields, NewGig } from 'gql-operations'
-  import { dateType, numberType, stringType, timeType } from 'state/input'
-  import { hyphenDateFormatter, timeFormatter } from 'utils/datetime'
+  import { NewEventFields, NewGig } from 'src/gql-operations'
+  import { dateType, numberType, stringType, timeType } from 'src/state/input'
+  import { hyphenDateFormatter, timeFormatter } from 'src/utils/datetime'
 
   export let event: NewEventFields
   export let updateEvent: (event: NewEventFields) => void

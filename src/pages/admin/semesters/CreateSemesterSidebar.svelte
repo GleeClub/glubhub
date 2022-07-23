@@ -1,18 +1,18 @@
 <script lang="ts">
-  import BackButton from 'components/buttons/BackButton.svelte'
-  import Sidebar from 'components/popup/Sidebar.svelte'
+  import BackButton from 'src/components/buttons/BackButton.svelte'
+  import Sidebar from 'src/components/popup/Sidebar.svelte'
   import EditSemesterForm from './EditSemesterForm.svelte'
 
-  import { query } from 'state/query'
-  import { replaceRoute } from 'store/route'
-  import { adminSemesters, routeAdmin } from 'route/constructors'
-  import { NewSemester } from 'gql-operations'
+  import { query } from 'src/state/query'
+  import { replaceRoute } from 'src/store/route'
+  import { adminSemesters, routeAdmin } from 'src/route/constructors'
+  import { NewSemester } from 'src/gql-operations'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   // TODO: set name from `Semester Year`
   let semester: NewSemester = {

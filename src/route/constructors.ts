@@ -18,7 +18,7 @@ import type {
   RouteResetPassword,
   RouteRoster,
   SemesterTab,
-} from 'route/types'
+} from 'src/route/types'
 
 export const routeHome: RouteHome = { name: 'Home', route: '' }
 

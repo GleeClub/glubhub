@@ -5,8 +5,8 @@ import {
   SiteContextQuery,
   SongMode,
   Uniform,
-} from 'gql-operations'
-import { titleCase } from 'utils/helpers'
+} from 'src/gql-operations'
+import { titleCase } from 'src/utils/helpers'
 import { pitchFromUnicode, pitchToUnicode } from './pitch'
 
 export interface FormInputType<T> {

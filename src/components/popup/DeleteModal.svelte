@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
-  import DeleteButton from 'components/buttons/DeleteButton.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import DeleteButton from 'src/components/buttons/DeleteButton.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import type { RemoteData } from 'state/types'
+  import type { RemoteData } from 'src/state/types'
 
   export let title: string
   export let cancel: () => void

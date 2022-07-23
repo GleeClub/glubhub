@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { routeEvents } from 'route/constructors'
-  import { renderRoute } from 'route/render'
-  import { EventTab } from 'route/types'
+  import { routeEvents } from 'src/route/constructors'
+  import { renderRoute } from 'src/route/render'
+  import { EventTab } from 'src/route/types'
 
   export let tab: EventTab
   export let currentTab: EventTab | null

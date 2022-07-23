@@ -1,0 +1,244 @@
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  color: #333;
+  margin: 0;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+a {
+  color: rgb(0, 100, 200);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: rgb(0, 80, 160);
+}
+
+label {
+  display: block;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-padding: 0.4em 0;
+  padding: 0.4em;
+  margin: 0 0 0.5em 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+.oldgold-text {
+  color: #b4a46a;
+}
+
+.oldgold {
+  background-color: #b4a46a;
+}
+
+.tooltip.is-tooltip-primary::before {
+  background: rgba(0, 209, 178, 0.1);
+}
+
+.is-tooltip[data-tooltip]::before {
+  z-index: 200;
+}
+
+.is-tooltip:hover::before {
+  z-index: 200;
+}
+
+table.is-fullwidth.is-hoverable:hover {
+  cursor: pointer;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: #b4a46a;
+}
+
+.placeholder {
+  width: 250px;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("../public/placeholder.png");
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+html {
+  background-color: #fafafa;
+}
+
+div.container.fullheight {
+  height: 80vh;
+}
+
+div.container.fullheight div.columns {
+  height: 100vh;
+}
+
+a.button.is-primary:not(.is-outlined) {
+  color: white;
+}
+
+button.button.is-primary:not(.is-outlined) {
+  color: white;
+}
+
+div.spinner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.spinner-inner {
+  display: block;
+}
+
+div.spinner i {
+  animation-duration: 1s;
+}
+
+.sidenav {
+  height: 100%;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  background-color: white;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 20px;
+  padding-top: 100px;
+}
+
+@media screen and (max-width: 768px) {
+  .sidenav:not(.hidden) {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .sidenav:not(.hidden) {
+    width: 40%;
+  }
+}
+
+.transparent-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: 0s;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.sidenav .is-divider[data-content]::after {
+  background-color: #fff;
+}
+
+.box .is-divider[data-content]::after {
+  background-color: #fff;
+}
+
+.is-divider[data-content]::after {
+  background-color: #fafafa;
+}
+
+.vertheader {
+  writing-mode: sideways-lr;
+  width: 20px;
+  margin-left: -35px;
+}
+
+tr.no-bottom-border td {
+  border-bottom: 0px;
+}
+
+table.no-bottom-border td {
+  border-bottom: 0px;
+}
+
+table.is-hoverable tr.not-hoverable:hover {
+  background-color: #fff;
+}
+
+.timeline body {
+  background-color: #fafafa;
+}
+
+.timeline .dot {
+  fill: #b4a46a;
+  stroke: white;
+}
+.timeline .now {
+  stroke: none;
+  fill: black;
+}
+.timeline .box-topper {
+  margin-bottom: 0;
+}
+.timeline path {
+  stroke: #b4a46a;
+}
+
+.timeline .domain {
+  stroke-linecap: round;
+  stroke-width: 5; /* Can this be bound somehow? */
+}
+.timeline .tick line {
+  stroke: none;
+}
+
+.line {
+  stroke: #b4a46a;
+  fill: url("#attendanceGradient");
+  stroke-width: 2;
+}
+
+.attendanceDot {
+  fill: #b4a46a;
+}
+
+// Update Bulma's global variables
+$primary: #b4a46a;
+
+// Import only what you need from Bulma
+@import '../node_modules/bulma/sass/base/_all.sass';
+@import '../node_modules/bulma/sass/components/_all.sass';
+@import '../node_modules/bulma/sass/elements/_all.sass';
+@import '../node_modules/bulma/sass/form/_all.sass';
+@import '../node_modules/bulma/sass/grid/_all.sass';
+@import '../node_modules/bulma/sass/helpers/_all.sass';
+@import '../node_modules/bulma/sass/layout/_all.sass';
+@import '../node_modules/bulma/sass/utilities/_all.sass';
+@import '../node_modules/@creativebulma/bulma-divider/src/sass/index.sass';
+@import '../node_modules/@creativebulma/bulma-tooltip/src/sass/index.sass';

@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import CheckboxInput from 'components/forms/CheckboxInput.svelte'
-  import TextareaInput from 'components/forms/TextareaInput.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
+  import TextareaInput from 'src/components/forms/TextareaInput.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { stringType } from 'state/input'
-  import { RemoteData } from 'state/types'
+  import { stringType } from 'src/state/input'
+  import { RemoteData } from 'src/state/types'
   import { EventForm, GigForm } from './state'
 
   export let event: EventForm

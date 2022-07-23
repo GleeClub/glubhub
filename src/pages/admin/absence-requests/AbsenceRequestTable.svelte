@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Table from 'components/bulma/Table.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
   import AbsenceRequestButtons from './AbsenceRequestButtons.svelte'
   import AbsenceRequestRow from './AbsenceRequestRow.svelte'
 
-  import { AllAbsenceRequestsQuery } from 'gql-operations'
+  import { AllAbsenceRequestsQuery } from 'src/gql-operations'
 
   export let absenceRequests: AllAbsenceRequestsQuery['absenceRequests']
   export let respond: (

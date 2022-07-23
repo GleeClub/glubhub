@@ -1,4 +1,4 @@
-import { FullEventQuery, FullSongQuery, SiteContextQuery } from 'gql-operations'
+import { FullEventQuery, FullSongQuery, SiteContextQuery } from 'src/gql-operations'
 import type { Readable } from 'svelte/store'
 
 export interface NotLoaded {

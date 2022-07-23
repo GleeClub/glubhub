@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { routeHome } from 'route/constructors'
-  import { renderRoute } from 'route/render'
+  import { routeHome } from 'src/route/constructors'
+  import { renderRoute } from 'src/route/render'
 </script>
 
 <a href={renderRoute(routeHome)} class="navbar-item">

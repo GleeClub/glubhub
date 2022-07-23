@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import LinkButton from 'components/buttons/LinkButton.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import LinkButton from 'src/components/buttons/LinkButton.svelte'
 
-  import { AllGigRequestsQuery, GigRequestStatus } from 'gql-operations'
-  import { adminCreateEvent, routeAdmin, routeEvents } from 'route/constructors'
+  import { AllGigRequestsQuery, GigRequestStatus } from 'src/gql-operations'
+  import { adminCreateEvent, routeAdmin, routeEvents } from 'src/route/constructors'
 
   export let gigRequest: AllGigRequestsQuery['gigRequests'][number]
   export let reopen: (id: number) => void

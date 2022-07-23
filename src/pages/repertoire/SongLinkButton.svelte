@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { FullSongLink } from 'state/types'
+  import { FullSongLink } from 'src/state/types'
 
   export let link: FullSongLink
   export let deleteLink: ((link: FullSongLink) => void) | undefined = undefined

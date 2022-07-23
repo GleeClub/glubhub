@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import Title from 'components/bulma/Title.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
   import AttendeeTable from './AttendeeTable.svelte'
 
-  import { FullEventQuery } from 'gql-operations'
-  import { NO_SECTION, SECTION_ORDER } from 'utils/constants'
+  import { FullEventQuery } from 'src/gql-operations'
+  import { NO_SECTION, SECTION_ORDER } from 'src/utils/constants'
 
   export let attendees: FullEventQuery['event']['allAttendance']
 
@@ -14,11 +14,11 @@
   )
 
   function separateByConfirmed(
-    attendees: FullEventQuery['event']['allAttendance']
+    filteredAttendees: FullEventQuery['event']['allAttendance']
   ) {
     return new Map(
       SECTION_ORDER.map((section) => {
-        const inSection = attendees.filter(
+        const inSection = filteredAttendees.filter(
           (a) => a.member.semester?.section === section
         )
 

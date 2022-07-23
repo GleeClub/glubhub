@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
-import type { NewRolePermission } from 'gql-operations'
-import { HasEventTimes, HasPermissions } from 'state/types'
+import type { NewRolePermission } from 'src/gql-operations'
+import { HasEventTimes, HasPermissions } from 'src/state/types'
 
 export const formatPhone = (phone: string) =>
   phone.length !== 10

@@ -1,15 +1,15 @@
 <script lang="ts">
-  import Button from 'components/buttons/Button.svelte'
-  import ButtonGroup from 'components/buttons/ButtonGroup.svelte'
-  import RequiresPermission from 'components/member/RequiresPermission.svelte'
-  import ErrorBox from 'components/remote/ErrorBox.svelte'
-  import SelectableList from 'components/remote/SelectableList.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
+  import ErrorBox from 'src/components/remote/ErrorBox.svelte'
+  import SelectableList from 'src/components/remote/SelectableList.svelte'
 
-  import { AllMinutesQuery } from 'gql-operations'
-  import { routeMinutes } from 'route/constructors'
-  import { editMinutes } from 'state/permissions'
-  import { LazyRemoteData, mapLazyLoaded, RemoteData } from 'state/types'
-  import { replaceRoute } from 'store/route'
+  import { AllMinutesQuery } from 'src/gql-operations'
+  import { routeMinutes } from 'src/route/constructors'
+  import { editMinutes } from 'src/state/permissions'
+  import { LazyRemoteData, mapLazyLoaded, RemoteData } from 'src/state/types'
+  import { replaceRoute } from 'src/store/route'
 
   export let allMinutes: LazyRemoteData<AllMinutesQuery>
   export let selectedId: number | null

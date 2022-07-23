@@ -1,24 +1,24 @@
 <script lang="ts">
-  import Title from 'components/bulma/Title.svelte'
-  import Box from 'components/bulma/Box.svelte'
-  import Columns from 'components/bulma/Columns.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
   import LeftColumn from './LeftColumn.svelte'
   import MiddleColumn from './MiddleColumn.svelte'
   import RightColumn from './RightColumn.svelte'
 
-  import { NewGig, NewEventFields, NewEventPeriod } from 'gql-operations'
-  import { query } from 'state/query'
-  import { goToRoute } from 'store/route'
-  import { routeEvents } from 'route/constructors'
+  import { NewGig, NewEventFields, NewEventPeriod } from 'src/gql-operations'
+  import { query } from 'src/state/query'
+  import { goToRoute } from 'src/store/route'
+  import { routeEvents } from 'src/route/constructors'
   import { get } from 'svelte/store'
-  import { siteContext } from 'store/context'
-  import { twentyFourHourTimeFormatter } from 'utils/datetime'
+  import { siteContext } from 'src/store/context'
+  import { twentyFourHourTimeFormatter } from 'src/utils/datetime'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
 
   export let gigRequestId: number | null
 

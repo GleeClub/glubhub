@@ -1,24 +1,24 @@
 <script lang="ts">
-  import Table from 'components/bulma/Table.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import BackButton from 'components/buttons/BackButton.svelte'
-  import RequiresPermission from 'components/member/RequiresPermission.svelte'
-  import DeleteModal from 'components/popup/DeleteModal.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import BackButton from 'src/components/buttons/BackButton.svelte'
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
+  import DeleteModal from 'src/components/popup/DeleteModal.svelte'
   import SongLinkButton from './SongLinkButton.svelte'
   import PitchSection from './PitchSection.svelte'
 
-  import { FullSongQuery } from 'gql-operations'
-  import { repertoireEdit, routeRepertoire } from 'route/constructors'
-  import { editRepertoire } from 'state/permissions'
-  import { replaceRoute } from 'store/route'
+  import { FullSongQuery } from 'src/gql-operations'
+  import { repertoireEdit, routeRepertoire } from 'src/route/constructors'
+  import { editRepertoire } from 'src/state/permissions'
+  import { replaceRoute } from 'src/store/route'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { query } from 'state/query'
+  } from 'src/state/types'
+  import { query } from 'src/state/query'
 
   export let song: FullSongQuery['song']
   export let reloadAllSongs: () => void

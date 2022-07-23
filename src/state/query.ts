@@ -1,4 +1,4 @@
-import { getSdk, Sdk } from 'gql-operations'
+import { getSdk, Sdk } from 'src/gql-operations'
 import { GraphQLClient } from 'graphql-request'
 import {
   loaded,
@@ -7,10 +7,10 @@ import {
   QueryResult,
   LazyRemoteData,
   notLoaded,
-} from 'state/types'
+} from 'src/state/types'
 import { Readable, writable } from 'svelte/store'
-import { API_URL } from 'utils/constants'
-import { getToken } from 'utils/token'
+import { API_URL } from 'src/utils/constants'
+import { getToken } from 'src/utils/token'
 
 export const gqlClient = getSdk(
   new GraphQLClient(API_URL, {

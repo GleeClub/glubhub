@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Table from 'components/bulma/Table.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
 
-  import { RemoteData } from 'state/types'
-  import { TransactionsForSemesterQuery } from 'gql-operations'
-  import { simpleDateWithYearFormatter } from 'utils/datetime'
+  import { RemoteData } from 'src/state/types'
+  import { TransactionsForSemesterQuery } from 'src/gql-operations'
+  import { simpleDateWithYearFormatter } from 'src/utils/datetime'
 
   export let transactions: TransactionsForSemesterQuery
   export let resolveTransaction: (id: number, resolved: boolean) => void

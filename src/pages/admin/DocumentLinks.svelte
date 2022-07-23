@@ -1,21 +1,21 @@
 <script lang="ts">
-  import Box from 'components/bulma/Box.svelte'
-  import Title from 'components/bulma/Title.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import DeleteButton from 'components/buttons/DeleteButton.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import Remote from 'components/remote/Remote.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import DeleteButton from 'src/components/buttons/DeleteButton.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
 
-  import { DocumentLink } from 'gql-operations'
-  import { stringType } from 'state/input'
-  import { eagerQuery, query } from 'state/query'
+  import { DocumentLink } from 'src/gql-operations'
+  import { stringType } from 'src/state/input'
+  import { eagerQuery, query } from 'src/state/query'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
+  } from 'src/state/types'
   import { get } from 'svelte/store'
 
   let name = ''

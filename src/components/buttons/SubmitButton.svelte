@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ButtonColor, ButtonSize } from 'utils/helpers'
+  import { ButtonColor, ButtonSize } from 'src/utils/helpers'
 
   export let color: ButtonColor | undefined = undefined
   export let size: ButtonSize | undefined = undefined

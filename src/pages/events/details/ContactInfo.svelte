@@ -1,8 +1,8 @@
 <script lang="ts">
-  import EmailLink from 'components/member/EmailLink.svelte'
-  import PhoneLink from 'components/member/PhoneLink.svelte'
+  import EmailLink from 'src/components/member/EmailLink.svelte'
+  import PhoneLink from 'src/components/member/PhoneLink.svelte'
 
-  import { FullEventGig } from 'state/types'
+  import { FullEventGig } from 'src/state/types'
 
   export let gig: FullEventGig
 </script>

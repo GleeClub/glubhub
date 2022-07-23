@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SimpleAttendance } from 'state/types'
+  import { SimpleAttendance } from 'src/state/types'
 
   export let points: number
   export let attendance: SimpleAttendance

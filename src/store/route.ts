@@ -1,7 +1,7 @@
 import { writable, derived } from 'svelte/store'
-import { parseRoute } from 'route/parse'
-import { renderRoute } from 'route/render'
-import type { GlubRoute } from 'route/types'
+import { parseRoute } from 'src/route/parse'
+import { renderRoute } from 'src/route/render'
+import type { GlubRoute } from 'src/route/types'
 
 const parseRouteFromLocation = () =>
   window.location.hash.length >= 2

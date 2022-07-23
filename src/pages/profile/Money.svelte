@@ -1,18 +1,18 @@
 <script lang="ts">
-  import Column from 'components/bulma/Column.svelte'
-  import Table from 'components/bulma/Table.svelte'
-  import Button from 'components/buttons/Button.svelte'
-  import StateBox from 'components/remote/StateBox.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import StateBox from 'src/components/remote/StateBox.svelte'
 
-  import { query } from 'state/query'
-  import { FullMemberQuery } from 'gql-operations'
+  import { query } from 'src/state/query'
+  import { FullMemberQuery } from 'src/gql-operations'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { simpleDateWithYearFormatter } from 'utils/datetime'
+  } from 'src/state/types'
+  import { simpleDateWithYearFormatter } from 'src/utils/datetime'
 
   export let transactions: FullMemberQuery['member']['transactions']
   export let onUpdate: () => void

@@ -1,24 +1,24 @@
 <script lang="ts">
-  import Container from 'components/bulma/Container.svelte'
-  import Columns from 'components/bulma/Columns.svelte'
-  import Column from 'components/bulma/Column.svelte'
-  import Box from 'components/bulma/Box.svelte'
-  import TextInput from 'components/forms/TextInput.svelte'
-  import SubmitButton from 'components/buttons/SubmitButton.svelte'
-  import Control from 'components/forms/Control.svelte'
-  import LinkButton from 'components/buttons/LinkButton.svelte'
+  import Container from 'src/components/bulma/Container.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
+  import Column from 'src/components/bulma/Column.svelte'
+  import Box from 'src/components/bulma/Box.svelte'
+  import TextInput from 'src/components/forms/TextInput.svelte'
+  import SubmitButton from 'src/components/buttons/SubmitButton.svelte'
+  import Control from 'src/components/forms/Control.svelte'
+  import LinkButton from 'src/components/buttons/LinkButton.svelte'
 
   import { Md5 } from 'ts-md5'
-  import { query } from 'state/query'
-  import { setToken } from 'utils/token'
-  import { routeEditProfile, routeForgotPassword } from 'route/constructors'
+  import { query } from 'src/state/query'
+  import { setToken } from 'src/utils/token'
+  import { routeEditProfile, routeForgotPassword } from 'src/route/constructors'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
-  } from 'state/types'
-  import { emailType, passwordType } from 'state/input'
+  } from 'src/state/types'
+  import { emailType, passwordType } from 'src/state/input'
 
   let email = ''
   let password = ''
@@ -46,7 +46,7 @@
     <Column narrow>
       <Box>
         <form on:submit|preventDefault={submit}>
-          <img style="width: 100%" alt="" src="/glubhub.svg" />
+          <img style="width: 100%" alt="" src="/src/glubhub.svg" />
           <TextInput
             type={emailType}
             value={email}

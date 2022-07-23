@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Table from 'components/bulma/Table.svelte'
-  import CarpoolRow from 'components/carpool/CarpoolRow.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import CarpoolRow from 'src/components/carpool/CarpoolRow.svelte'
 
-  import { EditCarpoolContextQuery } from 'gql-operations'
-  import { CarpoolMember } from 'state/types'
+  import { EditCarpoolContextQuery } from 'src/gql-operations'
+  import { CarpoolMember } from 'src/state/types'
 
   export let allMembers: CarpoolMember[]
   export let carpools: EditCarpoolContextQuery['event']['carpools']

@@ -11,7 +11,8 @@
     "sourceMap": false,
     "listFiles": true,
     "importsNotUsedAsValues": "remove",
-    "baseUrl": "./src",
+    "resolveJsonModule": true,
+    "baseUrl": ".",
 
     "plugins": [
       {
@@ -20,6 +21,6 @@
     ]
   },
 
-  "include": ["src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
+  "include": ["src/**/*", "*.json"],
+  "exclude": ["node_modules/*", "public/*"]
 }

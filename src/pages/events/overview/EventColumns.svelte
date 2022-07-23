@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Columns from 'components/bulma/Columns.svelte'
+  import Columns from 'src/components/bulma/Columns.svelte'
   import EventColumn from './EventColumn.svelte'
 
-  import { LazyRemoteData } from 'state/types'
-  import { AllEventsQuery } from 'gql-operations'
+  import { LazyRemoteData } from 'src/state/types'
+  import { AllEventsQuery } from 'src/gql-operations'
 
   export let events: LazyRemoteData<AllEventsQuery['events']>
   export let selectedId: number | null

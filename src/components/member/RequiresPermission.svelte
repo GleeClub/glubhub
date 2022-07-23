@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { siteContext } from 'store/context'
+  import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
-  import { permittedTo } from 'utils/helpers'
+  import { permittedTo } from 'src/utils/helpers'
 
   export let permission: string
   export let eventType: string | undefined = undefined

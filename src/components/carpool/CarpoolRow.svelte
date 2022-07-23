@@ -1,7 +1,7 @@
 <script lang="ts">
-  import AttendanceIcon from 'components/icons/AttendanceIcon.svelte'
+  import AttendanceIcon from 'src/components/icons/AttendanceIcon.svelte'
 
-  import { CarpoolMember, HasEventTimes, SimpleAttendance } from 'state/types'
+  import { CarpoolMember, HasEventTimes, SimpleAttendance } from 'src/state/types'
   import { createEventDispatcher } from 'svelte'
 
   export let member: CarpoolMember

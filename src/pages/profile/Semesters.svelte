@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Table from 'components/bulma/Table.svelte'
-  import Remote from 'components/remote/Remote.svelte'
+  import Table from 'src/components/bulma/Table.svelte'
+  import Remote from 'src/components/remote/Remote.svelte'
 
-  import { eagerQuery } from 'state/query'
-  import { roundToTwoDigits } from 'utils/helpers'
+  import { eagerQuery } from 'src/state/query'
+  import { roundToTwoDigits } from 'src/utils/helpers'
 
   export let email: string
 
