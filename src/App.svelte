@@ -16,9 +16,9 @@
   import EditProfile from 'src/pages/edit-profile/EditProfile.svelte'
   import EditCarpools from 'src/pages/events/edit-carpools/EditCarpools.svelte'
 
-  import { get } from 'svelte/store'
+  import { derived } from 'svelte/store'
   import type { GlubRoute } from 'src/route/types'
-  import { goToRoute, replaceRoute, route } from 'src/store/route'
+  import { goToRoute, route } from 'src/store/route'
   import { routeHome, routeLogin } from 'src/route/constructors'
   import { onDestroy } from 'svelte'
   import {
@@ -29,15 +29,13 @@
 
   reloadSiteContext()
 
-  const unsubscribe1 = siteContext.subscribe((_context) => {
-    const r = get(route)
-    if (r) {
-      replaceRoute(r)
-    }
-  })
+  const unsubscribe = derived(
+    ([route, siteContext, siteContextStatus]), x => x
+  )
+    .subscribe(([$route, $context, $contextStatus]) => {
+    if ($contextStatus.type !== "loaded") return;
 
-  const unsubscribe2 = route.subscribe((r) => {
-    const loggedIn = !!get(siteContext).user
+    const loggedIn = !!$context.user
     const guestRoutes: GlubRoute['route'][] = [
       'edit-profile',
       'forgot-password',
@@ -45,15 +43,14 @@
       'login',
     ]
 
-    if (!loggedIn && !guestRoutes.includes(r?.route || '')) {
+    if (!loggedIn && !guestRoutes.includes($route?.route || '')) {
       goToRoute(routeLogin)
-    } else if (loggedIn && r?.route === 'login') {
+    } else if (loggedIn && $route?.route === 'login') {
       goToRoute(routeHome)
     }
   })
 
-  onDestroy(unsubscribe1)
-  onDestroy(unsubscribe2)
+  onDestroy(unsubscribe)
 </script>
 
 <Navbar />
