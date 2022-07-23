@@ -29,7 +29,7 @@
   let createState: RemoteData = emptyLoaded
 
   const [songs, reloadAllSongs] = eagerQuery('AllSongs')
-  const [selectedSong, reloadSelectedSong] = songId
+  $: [selectedSong, reloadSelectedSong] = songId
     ? eagerQuery('FullSong', { id: songId })
     : [readable(notLoaded), (_vars: { id: number }) => {}]
 
@@ -55,10 +55,10 @@
     (song) => !song.current && song.title.toLowerCase()[0] <= 'g'
   )
   const songsHToP = filterSongs(
-    (song) => !song.current && song.title.toLowerCase()[0] <= 'g'
+    (song) => !song.current && song.title.toLowerCase()[0] >= 'h' && song.title.toLowerCase()[0] <= 'p'
   )
   const songsQToZ = filterSongs(
-    (song) => !song.current && song.title.toLowerCase()[0] <= 'g'
+    (song) => !song.current && song.title.toLowerCase()[0] >= 'q'
   )
 </script>
 
@@ -78,6 +78,7 @@
     </Columns>
   </Container>
 </Section>
+
 <Sidebar
   data={$selectedSong}
   close={() => replaceRoute(routeRepertoire(null, null))}

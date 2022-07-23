@@ -25,6 +25,7 @@
     'attendees',
     'setlist',
     'carpools',
+    'details'
   ]
 </script>
 

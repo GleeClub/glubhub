@@ -43,14 +43,9 @@
 />
 <Title centered>{song.title}</Title>
 {#if song.info}
-  <p>
-    {song.info}
-    <br />
-  </p>
+  <pre>{song.info}</pre>
+  <br />
 {/if}
-<p>
-  {song.key}:
-</p>
 <PitchSection title="Key" pitch={song.key} mode={song.mode} />
 <PitchSection title="Starting Pitch" pitch={song.startingPitch} mode={null} />
 <br />
@@ -71,14 +66,13 @@
 </Table>
 
 <RequiresPermission permission={editRepertoire}>
+  <br />
   <div>
     <Button
       click={() => replaceRoute(routeRepertoire(song.id, repertoireEdit))}
     >
       Edit Song
     </Button>
-    <br />
-    <br />
     <Button color="is-danger" click={() => (deleteState = emptyLoaded)}>
       Delete Song
     </Button>

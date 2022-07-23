@@ -8,7 +8,7 @@
 </script>
 
 {#if state.type === 'loaded'}
-  ""
+  <!-- nothing if loaded -->
 {:else if state.type === 'loading'}
   <Spinner />
 {:else}

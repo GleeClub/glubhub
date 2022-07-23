@@ -18,7 +18,7 @@
       <Tooltip content="hey kid, wanna pitch?">
         {pitchToUnicode(pitch)}
         {#if mode}
-          {' ' + titleCase(mode)}}
+          {' ' + titleCase(mode)}
         {/if}
       </Tooltip>
     </b>

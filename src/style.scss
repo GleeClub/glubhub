@@ -1,6 +1,14 @@
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
+// Update Bulma's global variables
+$primary: #b4a46a;
+
+// Import only what you need from Bulma
+@import '../node_modules/bulma/bulma.sass';
+@import '../node_modules/@creativebulma/bulma-divider/src/sass/index.sass';
+@import '../node_modules/@creativebulma/bulma-tooltip/src/sass/index.sass';
+
 html,
 body {
   position: relative;
@@ -227,18 +235,3 @@ table.is-hoverable tr.not-hoverable:hover {
 .attendanceDot {
   fill: #b4a46a;
 }
-
-// Update Bulma's global variables
-$primary: #b4a46a;
-
-// Import only what you need from Bulma
-@import '../node_modules/bulma/sass/base/_all.sass';
-@import '../node_modules/bulma/sass/components/_all.sass';
-@import '../node_modules/bulma/sass/elements/_all.sass';
-@import '../node_modules/bulma/sass/form/_all.sass';
-@import '../node_modules/bulma/sass/grid/_all.sass';
-@import '../node_modules/bulma/sass/helpers/_all.sass';
-@import '../node_modules/bulma/sass/layout/_all.sass';
-@import '../node_modules/bulma/sass/utilities/_all.sass';
-@import '../node_modules/@creativebulma/bulma-divider/src/sass/index.sass';
-@import '../node_modules/@creativebulma/bulma-tooltip/src/sass/index.sass';

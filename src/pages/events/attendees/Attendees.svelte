@@ -9,9 +9,7 @@
   export let attendees: FullEventQuery['event']['allAttendance']
 
   $: attending = separateByConfirmed(attendees.filter((a) => a.shouldAttend))
-  $: notAttending = separateByConfirmed(
-    attendees.filter((a) => !a.shouldAttend)
-  )
+  $: notAttending = separateByConfirmed(attendees.filter((a) => !a.shouldAttend))
 
   function separateByConfirmed(
     filteredAttendees: FullEventQuery['event']['allAttendance']
@@ -24,7 +22,7 @@
 
         return [
           section,
-          inSection.length
+          inSection.length > 0
             ? {
                 confirmed: inSection.filter((a) => a.confirmed),
                 notConfirmed: inSection.filter((a) => !a.confirmed),
@@ -53,8 +51,8 @@
     {#if notAttending.get(section)}
       <AttendeeTable
         section={section || NO_SECTION}
-        confirmed={attending.get(section)?.confirmed || []}
-        notConfirmed={attending.get(section)?.notConfirmed || []}
+        confirmed={notAttending.get(section)?.confirmed || []}
+        notConfirmed={notAttending.get(section)?.notConfirmed || []}
       />
     {/if}
   {/each}
