@@ -3,7 +3,7 @@
   import Remote from 'src/components/remote/Remote.svelte'
 
   import { eagerQuery } from 'src/state/query'
-  import { roundToTwoDigits } from 'src/utils/helpers'
+  import { roundToTwoDigits, titleCase } from 'src/utils/helpers'
 
   export let email: string
 
@@ -24,7 +24,7 @@
       {#each semesters.member.semesters as semester}
         <tr class="no-bottom-border">
           <td>{semester.semester}</td>
-          <td>{semester.enrollment || 'Inactive'}</td>
+          <td>{titleCase(semester.enrollment) || 'Inactive'}</td>
           <td>{semester.section || 'Homeless'}</td>
           <td>{roundToTwoDigits(semester.grades.grade)}</td>
         </tr>

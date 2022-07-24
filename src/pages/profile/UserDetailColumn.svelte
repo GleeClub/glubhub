@@ -15,7 +15,7 @@
 <i>"{member.about || 'no quote'}"</i>
 <br />
 {#if member.positions.length}
-  {member.positions.join(', ')}
+  {member.positions.map(p => p.name).join(', ')}
 {:else}
   Member
 {/if}
@@ -27,4 +27,4 @@
 {member.semester?.section || 'Homeless'}
 <br />
 {member.major || 'No major'}
-{member.minor && `, minoring in ${member.minor}`}
+{member.major && member.minor && `, minoring in ${member.minor}`}

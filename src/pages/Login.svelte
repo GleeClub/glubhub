@@ -46,7 +46,7 @@
     <Column narrow>
       <Box>
         <form on:submit|preventDefault={submit}>
-          <img style="width: 100%" alt="" src="/src/glubhub.svg" />
+          <img style="width: 100%" alt="" src="/glubhub.svg" />
           <TextInput
             type={emailType}
             value={email}
