@@ -7,6 +7,7 @@ import {
   QueryResult,
   LazyRemoteData,
   notLoaded,
+  ApiError,
 } from 'src/state/types'
 import { Readable, writable } from 'svelte/store'
 import { API_URL } from 'src/utils/constants'
@@ -30,7 +31,9 @@ export async function query<K extends keyof Sdk>(
   ) => Promise<ReturnType<Sdk[K]>>
   return action(...args)
     .then((result: Awaited<ReturnType<Sdk[K]>>) => loaded(result))
-    .catch((err) => error(err))
+    .catch((err: ApiError) => {
+      return error(err)
+    })
 }
 
 export function lazyQuery<K extends keyof Sdk>(

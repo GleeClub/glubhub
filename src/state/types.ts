@@ -11,9 +11,21 @@ export interface Loaded<Data> {
   type: 'loaded'
   data: Data
 }
+export interface ApiError {
+  response: {
+    error: string;
+    status: number;
+    headers: {
+      map: Map<string, string>;
+    };
+  };
+  request: {
+    query: string;
+  }
+}
 export interface RemoteError {
   type: 'error'
-  error: TypeError
+  error: ApiError
 }
 
 export const notLoaded: NotLoaded = { type: 'not-loaded' }
@@ -22,7 +34,7 @@ export function loaded<Data>(data: Data): Loaded<Data> {
   return { type: 'loaded', data }
 }
 export const emptyLoaded = loaded(null)
-export function error(error: TypeError): RemoteError {
+export function error(error: ApiError): RemoteError {
   return { type: 'error', error }
 }
 

@@ -33,7 +33,7 @@ import { titleCase } from 'src/utils/helpers';
     ['Section', member.semester?.section || 'Homeless'],
     ['About', member.about],
     ['Picture', member.picture],
-    ['Arrived At Tech', member.arrivedAtTech ? `${member.arrivedAtTech}` : ''],
+    ['Arrived At Tech', typeof member.arrivedAtTech === "number" ? `${member.arrivedAtTech}` : ''],
     ['Gateway Drug', member.gatewayDrug],
     ['Conflicts', member.conflicts],
     ['Dietary Restrictions', member.dietaryRestrictions],
