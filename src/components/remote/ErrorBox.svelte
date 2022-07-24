@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ApiError } from 'src/state/types';
+  import { ApiError } from 'src/state/types'
   import { SUBMISSION_STATE_BOX_ID } from 'src/utils/constants'
 
   export let error: ApiError

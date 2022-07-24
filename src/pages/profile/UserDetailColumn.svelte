@@ -15,7 +15,7 @@
 <i>"{member.about || 'no quote'}"</i>
 <br />
 {#if member.positions.length}
-  {member.positions.map(p => p.name).join(', ')}
+  {member.positions.map((p) => p.name).join(', ')}
 {:else}
   Member
 {/if}

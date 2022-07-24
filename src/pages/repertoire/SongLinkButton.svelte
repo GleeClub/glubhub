@@ -17,7 +17,7 @@
   {#if link.type === 'Sheet Music'}
     <a
       class="button is-outlined is-primary"
-      href="{link.url}"
+      href={link.url}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -29,7 +29,7 @@
   {:else if link.type === 'MIDIs'}
     <a
       class="button is-outlined is-primary"
-      href="{link.url}"
+      href={link.url}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -56,12 +56,7 @@
       <span style:padding-left="5px">{link.name}</span>
     </span>
   {:else}
-    <a
-      class="button"
-      target="_blank"
-      href={link.url}
-      rel="noopener noreferrer"
-    >
+    <a class="button" target="_blank" href={link.url} rel="noopener noreferrer">
       {link.name}
     </a>
   {/if}

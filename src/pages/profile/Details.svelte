@@ -13,7 +13,7 @@
     RemoteData,
     stateFromResult,
   } from 'src/state/types'
-import { titleCase } from 'src/utils/helpers';
+  import { titleCase } from 'src/utils/helpers'
 
   export let member: FullMemberQuery['member']
   export let onUpdate: () => void
@@ -29,11 +29,19 @@ import { titleCase } from 'src/utils/helpers';
     ['Phone Number', member.phoneNumber],
     ['Location', member.location],
     ['On Campus', `${member.onCampus}`],
-    ['Enrollment', member.semester?.enrollment ? titleCase(member.semester.enrollment) : 'Inactive'],
+    [
+      'Enrollment',
+      member.semester?.enrollment
+        ? titleCase(member.semester.enrollment)
+        : 'Inactive',
+    ],
     ['Section', member.semester?.section || 'Homeless'],
     ['About', member.about],
     ['Picture', member.picture],
-    ['Arrived At Tech', typeof member.arrivedAtTech === "number" ? `${member.arrivedAtTech}` : ''],
+    [
+      'Arrived At Tech',
+      typeof member.arrivedAtTech === 'number' ? `${member.arrivedAtTech}` : '',
+    ],
     ['Gateway Drug', member.gatewayDrug],
     ['Conflicts', member.conflicts],
     ['Dietary Restrictions', member.dietaryRestrictions],

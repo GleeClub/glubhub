@@ -3,7 +3,10 @@
   import PhoneLink from 'src/components/member/PhoneLink.svelte'
 
   import { AllGigRequestsQuery } from 'src/gql-operations'
-  import { simpleDateWithYearFormatter, timeFormatter } from 'src/utils/datetime'
+  import {
+    simpleDateWithYearFormatter,
+    timeFormatter,
+  } from 'src/utils/datetime'
 
   export let gigRequest: AllGigRequestsQuery['gigRequests'][number]
 </script>

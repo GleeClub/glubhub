@@ -27,8 +27,9 @@
 
   const dispatch = createEventDispatcher<{ select: T }>()
 
-  $: nonEmptyGroups = mapLazyLoaded(
-    itemGroups, gs => gs.filter(g => g.length > 0))
+  $: nonEmptyGroups = mapLazyLoaded(itemGroups, (gs) =>
+    gs.filter((g) => g.length > 0)
+  )
 </script>
 
 <Column narrow>

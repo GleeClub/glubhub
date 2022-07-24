@@ -87,7 +87,7 @@ table.is-fullwidth.is-hoverable:hover {
   height: 250px;
   background-repeat: no-repeat;
   background-size: contain;
-  background-image: url("../public/placeholder.png");
+  background-image: url('../public/placeholder.png');
 }
 
 html,
@@ -228,7 +228,7 @@ table.is-hoverable tr.not-hoverable:hover {
 
 .line {
   stroke: #b4a46a;
-  fill: url("#attendanceGradient");
+  fill: url('#attendanceGradient');
   stroke-width: 2;
 }
 

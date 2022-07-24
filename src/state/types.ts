@@ -1,4 +1,8 @@
-import { FullEventQuery, FullSongQuery, SiteContextQuery } from 'src/gql-operations'
+import {
+  FullEventQuery,
+  FullSongQuery,
+  SiteContextQuery,
+} from 'src/gql-operations'
 import type { Readable } from 'svelte/store'
 
 export interface NotLoaded {
@@ -13,14 +17,14 @@ export interface Loaded<Data> {
 }
 export interface ApiError {
   response: {
-    error: string;
-    status: number;
+    error: string
+    status: number
     headers: {
-      map: Map<string, string>;
-    };
-  };
+      map: Map<string, string>
+    }
+  }
   request: {
-    query: string;
+    query: string
   }
 }
 export interface RemoteError {

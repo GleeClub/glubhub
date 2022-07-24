@@ -55,7 +55,10 @@
     (song) => !song.current && song.title.toLowerCase()[0] <= 'g'
   )
   const songsHToP = filterSongs(
-    (song) => !song.current && song.title.toLowerCase()[0] >= 'h' && song.title.toLowerCase()[0] <= 'p'
+    (song) =>
+      !song.current &&
+      song.title.toLowerCase()[0] >= 'h' &&
+      song.title.toLowerCase()[0] <= 'p'
   )
   const songsQToZ = filterSongs(
     (song) => !song.current && song.title.toLowerCase()[0] >= 'q'

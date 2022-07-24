@@ -4,7 +4,11 @@
   import LinkButton from 'src/components/buttons/LinkButton.svelte'
 
   import { AllGigRequestsQuery, GigRequestStatus } from 'src/gql-operations'
-  import { adminCreateEvent, routeAdmin, routeEvents } from 'src/route/constructors'
+  import {
+    adminCreateEvent,
+    routeAdmin,
+    routeEvents,
+  } from 'src/route/constructors'
 
   export let gigRequest: AllGigRequestsQuery['gigRequests'][number]
   export let reopen: (id: number) => void

@@ -6,15 +6,14 @@ import type { GlubRoute } from 'src/route/types'
 const parseRouteFromLocation = () =>
   window.location.hash.length >= 2
     ? parseRoute(window.location.hash.slice(2).split('/'))
-    : null;
+    : null
 
 const routeInner = writable(parseRouteFromLocation())
 
 const originalPushState = history.pushState
 const originalReplaceState = history.replaceState
 
-const updateRoute = () =>
-  routeInner.set(parseRouteFromLocation())
+const updateRoute = () => routeInner.set(parseRouteFromLocation())
 
 history.pushState = function () {
   originalPushState.apply(this, arguments)

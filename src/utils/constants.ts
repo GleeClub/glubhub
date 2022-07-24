@@ -8,7 +8,8 @@ export const SUBMISSION_STATE_BOX_ID = 'submission-box'
 export const SECTION_ORDER = ['Tenor 1', 'Tenor 2', 'Baritone', 'Bass', null]
 export const NO_SECTION = 'Homeless'
 export const OFFICER_LIST_EMAIL = 'gleeclub_officers@lists.gatech.edu'
-export const ATTENDANCE_ISSUE_EMAIL = OFFICER_LIST_EMAIL + 'subject=Attendance%20Issue'
+export const ATTENDANCE_ISSUE_EMAIL =
+  OFFICER_LIST_EMAIL + 'subject=Attendance%20Issue'
 
 export const ALL_PERIODS = [
   Period.Daily,

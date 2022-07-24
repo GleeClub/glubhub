@@ -30,10 +30,10 @@
   reloadSiteContext()
 
   const unsubscribe = derived(
-    ([route, siteContext, siteContextStatus]), x => x
-  )
-    .subscribe(([$route, $context, $contextStatus]) => {
-    if ($contextStatus.type !== "loaded") return;
+    [route, siteContext, siteContextStatus],
+    (x) => x
+  ).subscribe(([$route, $context, $contextStatus]) => {
+    if ($contextStatus.type !== 'loaded') return
 
     const loggedIn = !!$context.user
     const guestRoutes: GlubRoute['route'][] = [

@@ -2,7 +2,6 @@ import { getSdk, Sdk } from 'src/gql-operations'
 import { GraphQLClient } from 'graphql-request'
 import {
   loaded,
-  loading,
   error,
   QueryResult,
   LazyRemoteData,
@@ -45,7 +44,6 @@ export function lazyQuery<K extends keyof Sdk>(
   const resultStore =
     writable<LazyRemoteData<Awaited<ReturnType<Sdk[K]>>>>(notLoaded)
   const makeQuery = (...args: Parameters<Sdk[K]>) => {
-    resultStore.set(loading)
     query(queryName, ...args).then((result) => resultStore.set(result))
   }
 

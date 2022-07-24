@@ -16,7 +16,11 @@
   } from 'src/state/types'
   import { derived } from 'svelte/store'
   import { eagerQuery, query } from 'src/state/query'
-  import { NewRolePermission, Permission, PermissionType } from 'src/gql-operations'
+  import {
+    NewRolePermission,
+    Permission,
+    PermissionType,
+  } from 'src/gql-operations'
 
   let state: RemoteData = emptyLoaded
 

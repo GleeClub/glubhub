@@ -23,7 +23,7 @@
   <div class="navbar-brand">
     <HomeLogo />
     {#if $siteContext.user}
-      <BurgerButton {expanded} toggleExpanded={() => expanded = !expanded} />
+      <BurgerButton {expanded} toggleExpanded={() => (expanded = !expanded)} />
     {/if}
   </div>
   <div class="navbar-menu" class:is-active={expanded}>

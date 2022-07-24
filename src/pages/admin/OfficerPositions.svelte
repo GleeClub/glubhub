@@ -7,7 +7,12 @@
 
   import { memberType } from 'src/state/input'
   import { eagerQuery, query } from 'src/state/query'
-  import { emptyLoaded, loading, mapLazyLoaded, RemoteData } from 'src/state/types'
+  import {
+    emptyLoaded,
+    loading,
+    mapLazyLoaded,
+    RemoteData,
+  } from 'src/state/types'
   import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
 

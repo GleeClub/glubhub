@@ -9,7 +9,9 @@
   export let attendees: FullEventQuery['event']['allAttendance']
 
   $: attending = separateByConfirmed(attendees.filter((a) => a.shouldAttend))
-  $: notAttending = separateByConfirmed(attendees.filter((a) => !a.shouldAttend))
+  $: notAttending = separateByConfirmed(
+    attendees.filter((a) => !a.shouldAttend)
+  )
 
   function separateByConfirmed(
     filteredAttendees: FullEventQuery['event']['allAttendance']

@@ -9,7 +9,8 @@
     "start": "sirv public --no-clear",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "format": "prettier --write --plugin-search-dir=. --ignore-path=.gitignore ."
   },
   "prettier": {
     "trailingComma": "es5",

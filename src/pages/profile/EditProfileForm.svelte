@@ -98,7 +98,8 @@
       ...$siteContext.static.sections.map((section) => section.name),
     ]}
     selected={form.section}
-    onInput={(section) => updateForm({ ...form, section: section || form.section })}
+    onInput={(section) =>
+      updateForm({ ...form, section: section || form.section })}
     title="Section"
   />
   <TextInput

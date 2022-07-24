@@ -2,7 +2,10 @@
   import Button from 'src/components/buttons/Button.svelte'
   import ButtonGroup from 'src/components/buttons/ButtonGroup.svelte'
 
-  import { AbsenceRequestStatus, AllAbsenceRequestsQuery } from 'src/gql-operations'
+  import {
+    AbsenceRequestStatus,
+    AllAbsenceRequestsQuery,
+  } from 'src/gql-operations'
 
   export let absenceRequest: AllAbsenceRequestsQuery['absenceRequests'][number]
   export let respond: (
