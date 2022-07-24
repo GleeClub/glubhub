@@ -9,7 +9,7 @@
   aria-expanded={expanded}
   class="navbar-burger"
   class:is-active={expanded}
-  onClick={toggleExpanded}
+  on:click={toggleExpanded}
 >
   <span aria-hidden="true" />
   <span aria-hidden="true" />
