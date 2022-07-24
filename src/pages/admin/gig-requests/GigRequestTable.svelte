@@ -29,8 +29,8 @@
     {:else}
       <br />
       <tr style="text-align: center">
-        <td colspan=5>
-        No gig requests here, <i>officer</i>.
+        <td colspan="5">
+          No gig requests here, <i>officer</i>.
         </td>
       </tr>
     {/if}

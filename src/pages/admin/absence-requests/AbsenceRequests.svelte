@@ -15,7 +15,6 @@
     RemoteData,
     stateFromResult,
   } from 'src/state/types'
-import { siteContext } from 'src/store/context';
 
   let state: RemoteData = emptyLoaded
 
@@ -29,7 +28,7 @@ import { siteContext } from 'src/store/context';
       )
     )
   )
-  const closedAbsenceRequests = derived([allAbsenceRequests, siteContext], ([requests, context]) =>
+  const closedAbsenceRequests = derived(allAbsenceRequests, (requests) =>
     mapLazyLoaded(requests, (reqs) =>
       reqs.absenceRequests.filter(
         (r) => r.state !== AbsenceRequestStatus.Pending

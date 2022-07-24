@@ -31,7 +31,14 @@
     state = loading
     const result = await query('UpdateSong', {
       id: song.id,
-      update: song,
+      update: {
+        current: song.current,
+        title: song.title,
+        info: song.info,
+        key: song.key,
+        startingPitch: song.startingPitch,
+        mode: song.mode,
+      },
     })
 
     state = stateFromResult(result)

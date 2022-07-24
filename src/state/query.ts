@@ -21,17 +21,30 @@ export const gqlClient = getSdk(
   })
 )
 
+type QueryApiResult<K extends keyof Sdk> =
+  | Awaited<ReturnType<Sdk[K]>>
+  | { data: null; errors: { message: string }[] }
+
 export async function query<K extends keyof Sdk>(
   queryName: K,
   ...args: Parameters<Sdk[K]>
 ): Promise<QueryResult<Awaited<ReturnType<Sdk[K]>>>> {
   const action = gqlClient[queryName] as (
     ...args: Parameters<Sdk[K]>
-  ) => Promise<ReturnType<Sdk[K]>>
+  ) => Promise<QueryApiResult<K>>
+
   return action(...args)
-    .then((result: Awaited<ReturnType<Sdk[K]>>) => loaded(result))
+    .then((result) => {
+      console.log('API result', result)
+      if ('errors' in result) {
+        return error(result.errors[0].message)
+      } else {
+        return loaded(result)
+      }
+    })
     .catch((err: ApiError) => {
-      return error(err)
+      console.log('API error', err, typeof err, Object.keys(err), err?.response)
+      return error(err.response.errors[0].message)
     })
 }
 
