@@ -23,7 +23,7 @@
     <br />
     {timeFormatter(absenceRequest.event.callTime)}
     <br />
-    {absenceRequest.event.location || ''}
+    {absenceRequest.event.location}
   </td>
   <td>
     <a href={renderRoute(routeProfile(absenceRequest.member.email, null))}>
@@ -31,6 +31,6 @@
     </a>
   </td>
   <td>
-    <i>"${absenceRequest.reason}"</i>
+    <i>"{absenceRequest.reason}"</i>
   </td>
 </tr>

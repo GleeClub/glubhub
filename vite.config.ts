@@ -14,9 +14,6 @@ const config = defineConfig({
       compilerOptions: {
         dev: !production,
       },
-
-      // @ts-ignore This is temporary until the type definitions are fixed!
-      hot: !production,
     }),
   ],
   server: {

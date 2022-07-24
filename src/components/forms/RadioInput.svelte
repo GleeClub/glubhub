@@ -44,7 +44,7 @@
           checked={render(value) === render(selected)}
           on:click={() => onInput(value)}
         />
-        {' ' + render(value)}}
+        {' ' + render(value)}
       </label>
       {#if index !== values.length - 1}
         <br />

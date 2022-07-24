@@ -18,7 +18,7 @@ export const twentyFourHourTimeFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format('HH:MM')
 
 export const dateFormatter = (datetime: string | Dayjs): string =>
-  dayjs(datetime).format('dddd, MMMM Do')
+  dayjs(datetime).format('dddd, MMMM D')
 
 export const simpleDateWithYearFormatter = (datetime: string | Dayjs): string =>
   dayjs(datetime).format('MMM DD, YYYY')

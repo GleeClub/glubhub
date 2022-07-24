@@ -22,7 +22,7 @@
   class:is-inverted={inverted}
   class:is-outlined={outlined}
   on:click={click}
-  disabled={click == undefined}
+  disabled={!click}
 >
   <slot />
 </svelte:element>

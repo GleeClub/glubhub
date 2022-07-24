@@ -18,7 +18,7 @@
 
   const events = derived(
     siteContext,
-    (context) => context.user!.grades.eventsWithChanges
+    (context) => context.user?.grades?.eventsWithChanges || []
   )
 </script>
 

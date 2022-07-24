@@ -15,15 +15,21 @@
     RemoteData,
     stateFromResult,
   } from 'src/state/types'
+  import { siteContext } from 'src/store/context'
 
   let state: RemoteData = emptyLoaded
 
   const [allGigRequests, reloadAllGigRequests] = eagerQuery('AllGigRequests')
 
   const gigRequestsWithStatus = (status: GigRequestStatus) =>
-    derived(allGigRequests, (requests) =>
+    derived([allGigRequests, siteContext], ([requests, context]) =>
       mapLazyLoaded(requests, (reqs) =>
-        reqs.gigRequests.filter((r) => r.status === status)
+        reqs.gigRequests.filter(
+          (r) =>
+            r.status === status &&
+            (status === GigRequestStatus.Pending ||
+              new Date(r.startTime) >= new Date(context.currentSemester.startDate) && new Date(r.startTime) <= new Date(context.currentSemester.endDate))
+        )
       )
     )
   const pendingGigRequests = gigRequestsWithStatus(GigRequestStatus.Pending)

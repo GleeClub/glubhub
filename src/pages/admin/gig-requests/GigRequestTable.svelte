@@ -21,9 +21,18 @@
     </tr>
   </thead>
   <tbody>
-    {#each gigRequests as gigRequest}
-      <SingleGigRequest {gigRequest} />
-      <GigRequestButtons {gigRequest} {reopen} {dismiss} />
-    {/each}
+    {#if gigRequests.length > 0}
+      {#each gigRequests as gigRequest}
+        <SingleGigRequest {gigRequest} />
+        <GigRequestButtons {gigRequest} {reopen} {dismiss} />
+      {/each}
+    {:else}
+      <br />
+      <tr style="text-align: center">
+        <td colspan=5>
+        No gig requests here, <i>officer</i>.
+        </td>
+      </tr>
+    {/if}
   </tbody>
 </Table>

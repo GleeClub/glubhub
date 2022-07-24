@@ -76,7 +76,7 @@
       color="is-primary"
       className="is-pulled-left"
       loading={state.type === 'loading'}
-      click={changeSemester}
+      click={() => changeSemester()}
     >
       The ol' Glub Hub switcharoo
     </Button>

@@ -15,8 +15,15 @@
   import { renderRoute } from 'src/route/render'
   import { route } from 'src/store/route'
   import { siteContext } from 'src/store/context'
+  import { onDestroy } from 'svelte'
 
   let expanded = false
+
+  const unsubscribe = route.subscribe((_route) => {
+    expanded = false
+  })
+
+  onDestroy(unsubscribe)
 </script>
 
 <nav class="navbar is-primary is-fixed-top" aria-label="main navigation">
