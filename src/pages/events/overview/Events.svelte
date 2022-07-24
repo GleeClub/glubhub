@@ -16,15 +16,15 @@
   export let eventId: number | null
   export let tab: EventTab | null
 
-  const [events, _reloadEvents] = eagerQuery('AllEvents', {})
+  const [allEvents, reloadAllEvents] = eagerQuery('AllEvents', {})
 
-  $: upcomingEvents = derived(events, ($events) =>
+  $: upcomingEvents = derived(allEvents, ($events) =>
     mapLazyLoaded($events, (es) => es.events.filter((e) => !eventIsOver(e)))
   )
-  $: pastEvents = derived(events, ($events) =>
+  $: pastEvents = derived(allEvents, ($events) =>
     mapLazyLoaded($events, (es) => es.events.filter((e) => eventIsOver(e)))
   )
-  $: [selectedEvent, reexecute] = eventId
+  $: [selectedEvent, reloadSelectedEvent] = eventId
     ? eagerQuery('FullEvent', { id: eventId })
     : [readable(notLoaded), (_vars: { id: number }) => {}]
 </script>
@@ -40,7 +40,13 @@
     let:data={event}
     {tab}
     event={event.event}
-    onUpdate={() => reexecute({ id: event.event.id })}
-    onDelete={() => reexecute({ id: event.event.id })}
+    onUpdate={() => {
+      reloadAllEvents()
+      reloadSelectedEvent({ id: event.event.id })
+    }}
+    onDelete={() => {
+      reloadAllEvents()
+      reloadSelectedEvent({ id: event.event.id })
+    }}
   />
 </Sidebar>

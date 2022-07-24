@@ -5,18 +5,14 @@
   export let loading = false
   export let prefix = ''
   export let suffix = ''
-
-  $: className = [
-    'field',
-    expanded ? 'is-expanded' : null,
-    loading ? 'is-loading' : null,
-    prefix || suffix ? 'has-addons' : null,
-  ]
-    .filter((c) => !!c)
-    .join(' ')
 </script>
 
-<div class={className}>
+<div
+  class="field"
+  class:is-expanded={expanded}
+  class:is-loading={loading}
+  class:has-addons={!!prefix || !!suffix}
+>
   {#if prefix}
     <Control>
       <a class="button is-static">

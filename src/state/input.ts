@@ -118,7 +118,7 @@ export const pitchType: FormInputType<Pitch | null> = {
 }
 
 export const songModeType: FormInputType<SongMode | null> = {
-  toString: (sm) => sm || '(no mode)',
+  toString: (sm) => (sm ? titleCase(sm) : '(no mode)'),
   fromString: (sm) =>
     ['Major', 'Minor'].includes(sm) ? (sm.toUpperCase() as SongMode) : null,
   textType: 'text',

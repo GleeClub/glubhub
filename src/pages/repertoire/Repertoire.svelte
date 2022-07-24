@@ -90,10 +90,13 @@
     {#if tab?.route === 'edit'}
       <EditSong
         song={song.song}
-        onUpdate={() => reloadSelectedSong({ id: song.song.id })}
+        onUpdate={() => {
+          reloadSelectedSong({ id: song.song.id })
+          reloadAllSongs()
+        }}
       />
     {:else}
-      <SongInfo song={song.song} reloadAllSongs={() => reloadAllSongs({})} />
+      <SongInfo song={song.song} reloadAllSongs={() => reloadAllSongs()} />
     {/if}
   </svelte:fragment>
 </Sidebar>
