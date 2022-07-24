@@ -3,7 +3,6 @@
   import Columns from 'src/components/bulma/Columns.svelte'
   import Container from 'src/components/bulma/Container.svelte'
   import Section from 'src/components/bulma/Section.svelte'
-  import DocumentLinks from 'src/components/navbar/DocumentLinks.svelte'
   import SelectableList from 'src/components/remote/SelectableList.svelte'
   import AbsenceRequests from './absence-requests/AbsenceRequests.svelte'
   import CreateEvent from './create-event/CreateEvent.svelte'
@@ -14,6 +13,7 @@
   import SitePermissions from './SitePermissions.svelte'
   import Uniforms from './uniforms/Uniforms.svelte'
   import WebmasterTools from './WebmasterTools.svelte'
+  import DocumentLinks from './DocumentLinks.svelte';
 
   import { routeAdmin } from 'src/route/constructors'
   import { AdminRoute } from 'src/route/types'
