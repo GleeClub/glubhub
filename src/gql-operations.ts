@@ -47,7 +47,7 @@ export type ActiveSemester = {
   /** The email of the member */
   member: Scalars['String'];
   /** What section the member sang in */
-  section?: Maybe<Scalars['String']>;
+  section: Scalars['String'];
   /** The name of the semester */
   semester: Scalars['String'];
 };
@@ -136,7 +136,7 @@ export type Event = {
   callTime: Scalars['GqlDateTime'];
   carpools: Array<Carpool>;
   /** General information or details about this event */
-  comments?: Maybe<Scalars['String']>;
+  comments: Scalars['String'];
   /** Whether members are assumed to attend (we assume as much for most events) */
   defaultAttend: Scalars['Boolean'];
   /** The gig for this event, if it is a gig */
@@ -146,7 +146,7 @@ export type Event = {
   /** The ID of the event */
   id: Scalars['Int'];
   /** Where this event will be held */
-  location?: Maybe<Scalars['String']>;
+  location: Scalars['String'];
   /** The name of the event */
   name: Scalars['String'];
   /** How many points attendance of this event is worth */
@@ -201,13 +201,13 @@ export type Fee = {
 export type Gig = {
   __typename?: 'Gig';
   /** The email of the contact for this gig */
-  contactEmail?: Maybe<Scalars['String']>;
+  contactEmail: Scalars['String'];
   /** The name of the contact for this gig */
-  contactName?: Maybe<Scalars['String']>;
+  contactName: Scalars['String'];
   /** The phone number of the contact for this gig */
-  contactPhone?: Maybe<Scalars['String']>;
+  contactPhone: Scalars['String'];
   /** A description of this event for the external site (if it is public) */
-  description?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
   /** The ID of the event this gig belongs to */
   event: Scalars['Int'];
   /** When members are expected to actually perform */
@@ -217,7 +217,7 @@ export type Gig = {
   /** Whether this gig is visible on the external website */
   public: Scalars['Boolean'];
   /** A summary of this event for the external site (if it is public) */
-  summary?: Maybe<Scalars['String']>;
+  summary: Scalars['String'];
   /** The uniform for this gig */
   uniform: Uniform;
 };
@@ -225,7 +225,7 @@ export type Gig = {
 export type GigRequest = {
   __typename?: 'GigRequest';
   /** Any comments about the event */
-  comments?: Maybe<Scalars['String']>;
+  comments: Scalars['String'];
   /** The phone number of the contact for the potential event */
   contactEmail: Scalars['String'];
   /** The name of the contact for the potential event */
@@ -289,13 +289,13 @@ export type MediaType = {
 export type Member = {
   __typename?: 'Member';
   /** A short biography written by the member */
-  about?: Maybe<Scalars['String']>;
+  about: Scalars['String'];
   /** What year the member arrived at Georgia Tech */
   arrivedAtTech?: Maybe<Scalars['Int']>;
   /** What conflicts with rehearsal the member may have */
-  conflicts?: Maybe<Scalars['String']>;
+  conflicts: Scalars['String'];
   /** Any dietary restrictions the member may have */
-  dietaryRestrictions?: Maybe<Scalars['String']>;
+  dietaryRestrictions: Scalars['String'];
   /** The member's email, which must be unique */
   email: Scalars['String'];
   /** The member's first name */
@@ -303,21 +303,21 @@ export type Member = {
   /** The member's full name */
   fullName: Scalars['String'];
   /** What got them to join Glee Club */
-  gatewayDrug?: Maybe<Scalars['String']>;
+  gatewayDrug: Scalars['String'];
   /** The grades for the member in the given semester (default the current semester) */
   grades: Grades;
   /** Where the member came from */
-  hometown?: Maybe<Scalars['String']>;
+  hometown: Scalars['String'];
   /** The member's last name */
   lastName: Scalars['String'];
   /** Where the member lives */
   location: Scalars['String'];
   /** The member's academic major */
-  major?: Maybe<Scalars['String']>;
+  major: Scalars['String'];
   /** The member's academic minor */
-  minor?: Maybe<Scalars['String']>;
+  minor: Scalars['String'];
   /** Whether the member lives on campus */
-  onCampus?: Maybe<Scalars['Boolean']>;
+  onCampus: Scalars['Boolean'];
   /** How many people the member can drive to events (besides themself) */
   passengers: Scalars['Int'];
   /** The permissions currently held by the member */
@@ -325,7 +325,7 @@ export type Member = {
   /** The member's phone number */
   phoneNumber: Scalars['String'];
   /** An optional link to a profile picture for the member */
-  picture?: Maybe<Scalars['String']>;
+  picture: Scalars['String'];
   /** The officer positions currently held by the member */
   positions: Array<Role>;
   /** The member's nick name */
@@ -361,24 +361,24 @@ export type MemberRole = {
 };
 
 export type MemberUpdate = {
-  about?: InputMaybe<Scalars['String']>;
+  about: Scalars['String'];
   arrivedAtTech?: InputMaybe<Scalars['Int']>;
-  conflicts?: InputMaybe<Scalars['String']>;
-  dietaryRestrictions?: InputMaybe<Scalars['String']>;
+  conflicts: Scalars['String'];
+  dietaryRestrictions: Scalars['String'];
   email: Scalars['String'];
   enrollment?: InputMaybe<Enrollment>;
   firstName: Scalars['String'];
-  gatewayDrug?: InputMaybe<Scalars['String']>;
-  hometown?: InputMaybe<Scalars['String']>;
+  gatewayDrug: Scalars['String'];
+  hometown: Scalars['String'];
   lastName: Scalars['String'];
   location: Scalars['String'];
-  major?: InputMaybe<Scalars['String']>;
-  minor?: InputMaybe<Scalars['String']>;
+  major: Scalars['String'];
+  minor: Scalars['String'];
   onCampus: Scalars['Boolean'];
   passHash?: InputMaybe<Scalars['String']>;
   passengers: Scalars['Int'];
   phoneNumber: Scalars['String'];
-  picture?: InputMaybe<Scalars['String']>;
+  picture: Scalars['String'];
   preferredName?: InputMaybe<Scalars['String']>;
   section?: InputMaybe<Scalars['String']>;
 };
@@ -758,19 +758,19 @@ export type NewEventPeriod = {
 };
 
 export type NewGig = {
-  contactEmail?: InputMaybe<Scalars['String']>;
-  contactName?: InputMaybe<Scalars['String']>;
-  contactPhone?: InputMaybe<Scalars['String']>;
-  description?: InputMaybe<Scalars['String']>;
+  contactEmail: Scalars['String'];
+  contactName: Scalars['String'];
+  contactPhone: Scalars['String'];
+  description: Scalars['String'];
   performanceTime: Scalars['GqlDateTime'];
   price?: InputMaybe<Scalars['Int']>;
   public: Scalars['Boolean'];
-  summary?: InputMaybe<Scalars['String']>;
+  summary: Scalars['String'];
   uniform: Scalars['Int'];
 };
 
 export type NewGigRequest = {
-  comments?: InputMaybe<Scalars['String']>;
+  comments: Scalars['String'];
   contactEmail: Scalars['String'];
   contactName: Scalars['String'];
   contactPhone: Scalars['String'];
@@ -781,24 +781,24 @@ export type NewGigRequest = {
 };
 
 export type NewMember = {
-  about?: InputMaybe<Scalars['String']>;
+  about: Scalars['String'];
   arrivedAtTech?: InputMaybe<Scalars['Int']>;
-  conflicts?: InputMaybe<Scalars['String']>;
-  dietaryRestrictions?: InputMaybe<Scalars['String']>;
+  conflicts: Scalars['String'];
+  dietaryRestrictions: Scalars['String'];
   email: Scalars['String'];
   enrollment: Enrollment;
   firstName: Scalars['String'];
-  gatewayDrug?: InputMaybe<Scalars['String']>;
-  hometown?: InputMaybe<Scalars['String']>;
+  gatewayDrug: Scalars['String'];
+  hometown: Scalars['String'];
   lastName: Scalars['String'];
   location: Scalars['String'];
-  major?: InputMaybe<Scalars['String']>;
-  minor?: InputMaybe<Scalars['String']>;
+  major: Scalars['String'];
+  minor: Scalars['String'];
   onCampus: Scalars['Boolean'];
   passHash: Scalars['String'];
   passengers: Scalars['Int'];
   phoneNumber: Scalars['String'];
-  picture?: InputMaybe<Scalars['String']>;
+  picture: Scalars['String'];
   preferredName?: InputMaybe<Scalars['String']>;
   section?: InputMaybe<Scalars['String']>;
 };
@@ -827,13 +827,13 @@ export type NewSong = {
 export type NewSongLink = {
   content?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
-  target: Scalars['String'];
   type: Scalars['String'];
+  url: Scalars['String'];
 };
 
 export type NewUniform = {
   color?: InputMaybe<Scalars['UniformColor']>;
-  description?: InputMaybe<Scalars['String']>;
+  description: Scalars['String'];
   name: Scalars['String'];
 };
 
@@ -886,14 +886,14 @@ export enum Pitch {
 
 export type PublicEvent = {
   __typename?: 'PublicEvent';
-  description?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
   endTime?: Maybe<Scalars['GqlDateTime']>;
   id: Scalars['Int'];
   invite: Scalars['String'];
-  location?: Maybe<Scalars['String']>;
+  location: Scalars['String'];
   name: Scalars['String'];
   startTime: Scalars['GqlDateTime'];
-  summary?: Maybe<Scalars['String']>;
+  summary: Scalars['String'];
 };
 
 export type PublicSong = {
@@ -1057,7 +1057,7 @@ export type Song = {
    * Any information related to the song
    * (minor changes to the music, who wrote it, soloists, etc.)
    */
-  info?: Maybe<Scalars['String']>;
+  info: Scalars['String'];
   /** The key of the song */
   key?: Maybe<Pitch>;
   /** The sorted sections of links belonging to the song */
@@ -1078,10 +1078,10 @@ export type SongLink = {
   name: Scalars['String'];
   /** The ID of the song this link belongs to */
   song: Scalars['Int'];
-  /** The target this link points to */
-  target: Scalars['String'];
   /** The type of this link (e.g. MIDI) */
   type: Scalars['String'];
+  /** The URL this link points to */
+  url: Scalars['String'];
 };
 
 export type SongLinkSection = {
@@ -1092,7 +1092,7 @@ export type SongLinkSection = {
 
 export type SongLinkUpdate = {
   name: Scalars['String'];
-  target: Scalars['String'];
+  url: Scalars['String'];
 };
 
 export enum SongMode {
@@ -1141,7 +1141,7 @@ export type Uniform = {
   /** The associated color (In the format #HHH, H being a hex digit) */
   color?: Maybe<Scalars['UniformColor']>;
   /** The explanation of what to wear when wearing the uniform */
-  description?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
   /** The ID of the uniform */
   id: Scalars['Int'];
   /** The name of the uniform */
@@ -1502,7 +1502,7 @@ export type UpdateUniformMutation = { __typename?: 'MutationRoot', updateUniform
 export type AllAbsenceRequestsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllAbsenceRequestsQuery = { __typename?: 'QueryRoot', absenceRequests: Array<{ __typename?: 'AbsenceRequest', time: string, reason: string, state: AbsenceRequestStatus, event: { __typename?: 'Event', id: number, name: string, location?: string | null, callTime: string }, member: { __typename?: 'Member', email: string, fullName: string } }> };
+export type AllAbsenceRequestsQuery = { __typename?: 'QueryRoot', absenceRequests: Array<{ __typename?: 'AbsenceRequest', time: string, reason: string, state: AbsenceRequestStatus, event: { __typename?: 'Event', id: number, name: string, location: string, callTime: string }, member: { __typename?: 'Member', email: string, fullName: string } }> };
 
 export type AllDocumentLinksQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1522,12 +1522,12 @@ export type AllFeesQuery = { __typename?: 'QueryRoot', fees: Array<{ __typename?
 export type AllGigRequestsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllGigRequestsQuery = { __typename?: 'QueryRoot', gigRequests: Array<{ __typename?: 'GigRequest', id: number, time: string, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, startTime: string, location: string, comments?: string | null, status: GigRequestStatus, event?: { __typename?: 'Event', id: number, name: string } | null }> };
+export type AllGigRequestsQuery = { __typename?: 'QueryRoot', gigRequests: Array<{ __typename?: 'GigRequest', id: number, time: string, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, startTime: string, location: string, comments: string, status: GigRequestStatus, event?: { __typename?: 'Event', id: number, name: string } | null }> };
 
 export type AllMembersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllMembersQuery = { __typename?: 'QueryRoot', members: Array<{ __typename?: 'Member', email: string, phoneNumber: string, fullName: string, location: string, semester?: { __typename?: 'ActiveSemester', section?: string | null } | null }> };
+export type AllMembersQuery = { __typename?: 'QueryRoot', members: Array<{ __typename?: 'Member', email: string, phoneNumber: string, fullName: string, location: string, semester?: { __typename?: 'ActiveSemester', section: string } | null }> };
 
 export type AllMinutesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1552,12 +1552,12 @@ export type AllSongsQuery = { __typename?: 'QueryRoot', songs: Array<{ __typenam
 export type AllUniformsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllUniformsQuery = { __typename?: 'QueryRoot', uniforms: Array<{ __typename?: 'Uniform', id: number, name: string, color?: string | null, description?: string | null }> };
+export type AllUniformsQuery = { __typename?: 'QueryRoot', uniforms: Array<{ __typename?: 'Uniform', id: number, name: string, color?: string | null, description: string }> };
 
 export type ConfirmSemesterFormQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ConfirmSemesterFormQuery = { __typename?: 'QueryRoot', user?: { __typename?: 'Member', location: string, onCampus?: boolean | null, dietaryRestrictions?: string | null, conflicts?: string | null, previousSemester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section?: string | null } | null } | null };
+export type ConfirmSemesterFormQuery = { __typename?: 'QueryRoot', user?: { __typename?: 'Member', location: string, onCampus: boolean, dietaryRestrictions: string, conflicts: string, previousSemester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section: string } | null } | null };
 
 export type CurrentOfficersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1576,14 +1576,14 @@ export type FullEventQueryVariables = Exact<{
 }>;
 
 
-export type FullEventQuery = { __typename?: 'QueryRoot', event: { __typename?: 'Event', id: number, name: string, semester: string, type: string, callTime: string, releaseTime?: string | null, points: number, comments?: string | null, location?: string | null, gigCount: boolean, defaultAttend: boolean, gig?: { __typename?: 'Gig', public: boolean, summary?: string | null, description?: string | null, contactName?: string | null, contactEmail?: string | null, contactPhone?: string | null, price?: number | null, performanceTime: string, uniform: { __typename?: 'Uniform', id: number, name: string, description?: string | null, color?: string | null } } | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number, rsvpIssue?: string | null, approvedAbsence: boolean, denyCredit: boolean, absenceRequest?: { __typename?: 'AbsenceRequest', state: AbsenceRequestStatus } | null } | null, allAttendance: Array<{ __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number, member: { __typename?: 'Member', fullName: string, email: string, semester?: { __typename?: 'ActiveSemester', section?: string | null } | null } }>, carpools: Array<{ __typename?: 'Carpool', driver: { __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }, passengers: Array<{ __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }> }>, setlist: Array<{ __typename?: 'Song', id: number, title: string, key?: Pitch | null, mode?: SongMode | null, startingPitch?: Pitch | null }> } };
+export type FullEventQuery = { __typename?: 'QueryRoot', event: { __typename?: 'Event', id: number, name: string, semester: string, type: string, callTime: string, releaseTime?: string | null, points: number, comments: string, location: string, gigCount: boolean, defaultAttend: boolean, gig?: { __typename?: 'Gig', public: boolean, summary: string, description: string, contactName: string, contactEmail: string, contactPhone: string, price?: number | null, performanceTime: string, uniform: { __typename?: 'Uniform', id: number, name: string, description: string, color?: string | null } } | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number, rsvpIssue?: string | null, approvedAbsence: boolean, denyCredit: boolean, absenceRequest?: { __typename?: 'AbsenceRequest', state: AbsenceRequestStatus } | null } | null, allAttendance: Array<{ __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number, member: { __typename?: 'Member', fullName: string, email: string, semester?: { __typename?: 'ActiveSemester', section: string } | null } }>, carpools: Array<{ __typename?: 'Carpool', driver: { __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }, passengers: Array<{ __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }> }>, setlist: Array<{ __typename?: 'Song', id: number, title: string, key?: Pitch | null, mode?: SongMode | null, startingPitch?: Pitch | null }> } };
 
 export type FullMemberQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type FullMemberQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, phoneNumber: string, picture?: string | null, passengers: number, location: string, onCampus?: boolean | null, about?: string | null, major?: string | null, minor?: string | null, hometown?: string | null, arrivedAtTech?: number | null, gatewayDrug?: string | null, conflicts?: string | null, dietaryRestrictions?: string | null, fullName: string, semester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section?: string | null } | null, positions: Array<{ __typename?: 'Role', name: string }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section?: string | null, grades: { __typename?: 'Grades', grade: number } }>, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }>, grades: { __typename?: 'Grades', grade: number, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, type: string, callTime: string, attendance: { __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number } }, change: { __typename?: 'GradeChange', reason: string, change: number, partialScore: number } }> } } };
+export type FullMemberQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, phoneNumber: string, picture: string, passengers: number, location: string, onCampus: boolean, about: string, major: string, minor: string, hometown: string, arrivedAtTech?: number | null, gatewayDrug: string, conflicts: string, dietaryRestrictions: string, fullName: string, semester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section: string } | null, positions: Array<{ __typename?: 'Role', name: string }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string, grades: { __typename?: 'Grades', grade: number } }>, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }>, grades: { __typename?: 'Grades', grade: number, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, type: string, callTime: string, attendance: { __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number } }, change: { __typename?: 'GradeChange', reason: string, change: number, partialScore: number } }> } } };
 
 export type FullMinutesQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -1597,26 +1597,26 @@ export type FullSongQueryVariables = Exact<{
 }>;
 
 
-export type FullSongQuery = { __typename?: 'QueryRoot', song: { __typename?: 'Song', id: number, title: string, info?: string | null, current: boolean, key?: Pitch | null, startingPitch?: Pitch | null, mode?: SongMode | null, linkSections: Array<{ __typename?: 'SongLinkSection', name: string, links: Array<{ __typename?: 'SongLink', id: number, name: string, type: string, target: string }> }> } };
+export type FullSongQuery = { __typename?: 'QueryRoot', song: { __typename?: 'Song', id: number, title: string, info: string, current: boolean, key?: Pitch | null, startingPitch?: Pitch | null, mode?: SongMode | null, linkSections: Array<{ __typename?: 'SongLinkSection', name: string, links: Array<{ __typename?: 'SongLink', id: number, name: string, type: string, url: string }> }> } };
 
 export type GigRequestForNewEventQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type GigRequestForNewEventQuery = { __typename?: 'QueryRoot', gigRequest: { __typename?: 'GigRequest', id: number, time: string, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, startTime: string, location: string, comments?: string | null, status: GigRequestStatus } };
+export type GigRequestForNewEventQuery = { __typename?: 'QueryRoot', gigRequest: { __typename?: 'GigRequest', id: number, time: string, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, startTime: string, location: string, comments: string, status: GigRequestStatus } };
 
 export type MemberSemestersQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type MemberSemestersQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section?: string | null, grades: { __typename?: 'Grades', grade: number } }> } };
+export type MemberSemestersQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string, grades: { __typename?: 'Grades', grade: number } }> } };
 
 export type SiteContextQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SiteContextQuery = { __typename?: 'QueryRoot', currentSemester: { __typename?: 'Semester', name: string, startDate: string, endDate: string, gigRequirement: number }, user?: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, fullName: string, phoneNumber: string, picture?: string | null, passengers: number, location: string, onCampus?: boolean | null, about?: string | null, major?: string | null, minor?: string | null, hometown?: string | null, arrivedAtTech?: number | null, gatewayDrug?: string | null, conflicts?: string | null, dietaryRestrictions?: string | null, semester?: { __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section?: string | null } | null, positions: Array<{ __typename?: 'Role', name: string }>, permissions: Array<{ __typename?: 'MemberPermission', name: string, eventType?: string | null }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section?: string | null }>, grades: { __typename?: 'Grades', grade: number, volunteerGigsAttended: Array<{ __typename?: 'Event', id: number, name: string, callTime: string, releaseTime?: string | null }>, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, callTime: string, releaseTime?: string | null }, change: { __typename?: 'GradeChange', change: number, partialScore: number, reason: string } }> }, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }> } | null, static: { __typename?: 'StaticData', sections: Array<{ __typename?: 'SectionType', name: string }>, permissions: Array<{ __typename?: 'Permission', name: string, description?: string | null, type: PermissionType }>, roles: Array<{ __typename?: 'Role', name: string, rank: number, maxQuantity: number }>, mediaTypes: Array<{ __typename?: 'MediaType', name: string, order: number, storage: StorageType }>, eventTypes: Array<{ __typename?: 'EventType', name: string, weight: number }>, transactionTypes: Array<{ __typename?: 'TransactionType', name: string }> } };
+export type SiteContextQuery = { __typename?: 'QueryRoot', currentSemester: { __typename?: 'Semester', name: string, startDate: string, endDate: string, gigRequirement: number }, user?: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, fullName: string, phoneNumber: string, picture: string, passengers: number, location: string, onCampus: boolean, about: string, major: string, minor: string, hometown: string, arrivedAtTech?: number | null, gatewayDrug: string, conflicts: string, dietaryRestrictions: string, semester?: { __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string } | null, positions: Array<{ __typename?: 'Role', name: string }>, permissions: Array<{ __typename?: 'MemberPermission', name: string, eventType?: string | null }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string }>, grades: { __typename?: 'Grades', grade: number, volunteerGigsAttended: Array<{ __typename?: 'Event', id: number, name: string, callTime: string, releaseTime?: string | null }>, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, callTime: string, releaseTime?: string | null }, change: { __typename?: 'GradeChange', change: number, partialScore: number, reason: string } }> }, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }> } | null, static: { __typename?: 'StaticData', sections: Array<{ __typename?: 'SectionType', name: string }>, permissions: Array<{ __typename?: 'Permission', name: string, description?: string | null, type: PermissionType }>, roles: Array<{ __typename?: 'Role', name: string, rank: number, maxQuantity: number }>, mediaTypes: Array<{ __typename?: 'MediaType', name: string, order: number, storage: StorageType }>, eventTypes: Array<{ __typename?: 'EventType', name: string, weight: number }>, transactionTypes: Array<{ __typename?: 'TransactionType', name: string }> } };
 
 export type TransactionsForSemesterQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2286,7 +2286,7 @@ export const FullSongDocument = gql`
         id
         name
         type
-        target
+        url
       }
     }
   }

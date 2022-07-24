@@ -13,7 +13,7 @@ query FullSong($id: Int!) {
         id
         name
         type
-        target
+        url
       }
     }
   }

@@ -41,7 +41,7 @@
       newLink: {
         name,
         type: typeName,
-        target: file.name,
+        url: file.name,
         content,
       },
     })

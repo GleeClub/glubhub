@@ -7,7 +7,7 @@
   import TextInput from 'src/components/forms/TextInput.svelte'
   import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { Enrollment, NewMember } from 'src/gql-operations'
+  import { Enrollment, MemberUpdate } from 'src/gql-operations'
   import {
     emailType,
     enrollmentType,
@@ -19,8 +19,8 @@
   import { RemoteData } from 'src/state/types'
   import { siteContext } from 'src/store/context'
 
-  export let form: NewMember
-  export let updateForm: (form: NewMember) => void
+  export let form: MemberUpdate
+  export let updateForm: (form: MemberUpdate) => void
   export let state: RemoteData
   export let cancel: () => void
   export let submit: () => void
@@ -98,7 +98,7 @@
       ...$siteContext.static.sections.map((section) => section.name),
     ]}
     selected={form.section}
-    onInput={(section) => updateForm({ ...form, section })}
+    onInput={(section) => updateForm({ ...form, section: section || form.section })}
     title="Section"
   />
   <TextInput

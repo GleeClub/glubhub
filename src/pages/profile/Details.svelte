@@ -6,19 +6,20 @@
   import EditProfileForm from './EditProfileForm.svelte'
 
   import { query } from 'src/state/query'
-  import { FullMemberQuery, NewMember } from 'src/gql-operations'
+  import { FullMemberQuery, MemberUpdate } from 'src/gql-operations'
   import {
     emptyLoaded,
     loading,
     RemoteData,
     stateFromResult,
   } from 'src/state/types'
+import { titleCase } from 'src/utils/helpers';
 
   export let member: FullMemberQuery['member']
   export let onUpdate: () => void
 
   let state: RemoteData = emptyLoaded
-  let form: NewMember | null = null
+  let form: MemberUpdate | null = null
 
   $: readonlyRows = [
     ['First Name', member.firstName],
@@ -27,15 +28,15 @@
     ['Email', member.email],
     ['Phone Number', member.phoneNumber],
     ['Location', member.location],
-    ['On Campus', `${!!member.onCampus}`],
-    ['Enrollment', member.semester?.enrollment || 'Inactive'],
+    ['On Campus', `${member.onCampus}`],
+    ['Enrollment', member.semester?.enrollment ? titleCase(member.semester.enrollment) : 'Inactive'],
     ['Section', member.semester?.section || 'Homeless'],
-    ['About', member.about || ''],
-    ['Picture', member.picture || ''],
+    ['About', member.about],
+    ['Picture', member.picture],
     ['Arrived At Tech', member.arrivedAtTech ? `${member.arrivedAtTech}` : ''],
-    ['Gateway Drug', member.gatewayDrug || ''],
-    ['Conflicts', member.conflicts || ''],
-    ['Dietary Restrictions', member.dietaryRestrictions || ''],
+    ['Gateway Drug', member.gatewayDrug],
+    ['Conflicts', member.conflicts],
+    ['Dietary Restrictions', member.dietaryRestrictions],
   ]
 
   async function updateMember() {
@@ -54,7 +55,7 @@
     }
   }
 
-  const formForMember = (): NewMember => ({
+  const formForMember = (): MemberUpdate => ({
     firstName: member.firstName,
     preferredName: member.preferredName || '',
     lastName: member.lastName,
@@ -62,18 +63,19 @@
     phoneNumber: member.phoneNumber,
     location: member.location,
     onCampus: !!member.onCampus,
-    major: member.major || '',
-    hometown: member.hometown || '',
+    major: member.major,
+    minor: member.minor,
+    hometown: member.hometown,
     passengers: member.passengers,
     // TODO: remove these exclams
     enrollment: member.semester!.enrollment,
     section: member.semester!.section,
-    about: member.about || '',
-    picture: member.picture || '',
+    about: member.about,
+    picture: member.picture,
     arrivedAtTech: member.arrivedAtTech,
-    gatewayDrug: member.gatewayDrug || '',
-    conflicts: member.conflicts || '',
-    dietaryRestrictions: member.dietaryRestrictions || '',
+    gatewayDrug: member.gatewayDrug,
+    conflicts: member.conflicts,
+    dietaryRestrictions: member.dietaryRestrictions,
     passHash: '',
   })
 </script>

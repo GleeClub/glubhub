@@ -34,7 +34,7 @@
       songId: song.id,
       newLink: {
         name,
-        target: url,
+        url,
         type: 'Performances',
       },
     })

@@ -17,7 +17,7 @@
   {#if link.type === 'Sheet Music'}
     <a
       class="button is-outlined is-primary"
-      href="https://gleeclub.gatech.edu/music/{link.target}"
+      href="{link.url}"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -29,7 +29,7 @@
   {:else if link.type === 'MIDIs'}
     <a
       class="button is-outlined is-primary"
-      href="https://gleeclub.gatech.edu/music/{link.target}"
+      href="{link.url}"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -45,7 +45,7 @@
       </span>
       <a
         class="button"
-        href="https://youtu.be/{link.target}"
+        href="https://youtu.be/{link.url}"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -59,7 +59,7 @@
     <a
       class="button"
       target="_blank"
-      href={link.target}
+      href={link.url}
       rel="noopener noreferrer"
     >
       {link.name}
