@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
+    "module": "esnext",
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noEmitOnError": true,
@@ -13,14 +14,12 @@
     "importsNotUsedAsValues": "remove",
     "resolveJsonModule": true,
     "baseUrl": ".",
-
     "plugins": [
       {
         "name": "typescript-eslint-language-service"
       }
     ]
   },
-
   "include": ["src/**/*", "*.json"],
   "exclude": ["node_modules/*", "public/*"]
 }

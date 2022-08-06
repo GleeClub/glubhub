@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
-import type { NewRolePermission } from 'src/gql-operations'
+import type { NewRolePermission, Pitch } from 'src/gql-operations'
+import { pitchToUnicode } from 'src/state/pitch'
 import { HasEventTimes, HasPermissions } from 'src/state/types'
 
 export const formatPhone = (phone: string) =>
@@ -22,11 +23,6 @@ export const eventIsOver = (event: HasEventTimes): boolean =>
 export const titleCase = (s: string): string =>
   s[0].toUpperCase() + s.slice(1).toLowerCase()
 
-// export const playPitch = (pitch: Pitch): void => {
-//   const synth = new Tone.Synth().toMaster();
-//   synth.triggerAttackRelease(Tone.Midi(`${pitchToUnicode(pitch)}4`), "1n");
-// };
-
 export const rolePermissionsAreEqual = (
   permission1: NewRolePermission,
   permission2: NewRolePermission
@@ -38,15 +34,16 @@ export const rolePermissionsAreEqual = (
 export const roundToTwoDigits = (x: number): number =>
   Math.round(x * 100) / 100.0
 
-export const fileToBase64 = async (file: File): Promise<string> =>
-  new Promise((resolve) => {
+export async function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve) => {
     const reader = new FileReader()
     reader.onloadend = (event) =>
       resolve((event.target!.result as string).replace(/^data:(.*,)?/, ''))
     reader.readAsDataURL(file)
   })
+}
 
-export const romanNumeral = (n: number): string => {
+export function romanNumeral(n: number): string {
   const wordNumeralPairs: [string, string][] = [
     ['zero', '0'],
     ['one', 'I'],
@@ -93,3 +90,18 @@ export interface ButtonAttributes {
 export type ButtonColor = 'is-primary' | 'is-danger' | 'is-info' | 'is-gold'
 
 export type ButtonSize = 'is-small' | 'is-normal' | 'is-medium' | 'is-large'
+
+export function playPitch(pitch: Pitch) {
+  import('tone')
+    .then((Tone) => {
+      const synth = new Tone.Synth().toDestination()
+      const pitchString = pitchToUnicode(pitch)
+        .replace('♭', 'b')
+        .replace('♯', '#')
+
+      synth.triggerAttackRelease(pitchString + '4', '1n')
+    })
+    .catch((_err) => {
+      alert("I couldn't find my pitch pipe, sorry boss")
+    })
+}
