@@ -6,6 +6,7 @@ import {
   SongMode,
   Uniform,
 } from 'src/gql-operations'
+import { hyphenDateFormatter, parseFormDateString, parseFormTimeString, twentyFourHourTimeFormatter } from 'src/utils/datetime'
 import { titleCase } from 'src/utils/helpers'
 import { pitchFromUnicode, pitchToUnicode } from './pitch'
 
@@ -30,15 +31,15 @@ export const stringType: FormInputType<string> = {
   textType: 'text',
 }
 
-export const dateType: FormInputType<string> = {
-  toString: (x) => x,
-  fromString: (x) => x,
+export const dateType: FormInputType<number> = {
+  toString: (x) => hyphenDateFormatter(x),
+  fromString: (x) => parseFormDateString(x) || 0,
   textType: 'date',
 }
 
-export const timeType: FormInputType<string> = {
-  toString: (x) => x,
-  fromString: (x) => x,
+export const timeType: FormInputType<number> = {
+  toString: (x) => twentyFourHourTimeFormatter(x),
+  fromString: (x) => parseFormTimeString(x) || 0,
   textType: 'time',
 }
 

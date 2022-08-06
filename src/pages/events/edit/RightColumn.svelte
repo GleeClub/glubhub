@@ -5,15 +5,15 @@
   import TextareaInput from 'src/components/forms/TextareaInput.svelte'
   import TextInput from 'src/components/forms/TextInput.svelte'
   import ErrorBox from 'src/components/remote/ErrorBox.svelte'
+import { NewEventFields, NewGig } from 'src/gql-operations';
 
   import { stringType } from 'src/state/input'
   import { RemoteData } from 'src/state/types'
-  import { EventForm, GigForm } from './state'
 
-  export let event: EventForm
-  export let updateEvent: (event: EventForm) => void
-  export let gig: GigForm
-  export let updateGig: (gig: GigForm) => void
+  export let event: NewEventFields
+  export let updateEvent: (event: NewEventFields) => void
+  export let gig: NewGig
+  export let updateGig: (gig: NewGig) => void
   export let state: RemoteData
 </script>
 
@@ -47,7 +47,7 @@
       updateEvent({ ...event, defaultAttend: !defaultNotAttend })}
   />
   <CheckboxInput
-    checked={event.gigCount}
+    checked={event.gigCount || false}
     content="This event counts as a volunteer gig"
     onChange={(gigCount) => updateEvent({ ...event, gigCount })}
   />

@@ -14,12 +14,14 @@
     stateFromResult,
   } from 'src/state/types'
 
-  // TODO: set name from `Semester Year`
+  const now = new Date();
+  const season = now.getMonth() < 6 ? 'Spring' : 'Fall' 
+
   let semester: NewSemester = {
-    name: '',
+    name: `${season} ${now.getFullYear()}`,
     gigRequirement: 5,
-    startDate: '',
-    endDate: '',
+    startDate: 0,
+    endDate: 0,
   }
   let state: RemoteData = emptyLoaded
 

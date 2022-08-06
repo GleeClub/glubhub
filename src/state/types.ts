@@ -97,8 +97,8 @@ export interface HasFullName {
 }
 
 export interface HasEventTimes {
-  callTime: string
-  releaseTime?: string | null
+  callTime: number
+  releaseTime?: number | null
 }
 
 export interface SimpleAttendance {

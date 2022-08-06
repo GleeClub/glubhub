@@ -3,17 +3,17 @@
   import RadioInput from 'src/components/forms/RadioInput.svelte'
   import SelectInput from 'src/components/forms/SelectInput.svelte'
   import TextareaInput from 'src/components/forms/TextareaInput.svelte'
+import { NewEventFields, NewGig } from 'src/gql-operations';
 
   import { stringType, uniformType } from 'src/state/input'
   import { eagerQuery } from 'src/state/query'
   import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
-  import { EventForm, GigForm } from './state'
 
-  export let event: EventForm
-  export let updateEvent: (event: EventForm) => void
-  export let gig: GigForm
-  export let updateGig: (gig: GigForm) => void
+  export let event: NewEventFields
+  export let updateEvent: (event: NewEventFields) => void
+  export let gig: NewGig
+  export let updateGig: (gig: NewGig) => void
 
   const [allSemesters, _reloadAllSemesters] = eagerQuery('AllSemesters', {})
   const [allUniforms, _reloadAllUniforms] = eagerQuery('AllUniforms', {})
@@ -51,12 +51,12 @@
   />
   <SelectInput
     values={[null, ...$loadedUniforms]}
-    selected={gig.uniform}
+    selected={$loadedUniforms.find(u => u.id === gig.uniform) || null}
     type={uniformType($loadedUniforms)}
-    onInput={(uniform) => updateGig({ ...gig, uniform })}
+    onInput={(uniform) => updateGig({ ...gig, uniform: uniform?.id || 0 })}
   />
   <TextareaInput
-    value={event.comments}
+    value={event.comments || ''}
     onInput={(comments) => updateEvent({ ...event, comments })}
     title="Event Summary"
     placeholder="We're gonna get in there, we're gonna use our mouths, and we're gonna get out."

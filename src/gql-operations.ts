@@ -13,8 +13,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  GqlDate: string;
-  GqlDateTime: string;
+  GqlDate: number;
+  GqlDateTime: number;
   UniformColor: string;
 };
 
@@ -330,10 +330,11 @@ export type Member = {
   positions: Array<Role>;
   /** The member's nick name */
   preferredName?: Maybe<Scalars['String']>;
+  /** Info about the member from last semester, if they were active */
   previousSemester?: Maybe<ActiveSemester>;
-  /** The semester TODO */
+  /** Info on the member for the current semester, if they are active */
   semester?: Maybe<ActiveSemester>;
-  /** The semester TODO */
+  /** Info for each semester the member was active */
   semesters: Array<ActiveSemester>;
   /** All of the member's transactions for their entire time in Glee Club */
   transactions: Array<ClubTransaction>;
@@ -422,7 +423,6 @@ export type MutationRoot = {
   deleteSongLink: SongLink;
   deleteUniform: Uniform;
   dismissGigRequest: GigRequest;
-  emailMeetingMinutes: Minutes;
   excuseUnconfirmedForEvent: Scalars['String'];
   forgotPassword: Scalars['String'];
   /** Gets a login token on successful login */
@@ -554,11 +554,6 @@ export type MutationRootDeleteUniformArgs = {
 
 
 export type MutationRootDismissGigRequestArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type MutationRootEmailMeetingMinutesArgs = {
   id: Scalars['Int'];
 };
 
@@ -1502,7 +1497,7 @@ export type UpdateUniformMutation = { __typename?: 'MutationRoot', updateUniform
 export type AllAbsenceRequestsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllAbsenceRequestsQuery = { __typename?: 'QueryRoot', absenceRequests: Array<{ __typename?: 'AbsenceRequest', time: string, reason: string, state: AbsenceRequestStatus, event: { __typename?: 'Event', id: number, name: string, location: string, callTime: string }, member: { __typename?: 'Member', email: string, fullName: string } }> };
+export type AllAbsenceRequestsQuery = { __typename?: 'QueryRoot', absenceRequests: Array<{ __typename?: 'AbsenceRequest', time: number, reason: string, state: AbsenceRequestStatus, event: { __typename?: 'Event', id: number, name: string, location: string, callTime: number }, member: { __typename?: 'Member', email: string, fullName: string } }> };
 
 export type AllDocumentLinksQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1512,7 +1507,7 @@ export type AllDocumentLinksQuery = { __typename?: 'QueryRoot', links: Array<{ _
 export type AllEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllEventsQuery = { __typename?: 'QueryRoot', events: Array<{ __typename?: 'Event', id: number, name: string, type: string, callTime: string, releaseTime?: string | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number } | null }> };
+export type AllEventsQuery = { __typename?: 'QueryRoot', events: Array<{ __typename?: 'Event', id: number, name: string, type: string, callTime: number, releaseTime?: number | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number } | null }> };
 
 export type AllFeesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1522,7 +1517,7 @@ export type AllFeesQuery = { __typename?: 'QueryRoot', fees: Array<{ __typename?
 export type AllGigRequestsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllGigRequestsQuery = { __typename?: 'QueryRoot', gigRequests: Array<{ __typename?: 'GigRequest', id: number, time: string, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, startTime: string, location: string, comments: string, status: GigRequestStatus, event?: { __typename?: 'Event', id: number, name: string, semester: string } | null }> };
+export type AllGigRequestsQuery = { __typename?: 'QueryRoot', gigRequests: Array<{ __typename?: 'GigRequest', id: number, time: number, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, startTime: number, location: string, comments: string, status: GigRequestStatus, event?: { __typename?: 'Event', id: number, name: string, semester: string } | null }> };
 
 export type AllMembersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1532,7 +1527,7 @@ export type AllMembersQuery = { __typename?: 'QueryRoot', members: Array<{ __typ
 export type AllMinutesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllMinutesQuery = { __typename?: 'QueryRoot', allMeetingMinutes: Array<{ __typename?: 'Minutes', id: number, name: string, date: string }> };
+export type AllMinutesQuery = { __typename?: 'QueryRoot', allMeetingMinutes: Array<{ __typename?: 'Minutes', id: number, name: string, date: number }> };
 
 export type AllRolePermissionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1576,21 +1571,21 @@ export type FullEventQueryVariables = Exact<{
 }>;
 
 
-export type FullEventQuery = { __typename?: 'QueryRoot', event: { __typename?: 'Event', id: number, name: string, semester: string, type: string, callTime: string, releaseTime?: string | null, points: number, comments: string, location: string, gigCount: boolean, defaultAttend: boolean, gig?: { __typename?: 'Gig', public: boolean, summary: string, description: string, contactName: string, contactEmail: string, contactPhone: string, price?: number | null, performanceTime: string, uniform: { __typename?: 'Uniform', id: number, name: string, description: string, color?: string | null } } | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number, rsvpIssue?: string | null, approvedAbsence: boolean, denyCredit: boolean, absenceRequest?: { __typename?: 'AbsenceRequest', state: AbsenceRequestStatus } | null } | null, allAttendance: Array<{ __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number, member: { __typename?: 'Member', fullName: string, email: string, semester?: { __typename?: 'ActiveSemester', section: string } | null } }>, carpools: Array<{ __typename?: 'Carpool', driver: { __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }, passengers: Array<{ __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }> }>, setlist: Array<{ __typename?: 'Song', id: number, title: string, key?: Pitch | null, mode?: SongMode | null, startingPitch?: Pitch | null }> } };
+export type FullEventQuery = { __typename?: 'QueryRoot', event: { __typename?: 'Event', id: number, name: string, semester: string, type: string, callTime: number, releaseTime?: number | null, points: number, comments: string, location: string, gigCount: boolean, defaultAttend: boolean, gig?: { __typename?: 'Gig', public: boolean, summary: string, description: string, contactName: string, contactEmail: string, contactPhone: string, price?: number | null, performanceTime: number, uniform: { __typename?: 'Uniform', id: number, name: string, description: string, color?: string | null } } | null, userAttendance?: { __typename?: 'Attendance', shouldAttend: boolean, didAttend: boolean, confirmed: boolean, minutesLate: number, rsvpIssue?: string | null, approvedAbsence: boolean, denyCredit: boolean, absenceRequest?: { __typename?: 'AbsenceRequest', state: AbsenceRequestStatus } | null } | null, allAttendance: Array<{ __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number, member: { __typename?: 'Member', fullName: string, email: string, semester?: { __typename?: 'ActiveSemester', section: string } | null } }>, carpools: Array<{ __typename?: 'Carpool', driver: { __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }, passengers: Array<{ __typename?: 'Member', email: string, fullName: string, location: string, passengers: number }> }>, setlist: Array<{ __typename?: 'Song', id: number, title: string, key?: Pitch | null, mode?: SongMode | null, startingPitch?: Pitch | null }> } };
 
 export type FullMemberQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type FullMemberQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, phoneNumber: string, picture: string, passengers: number, location: string, onCampus: boolean, about: string, major: string, minor: string, hometown: string, arrivedAtTech?: number | null, gatewayDrug: string, conflicts: string, dietaryRestrictions: string, fullName: string, semester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section: string } | null, positions: Array<{ __typename?: 'Role', name: string }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string, grades: { __typename?: 'Grades', grade: number } }>, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }>, grades: { __typename?: 'Grades', grade: number, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, type: string, callTime: string, attendance: { __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number } }, change: { __typename?: 'GradeChange', reason: string, change: number, partialScore: number } }> } } };
+export type FullMemberQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, phoneNumber: string, picture: string, passengers: number, location: string, onCampus: boolean, about: string, major: string, minor: string, hometown: string, arrivedAtTech?: number | null, gatewayDrug: string, conflicts: string, dietaryRestrictions: string, fullName: string, semester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section: string } | null, positions: Array<{ __typename?: 'Role', name: string }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string, grades: { __typename?: 'Grades', grade: number } }>, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: number, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }>, grades: { __typename?: 'Grades', grade: number, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, type: string, callTime: number, attendance: { __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number } }, change: { __typename?: 'GradeChange', reason: string, change: number, partialScore: number } }> } } };
 
 export type FullMinutesQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type FullMinutesQuery = { __typename?: 'QueryRoot', meetingMinutes: { __typename?: 'Minutes', id: number, name: string, date: string, public?: string | null, private?: string | null } };
+export type FullMinutesQuery = { __typename?: 'QueryRoot', meetingMinutes: { __typename?: 'Minutes', id: number, name: string, date: number, public?: string | null, private?: string | null } };
 
 export type FullSongQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -1604,7 +1599,7 @@ export type GigRequestForNewEventQueryVariables = Exact<{
 }>;
 
 
-export type GigRequestForNewEventQuery = { __typename?: 'QueryRoot', gigRequest: { __typename?: 'GigRequest', id: number, time: string, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, startTime: string, location: string, comments: string, status: GigRequestStatus } };
+export type GigRequestForNewEventQuery = { __typename?: 'QueryRoot', gigRequest: { __typename?: 'GigRequest', id: number, time: number, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, startTime: number, location: string, comments: string, status: GigRequestStatus } };
 
 export type MemberSemestersQueryVariables = Exact<{
   email: Scalars['String'];
@@ -1616,12 +1611,12 @@ export type MemberSemestersQuery = { __typename?: 'QueryRoot', member: { __typen
 export type SiteContextQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SiteContextQuery = { __typename?: 'QueryRoot', currentSemester: { __typename?: 'Semester', name: string, startDate: string, endDate: string, gigRequirement: number }, user?: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, fullName: string, phoneNumber: string, picture: string, passengers: number, location: string, onCampus: boolean, about: string, major: string, minor: string, hometown: string, arrivedAtTech?: number | null, gatewayDrug: string, conflicts: string, dietaryRestrictions: string, semester?: { __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string } | null, positions: Array<{ __typename?: 'Role', name: string }>, permissions: Array<{ __typename?: 'MemberPermission', name: string, eventType?: string | null }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string }>, grades: { __typename?: 'Grades', grade: number, volunteerGigsAttended: Array<{ __typename?: 'Event', id: number, name: string, callTime: string, releaseTime?: string | null }>, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, callTime: string, releaseTime?: string | null }, change: { __typename?: 'GradeChange', change: number, partialScore: number, reason: string } }> }, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }> } | null, static: { __typename?: 'StaticData', sections: Array<{ __typename?: 'SectionType', name: string }>, permissions: Array<{ __typename?: 'Permission', name: string, description?: string | null, type: PermissionType }>, roles: Array<{ __typename?: 'Role', name: string, rank: number, maxQuantity: number }>, mediaTypes: Array<{ __typename?: 'MediaType', name: string, order: number, storage: StorageType }>, eventTypes: Array<{ __typename?: 'EventType', name: string, weight: number }>, transactionTypes: Array<{ __typename?: 'TransactionType', name: string }> } };
+export type SiteContextQuery = { __typename?: 'QueryRoot', currentSemester: { __typename?: 'Semester', name: string, startDate: number, endDate: number, gigRequirement: number }, user?: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, fullName: string, phoneNumber: string, picture: string, passengers: number, location: string, onCampus: boolean, about: string, major: string, minor: string, hometown: string, arrivedAtTech?: number | null, gatewayDrug: string, conflicts: string, dietaryRestrictions: string, semester?: { __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string } | null, positions: Array<{ __typename?: 'Role', name: string }>, permissions: Array<{ __typename?: 'MemberPermission', name: string, eventType?: string | null }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string }>, grades: { __typename?: 'Grades', grade: number, volunteerGigsAttended: Array<{ __typename?: 'Event', id: number, name: string, callTime: number, releaseTime?: number | null }>, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, callTime: number, releaseTime?: number | null }, change: { __typename?: 'GradeChange', change: number, partialScore: number, reason: string } }> }, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: number, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }> } | null, static: { __typename?: 'StaticData', sections: Array<{ __typename?: 'SectionType', name: string }>, permissions: Array<{ __typename?: 'Permission', name: string, description?: string | null, type: PermissionType }>, roles: Array<{ __typename?: 'Role', name: string, rank: number, maxQuantity: number }>, mediaTypes: Array<{ __typename?: 'MediaType', name: string, order: number, storage: StorageType }>, eventTypes: Array<{ __typename?: 'EventType', name: string, weight: number }>, transactionTypes: Array<{ __typename?: 'TransactionType', name: string }> } };
 
 export type TransactionsForSemesterQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TransactionsForSemesterQuery = { __typename?: 'QueryRoot', transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: string, amount: number, description: string, semester?: string | null, type: string, resolved: boolean, member: { __typename?: 'Member', email: string, fullName: string } }> };
+export type TransactionsForSemesterQuery = { __typename?: 'QueryRoot', transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: number, amount: number, description: string, semester?: string | null, type: string, resolved: boolean, member: { __typename?: 'Member', email: string, fullName: string } }> };
 
 
 export const AddOfficershipDocument = gql`

@@ -13,7 +13,7 @@
 
   export let hoverEvent: (hover: HoveredEvent | null) => void
 
-  let graphElement: SVGElement
+  let graphElement: SVGGElement
 
   const pastEvents = derived(
     siteContext,
@@ -33,6 +33,7 @@
   onMount(() => {
     const events = get(pastEvents)
     if (!graphElement || !events.length) return
+    console.log(events, graphElement)
 
     x.domain(
       extent(events, (event) => new Date(event.event.callTime)) as [Date, Date]

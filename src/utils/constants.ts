@@ -1,4 +1,4 @@
-import { Period, Pitch, SongMode } from 'src/gql-operations'
+import { NewGig, Period, Pitch, SongMode } from 'src/gql-operations'
 
 export const GREASE_TOKEN_NAME = 'grease-token'
 export const GREASE_OLD_TOKEN_NAME = 'grease-old-token'
@@ -10,6 +10,7 @@ export const NO_SECTION = 'Homeless'
 export const OFFICER_LIST_EMAIL = 'gleeclub_officers@lists.gatech.edu'
 export const ATTENDANCE_ISSUE_EMAIL =
   OFFICER_LIST_EMAIL + 'subject=Attendance%20Issue'
+export const SECONDS_IN_DAY = 60 * 60 * 24
 
 export const ALL_PERIODS = [
   Period.Daily,
@@ -42,3 +43,15 @@ export const ALL_PITCHES = [
   Pitch.G,
   Pitch.GSharp,
 ]
+
+export const EMPTY_GIG: NewGig = {
+  contactEmail: '',
+  contactName: '',
+  contactPhone: '',
+  performanceTime: 0,
+  price: null,
+  public: false,
+  summary: '',
+  description: '',
+  uniform: 0
+}

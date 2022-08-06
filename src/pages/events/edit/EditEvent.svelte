@@ -4,7 +4,7 @@
   import MiddleColumn from './MiddleColumn.svelte'
   import RightColumn from './RightColumn.svelte'
 
-  import { FullEventQuery } from 'src/gql-operations'
+  import { FullEventQuery, NewEventFields, NewGig } from 'src/gql-operations'
   import { eventDetails, routeEvents } from 'src/route/constructors'
   import {
     emptyLoaded,
@@ -13,20 +13,16 @@
     stateFromResult,
   } from 'src/state/types'
   import { replaceRoute } from 'src/store/route'
-  import {
-    buildUpdateBody,
-    eventFormFromEvent,
-    gigFormFromEvent,
-  } from './state'
   import { query } from 'src/state/query'
+  import { EMPTY_GIG } from 'src/utils/constants';
 
   export let event: FullEventQuery['event']
   export let onUpdate: () => void
 
   let state: RemoteData = emptyLoaded
 
-  $: eventForm = eventFormFromEvent(event)
-  $: gigForm = gigFormFromEvent(event)
+  let eventForm: NewEventFields = event
+  let gigForm: NewGig = event.gig ? { ...event.gig, uniform: event.gig.uniform.id } : EMPTY_GIG
 
   function goBackToDetails() {
     replaceRoute(routeEvents(event.id, eventDetails))
@@ -37,7 +33,11 @@
 
     const result = await query('UpdateEvent', {
       id: event.id,
-      newEvent: buildUpdateBody(eventForm, gigForm),
+      newEvent: {
+        event: eventForm,
+        gig: gigForm,
+        repeat: null,
+      }
     })
 
     state = stateFromResult(result)

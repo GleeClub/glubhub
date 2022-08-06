@@ -12,7 +12,6 @@
   import { routeEvents } from 'src/route/constructors'
   import { get } from 'svelte/store'
   import { siteContext } from 'src/store/context'
-  import { twentyFourHourTimeFormatter } from 'src/utils/datetime'
   import {
     emptyLoaded,
     loading,
@@ -29,8 +28,8 @@
     name: '',
     semester: get(siteContext).currentSemester.name,
     type: 'Rehearsal',
-    callTime: '',
-    releaseTime: '',
+    callTime: 0,
+    releaseTime: 0,
     points: 5,
     comments: '',
     location: '',
@@ -39,7 +38,7 @@
   }
 
   let gig: NewGig = {
-    performanceTime: '',
+    performanceTime: 0,
     uniform: 0,
     contactName: '',
     contactEmail: '',
@@ -74,14 +73,13 @@
 
         event.name = `${request.name} for ${request.organization}`
         event.type = 'Volunteer Gig'
-        // TODO: which formatter?
-        event.callTime = twentyFourHourTimeFormatter(request.startTime)
+        event.callTime = request.startTime
         event.comments = request.comments || ''
         event.location = request.location
         event.gigCount = true
         event.defaultAttend = false
 
-        gig.performanceTime = twentyFourHourTimeFormatter(request.startTime)
+        gig.performanceTime = request.startTime
         gig.contactName = request.contactName
         gig.contactEmail = request.contactEmail
         gig.contactPhone = request.contactPhone

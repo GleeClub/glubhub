@@ -8,6 +8,6 @@ generates:
       - typescript-graphql-request
     config:
       scalars:
-        GqlDate: string
-        GqlDateTime: string
+        GqlDate: number
+        GqlDateTime: number
         UniformColor: string

@@ -88,7 +88,6 @@
               <Button
                 color="is-primary"
                 className="is-pulled-right"
-                loading={state.type === 'loading'}
                 click={updateCarpools}
               >
                 Update Carpools
