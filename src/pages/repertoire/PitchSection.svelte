@@ -3,7 +3,7 @@
 
   import { Pitch, SongMode } from 'src/gql-operations'
   import { pitchToUnicode } from 'src/state/pitch'
-  import { titleCase } from 'src/utils/helpers'
+  import { playPitch, titleCase } from 'src/utils/helpers'
 
   export let title: string
   export let pitch: Pitch | null | undefined
@@ -13,8 +13,7 @@
 <p>
   {title}:
   {#if pitch}
-    <!-- TODO: playPitch -->
-    <b>
+    <b on:click={() => pitch && playPitch(pitch)}>
       <Tooltip content="hey kid, wanna pitch?">
         {pitchToUnicode(pitch)}
         {#if mode}
