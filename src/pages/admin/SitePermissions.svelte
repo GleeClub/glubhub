@@ -43,10 +43,11 @@
 
   async function toggleRolePermission(
     rolePermission: NewRolePermission,
-    enabled: boolean
+    toEnable: boolean
   ) {
     state = loading
-    const result = enabled
+    console.log(toEnable, rolePermission)
+    const result = toEnable
       ? await query('EnableRolePermission', { rolePermission })
       : await query('DisableRolePermission', { rolePermission })
 
