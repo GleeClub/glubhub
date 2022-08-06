@@ -4,7 +4,7 @@
   import { FullEventQuery } from 'src/gql-operations'
   import { eventRequestAbsence, routeEvents } from 'src/route/constructors'
   import { replaceRoute } from 'src/store/route'
-  import { eventIsOver } from 'src/utils/helpers'
+  import { eventIsOver, titleCase } from 'src/utils/helpers'
 
   export let event: FullEventQuery['event']
 </script>
@@ -13,7 +13,7 @@
   <!-- Can't request an absence if the event is over -->
 {:else if event.userAttendance?.absenceRequest}
   <Button color="is-primary" outlined>
-    {`Request ${event.userAttendance.absenceRequest.state}`}
+    {`Request ${titleCase(event.userAttendance.absenceRequest.state)}`}
   </Button>
 {:else}
   <Button
