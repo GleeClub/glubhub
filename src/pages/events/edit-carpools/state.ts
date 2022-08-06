@@ -87,7 +87,7 @@ export const allSelectedEmails = derived(allSelectedMembers, (members) =>
 
 export const unassignedMembers = derived(carpoolState, (state) =>
   state.members.filter((m) =>
-    state.carpools.every((c) => memberInCarpool(m.email, c))
+    state.carpools.every((c) => !memberInCarpool(m.email, c))
   )
 )
 
