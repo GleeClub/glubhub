@@ -13,7 +13,7 @@
   import SitePermissions from './SitePermissions.svelte'
   import Uniforms from './uniforms/Uniforms.svelte'
   import WebmasterTools from './WebmasterTools.svelte'
-  import DocumentLinks from './DocumentLinks.svelte';
+  import DocumentLinks from './DocumentLinks.svelte'
 
   import { routeAdmin } from 'src/route/constructors'
   import { AdminRoute } from 'src/route/types'

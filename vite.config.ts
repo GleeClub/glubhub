@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { visualizer } from 'rollup-plugin-visualizer'
 import sveltePreprocess from 'svelte-preprocess'
 import autoprefixer from 'autoprefixer'
 import path from 'path'
@@ -15,6 +16,7 @@ const config = defineConfig({
         dev: !production,
       },
     }),
+    visualizer(),
   ],
   server: {
     host: 'localhost',
