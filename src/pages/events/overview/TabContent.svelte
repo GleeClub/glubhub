@@ -39,7 +39,7 @@
 {/if}
 
 {#if tab?.route === 'attendance'}
-  <Attendance eventId={event.id} attendees={event.allAttendance} />
+  <Attendance eventId={event.id} attendees={event.allAttendance} {onUpdate} />
 {:else if tab?.route === 'attendees'}
   <Attendees attendees={event.allAttendance} />
 {:else if tab?.route === 'setlist'}

@@ -2,7 +2,7 @@
   import Tooltip from 'src/components/bulma/Tooltip.svelte'
 
   import { Pitch, SongMode } from 'src/gql-operations'
-  import { pitchToUnicode } from 'src/state/pitch'
+  import { pitchToString } from 'src/state/pitch';
   import { playPitch, titleCase } from 'src/utils/helpers'
 
   export let title: string
@@ -15,7 +15,7 @@
   {#if pitch}
     <b on:click={() => pitch && playPitch(pitch)}>
       <Tooltip content="hey kid, wanna pitch?">
-        {pitchToUnicode(pitch)}
+        {pitchToString(pitch)}
         {#if mode}
           {' ' + titleCase(mode)}
         {/if}

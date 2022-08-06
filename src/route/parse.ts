@@ -13,7 +13,6 @@ export const parseRoute = (segments: string[]): GlubRoute | null => {
     case r.routeRoster.route:
       return r.routeRoster
 
-    // TODO: convert these to use the type definitions
     case r.routeProfile('', null).route:
       return parseProfileRoute(segments.slice(1))
 

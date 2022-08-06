@@ -20,7 +20,9 @@
     stateFromResult,
   } from 'src/state/types'
   import { replaceRoute } from 'src/store/route'
-  import { ALL_PITCHES, ALL_MODES } from 'src/utils/constants'
+  import { ALL_PITCHES, ALL_MODES, SHEET_MUSIC_FILE_TYPE, MIDIS_FILE_TYPE } from 'src/utils/constants'
+import Title from 'src/components/bulma/Title.svelte';
+import Subtitle from 'src/components/bulma/Subtitle.svelte'
 
   export let song: FullSongQuery['song']
   export let onUpdate: () => void
@@ -62,11 +64,8 @@
   content="finish editing"
   click={() => replaceRoute(routeRepertoire(song.id, repertoireDetails))}
 />
-<!-- TODO: Convert these to Components -->
-<h2 class="title is-4" style:text-align="center">Edit</h2>
-<h3 class="subtitle is-6" style:text-align="center">
-  {song.title}
-</h3>
+<Title is4 centered>Edit</Title>
+<Subtitle is6 centered>{song.title}</Subtitle>
 
 <TextInput
   type={stringType}
@@ -111,8 +110,7 @@
 <StateBox {state} />
 
 <ul style="list-style: none; padding-bottom: 10px;">
-  <!-- TODO: replace all uses of link types with constants -->
-  <EditFileType typeName="Sheet Music" {song} {onUpdate} {deleteLink} />
-  <EditFileType typeName="MIDIs" {song} {onUpdate} {deleteLink} />
+  <EditFileType typeName={SHEET_MUSIC_FILE_TYPE} {song} {onUpdate} {deleteLink} />
+  <EditFileType typeName={MIDIS_FILE_TYPE} {song} {onUpdate} {deleteLink} />
   <NewPerformanceSection {song} {onUpdate} {deleteLink} />
 </ul>

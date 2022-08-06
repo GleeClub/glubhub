@@ -31,12 +31,14 @@
     const loggedIn = !!get(siteContext).user
 
     const enteredPassword = !!(password || confirmPassword)
-    if (password !== confirmPassword) {
-      alert("Your passwords don't match.")
+    if (!enteredPassword && !loggedIn) {
+      alert("You need a password, champ")
       return
-    } else if (!form.section) {
-      // TODO: is this actually needed?
-      alert('You need a section, bucko.')
+    } else if (password !== confirmPassword) {
+      alert("Your passwords don't match, buddy")
+      return
+    } else if (!form.section && !loggedIn) {
+      alert('You need a section, bucko')
       return
     }
 

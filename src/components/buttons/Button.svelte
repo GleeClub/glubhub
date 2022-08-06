@@ -8,7 +8,6 @@
   export let outlined = false
   export let fullwidth = false
   export let className = ''
-  // TODO: should this be required?
   export let click: (() => void) | undefined = undefined
   export let element: 'a' | 'button' = 'button'
 </script>
@@ -22,7 +21,7 @@
   class:is-inverted={inverted}
   class:is-outlined={outlined}
   on:click={click}
-  disabled={!click}
+  disabled={typeof click === "function" ? undefined : true}
 >
   <slot />
 </svelte:element>

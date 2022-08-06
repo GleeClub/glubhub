@@ -65,8 +65,7 @@
     <Column>
       <Box>
         <Remote data={$allFees}>
-          <!-- TODO: try changing this to a svelte:fragment -->
-          <div slot="loaded" let:data={fees}>
+          <svelte:fragment slot="loaded" let:data={fees}>
             {#each fees.fees as fee}
               <TextInput
                 prefix={fee.name}
@@ -77,7 +76,7 @@
                 title={fee.description}
               />
             {/each}
-          </div>
+          </svelte:fragment>
         </Remote>
         <StateBox state={feeState} />
       </Box>

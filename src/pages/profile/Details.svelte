@@ -75,16 +75,14 @@
     minor: member.minor,
     hometown: member.hometown,
     passengers: member.passengers,
-    // TODO: remove these exclams
-    enrollment: member.semester!.enrollment,
-    section: member.semester!.section,
+    enrollment: member.semester?.enrollment,
+    section: member.semester?.section,
     about: member.about,
     picture: member.picture,
     arrivedAtTech: member.arrivedAtTech,
     gatewayDrug: member.gatewayDrug,
     conflicts: member.conflicts,
     dietaryRestrictions: member.dietaryRestrictions,
-    passHash: '',
   })
 </script>
 

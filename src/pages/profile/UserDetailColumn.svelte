@@ -1,5 +1,6 @@
 <script lang="ts">
-  import EmailLink from 'src/components/member/EmailLink.svelte'
+  import Subtitle from 'src/components/bulma/Subtitle.svelte'
+import EmailLink from 'src/components/member/EmailLink.svelte'
   import PhoneLink from 'src/components/member/PhoneLink.svelte'
 
   import { FullMemberQuery } from 'src/gql-operations'
@@ -7,11 +8,9 @@
   export let member: FullMemberQuery['member']
 </script>
 
-<!-- TODO: replace p with something else -->
-<p />
-<h1 class="subtitle is-3" style:margin-bottom="initial">
+<Subtitle>
   {member.fullName}
-</h1>
+</Subtitle>
 <i>"{member.about || 'no quote'}"</i>
 <br />
 {#if member.positions.length}

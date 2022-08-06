@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import type { NewRolePermission, Pitch } from 'src/gql-operations'
-import { pitchToUnicode } from 'src/state/pitch'
+import { pitchToString } from 'src/state/pitch'
 import { HasEventTimes, HasPermissions } from 'src/state/types'
 
 export const formatPhone = (phone: string) =>
@@ -95,7 +95,7 @@ export function playPitch(pitch: Pitch) {
   import('tone')
     .then((Tone) => {
       const synth = new Tone.Synth().toDestination()
-      const pitchString = pitchToUnicode(pitch)
+      const pitchString = pitchToString(pitch)
         .replace('♭', 'b')
         .replace('♯', '#')
 

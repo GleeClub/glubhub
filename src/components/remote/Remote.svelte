@@ -15,9 +15,6 @@
   }
 
   export let data: LazyRemoteData<T>
-
-  // TODO: cleaner way to do this?
-  $: loadedData = data.type === 'loaded' ? data.data : null!
 </script>
 
 {#if data.type === 'loading'}
@@ -29,7 +26,7 @@
     <ErrorBox error={data.error} />
   </slot>
 {:else if data.type === 'loaded'}
-  <slot name="loaded" data={loadedData} />
+  <slot name="loaded" data={data.data} />
 {:else}
   <slot name="not-loaded" />
 {/if}

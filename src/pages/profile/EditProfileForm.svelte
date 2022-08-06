@@ -7,7 +7,6 @@
   import TextInput from 'src/components/forms/TextInput.svelte'
   import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
-  import { Enrollment, MemberUpdate } from 'src/gql-operations'
   import {
     emailType,
     enrollmentType,
@@ -16,6 +15,7 @@
     sectionType,
     stringType,
   } from 'src/state/input'
+  import { Enrollment, MemberUpdate } from 'src/gql-operations'
   import { RemoteData } from 'src/state/types'
   import { siteContext } from 'src/store/context'
 
@@ -87,7 +87,7 @@
     values={[Enrollment.Class, Enrollment.Club, null]}
     selected={form.enrollment}
     onInput={(enrollment) =>
-      updateForm({ ...form, enrollment: enrollment || Enrollment.Club })}
+      updateForm({ ...form, enrollment })}
     title="Enrollment"
   />
   <SelectInput

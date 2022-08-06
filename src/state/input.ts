@@ -8,7 +8,7 @@ import {
 } from 'src/gql-operations'
 import { hyphenDateFormatter, parseFormDateString, parseFormTimeString, twentyFourHourTimeFormatter } from 'src/utils/datetime'
 import { titleCase } from 'src/utils/helpers'
-import { pitchFromUnicode, pitchToUnicode } from './pitch'
+import { pitchFromString, pitchToString } from './pitch'
 
 export interface FormInputType<T> {
   toString: (t: T) => string
@@ -98,9 +98,9 @@ export const memberType = (
 })
 
 export const enrollmentType: FormInputType<Enrollment | null> = {
-  toString: (x) => x || 'Inactive',
+  toString: (x) => x ? titleCase(x) : 'Inactive',
   fromString: (x) =>
-    x === 'Class' || x === 'Club' ? (x.toUpperCase() as Enrollment) : null,
+    (x === 'Class' || x === 'Club') ? (x.toUpperCase() as Enrollment) : null,
   textType: 'text',
 }
 
@@ -113,8 +113,8 @@ export const semesterType = (
 })
 
 export const pitchType: FormInputType<Pitch | null> = {
-  toString: (p) => (p ? pitchToUnicode(p) : '?'),
-  fromString: pitchFromUnicode,
+  toString: (p) => (p ? pitchToString(p) : '?'),
+  fromString: pitchFromString,
   textType: 'text',
 }
 

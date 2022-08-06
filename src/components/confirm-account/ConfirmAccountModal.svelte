@@ -11,7 +11,7 @@
   import TextInput from 'src/components/forms/TextInput.svelte'
 
   import { query } from 'src/state/query'
-  import { Enrollment } from 'src/gql-operations'
+  import { Enrollment, RegisterForSemesterForm } from 'src/gql-operations'
   import { sectionType, stringType } from 'src/state/input'
   import {
     emptyLoaded,
@@ -25,26 +25,21 @@
 
   let state: RemoteData = emptyLoaded
 
-  let location = ''
-  let onCampus = true
-  let enrollment = Enrollment.Class
-  let section: string | null = 'Baritone'
-  let conflicts = ''
-  let dietaryRestrictions = ''
+  let form: RegisterForSemesterForm = {
+    location: '',
+    onCampus: true,
+    enrollment: Enrollment.Class,
+    section: 'Baritone',
+    conflicts: '',
+    dietaryRestrictions: ''
+  }
 
   async function confirmAccount() {
-    if (!section) return
+    if (!form.section) return
 
     state = loading
     const result = await query('RegisterForSemester', {
-      newSemester: {
-        enrollment,
-        location,
-        section,
-        conflicts,
-        onCampus,
-        dietaryRestrictions,
-      },
+      newSemester: form,
     })
 
     state = stateFromResult(result)
@@ -57,14 +52,16 @@
   // Try to load last semester's data for convenience
   query('ConfirmSemesterForm').then((result) => {
     if (result.type === 'loaded' && result.data.user) {
-      const form = result.data.user
+      const f = result.data.user
 
-      location = form.location
-      enrollment = form.previousSemester?.enrollment || Enrollment.Class
-      onCampus = form.onCampus || false
-      section = form.previousSemester?.section || 'Baritone'
-      dietaryRestrictions = form.dietaryRestrictions || ''
-      conflicts = form.conflicts || ''
+      form = {
+        location: f.location,
+        enrollment: f.previousSemester?.enrollment || Enrollment.Class,
+        onCampus: f.onCampus,
+        section: f.previousSemester?.section || 'Baritone',
+        dietaryRestrictions: f.dietaryRestrictions,
+        conflicts: f.conflicts
+      }
     }
   })
 </script>
@@ -75,8 +72,8 @@
     <InputWrapper horizontal title="Location">
       <TextInput
         type={stringType}
-        value={location}
-        onInput={(newLocation) => (location = newLocation)}
+        value={form.location}
+        onInput={(newLocation) => (form.location = newLocation)}
         placeholder="Glenn"
         required
       />
@@ -86,15 +83,15 @@
         <ButtonGroup connected>
           <Button
             element="a"
-            color={onCampus ? 'is-primary' : undefined}
-            click={() => (onCampus = true)}
+            color={form.onCampus ? 'is-primary' : undefined}
+            click={() => (form.onCampus = true)}
           >
             On-campus
           </Button>
           <Button
             element="a"
-            color={!onCampus ? 'is-primary' : undefined}
-            click={() => (onCampus = false)}
+            color={!form.onCampus ? 'is-primary' : undefined}
+            click={() => (form.onCampus = false)}
           >
             Off-campus
           </Button>
@@ -104,9 +101,9 @@
     <InputWrapper horizontal title="Voice Part">
       <SelectInput
         type={sectionType($siteContext)}
-        values={[...$siteContext.static.sections.map((s) => s.name), null]}
-        selected={section}
-        onInput={(newSection) => (section = newSection)}
+        values={$siteContext.static.sections.map((s) => s.name)}
+        selected={form.section}
+        onInput={(newSection) => (form.section = newSection || 'Baritone')}
         expanded
         leftAligned
       />
@@ -116,20 +113,36 @@
         <ButtonGroup connected>
           <Button
             element="a"
-            color={enrollment === Enrollment.Class ? 'is-primary' : undefined}
-            click={() => (enrollment = Enrollment.Class)}
+            color={form.enrollment === Enrollment.Class ? 'is-primary' : undefined}
+            click={() => (form.enrollment = Enrollment.Class)}
           >
             Class
           </Button>
           <Button
             element="a"
-            color={enrollment === Enrollment.Club ? 'is-primary' : undefined}
-            click={() => (enrollment = Enrollment.Club)}
+            color={form.enrollment === Enrollment.Club ? 'is-primary' : undefined}
+            click={() => (form.enrollment = Enrollment.Club)}
           >
             Club
           </Button>
         </ButtonGroup>
       </Control>
+    </InputWrapper>
+    <InputWrapper horizontal title="Conflicts">
+      <TextInput
+        type={stringType}
+        value={form.conflicts}
+        onInput={(newConflicts) => (form.conflicts = newConflicts)}
+        placeholder="I got lab till 7 on Mondays and it makes me sad"
+      />
+    </InputWrapper>
+    <InputWrapper horizontal title="Dietary Restrictions">
+      <TextInput
+        type={stringType}
+        value={form.dietaryRestrictions}
+        onInput={(newRestrictions) => (form.dietaryRestrictions = newRestrictions)}
+        placeholder="My tummy huwts"
+      />
     </InputWrapper>
     <ButtonGroup alignment="is-right">
       <SubmitButton color="is-primary">Confirm</SubmitButton>

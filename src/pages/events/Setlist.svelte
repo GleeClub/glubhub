@@ -4,7 +4,8 @@
   import { FullEventQuery } from 'src/gql-operations'
   import { routeRepertoire } from 'src/route/constructors'
   import { renderRoute } from 'src/route/render'
-  import { pitchToUnicode } from 'src/state/pitch'
+  import { pitchToString } from 'src/state/pitch'
+  import { titleCase } from 'src/utils/helpers'
 
   export let songs: FullEventQuery['event']['setlist']
 </script>
@@ -22,12 +23,22 @@
               {song.title}
             </a>
           </td>
-          <!-- TODO: show mode as well -->
-          <td>{song.key ? pitchToUnicode(song.key) : 'No key'}</td>
           <td>
-            {song.startingPitch
-              ? pitchToUnicode(song.startingPitch)
-              : 'No starting pitch'}
+            {#if song.key}
+              {pitchToString(song.key)}
+              {#if song.mode}
+                {' ' + titleCase(song.mode)}
+              {/if}
+            {:else}
+              No key
+            {/if}
+          </td>
+          <td>
+            {#if song.startingPitch}
+              {pitchToString(song.startingPitch)}
+            {:else}
+              No starting pitch
+            {/if}
           </td>
         </tr>
       {/each}

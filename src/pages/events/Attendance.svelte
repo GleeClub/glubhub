@@ -16,8 +16,8 @@
   import { SECTION_ORDER, NO_SECTION } from 'src/utils/constants'
 
   export let eventId: number
-  // TODO: this is updated differently than everything else, we should pick a single approach
   export let attendees: FullEventQuery['event']['allAttendance']
+  export let onUpdate: () => void
 
   let state: RemoteData = emptyLoaded
 
@@ -42,8 +42,8 @@
     })
 
     state = stateFromResult(result)
-    if (result.type === 'loaded') {
-      Object.assign(attendee, attendance)
+    if (result.type === "loaded") {
+      onUpdate()
     }
   }
 

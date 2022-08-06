@@ -15,13 +15,12 @@
     <div class="notification is-info">
       <DeleteButton click={() => (ignoreConfirm = true)} />
       <div style="width: 100%; display: flex: align-items: center">
-        <div>
+        <div style="margin-bottom: 1em">
           Welcome! Feel free to browse the site, but if you're going to be
           active in Glee Club this semester, please confirm your account so we
           can get you into the system.
         </div>
         <div>
-          <!-- TODO: style={{ margin: "0 2em" }} -->
           <Button
             click={() => (confirming = true)}
             color="is-info"

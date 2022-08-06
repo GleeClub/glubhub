@@ -5,9 +5,6 @@
   import ErrorBox from 'src/components/remote/ErrorBox.svelte'
   import SongLinkButton from '../SongLinkButton.svelte'
 
-  import { FullSongQuery } from 'src/gql-operations'
-  import { stringType } from 'src/state/input'
-  import { query } from 'src/state/query'
   import {
     emptyLoaded,
     FullSongLink,
@@ -15,6 +12,10 @@
     RemoteData,
     stateFromResult,
   } from 'src/state/types'
+  import { FullSongQuery } from 'src/gql-operations'
+  import { stringType } from 'src/state/input'
+  import { query } from 'src/state/query'
+  import { PERFORMANCES_LINK_TYPE } from 'src/utils/constants';
 
   export let song: FullSongQuery['song']
   export let deleteLink: (link: FullSongLink) => void
@@ -25,7 +26,7 @@
   let state: RemoteData = emptyLoaded
 
   $: linkSection = song.linkSections.find(
-    (section) => section.name === 'Performances'
+    (section) => section.name === PERFORMANCES_LINK_TYPE
   )
 
   async function addPerformanceToSong() {
@@ -48,7 +49,7 @@
   }
 </script>
 
-<Divider content="Performances" />
+<Divider content={PERFORMANCES_LINK_TYPE} />
 {#if linkSection}
   {#each linkSection.links as link}
     <SongLinkButton {link} {deleteLink} />

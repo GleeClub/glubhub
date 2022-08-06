@@ -4,7 +4,6 @@
 
   type T = $$Generic
 
-  // TODO: remove these duplicate definitions?
   interface $$Props {
     values: T[]
     selected: T
