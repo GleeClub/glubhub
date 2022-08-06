@@ -48,6 +48,7 @@
         <form on:submit|preventDefault={submit}>
           <img style="width: 100%" alt="" src="/glubhub.svg" />
           <TextInput
+            id="email"
             type={emailType}
             value={email}
             onInput={(newEmail) => (email = newEmail)}
@@ -55,6 +56,7 @@
             placeholder="gburdell3@gatech.edu"
           />
           <TextInput
+            id="password"
             type={passwordType}
             value={password}
             onInput={(newPassword) => (password = newPassword)}

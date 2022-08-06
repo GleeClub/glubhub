@@ -12,6 +12,7 @@
     type: FormInputType<T>
     onInput: (t: T) => void
     title?: string
+    id?: string
     horizontal?: boolean
     required?: boolean
     helpText?: string
@@ -27,6 +28,7 @@
   export let type: FormInputType<T>
   export let onInput: (t: T) => void
   export let title = ''
+  export let id = ''
   export let horizontal = false
   export let required = false
   export let helpText = ''
@@ -42,6 +44,7 @@
   <FieldWrapper {expanded} {loading} {prefix} {suffix}>
     <Control>
       <input
+        {id}
         class="input {loading ? ' is-loading' : ''}"
         value={type.toString(value)}
         on:input={(event) =>
