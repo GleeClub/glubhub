@@ -35,17 +35,13 @@ export async function query<K extends keyof Sdk>(
 
   return action(...args)
     .then((result) => {
-      console.log('API result', result)
       if ('errors' in result) {
         return error(result.errors[0].message)
       } else {
         return loaded(result)
       }
     })
-    .catch((err: ApiError) => {
-      console.log('API error', err, typeof err, Object.keys(err), err?.response)
-      return error(err.response.errors[0].message)
-    })
+    .catch((err: ApiError) => error(err.response.errors[0].message))
 }
 
 export function lazyQuery<K extends keyof Sdk>(
