@@ -46,7 +46,6 @@
     toEnable: boolean
   ) {
     state = loading
-    console.log(toEnable, rolePermission)
     const result = toEnable
       ? await query('EnableRolePermission', { rolePermission })
       : await query('DisableRolePermission', { rolePermission })
@@ -91,14 +90,14 @@
                             eventType,
                           })
                       )}
-                      onChange={(enabled) =>
+                      onChange={(toEnable) =>
                         toggleRolePermission(
                           {
                             role: role.name,
                             permission: permission.name,
                             eventType,
                           },
-                          !enabled
+                          toEnable
                         )}
                     />
                   </Tooltip>
