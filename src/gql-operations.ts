@@ -131,7 +131,7 @@ export type Event = {
   __typename?: 'Event';
   allAttendance: Array<Attendance>;
   /** The attendance for a specific member at this event */
-  attendance: Attendance;
+  attendance?: Maybe<Attendance>;
   /** When members are expected to arrive to the event */
   callTime: Scalars['GqlDateTime'];
   carpools: Array<Carpool>;
@@ -1578,7 +1578,7 @@ export type FullMemberQueryVariables = Exact<{
 }>;
 
 
-export type FullMemberQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, phoneNumber: string, picture: string, passengers: number, location: string, onCampus: boolean, about: string, major: string, minor: string, hometown: string, arrivedAtTech?: number | null, gatewayDrug: string, conflicts: string, dietaryRestrictions: string, fullName: string, semester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section: string } | null, positions: Array<{ __typename?: 'Role', name: string }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string, grades: { __typename?: 'Grades', grade: number } }>, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: number, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }>, grades: { __typename?: 'Grades', grade: number, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, type: string, callTime: number, attendance: { __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number } }, change: { __typename?: 'GradeChange', reason: string, change: number, partialScore: number } }> } } };
+export type FullMemberQuery = { __typename?: 'QueryRoot', member: { __typename?: 'Member', email: string, firstName: string, preferredName?: string | null, lastName: string, phoneNumber: string, picture: string, passengers: number, location: string, onCampus: boolean, about: string, major: string, minor: string, hometown: string, arrivedAtTech?: number | null, gatewayDrug: string, conflicts: string, dietaryRestrictions: string, fullName: string, semester?: { __typename?: 'ActiveSemester', enrollment: Enrollment, section: string } | null, positions: Array<{ __typename?: 'Role', name: string }>, semesters: Array<{ __typename?: 'ActiveSemester', semester: string, enrollment: Enrollment, section: string, grades: { __typename?: 'Grades', grade: number } }>, transactions: Array<{ __typename?: 'ClubTransaction', id: number, time: number, amount: number, description: string, semester?: string | null, type: string, resolved: boolean }>, grades: { __typename?: 'Grades', grade: number, eventsWithChanges: Array<{ __typename?: 'EventWithGradeChange', event: { __typename?: 'Event', id: number, name: string, type: string, callTime: number, attendance?: { __typename?: 'Attendance', didAttend: boolean, shouldAttend: boolean, confirmed: boolean, minutesLate: number } | null }, change: { __typename?: 'GradeChange', reason: string, change: number, partialScore: number } }> } } };
 
 export type FullMinutesQueryVariables = Exact<{
   id: Scalars['Int'];

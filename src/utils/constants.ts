@@ -1,4 +1,5 @@
 import { NewGig, Period, Pitch, SongMode } from 'src/gql-operations'
+import { SimpleAttendance } from 'src/state/types'
 
 export const GREASE_TOKEN_NAME = 'grease-token'
 export const GREASE_OLD_TOKEN_NAME = 'grease-old-token'
@@ -15,6 +16,13 @@ export const SECONDS_IN_DAY = 60 * 60 * 24
 export const SHEET_MUSIC_FILE_TYPE = 'Sheet Music'
 export const MIDIS_FILE_TYPE = 'MIDIs'
 export const PERFORMANCES_LINK_TYPE = 'Performances'
+
+export const DEFAULT_ATTENDANCE: SimpleAttendance = {
+  minutesLate: 0,
+  shouldAttend: false,
+  didAttend: false,
+  confirmed: false,
+};
 
 export const ALL_PERIODS = [
   Period.Daily,

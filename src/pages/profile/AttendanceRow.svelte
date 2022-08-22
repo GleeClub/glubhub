@@ -7,6 +7,7 @@
   import { renderRoute } from 'src/route/render'
   import { numberType } from 'src/state/input'
   import { SimpleAttendance } from 'src/state/types'
+import { DEFAULT_ATTENDANCE } from 'src/utils/constants'
   import { dateFormatter } from 'src/utils/datetime'
 
   export let event: FullMemberQuery['member']['grades']['eventsWithChanges'][number]
@@ -27,10 +28,10 @@
   <td>
     <CheckboxInput
       content=""
-      checked={event.event.attendance.shouldAttend}
+      checked={event.event.attendance?.shouldAttend || false}
       onChange={(shouldAttend) =>
         updateAttendance(event.event.id, {
-          ...event.event.attendance,
+          ...(event.event.attendance || DEFAULT_ATTENDANCE),
           shouldAttend,
         })}
     />
@@ -38,10 +39,10 @@
   <td>
     <CheckboxInput
       content=""
-      checked={event.event.attendance.didAttend}
+      checked={event.event.attendance?.didAttend || false}
       onChange={(didAttend) =>
         updateAttendance(event.event.id, {
-          ...event.event.attendance,
+          ...(event.event.attendance || DEFAULT_ATTENDANCE),
           didAttend,
         })}
     />
@@ -49,10 +50,10 @@
   <td>
     <TextInput
       type={numberType}
-      value={event.event.attendance.minutesLate}
+      value={event.event.attendance?.minutesLate || 0}
       onInput={(minutesLate) =>
         updateAttendance(event.event.id, {
-          ...event.event.attendance,
+          ...(event.event.attendance || DEFAULT_ATTENDANCE),
           minutesLate: minutesLate || 0,
         })}
       placeholder="0"
