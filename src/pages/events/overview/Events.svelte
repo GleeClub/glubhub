@@ -8,7 +8,7 @@
   import { routeEvents } from 'src/route/constructors'
   import { EventTab } from 'src/route/types'
   import { eagerQuery } from 'src/state/query'
-  import { goToRoute } from 'src/store/route'
+  import { goToRoute, replaceRoute } from 'src/store/route'
   import { eventIsOver } from 'src/utils/helpers'
   import { derived, readable } from 'svelte/store'
   import { mapLazyLoaded, notLoaded } from 'src/state/types'
@@ -46,7 +46,7 @@
     }}
     onDelete={() => {
       reloadAllEvents()
-      reloadSelectedEvent({ id: event.event.id })
+      replaceRoute(routeEvents(null, null))
     }}
   />
 </Sidebar>
