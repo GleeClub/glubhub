@@ -14,12 +14,12 @@ export const datetimeToDate = (datetime: DateTime): Date =>
 export const fullDateTimeFormatter = (datetime?: DateTime | null): string =>
   datetime
     ? dayjs(`${datetime.date} ${datetime.time}`).format(
-        'dddd, MMMM D, YYYY h:mm A'
-      )
+      'dddd, MMMM D, YYYY h:mm A'
+    )
     : ''
 
 export const timeFormatter = (time?: string | null): string =>
-  time ? dayjs(time).format('H:mm A') : ''
+  time ? dayjs(`1970-01-01 ${time}`).format('h:mm A') : ''
 
 export const dateFormatter = (date?: string | Dayjs | null): string =>
   date ? dayjs(date).format('dddd, MMMM D') : ''
