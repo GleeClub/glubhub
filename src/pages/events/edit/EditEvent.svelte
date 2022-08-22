@@ -39,7 +39,7 @@
         contactName: event.gig.contactName,
         contactPhone: event.gig.contactPhone,
         description: event.gig.description,
-        performanceTime: event.gig.performanceTime,
+        performanceTime: event.gig.performanceTime.time,
         price: event.gig.price,
         public: event.gig.public,
         summary: event.gig.summary,

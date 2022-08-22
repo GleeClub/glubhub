@@ -44,10 +44,7 @@
   }
 
   let gig: NewGig = {
-    performanceTime: {
-      date: '',
-      time: '',
-    },
+    performanceTime: '',
     uniform: 0,
     contactName: '',
     contactEmail: '',
@@ -88,7 +85,7 @@
         event.gigCount = true
         event.defaultAttend = false
 
-        gig.performanceTime = request.startTime
+        gig.performanceTime = request.startTime.time
         gig.contactName = request.contactName
         gig.contactEmail = request.contactEmail
         gig.contactPhone = request.contactPhone

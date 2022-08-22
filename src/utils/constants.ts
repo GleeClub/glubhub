@@ -65,10 +65,7 @@ export const EMPTY_GIG: NewGig = {
   contactEmail: '',
   contactName: '',
   contactPhone: '',
-  performanceTime: {
-    date: '',
-    time: '',
-  },
+  performanceTime: '',
   price: null,
   public: false,
   summary: '',

@@ -55,14 +55,10 @@
   />
   <TextInput
     type={timeType}
-    value={gig.performanceTime.time}
+    value={gig.performanceTime}
     onInput={(performanceTime) =>
       updateGig({
-        ...gig,
-        performanceTime: {
-          date: event.callTime.date,
-          time: performanceTime,
-        },
+        ...gig, performanceTime,
       })}
     title="Event Time"
     helpText="4:21 lamo"

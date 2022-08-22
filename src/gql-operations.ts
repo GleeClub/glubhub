@@ -772,7 +772,7 @@ export type NewGig = {
   contactName: Scalars['String'];
   contactPhone: Scalars['String'];
   description: Scalars['String'];
-  performanceTime: DateTimeInput;
+  performanceTime: Scalars['TimeScalar'];
   price?: InputMaybe<Scalars['Int']>;
   public: Scalars['Boolean'];
   summary: Scalars['String'];
