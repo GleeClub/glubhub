@@ -6,6 +6,7 @@ import {
   SongMode,
   Uniform,
 } from 'src/gql-operations'
+import { SECONDS_IN_DAY } from 'src/utils/constants'
 import {
   hyphenDateFormatter,
   parseFormDateString,
@@ -37,13 +38,13 @@ export const stringType: FormInputType<string> = {
 }
 
 export const dateType: FormInputType<number> = {
-  toString: (x) => hyphenDateFormatter(x),
+  toString: (x) => hyphenDateFormatter(x - (x % SECONDS_IN_DAY)),
   fromString: (x) => parseFormDateString(x) || 0,
   textType: 'date',
 }
 
 export const timeType: FormInputType<number> = {
-  toString: (x) => twentyFourHourTimeFormatter(x),
+  toString: (x) => twentyFourHourTimeFormatter(x % SECONDS_IN_DAY),
   fromString: (x) => parseFormTimeString(x) || 0,
   textType: 'time',
 }

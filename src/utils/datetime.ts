@@ -1,37 +1,44 @@
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import { SECONDS_IN_DAY } from './constants'
 
-export const fullDateTimeFormatter = (datetime: number | Dayjs): string =>
-  dayjs(datetime).format('dddd, MMMM D, YYYY h:mm A')
+export const fullDateTimeFormatter = (datetime: number): string =>
+  datetime ? dayjs(datetime * 1000).format('dddd, MMMM D, YYYY h:mm A') : ''
 
-export const timeFormatter = (datetime: number | Dayjs): string =>
-  dayjs(datetime).format('H:mm A')
+export const timeFormatter = (datetime: number): string =>
+  datetime ? dayjs(datetime * 1000).format('H:mm A') : ''
 
-export const hyphenDateFormatter = (datetime: number | Dayjs): string =>
-  dayjs(datetime).format('YYYY-MM-DD')
+export const hyphenDateFormatter = (datetime: number): string =>
+  datetime ? dayjs(datetime * 1000).format('YYYY-MM-DD') : ''
 
-export const twentyFourHourTimeFormatter = (datetime: number | Dayjs): string =>
-  dayjs(datetime).format('HH:MM')
+export const twentyFourHourTimeFormatter = (datetime: number): string =>
+  datetime ? dayjs(datetime * 1000).format('HH:MM') : ''
 
-export const dateFormatter = (datetime: number | Dayjs): string =>
-  dayjs(datetime).format('dddd, MMMM D')
+export const dateFormatter = (datetime: number): string =>
+  datetime ? dayjs(datetime * 1000).format('dddd, MMMM D') : ''
 
-export const simpleDateWithYearFormatter = (datetime: number | Dayjs): string =>
-  dayjs(datetime).format('MMM DD, YYYY')
+export const simpleDateWithYearFormatter = (datetime: number): string =>
+  datetime ? dayjs(datetime * 1000).format('MMM DD, YYYY') : ''
 
-export const simpleDateFormatter = (datetime: number | Dayjs): string =>
-  dayjs(datetime).format('M/D')
+export const simpleDateFormatter = (datetime: number): string =>
+  datetime ? dayjs(datetime * 1000).format('M/D') : ''
 
 export const parseFormDateString = (date: string): number | null => {
+  if (!date) return null
   const epoch = dayjs(date)?.toDate().getTime()
   return typeof epoch === 'number' ? epoch / 1000 : null
 }
 
-export const parseFormTimeString = (date: string): number | null => {
-  const epoch = dayjs(`1970-00-00 ${date}`)?.toDate().getTime()
+export const parseFormTimeString = (time: string): number | null => {
+  if (!time) return null
+  const epoch = dayjs(`1970-00-00 ${time}`)?.toDate().getTime()
   return typeof epoch === 'number' ? epoch / 1000 : null
 }
 
 export function combineDateAndTime(date: number, time: number): number {
-  return date - (date % SECONDS_IN_DAY) + (time % SECONDS_IN_DAY)
+  const onlyDate = date - (date % SECONDS_IN_DAY)
+  const onlyTime = time % SECONDS_IN_DAY
+
+  if (!onlyDate) return onlyTime;
+  if (!onlyTime) return onlyDate;
+  return onlyDate + onlyTime
 }

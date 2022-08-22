@@ -22,7 +22,7 @@ export const DEFAULT_ATTENDANCE: SimpleAttendance = {
   shouldAttend: false,
   didAttend: false,
   confirmed: false,
-};
+}
 
 export const ALL_PERIODS = [
   Period.Daily,

@@ -7,7 +7,7 @@
   import { renderRoute } from 'src/route/render'
   import { numberType } from 'src/state/input'
   import { SimpleAttendance } from 'src/state/types'
-import { DEFAULT_ATTENDANCE } from 'src/utils/constants'
+  import { DEFAULT_ATTENDANCE } from 'src/utils/constants'
   import { dateFormatter } from 'src/utils/datetime'
 
   export let event: FullMemberQuery['member']['grades']['eventsWithChanges'][number]
