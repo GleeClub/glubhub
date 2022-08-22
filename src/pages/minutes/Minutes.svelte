@@ -25,11 +25,10 @@
   } from 'src/state/types'
   import { replaceRoute } from 'src/store/route'
   import { readable } from 'svelte/store'
-  import { dateFormatter } from 'src/utils/datetime'
+  import { dateFormatter, now } from 'src/utils/datetime'
   import { editMinutes, viewCompleteMinutes } from 'src/state/permissions'
   import { renderRoute } from 'src/route/render'
   import { eagerQuery, query } from 'src/state/query'
-import dayjs from 'dayjs';
 
   export let minutesId: number | null
   export let tab: MinutesTab | null
@@ -44,7 +43,7 @@ import dayjs from 'dayjs';
   async function createNewMinutes() {
     createState = loading
     const result = await query('CreateMinutes', {
-      name: `Meeting on ${dateFormatter(dayjs())}`,
+      name: `Meeting on ${dateFormatter(now())}`,
     })
 
     createState = stateFromResult(result)

@@ -1,7 +1,7 @@
-import dayjs from 'dayjs'
 import type { NewRolePermission, Pitch } from 'src/gql-operations'
 import { pitchToString } from 'src/state/pitch'
 import { HasEventTimes, HasPermissions } from 'src/state/types'
+import { datetimeToDate } from './datetime'
 
 export const formatPhone = (phone: string) =>
   phone.length !== 10
@@ -18,11 +18,10 @@ export const permittedTo = (
   )
 
 export const eventIsOver = (event: HasEventTimes): boolean => {
-  const now = dayjs();
   if (event.releaseTime) {
-    return now > dayjs(`${event.releaseTime.date} ${event.releaseTime.time}`);
+    return new Date() > datetimeToDate(event.releaseTime);
   } else {
-    return now > dayjs(`${event.callTime.date} ${event.callTime.time}`);
+    return new Date > datetimeToDate(event.callTime);
   }
 }
 
