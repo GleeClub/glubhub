@@ -31,7 +31,7 @@
     enrollment: Enrollment.Class,
     section: 'Baritone',
     conflicts: '',
-    dietaryRestrictions: ''
+    dietaryRestrictions: '',
   }
 
   async function confirmAccount() {
@@ -60,7 +60,7 @@
         onCampus: f.onCampus,
         section: f.previousSemester?.section || 'Baritone',
         dietaryRestrictions: f.dietaryRestrictions,
-        conflicts: f.conflicts
+        conflicts: f.conflicts,
       }
     }
   })
@@ -113,14 +113,18 @@
         <ButtonGroup connected>
           <Button
             element="a"
-            color={form.enrollment === Enrollment.Class ? 'is-primary' : undefined}
+            color={form.enrollment === Enrollment.Class
+              ? 'is-primary'
+              : undefined}
             click={() => (form.enrollment = Enrollment.Class)}
           >
             Class
           </Button>
           <Button
             element="a"
-            color={form.enrollment === Enrollment.Club ? 'is-primary' : undefined}
+            color={form.enrollment === Enrollment.Club
+              ? 'is-primary'
+              : undefined}
             click={() => (form.enrollment = Enrollment.Club)}
           >
             Club
@@ -140,7 +144,8 @@
       <TextInput
         type={stringType}
         value={form.dietaryRestrictions}
-        onInput={(newRestrictions) => (form.dietaryRestrictions = newRestrictions)}
+        onInput={(newRestrictions) =>
+          (form.dietaryRestrictions = newRestrictions)}
         placeholder="My tummy huwts"
       />
     </InputWrapper>

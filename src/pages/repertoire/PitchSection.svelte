@@ -2,7 +2,7 @@
   import Tooltip from 'src/components/bulma/Tooltip.svelte'
 
   import { Pitch, SongMode } from 'src/gql-operations'
-  import { pitchToString } from 'src/state/pitch';
+  import { pitchToString } from 'src/state/pitch'
   import { playPitch, titleCase } from 'src/utils/helpers'
 
   export let title: string

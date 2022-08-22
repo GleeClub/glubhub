@@ -21,7 +21,7 @@
   class:is-inverted={inverted}
   class:is-outlined={outlined}
   on:click={click}
-  disabled={typeof click === "function" ? undefined : true}
+  disabled={typeof click === 'function' ? undefined : true}
 >
   <slot />
 </svelte:element>

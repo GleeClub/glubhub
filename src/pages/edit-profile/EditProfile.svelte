@@ -32,7 +32,7 @@
 
     const enteredPassword = !!(password || confirmPassword)
     if (!enteredPassword && !loggedIn) {
-      alert("You need a password, champ")
+      alert('You need a password, champ')
       return
     } else if (password !== confirmPassword) {
       alert("Your passwords don't match, buddy")

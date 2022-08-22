@@ -23,15 +23,15 @@ export const simpleDateFormatter = (datetime: number | Dayjs): string =>
   dayjs(datetime).format('M/D')
 
 export const parseFormDateString = (date: string): number | null => {
-  const epoch = dayjs(date)?.toDate().getTime();
-  return typeof epoch === "number" ? epoch / 1000 : null;
+  const epoch = dayjs(date)?.toDate().getTime()
+  return typeof epoch === 'number' ? epoch / 1000 : null
 }
 
 export const parseFormTimeString = (date: string): number | null => {
-  const epoch = dayjs(`1970-00-00 ${date}`)?.toDate().getTime();
-  return typeof epoch === "number" ? epoch / 1000 : null;
+  const epoch = dayjs(`1970-00-00 ${date}`)?.toDate().getTime()
+  return typeof epoch === 'number' ? epoch / 1000 : null
 }
 
 export function combineDateAndTime(date: number, time: number): number {
-  return date - (date % SECONDS_IN_DAY) + (time % SECONDS_IN_DAY);
+  return date - (date % SECONDS_IN_DAY) + (time % SECONDS_IN_DAY)
 }

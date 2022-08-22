@@ -22,6 +22,7 @@
   import { RemoteData } from 'src/state/types'
   import { siteContext } from 'src/store/context'
   import { createEventDispatcher } from 'svelte'
+  import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
 
   export let loggedIn: boolean
   export let form: MemberUpdate
@@ -98,6 +99,7 @@
       type={stringType}
       value={form.location}
       onInput={(location) => updateForm({ ...form, location })}
+      required
       placeholder="Glenn"
     />
     <Control>
@@ -117,47 +119,42 @@
       </ButtonGroup>
     </Control>
   </InputWrapper>
-  <TextInput
-    type={stringType}
-    value={form.major}
-    onInput={(major) => updateForm({ ...form, major })}
-    required
-    horizontal
-    title="Major"
-    placeholder="Undecided Engineering"
-  />
-  <TextInput
-    type={stringType}
-    value={form.hometown}
-    onInput={(hometown) => updateForm({ ...form, hometown })}
-    required
-    horizontal
-    title="Hometown"
-    placeholder="Winslow, Arizona"
-  />
   <InputWrapper horizontal title="Car">
+    <div class="field is-grouped">
+      <CheckboxInput
+        content="I have a car"
+        checked={form.passengers > 0}
+        onChange={(hasCar) =>
+          updateForm({ ...form, passengers: hasCar ? 1 : 0 })}
+      />
+      {#if form.passengers > 0}
+        <TextInput
+          type={numberType}
+          value={form.passengers}
+          onInput={(passengers) =>
+            updateForm({ ...form, passengers: passengers || 0 })}
+          placeholder="How many?"
+          suffix="passengers"
+        />
+      {/if}
+    </div>
+  </InputWrapper>
+  <InputWrapper horizontal title="Conflicts">
     <TextInput
       type={stringType}
-      value={form.location}
-      onInput={(location) => updateForm({ ...form, location })}
-      placeholder="Glenn"
+      value={form.conflicts}
+      onInput={(newConflicts) => (form.conflicts = newConflicts)}
+      placeholder="I got lab till 7 on Mondays and it makes me sad"
     />
-    <Control>
-      <ButtonGroup connected>
-        <Button
-          color={form.onCampus ? 'is-primary' : undefined}
-          click={() => updateForm({ ...form, onCampus: true })}
-        >
-          On-campus
-        </Button>
-        <Button
-          color={!form.onCampus ? 'is-primary' : undefined}
-          click={() => updateForm({ ...form, onCampus: false })}
-        >
-          Off-campus
-        </Button>
-      </ButtonGroup>
-    </Control>
+  </InputWrapper>
+  <InputWrapper horizontal title="Dietary Restrictions">
+    <TextInput
+      type={stringType}
+      value={form.dietaryRestrictions}
+      onInput={(newRestrictions) =>
+        (form.dietaryRestrictions = newRestrictions)}
+      placeholder="My tummy huwts"
+    />
   </InputWrapper>
   <InputWrapper horizontal title="Enrollment">
     <InputWrapper horizontal>
@@ -210,11 +207,27 @@
   />
   <TextInput
     type={stringType}
-    value={form.picture}
-    onInput={(picture) => updateForm({ ...form, picture })}
+    value={form.major}
+    onInput={(major) => updateForm({ ...form, major })}
     horizontal
-    title="Picture URL"
-    placeholder="https://create.mylittlepony.movie/images/ponyparticon_bodybig.png"
+    title="Major"
+    placeholder="Undecided Engineering"
+  />
+  <TextInput
+    type={stringType}
+    value={form.minor}
+    onInput={(minor) => updateForm({ ...form, minor })}
+    horizontal
+    title="Minor"
+    placeholder="CS cause I like money"
+  />
+  <TextInput
+    type={stringType}
+    value={form.hometown}
+    onInput={(hometown) => updateForm({ ...form, hometown })}
+    horizontal
+    title="Hometown"
+    placeholder="Winslow, Arizona"
   />
   <TextInput
     type={numberType}
@@ -227,6 +240,14 @@
     horizontal
     title="Arrived at Tech"
     placeholder="2099"
+  />
+  <TextInput
+    type={stringType}
+    value={form.picture}
+    onInput={(picture) => updateForm({ ...form, picture })}
+    horizontal
+    title="Picture URL"
+    placeholder="https://create.mylittlepony.movie/images/ponyparticon_bodybig.png"
   />
   <ButtonGroup alignment="is-right">
     {#if $siteContext.user}

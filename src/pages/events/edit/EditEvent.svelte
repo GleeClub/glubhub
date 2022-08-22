@@ -14,7 +14,7 @@
   } from 'src/state/types'
   import { replaceRoute } from 'src/store/route'
   import { query } from 'src/state/query'
-  import { EMPTY_GIG } from 'src/utils/constants';
+  import { EMPTY_GIG } from 'src/utils/constants'
 
   export let event: FullEventQuery['event']
   export let onUpdate: () => void
@@ -22,7 +22,9 @@
   let state: RemoteData = emptyLoaded
 
   let eventForm: NewEventFields = event
-  let gigForm: NewGig = event.gig ? { ...event.gig, uniform: event.gig.uniform.id } : EMPTY_GIG
+  let gigForm: NewGig = event.gig
+    ? { ...event.gig, uniform: event.gig.uniform.id }
+    : EMPTY_GIG
 
   function goBackToDetails() {
     replaceRoute(routeEvents(event.id, eventDetails))
@@ -37,7 +39,7 @@
         event: eventForm,
         gig: gigForm,
         repeat: null,
-      }
+      },
     })
 
     state = stateFromResult(result)

@@ -15,7 +15,7 @@
   import { FullSongQuery } from 'src/gql-operations'
   import { stringType } from 'src/state/input'
   import { query } from 'src/state/query'
-  import { PERFORMANCES_LINK_TYPE } from 'src/utils/constants';
+  import { PERFORMANCES_LINK_TYPE } from 'src/utils/constants'
 
   export let song: FullSongQuery['song']
   export let deleteLink: (link: FullSongLink) => void

@@ -3,7 +3,7 @@
   import RadioInput from 'src/components/forms/RadioInput.svelte'
   import SelectInput from 'src/components/forms/SelectInput.svelte'
   import TextareaInput from 'src/components/forms/TextareaInput.svelte'
-import { NewEventFields, NewGig } from 'src/gql-operations';
+  import { NewEventFields, NewGig } from 'src/gql-operations'
 
   import { stringType, uniformType } from 'src/state/input'
   import { eagerQuery } from 'src/state/query'
@@ -51,7 +51,7 @@ import { NewEventFields, NewGig } from 'src/gql-operations';
   />
   <SelectInput
     values={[null, ...$loadedUniforms]}
-    selected={$loadedUniforms.find(u => u.id === gig.uniform) || null}
+    selected={$loadedUniforms.find((u) => u.id === gig.uniform) || null}
     type={uniformType($loadedUniforms)}
     onInput={(uniform) => updateGig({ ...gig, uniform: uniform?.id || 0 })}
   />

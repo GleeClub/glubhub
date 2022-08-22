@@ -6,7 +6,12 @@ import {
   SongMode,
   Uniform,
 } from 'src/gql-operations'
-import { hyphenDateFormatter, parseFormDateString, parseFormTimeString, twentyFourHourTimeFormatter } from 'src/utils/datetime'
+import {
+  hyphenDateFormatter,
+  parseFormDateString,
+  parseFormTimeString,
+  twentyFourHourTimeFormatter,
+} from 'src/utils/datetime'
 import { titleCase } from 'src/utils/helpers'
 import { pitchFromString, pitchToString } from './pitch'
 
@@ -98,9 +103,9 @@ export const memberType = (
 })
 
 export const enrollmentType: FormInputType<Enrollment | null> = {
-  toString: (x) => x ? titleCase(x) : 'Inactive',
+  toString: (x) => (x ? titleCase(x) : 'Inactive'),
   fromString: (x) =>
-    (x === 'Class' || x === 'Club') ? (x.toUpperCase() as Enrollment) : null,
+    x === 'Class' || x === 'Club' ? (x.toUpperCase() as Enrollment) : null,
   textType: 'text',
 }
 

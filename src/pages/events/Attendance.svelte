@@ -42,7 +42,7 @@
     })
 
     state = stateFromResult(result)
-    if (result.type === "loaded") {
+    if (result.type === 'loaded') {
       onUpdate()
     }
   }

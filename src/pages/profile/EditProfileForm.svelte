@@ -86,8 +86,7 @@
     type={enrollmentType}
     values={[Enrollment.Class, Enrollment.Club, null]}
     selected={form.enrollment}
-    onInput={(enrollment) =>
-      updateForm({ ...form, enrollment })}
+    onInput={(enrollment) => updateForm({ ...form, enrollment })}
     title="Enrollment"
   />
   <SelectInput

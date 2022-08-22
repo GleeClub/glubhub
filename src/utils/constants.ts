@@ -12,9 +12,9 @@ export const ATTENDANCE_ISSUE_EMAIL =
   OFFICER_LIST_EMAIL + 'subject=Attendance%20Issue'
 export const SECONDS_IN_DAY = 60 * 60 * 24
 
-export const SHEET_MUSIC_FILE_TYPE = "Sheet Music"
-export const MIDIS_FILE_TYPE = "MIDIs"
-export const PERFORMANCES_LINK_TYPE = "Performances"
+export const SHEET_MUSIC_FILE_TYPE = 'Sheet Music'
+export const MIDIS_FILE_TYPE = 'MIDIs'
+export const PERFORMANCES_LINK_TYPE = 'Performances'
 
 export const ALL_PERIODS = [
   Period.Daily,
@@ -57,5 +57,5 @@ export const EMPTY_GIG: NewGig = {
   public: false,
   summary: '',
   description: '',
-  uniform: 0
+  uniform: 0,
 }

@@ -59,7 +59,10 @@
     onInput={(performanceTime) =>
       updateGig({
         ...gig,
-        performanceTime: combineDateAndTime(gig.performanceTime, performanceTime),
+        performanceTime: combineDateAndTime(
+          gig.performanceTime,
+          performanceTime
+        ),
       })}
     title="Event Time"
     helpText="4:21 lamo"
@@ -77,7 +80,7 @@
   />
   <TextInput
     type={dateType}
-    value={event.releaseTime  || 0}
+    value={event.releaseTime || 0}
     onInput={(releaseDate) =>
       updateEvent({
         ...event,

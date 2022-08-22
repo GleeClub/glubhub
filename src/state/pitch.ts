@@ -18,8 +18,8 @@ export const pitchFromString = (unicode: string): Pitch => {
   } else if (unicode.endsWith('♯')) {
     accidental = '_SHARP'
   }
-  
-  return `${unicode[0]}${accidental}` as Pitch;
+
+  return `${unicode[0]}${accidental}` as Pitch
 }
 
 export const halfStepsAboveA = (pitch: Pitch): number => {

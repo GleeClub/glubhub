@@ -20,9 +20,14 @@
     stateFromResult,
   } from 'src/state/types'
   import { replaceRoute } from 'src/store/route'
-  import { ALL_PITCHES, ALL_MODES, SHEET_MUSIC_FILE_TYPE, MIDIS_FILE_TYPE } from 'src/utils/constants'
-import Title from 'src/components/bulma/Title.svelte';
-import Subtitle from 'src/components/bulma/Subtitle.svelte'
+  import {
+    ALL_PITCHES,
+    ALL_MODES,
+    SHEET_MUSIC_FILE_TYPE,
+    MIDIS_FILE_TYPE,
+  } from 'src/utils/constants'
+  import Title from 'src/components/bulma/Title.svelte'
+  import Subtitle from 'src/components/bulma/Subtitle.svelte'
 
   export let song: FullSongQuery['song']
   export let onUpdate: () => void
@@ -110,7 +115,12 @@ import Subtitle from 'src/components/bulma/Subtitle.svelte'
 <StateBox {state} />
 
 <ul style="list-style: none; padding-bottom: 10px;">
-  <EditFileType typeName={SHEET_MUSIC_FILE_TYPE} {song} {onUpdate} {deleteLink} />
+  <EditFileType
+    typeName={SHEET_MUSIC_FILE_TYPE}
+    {song}
+    {onUpdate}
+    {deleteLink}
+  />
   <EditFileType typeName={MIDIS_FILE_TYPE} {song} {onUpdate} {deleteLink} />
   <NewPerformanceSection {song} {onUpdate} {deleteLink} />
 </ul>

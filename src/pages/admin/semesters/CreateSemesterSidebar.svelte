@@ -14,8 +14,8 @@
     stateFromResult,
   } from 'src/state/types'
 
-  const now = new Date();
-  const season = now.getMonth() < 6 ? 'Spring' : 'Fall' 
+  const now = new Date()
+  const season = now.getMonth() < 6 ? 'Spring' : 'Fall'
 
   let semester: NewSemester = {
     name: `${season} ${now.getFullYear()}`,

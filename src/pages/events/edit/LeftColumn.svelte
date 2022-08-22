@@ -2,9 +2,9 @@
   import Column from 'src/components/bulma/Column.svelte'
   import TextInput from 'src/components/forms/TextInput.svelte'
 
-  import type { NewEventFields, NewGig } from 'src/gql-operations';
+  import type { NewEventFields, NewGig } from 'src/gql-operations'
   import { dateType, numberType, stringType, timeType } from 'src/state/input'
-import { combineDateAndTime } from 'src/utils/datetime';
+  import { combineDateAndTime } from 'src/utils/datetime'
 
   export let event: NewEventFields
   export let updateEvent: (event: NewEventFields) => void
@@ -33,20 +33,22 @@ import { combineDateAndTime } from 'src/utils/datetime';
   <TextInput
     type={dateType}
     value={event.callTime}
-    onInput={(callDate) => updateEvent({
-      ...event,
-      callTime: combineDateAndTime(callDate, event.callTime),
-    })}
+    onInput={(callDate) =>
+      updateEvent({
+        ...event,
+        callTime: combineDateAndTime(callDate, event.callTime),
+      })}
     title="Date of Event"
     required
   />
   <TextInput
     type={timeType}
     value={event.callTime}
-    onInput={(callTime) => updateEvent({
-      ...event,
-      callTime: combineDateAndTime(event.callTime, callTime)
-    })}
+    onInput={(callTime) =>
+      updateEvent({
+        ...event,
+        callTime: combineDateAndTime(event.callTime, callTime),
+      })}
     title="Call Time"
     helpText="4:20 lamo"
     required
@@ -54,30 +56,33 @@ import { combineDateAndTime } from 'src/utils/datetime';
   <TextInput
     type={timeType}
     value={gig.performanceTime}
-    onInput={(performanceTime) => updateGig({
-      ...gig,
-      performanceTime: combineDateAndTime(event.callTime, performanceTime),
-    })}
+    onInput={(performanceTime) =>
+      updateGig({
+        ...gig,
+        performanceTime: combineDateAndTime(event.callTime, performanceTime),
+      })}
     title="Event Time"
     helpText="4:21 lamo"
   />
   <TextInput
     type={timeType}
     value={event.releaseTime || 0}
-    onInput={(releaseTime) => updateEvent({
-      ...event,
-      releaseTime: combineDateAndTime(event.releaseTime || 0, releaseTime),
-    })}
+    onInput={(releaseTime) =>
+      updateEvent({
+        ...event,
+        releaseTime: combineDateAndTime(event.releaseTime || 0, releaseTime),
+      })}
     title="Release Time"
     helpText="4:22 lamo"
   />
   <TextInput
     type={dateType}
     value={event.releaseTime || 0}
-    onInput={(releaseDate) => updateEvent({
-      ...event,
-      releaseTime: combineDateAndTime(releaseDate, event.releaseTime || 0),
-     })}
+    onInput={(releaseDate) =>
+      updateEvent({
+        ...event,
+        releaseTime: combineDateAndTime(releaseDate, event.releaseTime || 0),
+      })}
     title="Release Date"
   />
   <TextInput

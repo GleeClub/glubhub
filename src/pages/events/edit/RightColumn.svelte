@@ -5,7 +5,7 @@
   import TextareaInput from 'src/components/forms/TextareaInput.svelte'
   import TextInput from 'src/components/forms/TextInput.svelte'
   import ErrorBox from 'src/components/remote/ErrorBox.svelte'
-import { NewEventFields, NewGig } from 'src/gql-operations';
+  import { NewEventFields, NewGig } from 'src/gql-operations'
 
   import { stringType } from 'src/state/input'
   import { RemoteData } from 'src/state/types'

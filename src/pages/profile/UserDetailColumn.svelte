@@ -1,6 +1,6 @@
 <script lang="ts">
   import Subtitle from 'src/components/bulma/Subtitle.svelte'
-import EmailLink from 'src/components/member/EmailLink.svelte'
+  import EmailLink from 'src/components/member/EmailLink.svelte'
   import PhoneLink from 'src/components/member/PhoneLink.svelte'
 
   import { FullMemberQuery } from 'src/gql-operations'
