@@ -8,7 +8,7 @@
 </script>
 
 {#if gig}
-  <Tooltip content={`${gig.name} on ${dateFormatter(gig.callTime)}`}>
+  <Tooltip content={`${gig.name} on ${dateFormatter(gig.callTime.date)}`}>
     <span class="icon is-large has-text-primary">
       <i class="far fa-2x fa-check-circle" />
     </span>

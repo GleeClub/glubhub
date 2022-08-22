@@ -20,8 +20,8 @@
   let semester: NewSemester = {
     name: `${season} ${now.getFullYear()}`,
     gigRequirement: 5,
-    startDate: 0,
-    endDate: 0,
+    startDate: '',
+    endDate: '',
   }
   let state: RemoteData = emptyLoaded
 

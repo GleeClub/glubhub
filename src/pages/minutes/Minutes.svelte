@@ -29,6 +29,7 @@
   import { editMinutes, viewCompleteMinutes } from 'src/state/permissions'
   import { renderRoute } from 'src/route/render'
   import { eagerQuery, query } from 'src/state/query'
+import dayjs from 'dayjs';
 
   export let minutesId: number | null
   export let tab: MinutesTab | null
@@ -42,9 +43,8 @@
 
   async function createNewMinutes() {
     createState = loading
-    const now = new Date().getTime() / 1000
     const result = await query('CreateMinutes', {
-      name: `Meeting on ${dateFormatter(now)}`,
+      name: `Meeting on ${dateFormatter(dayjs())}`,
     })
 
     createState = stateFromResult(result)

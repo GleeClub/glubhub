@@ -4,8 +4,14 @@ query FullEvent($id: Int!) {
     name
     semester
     type
-    callTime
-    releaseTime
+    callTime {
+      date
+      time
+    }
+    releaseTime {
+      date
+      time
+    }
     points
     comments
     location
@@ -19,7 +25,10 @@ query FullEvent($id: Int!) {
       contactEmail
       contactPhone
       price
-      performanceTime
+      performanceTime {
+        date
+        time
+      }
       uniform {
         id
         name

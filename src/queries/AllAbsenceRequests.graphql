@@ -1,13 +1,19 @@
 query AllAbsenceRequests {
   absenceRequests {
-    time
+    time {
+      date
+      time
+    }
     reason
     state
     event {
       id
       name
       location
-      callTime
+      callTime {
+        date
+        time
+      }
     }
     member {
       email

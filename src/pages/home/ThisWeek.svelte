@@ -8,6 +8,7 @@
   import { axisLeft } from 'd3-axis'
   import { timeMonday } from 'd3-time'
   import { timeFormat } from 'd3-time-format'
+  import { datetimeToDate } from 'src/utils/datetime'
 
   export let events: UserGradesEvent[]
 
@@ -29,8 +30,8 @@
 
   const tooCloseToPrevious = (index: number) =>
     index &&
-    y(new Date(events[index].event.callTime)) -
-      y(new Date(events[index - 1].event.callTime)) <=
+    y(datetimeToDate(events[index].event.callTime)) -
+      y(datetimeToDate( events[index - 1].event.callTime)) <=
       20
 
   onMount(() => {
@@ -50,10 +51,10 @@
   function linkYPosition(index: number) {
     if (tooCloseToPrevious(index)) {
       return (
-        y(new Date(events[index - 1].event.callTime)) + 16 + circleRadius / 2.0
+        y(datetimeToDate( events[index - 1].event.callTime)) + 16 + circleRadius / 2.0
       )
     } else {
-      return y(new Date(events[index].event.callTime)) + circleRadius / 2.0
+      return y(datetimeToDate(events[index].event.callTime)) + circleRadius / 2.0
     }
   }
 </script>
@@ -69,7 +70,7 @@
         cx={circleX}
         cy={tooCloseToPrevious(eventIndex)
           ? -1 * circleRadius
-          : y(new Date(event.event.callTime))}
+          : y(datetimeToDate(event.event.callTime))}
       />
     {/each}
   </g>

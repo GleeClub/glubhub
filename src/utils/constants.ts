@@ -1,4 +1,4 @@
-import { NewGig, Period, Pitch, SongMode } from 'src/gql-operations'
+import { DateTime, NewGig, Period, Pitch, SongMode } from 'src/gql-operations'
 import { SimpleAttendance } from 'src/state/types'
 
 export const GREASE_TOKEN_NAME = 'grease-token'
@@ -11,7 +11,6 @@ export const NO_SECTION = 'Homeless'
 export const OFFICER_LIST_EMAIL = 'gleeclub_officers@lists.gatech.edu'
 export const ATTENDANCE_ISSUE_EMAIL =
   OFFICER_LIST_EMAIL + 'subject=Attendance%20Issue'
-export const SECONDS_IN_DAY = 60 * 60 * 24
 
 export const SHEET_MUSIC_FILE_TYPE = 'Sheet Music'
 export const MIDIS_FILE_TYPE = 'MIDIs'
@@ -22,6 +21,11 @@ export const DEFAULT_ATTENDANCE: SimpleAttendance = {
   shouldAttend: false,
   didAttend: false,
   confirmed: false,
+}
+
+export const DEFAULT_DATETIME: DateTime = {
+  date: '',
+  time: '',
 }
 
 export const ALL_PERIODS = [
@@ -60,7 +64,10 @@ export const EMPTY_GIG: NewGig = {
   contactEmail: '',
   contactName: '',
   contactPhone: '',
-  performanceTime: 0,
+  performanceTime: {
+    date: '',
+    time: '',
+  },
   price: null,
   public: false,
   summary: '',

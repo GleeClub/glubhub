@@ -38,7 +38,7 @@
     <tbody>
       {#each transactions as transaction}
         <tr class="no-bottom-border">
-          <td>{simpleDateWithYearFormatter(transaction.time)}</td>
+          <td>{simpleDateWithYearFormatter(transaction.time.date)}</td>
           <td>
             {transaction.type}
             {#if transaction.description}

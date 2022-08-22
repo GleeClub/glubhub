@@ -35,7 +35,10 @@ query FullMember($email: String!) {
     }
     transactions {
       id
-      time
+      time {
+        date
+        time
+      }
       amount
       description
       semester
@@ -49,7 +52,10 @@ query FullMember($email: String!) {
           id
           name
           type
-          callTime
+          callTime {
+            date
+            time
+          }
           attendance(member: $email) {
             didAttend
             shouldAttend

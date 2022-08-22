@@ -28,9 +28,9 @@
           (r) =>
             r.status === status &&
             (status === GigRequestStatus.Pending ||
-              (new Date(r.startTime) >=
+              (new Date(r.startTime.date) >=
                 new Date(context.currentSemester.startDate) &&
-                new Date(r.startTime) <=
+                new Date(r.startTime.date) <=
                   new Date(context.currentSemester.endDate)))
         )
       )

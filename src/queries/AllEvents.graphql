@@ -3,8 +3,14 @@ query AllEvents {
     id
     name
     type
-    callTime
-    releaseTime
+    callTime {
+      date
+      time
+    }
+    releaseTime {
+      date
+      time
+    }
     userAttendance {
       shouldAttend
       didAttend

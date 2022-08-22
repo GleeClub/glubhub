@@ -10,6 +10,7 @@
   import { axisLeft, axisBottom } from 'd3-axis'
   import { line, curveMonotoneX } from 'd3-shape'
   import { scaleTime, scaleLinear } from 'd3-scale'
+import { datetimeToDate } from 'src/utils/datetime';
 
   export let hoverEvent: (hover: HoveredEvent | null) => void
 
@@ -36,7 +37,7 @@
     console.log(events, graphElement)
 
     x.domain(
-      extent(events, (event) => new Date(event.event.callTime)) as [Date, Date]
+      extent(events, (event) => datetimeToDate(event.event.callTime)) as [Date, Date]
     )
     y.domain([0, 100])
 
@@ -61,15 +62,15 @@
       .append('path')
       .datum([
         {
-          callTime: new Date(events[0].event.callTime),
+          callTime: datetimeToDate(events[0].event.callTime),
           partialScore: 0,
         },
         ...events.map((event) => ({
-          callTime: new Date(event.event.callTime),
+          callTime: datetimeToDate(event.event.callTime),
           partialScore: event.change!.partialScore,
         })),
         {
-          callTime: new Date(events[events.length - 1].event.callTime),
+          callTime: datetimeToDate(events[events.length - 1].event.callTime),
           partialScore: 0,
         },
       ])
@@ -84,7 +85,7 @@
   <g>
     {#each $pastEvents as event}
       <circle
-        cx={x(new Date(event.event.callTime))}
+        cx={x(datetimeToDate(event.event.callTime))}
         cy={y(Math.max(event.change.partialScore, 0))}
         r={4}
         stroke-width={3}
@@ -96,7 +97,7 @@
   <g>
     {#each $pastEvents as event}]
       <circle
-        cx={x(new Date(event.event.callTime))}
+        cx={x(datetimeToDate(event.event.callTime))}
         cy={y(Math.max(event.change.partialScore, 0))}
         r={8}
         fill-opacity={0}

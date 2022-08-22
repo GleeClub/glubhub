@@ -54,7 +54,7 @@
     <AttendanceBlock {event} {rsvpState} {rsvp} {confirm} />
   </span>
   {#if event.gig?.performanceTime}
-    <p>Perform at: {timeFormatter(event.gig.performanceTime)}</p>
+    <p>Perform at: {timeFormatter(event.gig.performanceTime.time)}</p>
   {/if}
   <p>
     This event is worth <b>{event.points}</b> points

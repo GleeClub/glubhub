@@ -2,6 +2,7 @@ import {
   FullEventQuery,
   FullSongQuery,
   SiteContextQuery,
+  DateTime,
 } from 'src/gql-operations'
 import type { Readable } from 'svelte/store'
 
@@ -97,8 +98,8 @@ export interface HasFullName {
 }
 
 export interface HasEventTimes {
-  callTime: number
-  releaseTime?: number | null
+  callTime: DateTime
+  releaseTime?: DateTime | null
 }
 
 export interface SimpleAttendance {

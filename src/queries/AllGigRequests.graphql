@@ -1,13 +1,19 @@
 query AllGigRequests {
   gigRequests {
     id
-    time
+    time {
+      date
+      time
+    }
     name
     organization
     contactName
     contactPhone
     contactEmail
-    startTime
+    startTime {
+      date
+      time
+    }
     location
     comments
     status

@@ -18,7 +18,7 @@
 </script>
 
 <tr class="no-bottom-border">
-  <td>{dateFormatter(event.event.callTime)}</td>
+  <td>{dateFormatter(event.event.callTime.date)}</td>
   <td>
     <a href={renderRoute(routeEvents(event.event.id, null))}
       >{event.event.name}</a

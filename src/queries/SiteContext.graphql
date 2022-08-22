@@ -46,15 +46,27 @@ query SiteContext {
       volunteerGigsAttended {
         id
         name
-        callTime
-        releaseTime
+        callTime {
+          date
+          time
+        }
+        releaseTime {
+          date
+          time
+        }
       }
       eventsWithChanges {
         event {
           id
           name
-          callTime
-          releaseTime
+          callTime {
+            date
+            time
+          }
+          releaseTime {
+            date
+            time
+          }
         }
         change {
           change
@@ -65,7 +77,10 @@ query SiteContext {
     }
     transactions {
       id
-      time
+      time {
+        date
+        time
+      }
       amount
       description
       semester

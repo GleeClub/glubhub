@@ -28,8 +28,14 @@
     name: '',
     semester: get(siteContext).currentSemester.name,
     type: 'Rehearsal',
-    callTime: 0,
-    releaseTime: 0,
+    callTime: {
+      date: '',
+      time: '',
+    },
+    releaseTime: {
+      date: '',
+      time: '',
+    },
     points: 5,
     comments: '',
     location: '',
@@ -38,7 +44,10 @@
   }
 
   let gig: NewGig = {
-    performanceTime: 0,
+    performanceTime: {
+      date: '',
+      time: '',
+    },
     uniform: 0,
     contactName: '',
     contactEmail: '',

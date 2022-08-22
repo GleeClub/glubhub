@@ -4,7 +4,7 @@
 
   import { NewEventFields, NewGig } from 'src/gql-operations'
   import { dateType, numberType, stringType, timeType } from 'src/state/input'
-  import { combineDateAndTime } from 'src/utils/datetime'
+  import { DEFAULT_DATETIME } from 'src/utils/constants'
 
   export let event: NewEventFields
   export let updateEvent: (event: NewEventFields) => void
@@ -32,22 +32,22 @@
   />
   <TextInput
     type={dateType}
-    value={event.callTime}
+    value={event.callTime.date}
     onInput={(callDate) =>
       updateEvent({
         ...event,
-        callTime: combineDateAndTime(callDate, event.callTime),
+        callTime: { ...event.callTime, date: callDate },
       })}
     title="Date of Event"
     required
   />
   <TextInput
     type={timeType}
-    value={event.callTime}
+    value={event.callTime.time}
     onInput={(callTime) =>
       updateEvent({
         ...event,
-        callTime: combineDateAndTime(event.callTime, callTime),
+        callTime: { ...event.callTime, time: callTime }
       })}
     title="Call Time"
     helpText="4:20 lamo"
@@ -55,36 +55,39 @@
   />
   <TextInput
     type={timeType}
-    value={gig.performanceTime}
+    value={gig.performanceTime.time}
     onInput={(performanceTime) =>
       updateGig({
         ...gig,
-        performanceTime: combineDateAndTime(
-          gig.performanceTime,
-          performanceTime
-        ),
+        performanceTime: { ...gig.performanceTime, time: performanceTime },
       })}
     title="Event Time"
     helpText="4:21 lamo"
   />
   <TextInput
     type={timeType}
-    value={event.releaseTime || 0}
+    value={event.releaseTime?.time || ''}
     onInput={(releaseTime) =>
       updateEvent({
         ...event,
-        releaseTime: combineDateAndTime(event.releaseTime || 0, releaseTime),
+        releaseTime: {
+          ...(event.releaseTime || DEFAULT_DATETIME),
+          time: releaseTime,
+        }
       })}
     title="Release Time"
     helpText="4:22 lamo"
   />
   <TextInput
     type={dateType}
-    value={event.releaseTime || 0}
+    value={event.releaseTime?.date || ''}
     onInput={(releaseDate) =>
       updateEvent({
         ...event,
-        releaseTime: combineDateAndTime(releaseDate, event.releaseTime || 0),
+        releaseTime: {
+          ...(event.releaseTime || DEFAULT_DATETIME),
+          date: releaseDate,
+        }
       })}
     title="Release Date"
   />

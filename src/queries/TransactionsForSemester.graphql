@@ -5,7 +5,10 @@ query TransactionsForSemester {
       email
       fullName
     }
-    time
+    time {
+      date
+      time
+    }
     amount
     description
     semester

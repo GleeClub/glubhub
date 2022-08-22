@@ -51,7 +51,7 @@
       <p>
         <br />
         Do you have an issue? Do you need a daddy tissue?
-        <a href="mailto:{ATTENDANCE_ISSUE_EMAIL}"> Email the officers </a>
+        <a href="mailto:{ATTENDANCE_ISSUE_EMAIL}">Email the officers</a>
         to cry about it.
       </p>
     {:else}

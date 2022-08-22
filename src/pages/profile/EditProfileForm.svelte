@@ -72,6 +72,7 @@
     value={form.location}
     onInput={(location) => updateForm({ ...form, location })}
     title="Location"
+    required
   />
   <RadioInput
     horizontal

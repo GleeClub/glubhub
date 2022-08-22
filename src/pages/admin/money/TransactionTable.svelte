@@ -16,7 +16,7 @@
   <tbody>
     {#each transactions.transactions as transaction}
       <tr class="no-bottom-border">
-        <td>{simpleDateWithYearFormatter(transaction.time)}</td>
+        <td>{simpleDateWithYearFormatter(transaction.time.date)}</td>
         <td>{transaction.member.fullName}</td>
         <td>{transaction.type}</td>
         <td>{transaction.amount}</td>

@@ -17,8 +17,14 @@ export const permittedTo = (
     (p) => p.name === permission && (!eventType || p.eventType === eventType)
   )
 
-export const eventIsOver = (event: HasEventTimes): boolean =>
-  dayjs() > (dayjs(event.releaseTime) || dayjs(event.callTime))
+export const eventIsOver = (event: HasEventTimes): boolean => {
+  const now = dayjs();
+  if (event.releaseTime) {
+    return now > dayjs(`${event.releaseTime.date} ${event.releaseTime.time}`);
+  } else {
+    return now > dayjs(`${event.callTime.date} ${event.callTime.time}`);
+  }
+}
 
 export const titleCase = (s: string): string =>
   s[0].toUpperCase() + s.slice(1).toLowerCase()

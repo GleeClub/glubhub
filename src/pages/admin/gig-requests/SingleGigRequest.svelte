@@ -13,15 +13,15 @@
 
 <tr class="no-bottom-border">
   <td>
-    {simpleDateWithYearFormatter(gigRequest.time)}
+    {simpleDateWithYearFormatter(gigRequest.time.date)}
     <br />
-    {timeFormatter(gigRequest.time)}
+    {timeFormatter(gigRequest.time.time)}
   </td>
   <td>{gigRequest.name}</td>
   <td>
-    {simpleDateWithYearFormatter(gigRequest.startTime)}
+    {simpleDateWithYearFormatter(gigRequest.startTime.date)}
     <br />
-    {timeFormatter(gigRequest.startTime)}
+    {timeFormatter(gigRequest.startTime.time)}
     <br />
     {gigRequest.location}
   </td>

@@ -8,8 +8,8 @@ const defaultSiteContext: SiteContextQuery = {
   currentSemester: {
     name: '',
     gigRequirement: 0,
-    startDate: 0,
-    endDate: 0,
+    startDate: '',
+    endDate: '',
   },
   static: {
     permissions: [],

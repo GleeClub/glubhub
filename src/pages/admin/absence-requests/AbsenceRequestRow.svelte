@@ -9,9 +9,9 @@
 
 <tr class="no-bottom-border">
   <td>
-    {dateFormatter(absenceRequest.time)}
+    {dateFormatter(absenceRequest.time.date)}
     <br />
-    {timeFormatter(absenceRequest.time)}
+    {timeFormatter(absenceRequest.time.time)}
   </td>
   <td>
     <a href={renderRoute(routeEvents(absenceRequest.event.id, null))}>
@@ -19,9 +19,9 @@
     </a>
   </td>
   <td>
-    {dateFormatter(absenceRequest.event.callTime)}
+    {dateFormatter(absenceRequest.event.callTime.date)}
     <br />
-    {timeFormatter(absenceRequest.event.callTime)}
+    {timeFormatter(absenceRequest.event.callTime.time)}
     <br />
     {absenceRequest.event.location}
   </td>
