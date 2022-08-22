@@ -47,7 +47,7 @@
     onInput={(callTime) =>
       updateEvent({
         ...event,
-        callTime: { ...event.callTime, time: callTime }
+        callTime: { ...event.callTime, time: callTime },
       })}
     title="Call Time"
     helpText="4:20 lamo"
@@ -73,7 +73,7 @@
         releaseTime: {
           ...(event.releaseTime || DEFAULT_DATETIME),
           time: releaseTime,
-        }
+        },
       })}
     title="Release Time"
     helpText="4:22 lamo"
@@ -87,7 +87,7 @@
         releaseTime: {
           ...(event.releaseTime || DEFAULT_DATETIME),
           date: releaseDate,
-        }
+        },
       })}
     title="Release Date"
   />

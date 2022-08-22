@@ -1,6 +1,6 @@
 <script lang="ts">
   import { SimpleAttendance } from 'src/state/types'
-  import { ATTENDANCE_ISSUE_EMAIL } from 'src/utils/constants';
+  import { ATTENDANCE_ISSUE_EMAIL } from 'src/utils/constants'
 
   export let points: number
   export let attendance: SimpleAttendance
@@ -15,9 +15,7 @@
 {:else if attendance.shouldAttend}
   You <b>weren't there</b>, and that's <b>not ok</b>. You lost{' '}
   {`${points}`} points.{' '}
-  <a href="mailto:{ATTENDANCE_ISSUE_EMAIL}">
-    Email the officers
-  </a>{' '}
+  <a href="mailto:{ATTENDANCE_ISSUE_EMAIL}"> Email the officers </a>{' '}
   if you think that's not right.
 {:else}
   You <b>weren't there</b>, but that's <b>ok</b>.

@@ -10,7 +10,7 @@
   import { axisLeft, axisBottom } from 'd3-axis'
   import { line, curveMonotoneX } from 'd3-shape'
   import { scaleTime, scaleLinear } from 'd3-scale'
-import { datetimeToDate } from 'src/utils/datetime';
+  import { datetimeToDate } from 'src/utils/datetime'
 
   export let hoverEvent: (hover: HoveredEvent | null) => void
 
@@ -37,7 +37,10 @@ import { datetimeToDate } from 'src/utils/datetime';
     console.log(events, graphElement)
 
     x.domain(
-      extent(events, (event) => datetimeToDate(event.event.callTime)) as [Date, Date]
+      extent(events, (event) => datetimeToDate(event.event.callTime)) as [
+        Date,
+        Date
+      ]
     )
     y.domain([0, 100])
 

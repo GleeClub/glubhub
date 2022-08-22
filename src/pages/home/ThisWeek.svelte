@@ -31,7 +31,7 @@
   const tooCloseToPrevious = (index: number) =>
     index &&
     y(datetimeToDate(events[index].event.callTime)) -
-      y(datetimeToDate( events[index - 1].event.callTime)) <=
+      y(datetimeToDate(events[index - 1].event.callTime)) <=
       20
 
   onMount(() => {
@@ -51,10 +51,14 @@
   function linkYPosition(index: number) {
     if (tooCloseToPrevious(index)) {
       return (
-        y(datetimeToDate( events[index - 1].event.callTime)) + 16 + circleRadius / 2.0
+        y(datetimeToDate(events[index - 1].event.callTime)) +
+        16 +
+        circleRadius / 2.0
       )
     } else {
-      return y(datetimeToDate(events[index].event.callTime)) + circleRadius / 2.0
+      return (
+        y(datetimeToDate(events[index].event.callTime)) + circleRadius / 2.0
+      )
     }
   }
 </script>

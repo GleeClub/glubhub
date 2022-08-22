@@ -4,7 +4,7 @@
 
   import type { NewEventFields, NewGig } from 'src/gql-operations'
   import { dateType, numberType, stringType, timeType } from 'src/state/input'
-import { DEFAULT_DATETIME } from 'src/utils/constants'
+  import { DEFAULT_DATETIME } from 'src/utils/constants'
 
   export let event: NewEventFields
   export let updateEvent: (event: NewEventFields) => void
@@ -62,7 +62,7 @@ import { DEFAULT_DATETIME } from 'src/utils/constants'
         performanceTime: {
           date: event.callTime.date,
           time: performanceTime,
-        }
+        },
       })}
     title="Event Time"
     helpText="4:21 lamo"
@@ -76,7 +76,7 @@ import { DEFAULT_DATETIME } from 'src/utils/constants'
         releaseTime: {
           ...(event.releaseTime || DEFAULT_DATETIME),
           time: releaseTime,
-        }
+        },
       })}
     title="Release Time"
     helpText="4:22 lamo"
@@ -90,7 +90,7 @@ import { DEFAULT_DATETIME } from 'src/utils/constants'
         releaseTime: {
           ...(event.releaseTime || DEFAULT_DATETIME),
           date: releaseDate,
-        }
+        },
       })}
     title="Release Date"
   />

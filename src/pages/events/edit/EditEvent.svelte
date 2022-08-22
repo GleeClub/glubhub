@@ -21,9 +21,30 @@
 
   let state: RemoteData = emptyLoaded
 
-  let eventForm: NewEventFields = event
+  let eventForm: NewEventFields = {
+    callTime: event.callTime,
+    comments: event.comments,
+    defaultAttend: event.defaultAttend,
+    gigCount: event.gigCount,
+    location: event.location,
+    name: event.name,
+    points: event.points,
+    releaseTime: event.releaseTime,
+    semester: event.semester,
+    type: event.type,
+  }
   let gigForm: NewGig = event.gig
-    ? { ...event.gig, uniform: event.gig.uniform.id }
+    ? {
+        contactEmail: event.gig.contactEmail,
+        contactName: event.gig.contactName,
+        contactPhone: event.gig.contactPhone,
+        description: event.gig.description,
+        performanceTime: event.gig.performanceTime,
+        price: event.gig.price,
+        public: event.gig.public,
+        summary: event.gig.summary,
+        uniform: event.gig.uniform.id,
+      }
     : EMPTY_GIG
 
   function goBackToDetails() {

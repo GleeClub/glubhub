@@ -19,9 +19,9 @@ export const permittedTo = (
 
 export const eventIsOver = (event: HasEventTimes): boolean => {
   if (event.releaseTime) {
-    return new Date() > datetimeToDate(event.releaseTime);
+    return new Date() > datetimeToDate(event.releaseTime)
   } else {
-    return new Date > datetimeToDate(event.callTime);
+    return new Date() > datetimeToDate(event.callTime)
   }
 }
 
