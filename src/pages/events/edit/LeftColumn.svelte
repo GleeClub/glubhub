@@ -58,7 +58,8 @@
     value={gig.performanceTime}
     onInput={(performanceTime) =>
       updateGig({
-        ...gig, performanceTime,
+        ...gig,
+        performanceTime,
       })}
     title="Event Time"
     helpText="4:21 lamo"

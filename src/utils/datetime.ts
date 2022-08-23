@@ -14,8 +14,8 @@ export const datetimeToDate = (datetime: DateTime): Date =>
 export const fullDateTimeFormatter = (datetime?: DateTime | null): string =>
   datetime
     ? dayjs(`${datetime.date} ${datetime.time}`).format(
-      'dddd, MMMM D, YYYY h:mm A'
-    )
+        'dddd, MMMM D, YYYY h:mm A'
+      )
     : ''
 
 export const timeFormatter = (time?: string | null): string =>

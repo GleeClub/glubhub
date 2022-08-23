@@ -6,13 +6,17 @@
   import SelectableList from 'src/components/remote/SelectableList.svelte'
 
   import { AllMinutesQuery } from 'src/gql-operations'
-  import { minutesPrivate, minutesPublic, routeMinutes } from 'src/route/constructors'
+  import {
+    minutesPrivate,
+    minutesPublic,
+    routeMinutes,
+  } from 'src/route/constructors'
   import { editMinutes, viewCompleteMinutes } from 'src/state/permissions'
   import { LazyRemoteData, mapLazyLoaded, RemoteData } from 'src/state/types'
-import { siteContext } from 'src/store/context';
+  import { siteContext } from 'src/store/context'
   import { replaceRoute } from 'src/store/route'
-import { permittedTo } from 'src/utils/helpers';
-import { get } from 'svelte/store';
+  import { permittedTo } from 'src/utils/helpers'
+  import { get } from 'svelte/store'
 
   export let allMinutes: LazyRemoteData<AllMinutesQuery>
   export let selectedId: number | null
@@ -27,12 +31,14 @@ import { get } from 'svelte/store';
       : [minutes.allMeetingMinutes.slice(0, 10)]
   )
 
-  function selectMinutes(minutes: AllMinutesQuery['allMeetingMinutes'][number]) {
-    const context = get(siteContext);
+  function selectMinutes(
+    minutes: AllMinutesQuery['allMeetingMinutes'][number]
+  ) {
+    const context = get(siteContext)
     if (context.user && permittedTo(context.user, viewCompleteMinutes)) {
-      replaceRoute(routeMinutes(minutes.id, minutesPrivate))      
+      replaceRoute(routeMinutes(minutes.id, minutesPrivate))
     } else {
-      replaceRoute(routeMinutes(minutes.id, minutesPublic))      
+      replaceRoute(routeMinutes(minutes.id, minutesPublic))
     }
   }
 </script>

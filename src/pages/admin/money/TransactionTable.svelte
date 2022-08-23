@@ -14,26 +14,32 @@
 
 <Table striped fullwidth scrollable>
   <tbody>
-    {#each transactions.transactions as transaction}
-      <tr class="no-bottom-border">
-        <td>{simpleDateWithYearFormatter(transaction.time.date)}</td>
-        <td>{transaction.member.fullName}</td>
-        <td>{transaction.type}</td>
-        <td>{transaction.amount}</td>
-        <td>{transaction.resolved ? 'Resolved' : 'Outstanding'}</td>
-        <td>
-          <Button
-            size="is-small"
-            color:is-primary={!transaction.resolved}
-            click={() =>
-              resolveTransaction(transaction.id, !transaction.resolved)}
-          >
-            {transaction.resolved ? 'Unresolve' : 'Resolve'}
-          </Button>
-        </td>
-        <td>{transaction.description}</td>
+    {#if transactions.transactions.length}
+      {#each transactions.transactions as transaction}
+        <tr class="no-bottom-border">
+          <td>{simpleDateWithYearFormatter(transaction.time.date)}</td>
+          <td>{transaction.member.fullName}</td>
+          <td>{transaction.type}</td>
+          <td>{transaction.amount}</td>
+          <td>{transaction.resolved ? 'Resolved' : 'Outstanding'}</td>
+          <td>
+            <Button
+              size="is-small"
+              color:is-primary={!transaction.resolved}
+              click={() =>
+                resolveTransaction(transaction.id, !transaction.resolved)}
+            >
+              {transaction.resolved ? 'Unresolve' : 'Resolve'}
+            </Button>
+          </td>
+          <td>{transaction.description}</td>
+        </tr>
+      {/each}
+    {:else}
+      <tr style="text-align: center">
+        <td>No money, no problems.</td>
       </tr>
-    {/each}
+    {/if}
   </tbody>
 </Table>
 <StateBox {state} />
