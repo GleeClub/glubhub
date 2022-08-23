@@ -26,7 +26,7 @@
 
   async function updateLink(link: DocumentLink) {
     state = loading
-    const result = await query('CreateDocumentLink', link)
+    const result = await query('UpdateDocumentLink', link)
 
     state = stateFromResult(result)
     if (result.type === 'loaded') {

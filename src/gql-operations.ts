@@ -1453,6 +1453,14 @@ export type UpdateCarpoolsMutationVariables = Exact<{
 
 export type UpdateCarpoolsMutation = { __typename?: 'MutationRoot', updateCarpools: Array<{ __typename?: 'Carpool', id: number }> };
 
+export type UpdateDocumentLinkMutationVariables = Exact<{
+  name: Scalars['String'];
+  url: Scalars['String'];
+}>;
+
+
+export type UpdateDocumentLinkMutation = { __typename?: 'MutationRoot', updateLink: { __typename?: 'DocumentLink', name: string, url: string } };
+
 export type UpdateEventMutationVariables = Exact<{
   id: Scalars['Int'];
   newEvent: NewEvent;
@@ -1880,6 +1888,14 @@ export const UpdateCarpoolsDocument = gql`
     mutation UpdateCarpools($eventId: Int!, $carpools: [UpdatedCarpool!]!) {
   updateCarpools(eventId: $eventId, carpools: $carpools) {
     id
+  }
+}
+    `;
+export const UpdateDocumentLinkDocument = gql`
+    mutation UpdateDocumentLink($name: String!, $url: String!) {
+  updateLink(name: $name, url: $url) {
+    name
+    url
   }
 }
     `;
@@ -2637,6 +2653,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     UpdateCarpools(variables: UpdateCarpoolsMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateCarpoolsMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateCarpoolsMutation>(UpdateCarpoolsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateCarpools', 'mutation');
+    },
+    UpdateDocumentLink(variables: UpdateDocumentLinkMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateDocumentLinkMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateDocumentLinkMutation>(UpdateDocumentLinkDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateDocumentLink', 'mutation');
     },
     UpdateEvent(variables: UpdateEventMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateEventMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateEventMutation>(UpdateEventDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateEvent', 'mutation');

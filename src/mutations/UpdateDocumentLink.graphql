@@ -1,0 +1,6 @@
+mutation UpdateDocumentLink($name: String!, $url: String!) {
+  updateLink(name: $name, url: $url) {
+    name
+    url
+  }
+}
