@@ -2122,7 +2122,7 @@ export const CurrentOfficersDocument = gql`
       fullName
     }
   }
-  members {
+  members(includeInactive: true) {
     email
     fullName
   }

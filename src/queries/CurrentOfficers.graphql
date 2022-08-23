@@ -6,7 +6,7 @@ query CurrentOfficers {
       fullName
     }
   }
-  members {
+  members(includeInactive: true) {
     email
     fullName
   }

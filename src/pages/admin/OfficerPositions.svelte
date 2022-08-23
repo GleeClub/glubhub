@@ -20,7 +20,6 @@
 
   const [currentOfficers, reloadCurrentOfficers] = eagerQuery(
     'CurrentOfficers',
-    {}
   )
 
   const roleGroups = derived(
