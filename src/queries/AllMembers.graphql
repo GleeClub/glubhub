@@ -1,5 +1,5 @@
-query AllMembers {
-  members {
+query AllMembers($includeInactive: Boolean!) {
+  members(includeInactive: $includeInactive) {
     email
     phoneNumber
     fullName

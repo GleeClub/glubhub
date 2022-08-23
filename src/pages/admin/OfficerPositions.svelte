@@ -18,9 +18,7 @@
 
   let state: RemoteData = emptyLoaded
 
-  const [currentOfficers, reloadCurrentOfficers] = eagerQuery(
-    'CurrentOfficers',
-  )
+  const [currentOfficers, reloadCurrentOfficers] = eagerQuery('CurrentOfficers')
 
   const roleGroups = derived(
     [siteContext, currentOfficers],

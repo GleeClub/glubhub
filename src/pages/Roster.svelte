@@ -10,11 +10,17 @@
   import { routeProfile } from 'src/route/constructors'
   import { renderRoute } from 'src/route/render'
   import { eagerQuery } from 'src/state/query'
+  import Button from 'src/components/buttons/Button.svelte'
+  import Title from 'src/components/bulma/Title.svelte'
 
-  const [members, _reloadMembers] = eagerQuery('AllMembers')
+  let showInactive = false
+  $: [members, _reloadMembers] = eagerQuery('AllMembers', {
+    includeInactive: showInactive,
+  })
 </script>
 
 <Section>
+  <Title centered>Roster</Title>
   <Container>
     <Remote data={$members}>
       <Box slot="loaded" let:data={loadedMembers}>
@@ -48,6 +54,15 @@
             {/each}
           </tbody>
         </Table>
+        <div class="is-fullwidth" style="align-items: center">
+          <Button fullwidth click={() => (showInactive = !showInactive)}>
+            {#if showInactive}
+              Hide Inactive Members
+            {:else}
+              Show Inactive Members
+            {/if}
+          </Button>
+        </div>
       </Box>
     </Remote>
   </Container>

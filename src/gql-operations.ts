@@ -1542,7 +1542,9 @@ export type AllGigRequestsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AllGigRequestsQuery = { __typename?: 'QueryRoot', gigRequests: Array<{ __typename?: 'GigRequest', id: number, name: string, organization: string, contactName: string, contactPhone: string, contactEmail: string, location: string, comments: string, status: GigRequestStatus, time: { __typename?: 'DateTime', date: string, time: string }, startTime: { __typename?: 'DateTime', date: string, time: string }, event?: { __typename?: 'Event', id: number, name: string, semester: string } | null }> };
 
-export type AllMembersQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllMembersQueryVariables = Exact<{
+  includeInactive: Scalars['Boolean'];
+}>;
 
 
 export type AllMembersQuery = { __typename?: 'QueryRoot', members: Array<{ __typename?: 'Member', email: string, phoneNumber: string, fullName: string, location: string, semester?: { __typename?: 'ActiveSemester', section: string } | null }> };
@@ -2042,8 +2044,8 @@ export const AllGigRequestsDocument = gql`
 }
     `;
 export const AllMembersDocument = gql`
-    query AllMembers {
-  members {
+    query AllMembers($includeInactive: Boolean!) {
+  members(includeInactive: $includeInactive) {
     email
     phoneNumber
     fullName
@@ -2693,7 +2695,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     AllGigRequests(variables?: AllGigRequestsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllGigRequestsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AllGigRequestsQuery>(AllGigRequestsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllGigRequests', 'query');
     },
-    AllMembers(variables?: AllMembersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllMembersQuery> {
+    AllMembers(variables: AllMembersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllMembersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AllMembersQuery>(AllMembersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AllMembers', 'query');
     },
     AllMinutes(variables?: AllMinutesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllMinutesQuery> {

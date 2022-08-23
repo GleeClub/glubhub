@@ -28,7 +28,9 @@
   let includedMembers: string[] = []
   let state: RemoteData = emptyLoaded
 
-  const [allMembers, _reloadAllMembers] = eagerQuery('AllMembers')
+  const [allMembers, _reloadAllMembers] = eagerQuery('AllMembers', {
+    includeInactive: false,
+  })
 
   function closeSidebar() {
     replaceRoute(routeAdmin(adminMoney(null)))
