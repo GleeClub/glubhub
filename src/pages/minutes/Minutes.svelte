@@ -120,7 +120,13 @@
                   onDelete={() => reloadAllMinutes({})}
                 />
               {:else}
-                <div>{@html minutes.meetingMinutes.public}</div>
+                <div>
+                  {#if minutes.meetingMinutes.public}
+                    {@html minutes.meetingMinutes.public}
+                  {:else}
+                    <i>No public minutes</i>
+                  {/if}
+                </div>
               {/if}
             </svelte:fragment>
 

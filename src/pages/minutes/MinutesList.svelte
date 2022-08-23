@@ -6,10 +6,13 @@
   import SelectableList from 'src/components/remote/SelectableList.svelte'
 
   import { AllMinutesQuery } from 'src/gql-operations'
-  import { routeMinutes } from 'src/route/constructors'
-  import { editMinutes } from 'src/state/permissions'
+  import { minutesPrivate, minutesPublic, routeMinutes } from 'src/route/constructors'
+  import { editMinutes, viewCompleteMinutes } from 'src/state/permissions'
   import { LazyRemoteData, mapLazyLoaded, RemoteData } from 'src/state/types'
+import { siteContext } from 'src/store/context';
   import { replaceRoute } from 'src/store/route'
+import { permittedTo } from 'src/utils/helpers';
+import { get } from 'svelte/store';
 
   export let allMinutes: LazyRemoteData<AllMinutesQuery>
   export let selectedId: number | null
@@ -23,13 +26,22 @@
       ? [minutes.allMeetingMinutes]
       : [minutes.allMeetingMinutes.slice(0, 10)]
   )
+
+  function selectMinutes(minutes: AllMinutesQuery['allMeetingMinutes'][number]) {
+    const context = get(siteContext);
+    if (context.user && permittedTo(context.user, viewCompleteMinutes)) {
+      replaceRoute(routeMinutes(minutes.id, minutesPrivate))      
+    } else {
+      replaceRoute(routeMinutes(minutes.id, minutesPublic))      
+    }
+  }
 </script>
 
 <SelectableList
   title="Meeting Minutes"
   itemGroups={shownMinutes}
   isSelected={(m) => m.id === selectedId}
-  on:select={(m) => replaceRoute(routeMinutes(m.detail.id, null))}
+  on:select={(m) => selectMinutes(m.detail)}
   render={(m) => m.name}
   messageIfEmpty="No minutes"
 >
