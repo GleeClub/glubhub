@@ -4,9 +4,8 @@
 </script>
 
 <span
-  style="cursor: pointer"
   data-tooltip={content}
-  class="tooltip is-tooltip{alignment ? ` is-tooltip-${alignment}` : ''}"
+  class="has-tooltip {alignment ? `has-tooltip-${alignment}` : ''}"
 >
   <slot />
 </span>

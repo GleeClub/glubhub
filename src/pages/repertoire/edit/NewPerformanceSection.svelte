@@ -49,7 +49,7 @@
   }
 </script>
 
-<Divider content={PERFORMANCES_LINK_TYPE} />
+<Divider>{PERFORMANCES_LINK_TYPE}</Divider>
 {#if linkSection}
   {#each linkSection.links as link}
     <SongLinkButton {link} {deleteLink} />

@@ -31,7 +31,7 @@
 
 <Section>
   <EventColumns events={$upcomingEvents} selectedId={eventId} />
-  <Divider content="Past" />
+  <Divider>Past</Divider>
   <EventColumns events={$pastEvents} selectedId={eventId} />
 </Section>
 <Sidebar data={$selectedEvent} close={() => goToRoute(routeEvents(null, null))}>

@@ -3,9 +3,9 @@ import type { Pitch } from 'src/gql-operations'
 export function pitchToString(pitch: Pitch): string {
   let accidental = ''
   if (pitch.endsWith('_FLAT')) {
-    accidental = '♯'
-  } else if (pitch.endsWith('_SHARP')) {
     accidental = '♭'
+  } else if (pitch.endsWith('_SHARP')) {
+    accidental = '♯'
   }
 
   return `${pitch[0]}${accidental}`

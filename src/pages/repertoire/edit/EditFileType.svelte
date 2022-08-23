@@ -53,7 +53,7 @@
   }
 </script>
 
-<Divider content={typeName} />
+<Divider>{typeName}</Divider>
 {#if linkSection}
   {#each linkSection.links as link}
     <SongLinkButton {link} {deleteLink} />
