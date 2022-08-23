@@ -80,7 +80,7 @@
           <td>
             <TextInput
               type={stringType}
-              value={url}
+              value={link.url}
               onInput={(url) => updateLink({ ...link, url })}
               placeholder="URL"
             />
