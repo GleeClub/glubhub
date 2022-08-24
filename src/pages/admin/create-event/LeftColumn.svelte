@@ -4,12 +4,12 @@
 
   import { NewEventFields, NewGig } from 'src/gql-operations'
   import { dateType, numberType, stringType, timeType } from 'src/state/input'
-  import { DEFAULT_DATETIME } from 'src/utils/constants'
+  import { DEFAULT_DATETIME, EMPTY_GIG } from 'src/utils/constants'
 
   export let event: NewEventFields
   export let updateEvent: (event: NewEventFields) => void
-  export let gig: NewGig
-  export let updateGig: (gig: NewGig) => void
+  export let gig: NewGig | null
+  export let updateGig: (gig: NewGig | null) => void
 </script>
 
 <Column>
@@ -55,14 +55,15 @@
   />
   <TextInput
     type={timeType}
-    value={gig.performanceTime}
+    value={gig?.performanceTime || ''}
     onInput={(performanceTime) =>
       updateGig({
-        ...gig,
+        ...(gig || EMPTY_GIG),
         performanceTime,
       })}
     title="Event Time"
     helpText="4:21 lamo"
+    required={!!gig}
   />
   <TextInput
     type={timeType}

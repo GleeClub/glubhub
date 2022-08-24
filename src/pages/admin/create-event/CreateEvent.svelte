@@ -18,7 +18,7 @@
     RemoteData,
     stateFromResult,
   } from 'src/state/types'
-import { onDestroy } from 'svelte';
+  import { onDestroy } from 'svelte'
 
   export let gigRequestId: number | null
 
@@ -44,17 +44,7 @@ import { onDestroy } from 'svelte';
     defaultAttend: true,
   }
 
-  let gig: NewGig = {
-    performanceTime: '',
-    uniform: 0,
-    contactName: '',
-    contactEmail: '',
-    contactPhone: '',
-    price: null,
-    public: false,
-    summary: '',
-    description: '',
-  }
+  let gig: NewGig | null = null
 
   async function createEvent() {
     state = loading
@@ -86,10 +76,16 @@ import { onDestroy } from 'svelte';
         event.gigCount = true
         event.defaultAttend = false
 
-        gig.performanceTime = request.startTime.time
-        gig.contactName = request.contactName
-        gig.contactEmail = request.contactEmail
-        gig.contactPhone = request.contactPhone
+        gig = {
+          performanceTime: request.startTime.time,
+          contactName: request.contactName,
+          contactEmail: request.contactEmail,
+          contactPhone: request.contactPhone,
+          public: true,
+          description: request.comments,
+          summary: request.name,
+          uniform: 0
+        }
       }
     })
   }

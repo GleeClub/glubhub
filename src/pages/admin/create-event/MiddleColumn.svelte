@@ -9,11 +9,12 @@
   import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
   import { stringType, uniformType } from 'src/state/input'
+import { EMPTY_GIG } from 'src/utils/constants';
 
   export let event: NewEventFields
-  export let gig: NewGig
+  export let gig: NewGig | null
   export let updateEvent: (event: NewEventFields) => void
-  export let updateGig: (gig: NewGig) => void
+  export let updateGig: (gig: NewGig | null) => void
 
   const [allSemesters, _reloadAllSemesters] = eagerQuery('AllSemesters')
   const [allUniforms, _reloadAllUniforms] = eagerQuery('AllUniforms')
@@ -52,10 +53,11 @@
   <SelectInput
     type={uniformType($loadedUniforms)}
     values={[null, ...$loadedUniforms]}
-    selected={$loadedUniforms.find((uniform) => uniform.id === gig.uniform) ||
+    selected={$loadedUniforms.find((uniform) => uniform.id === gig?.uniform) ||
       null}
-    onInput={(uniform) => updateGig({ ...gig, uniform: uniform?.id || 0 })}
+    onInput={(uniform) => updateGig({ ...(gig || EMPTY_GIG), uniform: uniform?.id || 0 })}
     title="Uniform"
+    required={!!gig}
   />
   <TextareaInput
     value={event.comments || ''}

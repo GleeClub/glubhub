@@ -8,15 +8,15 @@
   import ErrorBox from 'src/components/remote/ErrorBox.svelte'
 
   import { RemoteData } from 'src/state/types'
-  import { ALL_PERIODS } from 'src/utils/constants'
+  import { ALL_PERIODS, EMPTY_GIG } from 'src/utils/constants'
   import { dateType, periodType, stringType } from 'src/state/input'
   import { NewEventFields, NewEventPeriod, NewGig } from 'src/gql-operations'
 
   export let event: NewEventFields
-  export let gig: NewGig
+  export let gig: NewGig | null
   export let repeat: NewEventPeriod | null
   export let updateEvent: (event: NewEventFields) => void
-  export let updateGig: (event: NewGig) => void
+  export let updateGig: (event: NewGig | null) => void
   export let updateRepeat: (repeat: NewEventPeriod | null) => void
   export let state: RemoteData
 </script>
@@ -24,24 +24,26 @@
 <Column>
   <CheckboxInput
     content="This event is public, so I want it to show up on the external site"
-    checked={gig.public}
-    onChange={(isPublic) => updateGig({ ...gig, public: isPublic })}
+    checked={gig?.public || false}
+    onChange={(isPublic) => updateGig({ ...(gig || EMPTY_GIG), public: isPublic })}
   />
-  {#if gig.public}
+  {#if gig?.public}
     <TextInput
       type={stringType}
-      value={gig.summary}
-      onInput={(summary) => updateGig({ ...gig, summary })}
+      value={gig?.summary || ''}
+      onInput={(summary) => updateGig({ ...(gig || EMPTY_GIG), summary })}
       title="Public Summary"
       helpText="Careful, real people will see this"
       placeholder="Friends? Countrymen? Bueller?"
+      required
     />
     <TextareaInput
       value={gig.description || ''}
-      onInput={(description) => updateGig({ ...gig, description })}
+      onInput={(description) => updateGig({ ...(gig || EMPTY_GIG), description })}
       title="Public Description"
       helpText="Careful, real people will see this"
       placeholder="We the people, in order to kick a more perfect ass, I don't know where this is going"
+      required
     />
   {/if}
   <CheckboxInput
