@@ -60,14 +60,18 @@
     values={[null, ...ALL_PERIODS]}
     selected={repeat?.period}
     onInput={(period) =>
-      updateRepeat(period && repeat ? { ...repeat, period } : null)}
+      updateRepeat(
+        period
+          ? { period, repeatUntil: repeat?.repeatUntil || event.callTime.date }
+          : null
+      )}
     title="Repeat"
   />
   <TextInput
     type={dateType}
-    value={repeat?.repeatUntil}
+    value={repeat?.repeatUntil || ''}
     onInput={(repeatUntil) =>
-      updateRepeat(repeatUntil && repeat ? { ...repeat, repeatUntil } : null)}
+      updateRepeat(repeat ? { ...repeat, repeatUntil } : null)}
     title="Repeat Until"
     required={!!repeat?.period}
   />
