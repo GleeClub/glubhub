@@ -7,8 +7,7 @@
 <p>
   <span>{uniform.name} </span>
   <span
-    style:cursor="pointer"
-    class="icon tooltip has-tooltip-bottom is-tooltip-multiline has-text-grey-light is-small"
+    class="icon has-tooltip has-tooltip-bottom has-tooltip-multiline has-text-grey-light is-small"
     data-tooltip={uniform.description || ''}
   >
     <i class="far fa-question-circle" />
