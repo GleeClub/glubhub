@@ -18,6 +18,7 @@
     RemoteData,
     stateFromResult,
   } from 'src/state/types'
+import { onDestroy } from 'svelte';
 
   export let gigRequestId: number | null
 
@@ -92,6 +93,12 @@
       }
     })
   }
+
+  const unsubscribe = siteContext.subscribe(context => {
+    event.semester = context.currentSemester.name
+  })
+
+  onDestroy(unsubscribe)
 </script>
 
 <Title>Create Event</Title>
