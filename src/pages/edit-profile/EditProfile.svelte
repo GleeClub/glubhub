@@ -46,8 +46,7 @@ import { onDestroy } from 'svelte';
     state = loading
     form.passHash = enteredPassword ? Md5.hashStr(password) : null
     const result = loggedIn
-      ? await query('UpdateMember', {
-          email: get(siteContext).user!.email,
+      ? await query('UpdateProfile', {
           update: form,
         })
       : await query('RegisterMember', {
@@ -88,7 +87,6 @@ import { onDestroy } from 'svelte';
       <HeaderText />
       <br />
       <FormFields
-        loggedIn={!!$siteContext.user}
         {form}
         updateForm={(updatedForm) => (form = updatedForm)}
         {password}

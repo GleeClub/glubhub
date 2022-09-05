@@ -24,7 +24,6 @@
   import { createEventDispatcher } from 'svelte'
   import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
 
-  export let loggedIn: boolean
   export let form: MemberUpdate
   export let updateForm: (form: MemberUpdate) => void
   export let password: string

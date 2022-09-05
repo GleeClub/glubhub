@@ -18,6 +18,7 @@ export type Scalars = {
   UniformColor: string;
 };
 
+/** A request by a member to not lose credit for missing an event */
 export type AbsenceRequest = {
   __typename?: 'AbsenceRequest';
   /** The event they requested absence from */
@@ -32,12 +33,17 @@ export type AbsenceRequest = {
   time: DateTime;
 };
 
+/** The current status of an absence request */
 export enum AbsenceRequestStatus {
+  /** The request has been approved */
   Approved = 'APPROVED',
+  /** The request has been denied */
   Denied = 'DENIED',
+  /** The request hasn't been responded to yet */
   Pending = 'PENDING'
 }
 
+/** A semester the given member was active during */
 export type ActiveSemester = {
   __typename?: 'ActiveSemester';
   /** Whether the member was registered for the class */
@@ -52,6 +58,7 @@ export type ActiveSemester = {
   semester: Scalars['String'];
 };
 
+/** Info about a member's attendance for a specific event */
 export type Attendance = {
   __typename?: 'Attendance';
   /** The absence request made by the current member, if they requested one */
@@ -74,13 +81,19 @@ export type Attendance = {
   shouldAttend: Scalars['Boolean'];
 };
 
+/** An update for a member's attendance at a specific event */
 export type AttendanceUpdate = {
+  /** Whether the member confirmed that they would attend */
   confirmed: Scalars['Boolean'];
+  /** Whether the member did attend the event */
   didAttend: Scalars['Boolean'];
+  /** How late the member was if they attended */
   minutesLate: Scalars['Int'];
+  /** Whether the member is expected to attend the event */
   shouldAttend: Scalars['Boolean'];
 };
 
+/** A carpool for members driving to an event */
 export type Carpool = {
   __typename?: 'Carpool';
   /** The driver of the carpool */
@@ -93,6 +106,7 @@ export type Carpool = {
   passengers: Array<Member>;
 };
 
+/** A money transaction charged to a member */
 export type ClubTransaction = {
   __typename?: 'ClubTransaction';
   /** How much this transaction was for */
@@ -113,6 +127,7 @@ export type ClubTransaction = {
   type: Scalars['String'];
 };
 
+/** A datetime broken into a date and a time */
 export type DateTime = {
   __typename?: 'DateTime';
   /** The date part of the datetime */
@@ -121,6 +136,7 @@ export type DateTime = {
   time: Scalars['TimeScalar'];
 };
 
+/** A new datetime broken into a date and a time */
 export type DateTimeInput = {
   /** The date part of the datetime */
   date: Scalars['DateScalar'];
@@ -128,7 +144,7 @@ export type DateTimeInput = {
   time: Scalars['TimeScalar'];
 };
 
-/** A link to a Google Doc or other important document. */
+/** A link to a Google Doc or other important document */
 export type DocumentLink = {
   __typename?: 'DocumentLink';
   /** The name of the link */
@@ -137,18 +153,24 @@ export type DocumentLink = {
   url: Scalars['String'];
 };
 
+/** Whether a member is in the club for a grade or not */
 export enum Enrollment {
+  /** The member is enrolled in the course */
   Class = 'CLASS',
+  /** The member is there on their own time */
   Club = 'CLUB'
 }
 
+/** An event where members are singing */
 export type Event = {
   __typename?: 'Event';
+  /** Attendance for all current members for the event */
   allAttendance: Array<Attendance>;
   /** The attendance for a specific member at this event */
   attendance?: Maybe<Attendance>;
   /** When members are expected to arrive to the event */
   callTime: DateTime;
+  /** All carpools for this event */
   carpools: Array<Carpool>;
   /** General information or details about this event */
   comments: Scalars['String'];
@@ -170,6 +192,7 @@ export type Event = {
   releaseTime?: Maybe<DateTime>;
   /** The name of the semester this event belongs to */
   semester: Scalars['String'];
+  /** All songs we plan to sing at this event, in order */
   setlist: Array<Song>;
   /** The type of the event (see EventType) */
   type: Scalars['String'];
@@ -178,15 +201,18 @@ export type Event = {
 };
 
 
+/** An event where members are singing */
 export type EventAllAttendanceArgs = {
   emptyIfNotPermitted?: Scalars['Boolean'];
 };
 
 
+/** An event where members are singing */
 export type EventAttendanceArgs = {
   member: Scalars['String'];
 };
 
+/** The type of an event */
 export type EventType = {
   __typename?: 'EventType';
   /** The name of the type of event */
@@ -195,6 +221,7 @@ export type EventType = {
   weight: Scalars['Int'];
 };
 
+/** An event and the change to a member's grade that it caused */
 export type EventWithGradeChange = {
   __typename?: 'EventWithGradeChange';
   /** What grade change occurred, for what reason */
@@ -203,6 +230,7 @@ export type EventWithGradeChange = {
   event: Event;
 };
 
+/** A fee that can be charged to members */
 export type Fee = {
   __typename?: 'Fee';
   /** The amount to charge members */
@@ -213,6 +241,7 @@ export type Fee = {
   name: Scalars['String'];
 };
 
+/** The gig info included for an event, if it is a gig */
 export type Gig = {
   __typename?: 'Gig';
   /** The email of the contact for this gig */
@@ -237,6 +266,7 @@ export type Gig = {
   uniform: Uniform;
 };
 
+/** A request for the Glee Club to perform somewhere */
 export type GigRequest = {
   __typename?: 'GigRequest';
   /** Any comments about the event */
@@ -265,12 +295,17 @@ export type GigRequest = {
   time: DateTime;
 };
 
+/** The status of a gig request */
 export enum GigRequestStatus {
+  /** We have decided to take the request */
   Accepted = 'ACCEPTED',
+  /** We have decided to decline the request */
   Dismissed = 'DISMISSED',
+  /** We have not responded to the request yet */
   Pending = 'PENDING'
 }
 
+/** A change to a member's grade for a semester */
 export type GradeChange = {
   __typename?: 'GradeChange';
   /** How much the grade changed */
@@ -281,6 +316,7 @@ export type GradeChange = {
   reason: Scalars['String'];
 };
 
+/** The grades for a member in a semester */
 export type Grades = {
   __typename?: 'Grades';
   /** The events of the semester, with the grade changes for those events */
@@ -291,6 +327,7 @@ export type Grades = {
   volunteerGigsAttended: Array<Event>;
 };
 
+/** A type of media belonging to a song */
 export type MediaType = {
   __typename?: 'MediaType';
   /** The name of the type of media */
@@ -301,6 +338,7 @@ export type MediaType = {
   storage: StorageType;
 };
 
+/** A member in the Glee Club */
 export type Member = {
   __typename?: 'Member';
   /** A short biography written by the member */
@@ -356,10 +394,12 @@ export type Member = {
 };
 
 
+/** A member in the Glee Club */
 export type MemberGradesArgs = {
   semester?: InputMaybe<Scalars['String']>;
 };
 
+/** A permission that a member holds */
 export type MemberPermission = {
   __typename?: 'MemberPermission';
   /** Optionally, the type of event the permission applies to */
@@ -368,6 +408,7 @@ export type MemberPermission = {
   name: Scalars['String'];
 };
 
+/** A member that holds a role */
 export type MemberRole = {
   __typename?: 'MemberRole';
   /** The member holding the role */
@@ -376,29 +417,54 @@ export type MemberRole = {
   role: Scalars['String'];
 };
 
+/** An update to a member in the Glee Club */
 export type MemberUpdate = {
+  /** A short biography written by the member */
   about: Scalars['String'];
+  /** What year the member arrived at Georgia Tech */
   arrivedAtTech?: InputMaybe<Scalars['Int']>;
+  /** What conflicts with rehearsal the member may have */
   conflicts: Scalars['String'];
+  /** Any dietary restrictions the member may have */
   dietaryRestrictions: Scalars['String'];
+  /**
+   * The member's new email. If they choose a new one, it must not
+   * be held by other members
+   */
   email: Scalars['String'];
+  /** The new enrollment of the member */
   enrollment?: InputMaybe<Enrollment>;
+  /** The member's first name */
   firstName: Scalars['String'];
+  /** What got them to join Glee Club */
   gatewayDrug: Scalars['String'];
+  /** Where the member came from */
   hometown: Scalars['String'];
+  /** The member's last name */
   lastName: Scalars['String'];
+  /** Where the member lives */
   location: Scalars['String'];
+  /** The member's academic major */
   major: Scalars['String'];
+  /** The member's academic minor */
   minor: Scalars['String'];
+  /** Whether the member lives on campus */
   onCampus: Scalars['Boolean'];
+  /** The member's password (MD5-encrypted), if they want to update it */
   passHash?: InputMaybe<Scalars['String']>;
+  /** How many people the member can drive to events (besides themself) */
   passengers: Scalars['Int'];
+  /** The member's phone number */
   phoneNumber: Scalars['String'];
+  /** An optional link to a profile picture for the member */
   picture: Scalars['String'];
+  /** The member's nick name */
   preferredName?: InputMaybe<Scalars['String']>;
+  /** The new voice section of the member */
   section?: InputMaybe<Scalars['String']>;
 };
 
+/** Meeting minutes from officer meetings */
 export type Minutes = {
   __typename?: 'Minutes';
   /** When these notes were initially created */
@@ -415,61 +481,109 @@ export type Minutes = {
 
 export type MutationRoot = {
   __typename?: 'MutationRoot';
+  /** Creates multiple transactions from the given batch */
   addBatchOfTransactions: Array<ClubTransaction>;
+  /** Assign the given member the given officer position */
   addOfficership: Scalars['Boolean'];
+  /** Adds a permission to the given role */
   addPermissionToRole: Scalars['Boolean'];
+  /** Charge dues for the semester */
   chargeDues: Array<ClubTransaction>;
+  /** Charges late dues for the semester (anyone who hasn't paid their due) */
   chargeLateDues: Array<ClubTransaction>;
+  /** Confirms attendance for the given event */
   confirmForEvent: Attendance;
+  /** Creates a new event */
   createEvent: Event;
+  /** Creates a new document link */
   createLink: DocumentLink;
+  /** Create some new meeting minutes */
   createMeetingMinutes: Minutes;
+  /** Creates a new semester */
   createSemester: Semester;
+  /** Creates a new song */
   createSong: Song;
+  /** Creates a new song link */
   createSongLink: SongLink;
+  /** Creates a new uniform */
   createUniform: Uniform;
   /** Deletes an event and returns its ID */
   deleteEvent: Scalars['Int'];
+  /** Deletes the given document link */
   deleteLink: DocumentLink;
+  /** Deletes the given meeting minutes */
   deleteMeetingMinutes: Minutes;
   /** Deletes a member and returns their email */
   deleteMember: Scalars['String'];
+  /** Deletes the given song */
   deleteSong: Song;
+  /** Deletes the given song link */
   deleteSongLink: SongLink;
+  /** Deletes the given uniform */
   deleteUniform: Uniform;
+  /** Dismisses a gig request */
   dismissGigRequest: GigRequest;
+  /** Excuses all unconfirmed members at the given event */
   excuseUnconfirmedForEvent: Scalars['String'];
+  /** Requests a password reset email for the given member */
   forgotPassword: Scalars['String'];
   /** Gets a login token on successful login */
   login: Scalars['String'];
+  /** Logs in as the given member */
   loginAs: Scalars['String'];
   /** Logs the member out */
   logout: Scalars['String'];
+  /** Registers an existing member for the current semester */
   registerForSemester: Member;
+  /** Registers a new member */
   registerMember: Member;
+  /** Remove an officer position from the given mmember */
   removeOfficership: Scalars['Boolean'];
+  /** Removes a permission from the given role */
   removePermissionFromRole: Scalars['Boolean'];
+  /** Reopens a dismissed gig request */
   reopenGigRequest: GigRequest;
+  /** Resets the member's password */
   resetPassword: Scalars['String'];
+  /** Resolves the given transaction */
   resolveTransaction: ClubTransaction;
+  /** Responds to an absence request from the given member for the given event */
   respondToAbsenceRequest: AbsenceRequest;
+  /** RSVP's for the given event */
   rsvpForEvent: Attendance;
+  /** Set the given semester as the current semester */
   setCurrentSemester: Semester;
+  /** Sets the given global variable */
   setVariable: Variable;
+  /** Submits a new absence request for the current user at the given event */
   submitAbsenceRequest: AbsenceRequest;
+  /** Submits a new gig request */
   submitGigRequest: GigRequest;
+  /** Unsets the given variable and returns */
   unsetVariable: Scalars['String'];
+  /** Updates the attendance for the given member at the given event */
   updateAttendance: Attendance;
+  /** Updates the carpools for the given event */
   updateCarpools: Array<Carpool>;
+  /** Updates the given event */
   updateEvent: Event;
+  /** Update the cost for the given fee */
   updateFeeAmount: Fee;
+  /** Updates the given document link */
   updateLink: DocumentLink;
+  /** Updates the given meeting minutes */
   updateMeetingMinutes: Minutes;
+  /** Updates the given member's profile */
   updateMember: Member;
+  /** Updates the current user's profile */
   updateProfile: Member;
+  /** Updates the given semester */
   updateSemester: Semester;
+  /** Updates the given song */
   updateSong: Song;
+  /** Updates the given song link */
   updateSongLink: SongLink;
+  /** Updates the given uniform */
   updateUniform: Uniform;
 };
 
@@ -743,76 +857,135 @@ export type MutationRootUpdateUniformArgs = {
   update: NewUniform;
 };
 
+/** A new event, broken into different groups of fields */
 export type NewEvent = {
+  /** The event fields */
   event: NewEventFields;
+  /** The gig fields, if this event is a gig */
   gig?: InputMaybe<NewGig>;
+  /** How often to optionally repeat the event */
   repeat?: InputMaybe<NewEventPeriod>;
 };
 
+/** The event-specific fields on a new event */
 export type NewEventFields = {
+  /** When members are expected to arrive to the event */
   callTime: DateTimeInput;
+  /** General information or details about this event */
   comments?: InputMaybe<Scalars['String']>;
+  /** Whether members are assumed to attend (we assume as much for most events) */
   defaultAttend: Scalars['Boolean'];
+  /** Whether this event counts toward the volunteer gig count for the semester */
   gigCount?: InputMaybe<Scalars['Boolean']>;
+  /** Where this event will be held */
   location?: InputMaybe<Scalars['String']>;
+  /** The name of the event */
   name: Scalars['String'];
+  /** How many points attendance of this event is worth */
   points: Scalars['Int'];
+  /** When members are probably going to be released */
   releaseTime?: InputMaybe<DateTimeInput>;
+  /** The name of the semester this event belongs to */
   semester: Scalars['String'];
+  /** The type of the event (see EventType) */
   type: Scalars['String'];
 };
 
+/** How often an event should repeat and until when */
 export type NewEventPeriod = {
+  /** How many days between repeat events */
   period: Period;
+  /** The last date the event will repeat until */
   repeatUntil: Scalars['DateScalar'];
 };
 
+/** A new gig attached to a new event created from a gig request */
 export type NewGig = {
+  /** The email of the contact for the gig */
   contactEmail: Scalars['String'];
+  /** The name of the contact for the gig */
   contactName: Scalars['String'];
+  /** The phone number of the contact for the gig */
   contactPhone: Scalars['String'];
+  /** A short description for the event on our external site */
   description: Scalars['String'];
+  /** When we will start performing */
   performanceTime: Scalars['TimeScalar'];
+  /** How much we are charging for the gig */
   price?: InputMaybe<Scalars['Int']>;
+  /** Whether we will show this gig on our external site */
   public: Scalars['Boolean'];
+  /** A title for the event on our external site */
   summary: Scalars['String'];
+  /** The ID of the uniform for the gig */
   uniform: Scalars['Int'];
 };
 
+/** A new gig request */
 export type NewGigRequest = {
+  /** Any comments about the event */
   comments: Scalars['String'];
+  /** The email of the contact for the potential event */
   contactEmail: Scalars['String'];
+  /** The name of the contact for the potential event */
   contactName: Scalars['String'];
+  /** The phone number of the contact for the potential event */
   contactPhone: Scalars['String'];
+  /** Where the event will be happening */
   location: Scalars['String'];
+  /** The name of the potential event */
   name: Scalars['String'];
+  /** The organization requesting a performance from the Glee Club */
   organization: Scalars['String'];
+  /** When the event will probably happen */
   startTime: DateTimeInput;
 };
 
+/** A new member in the Glee Club */
 export type NewMember = {
+  /** A short biography written by the member */
   about: Scalars['String'];
+  /** What year the member arrived at Georgia Tech */
   arrivedAtTech?: InputMaybe<Scalars['Int']>;
+  /** What conflicts with rehearsal the member may have */
   conflicts: Scalars['String'];
+  /** Any dietary restrictions the member may have */
   dietaryRestrictions: Scalars['String'];
+  /** The new member's email, which must be unique */
   email: Scalars['String'];
+  /** Whether the member will be in the class or club */
   enrollment: Enrollment;
+  /** The member's first name */
   firstName: Scalars['String'];
+  /** What got them to join Glee Club */
   gatewayDrug: Scalars['String'];
+  /** Where the member came from */
   hometown: Scalars['String'];
+  /** The member's last name */
   lastName: Scalars['String'];
+  /** Where the member lives */
   location: Scalars['String'];
+  /** The member's academic major */
   major: Scalars['String'];
+  /** The member's academic minor */
   minor: Scalars['String'];
+  /** Whether the member lives on campus */
   onCampus: Scalars['Boolean'];
+  /** The member's password, MD5-encrypted */
   passHash: Scalars['String'];
+  /** How many people the member can drive to events (besides themself) */
   passengers: Scalars['Int'];
+  /** The member's phone number */
   phoneNumber: Scalars['String'];
+  /** An optional link to a profile picture for the member */
   picture: Scalars['String'];
+  /** The member's nick name */
   preferredName?: InputMaybe<Scalars['String']>;
+  /** What voice section the member will sing in */
   section?: InputMaybe<Scalars['String']>;
 };
 
+/** A new assignment of a permission to a role */
 export type NewRolePermission = {
   /** Optionally, the type of the event the permission applies to */
   eventType?: InputMaybe<Scalars['String']>;
@@ -822,39 +995,63 @@ export type NewRolePermission = {
   role: Scalars['String'];
 };
 
+/** A new semester for events */
 export type NewSemester = {
+  /** When the new semester will end */
   endDate: Scalars['DateScalar'];
+  /** How many gigs are required for members to attend during this semester */
   gigRequirement: Scalars['Int'];
+  /** The name of the new semester */
   name: Scalars['String'];
+  /** When the new semester will start */
   startDate: Scalars['DateScalar'];
 };
 
+/** A new song for the club to perform */
 export type NewSong = {
+  /** A description of the song */
   info?: InputMaybe<Scalars['String']>;
+  /** The name of the new song */
   title: Scalars['String'];
 };
 
+/** A new link to media under a song */
 export type NewSongLink = {
+  /** The content of the link */
   content?: InputMaybe<Scalars['String']>;
+  /** The name of the resource */
   name: Scalars['String'];
+  /** The type of the media */
   type: Scalars['String'];
+  /** A link to the media */
   url: Scalars['String'];
 };
 
+/** A new uniform type */
 export type NewUniform = {
+  /** The color to display for the uniform */
   color?: InputMaybe<Scalars['UniformColor']>;
+  /** A description of the uniform */
   description: Scalars['String'];
+  /** The name of the new uniform */
   name: Scalars['String'];
 };
 
+/** How often an event repeats */
 export enum Period {
+  /** The event repeat every two weeks */
   Biweekly = 'BIWEEKLY',
+  /** The event repeat every day */
   Daily = 'DAILY',
+  /** The event repeats every thirty days */
   Monthly = 'MONTHLY',
+  /** The event repeat every week */
   Weekly = 'WEEKLY',
+  /** The event repeats every year */
   Yearly = 'YEARLY'
 }
 
+/** A permission that grants abilities to a member */
 export type Permission = {
   __typename?: 'Permission';
   /** A description of what the permission entails */
@@ -865,11 +1062,15 @@ export type Permission = {
   type: PermissionType;
 };
 
+/** Whether a permission applies to a specific event type or not */
 export enum PermissionType {
+  /** The permission applies for a specific type of event */
   Event = 'EVENT',
+  /** The permission applies globally */
   Static = 'STATIC'
 }
 
+/** A musical note */
 export enum Pitch {
   A = 'A',
   AFlat = 'A_FLAT',
@@ -894,59 +1095,102 @@ export enum Pitch {
   GSharp = 'G_SHARP'
 }
 
+/** Events that are visible to the public */
 export type PublicEvent = {
   __typename?: 'PublicEvent';
+  /** A short description of the event */
   description: Scalars['String'];
+  /** When this event will end */
   endTime?: Maybe<DateTime>;
+  /** The ID of the event */
   id: Scalars['Int'];
+  /** An invite to add this event to your calendar */
   invite: Scalars['String'];
+  /** The location of the event */
   location: Scalars['String'];
+  /** The name of the event */
   name: Scalars['String'];
+  /** When this event will start */
   startTime: DateTime;
+  /** A short summary of the event */
   summary: Scalars['String'];
 };
 
+/** A song that is visible on the external site */
 export type PublicSong = {
   __typename?: 'PublicSong';
+  /** Whether the song is in the current club repertoire */
   current: Scalars['Boolean'];
+  /** The title of the song */
   title: Scalars['String'];
+  /** Links to YouTube performances of this song by the Glee Club */
   videos: Array<PublicVideo>;
 };
 
+/** A YouTube performance of a song by the Glee Club */
 export type PublicVideo = {
   __typename?: 'PublicVideo';
+  /** The name of the song */
   title: Scalars['String'];
+  /** A link to the performance on YouTube */
   url: Scalars['String'];
 };
 
 export type QueryRoot = {
   __typename?: 'QueryRoot';
+  /** All absence requests for the current semester */
   absenceRequests: Array<AbsenceRequest>;
+  /** All meeting minutes */
   allMeetingMinutes: Array<Minutes>;
+  /** The current role permissions */
   currentPermissions: Array<RolePermission>;
+  /** The current semester */
   currentSemester: Semester;
+  /** The event with the given ID */
   event: Event;
+  /** All events in the current semester */
   events: Array<Event>;
+  /** All fees */
   fees: Array<Fee>;
+  /** The gig request with the given ID */
   gigRequest: GigRequest;
+  /** All gig requests made this semester and other unresolved requests */
   gigRequests: Array<GigRequest>;
+  /** All document links */
   links: Array<DocumentLink>;
+  /** The meeting minutes with the given ID */
   meetingMinutes: Minutes;
+  /** The member with the given email */
   member: Member;
+  /** All members registered on the site. Only loads active members by default */
   members: Array<Member>;
+  /** All current officers */
   officers: Array<MemberRole>;
+  /** All events visible on the external site */
   publicEvents: Array<PublicEvent>;
+  /** All songs visible on the external site */
   publicSongs: Array<PublicSong>;
+  /** The semester with the given name */
   semester: Semester;
+  /** All semesters */
   semesters: Array<Semester>;
+  /** The song with the given ID */
   song: Song;
+  /** The song link with the given ID */
   songLink: SongLink;
+  /** All songs in our repertoire */
   songs: Array<Song>;
+  /** The static data for the site */
   static: StaticData;
+  /** All transactions for this semester */
   transactions: Array<ClubTransaction>;
+  /** The uniform with the given ID */
   uniform: Uniform;
+  /** All uniforms */
   uniforms: Array<Uniform>;
+  /** The current user, if they are logged in */
   user?: Maybe<Member>;
+  /** The variable with the given key */
   variable: Variable;
 };
 
@@ -1002,12 +1246,19 @@ export type QueryRootVariableArgs = {
   key: Scalars['String'];
 };
 
+/** The info needed for a member to register for a new semester */
 export type RegisterForSemesterForm = {
+  /** Any conflicts the member has */
   conflicts: Scalars['String'];
+  /** Any dietary restrictions the member has */
   dietaryRestrictions: Scalars['String'];
+  /** Whether the member is in the class or the club */
   enrollment: Enrollment;
+  /** Where the member lives */
   location: Scalars['String'];
+  /** Whether the member lives on-campus */
   onCampus: Scalars['Boolean'];
+  /** What voice section the member will sing in */
   section: Scalars['String'];
 };
 
@@ -1025,6 +1276,7 @@ export type Role = {
   rank: Scalars['Int'];
 };
 
+/** A permissin that is inherited by a role */
 export type RolePermission = {
   __typename?: 'RolePermission';
   /** Optionally, the type of the event the permission applies to */
@@ -1037,12 +1289,14 @@ export type RolePermission = {
   role: Scalars['String'];
 };
 
+/** A voice section members sing in */
 export type SectionType = {
   __typename?: 'SectionType';
   /** The name of the section (Tenor, Baritone, etc.) */
   name: Scalars['String'];
 };
 
+/** A school semester that events happen during */
 export type Semester = {
   __typename?: 'Semester';
   /** Whether this is the current semester */
@@ -1057,6 +1311,7 @@ export type Semester = {
   startDate: Scalars['DateScalar'];
 };
 
+/** A song that the Glee Club performs */
 export type Song = {
   __typename?: 'Song';
   /** Whether it is in this semester's repertoire */
@@ -1080,6 +1335,7 @@ export type Song = {
   title: Scalars['String'];
 };
 
+/** A link to some media under a song */
 export type SongLink = {
   __typename?: 'SongLink';
   /** The ID of the song link */
@@ -1094,58 +1350,92 @@ export type SongLink = {
   url: Scalars['String'];
 };
 
+/** A group of links to resources for a song */
 export type SongLinkSection = {
   __typename?: 'SongLinkSection';
+  /** The links in this group */
   links: Array<SongLink>;
+  /** The name of the link group */
   name: Scalars['String'];
 };
 
+/** An update to a song link */
 export type SongLinkUpdate = {
+  /** The new name of the link */
   name: Scalars['String'];
+  /** The new URL for the link */
   url: Scalars['String'];
 };
 
+/** Whether a song is in major or minor */
 export enum SongMode {
+  /** The song is in a major key */
   Major = 'MAJOR',
+  /** The song is in a minor key */
   Minor = 'MINOR'
 }
 
+/** An update to an existing song */
 export type SongUpdate = {
+  /** Whether the song is in the club's current repertoire */
   current: Scalars['Boolean'];
+  /** A description of the song */
   info: Scalars['String'];
+  /** The key of the song */
   key?: InputMaybe<Pitch>;
+  /** Whether the song is in major or minor */
   mode?: InputMaybe<SongMode>;
+  /** The pitch the song starts on */
   startingPitch?: InputMaybe<Pitch>;
+  /** The new name for the song */
   title: Scalars['String'];
 };
 
+/** A collection of static data */
 export type StaticData = {
   __typename?: 'StaticData';
+  /** All types of events */
   eventTypes: Array<EventType>;
+  /** The types of media available for song links */
   mediaTypes: Array<MediaType>;
+  /** All permissions used by the site */
   permissions: Array<Permission>;
+  /** All officer roles */
   roles: Array<Role>;
+  /** All voice sections members can sing in */
   sections: Array<SectionType>;
+  /** All types of transactions */
   transactionTypes: Array<TransactionType>;
 };
 
+/** Whether a media item is a link or a local file */
 export enum StorageType {
+  /** The item is stored locally */
   Local = 'LOCAL',
+  /** The item is a link to an external resource */
   Remote = 'REMOTE'
 }
 
+/** A batch of transactions to charge to multiple members */
 export type TransactionBatch = {
+  /** The amount to charge each member */
   amount: Scalars['Int'];
+  /** A description of the purpose of the transaction */
   description: Scalars['String'];
+  /** The emails of the members */
   members: Array<Scalars['String']>;
+  /** The type of the transaction */
   type: Scalars['String'];
 };
 
+/** A type of transaction */
 export type TransactionType = {
   __typename?: 'TransactionType';
+  /** The name of the type of transaction */
   name: Scalars['String'];
 };
 
+/** A uniform members might need to wear for an event */
 export type Uniform = {
   __typename?: 'Uniform';
   /** The associated color (In the format #HHH, H being a hex digit) */
@@ -1158,14 +1448,21 @@ export type Uniform = {
   name: Scalars['String'];
 };
 
+/** An updated carpool */
 export type UpdatedCarpool = {
+  /** The email of the driver */
   driver: Scalars['String'];
+  /** The emails of the passengers */
   passengers: Array<Scalars['String']>;
 };
 
+/** An update for some meeting minutes */
 export type UpdatedMeetingMinutes = {
+  /** The name of the meeting */
   name: Scalars['String'];
+  /** The full version of the meeting minutes */
   private?: InputMaybe<Scalars['String']>;
+  /** The redacted version of the meeting minutes */
   public: Scalars['String'];
 };
 
@@ -1492,6 +1789,13 @@ export type UpdateMemberMutationVariables = Exact<{
 
 
 export type UpdateMemberMutation = { __typename?: 'MutationRoot', updateMember: { __typename?: 'Member', email: string } };
+
+export type UpdateProfileMutationVariables = Exact<{
+  update: MemberUpdate;
+}>;
+
+
+export type UpdateProfileMutation = { __typename?: 'MutationRoot', updateProfile: { __typename?: 'Member', email: string } };
 
 export type UpdateSemesterMutationVariables = Exact<{
   name: Scalars['String'];
@@ -1925,6 +2229,13 @@ export const UpdateMeetingMinutesDocument = gql`
 export const UpdateMemberDocument = gql`
     mutation UpdateMember($email: String!, $update: MemberUpdate!) {
   updateMember(email: $email, newMember: $update) {
+    email
+  }
+}
+    `;
+export const UpdateProfileDocument = gql`
+    mutation UpdateProfile($update: MemberUpdate!) {
+  updateProfile(newMember: $update) {
     email
   }
 }
@@ -2670,6 +2981,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     UpdateMember(variables: UpdateMemberMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateMemberMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateMemberMutation>(UpdateMemberDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateMember', 'mutation');
+    },
+    UpdateProfile(variables: UpdateProfileMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateProfileMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateProfileMutation>(UpdateProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateProfile', 'mutation');
     },
     UpdateSemester(variables: UpdateSemesterMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateSemesterMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateSemesterMutation>(UpdateSemesterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateSemester', 'mutation');
