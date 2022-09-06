@@ -21,6 +21,7 @@
   import { Md5 } from 'ts-md5'
   import { query } from 'src/state/query'
   import { goToRoute } from 'src/store/route'
+import { onDestroy } from 'svelte';
 
   let password = ''
   let confirmPassword = ''
@@ -45,8 +46,7 @@
     state = loading
     form.passHash = enteredPassword ? Md5.hashStr(password) : null
     const result = loggedIn
-      ? await query('UpdateMember', {
-          email: get(siteContext).user!.email,
+      ? await query('UpdateProfile', {
           update: form,
         })
       : await query('RegisterMember', {
@@ -70,6 +70,14 @@
       }
     }
   }
+  
+  const unsubscribe = siteContext.subscribe(context => {
+    if (context.user) {
+      form = buildProfileForm(context)
+    }
+  })
+  
+  onDestroy(unsubscribe)
 </script>
 
 <Section>
@@ -79,7 +87,6 @@
       <HeaderText />
       <br />
       <FormFields
-        loggedIn={!!$siteContext.user}
         {form}
         updateForm={(updatedForm) => (form = updatedForm)}
         {password}

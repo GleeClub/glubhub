@@ -1,0 +1,5 @@
+mutation UpdateProfile($update: MemberUpdate!) {
+  updateProfile(newMember: $update) {
+    email
+  }
+}

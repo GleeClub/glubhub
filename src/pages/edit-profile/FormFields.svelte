@@ -24,7 +24,6 @@
   import { createEventDispatcher } from 'svelte'
   import CheckboxInput from 'src/components/forms/CheckboxInput.svelte'
 
-  export let loggedIn: boolean
   export let form: MemberUpdate
   export let updateForm: (form: MemberUpdate) => void
   export let password: string
@@ -83,14 +82,12 @@
       type={passwordType}
       value={password}
       onInput={(password) => updatePassword(password)}
-      required={loggedIn}
       placeholder="Password"
     />
     <TextInput
       type={passwordType}
       value={confirmPassword}
       onInput={(confirmPassword) => updateConfirmPassword(confirmPassword)}
-      required={loggedIn}
       placeholder="Confirm Password"
     />
   </InputWrapper>
