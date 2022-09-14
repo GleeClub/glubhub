@@ -9,7 +9,7 @@
   import { siteContext } from 'src/store/context'
   import { derived } from 'svelte/store'
   import { stringType, uniformType } from 'src/state/input'
-import { EMPTY_GIG } from 'src/utils/constants';
+  import { EMPTY_GIG } from 'src/utils/constants'
 
   export let event: NewEventFields
   export let gig: NewGig | null
@@ -55,7 +55,8 @@ import { EMPTY_GIG } from 'src/utils/constants';
     values={[null, ...$loadedUniforms]}
     selected={$loadedUniforms.find((uniform) => uniform.id === gig?.uniform) ||
       null}
-    onInput={(uniform) => updateGig({ ...(gig || EMPTY_GIG), uniform: uniform?.id || 0 })}
+    onInput={(uniform) =>
+      updateGig({ ...(gig || EMPTY_GIG), uniform: uniform?.id || 0 })}
     title="Uniform"
     required={!!gig}
   />

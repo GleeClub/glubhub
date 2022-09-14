@@ -21,7 +21,7 @@
   import { Md5 } from 'ts-md5'
   import { query } from 'src/state/query'
   import { goToRoute } from 'src/store/route'
-import { onDestroy } from 'svelte';
+  import { onDestroy } from 'svelte'
 
   let password = ''
   let confirmPassword = ''
@@ -70,13 +70,13 @@ import { onDestroy } from 'svelte';
       }
     }
   }
-  
-  const unsubscribe = siteContext.subscribe(context => {
+
+  const unsubscribe = siteContext.subscribe((context) => {
     if (context.user) {
       form = buildProfileForm(context)
     }
   })
-  
+
   onDestroy(unsubscribe)
 </script>
 

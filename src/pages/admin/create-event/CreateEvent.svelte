@@ -84,13 +84,13 @@
           public: true,
           description: request.comments,
           summary: request.name,
-          uniform: 0
+          uniform: 0,
         }
       }
     })
   }
 
-  const unsubscribe = siteContext.subscribe(context => {
+  const unsubscribe = siteContext.subscribe((context) => {
     event.semester = context.currentSemester.name
   })
 

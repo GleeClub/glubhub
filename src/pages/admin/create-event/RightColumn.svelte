@@ -25,7 +25,8 @@
   <CheckboxInput
     content="This event is public, so I want it to show up on the external site"
     checked={gig?.public || false}
-    onChange={(isPublic) => updateGig({ ...(gig || EMPTY_GIG), public: isPublic })}
+    onChange={(isPublic) =>
+      updateGig({ ...(gig || EMPTY_GIG), public: isPublic })}
   />
   {#if gig?.public}
     <TextInput
@@ -39,7 +40,8 @@
     />
     <TextareaInput
       value={gig.description || ''}
-      onInput={(description) => updateGig({ ...(gig || EMPTY_GIG), description })}
+      onInput={(description) =>
+        updateGig({ ...(gig || EMPTY_GIG), description })}
       title="Public Description"
       helpText="Careful, real people will see this"
       placeholder="We the people, in order to kick a more perfect ass, I don't know where this is going"
