@@ -1,0 +1,2 @@
+C:\Users\Ben04\Source\Repos\glubhub\obj\x86\Debug\Glubhub.vbproj.AssemblyReference.cache
+C:\Users\Ben04\Source\Repos\glubhub\obj\x86\Debug\Glubhub.vbproj.CoreCompileInputs.cache

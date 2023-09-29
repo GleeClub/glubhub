@@ -7,6 +7,12 @@
   import SongInfo from './SongInfo.svelte'
   import EditSong from './edit/EditSong.svelte'
 
+   //New
+  import RequiresPermission from 'src/components/member/RequiresPermission.svelte'
+  import Button from 'src/components/buttons/Button.svelte'
+  import { editRepertoire } from 'src/state/permissions'
+  //End
+
   import {
     emptyLoaded,
     LazyRemoteData,
@@ -72,8 +78,6 @@
         title="Current"
         songs={$currentSongs}
         selectedId={songId}
-        {createState}
-        {createSong}
       />
       <SongColumn title="A-G" songs={$songsAToG} selectedId={songId} />
       <SongColumn title="H-P" songs={$songsHToP} selectedId={songId} />
@@ -81,6 +85,19 @@
     </Columns>
   </Container>
 </Section>
+
+<!--Create button-->
+    <RequiresPermission permission={editRepertoire}>
+    <br />
+    <div>
+    <Button
+        click={() => createSong()}
+    >
+        Create Song
+    </Button>
+    </div>
+  </RequiresPermission>
+  <!--End-->
 
 <Sidebar
   data={$selectedSong}
