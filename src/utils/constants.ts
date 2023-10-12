@@ -3,7 +3,7 @@ import { SimpleAttendance } from 'src/state/types'
 
 export const GREASE_TOKEN_NAME = 'grease-token'
 export const GREASE_OLD_TOKEN_NAME = 'grease-old-token'
-export const API_URL = 'https://api.glubhub.org/'
+export const API_URL = 'https://grease.fly.dev/'
 export const GOLD_COLOR = '#b4a46a'
 export const SUBMISSION_STATE_BOX_ID = 'submission-box'
 export const SECTION_ORDER = ['Tenor 1', 'Tenor 2', 'Baritone', 'Bass', null]
