@@ -28,7 +28,7 @@
     on:select={(song) => replaceRoute(routeRepertoire(song.detail.id, null))}
     messageIfEmpty="Nothin' to see here, buddy."
   >
-    {#if createState}
+    <!-- {#if createState} -->
       <RequiresPermission slot="bottom-content" permission={editRepertoire}>
         <div style:padding-top="5px">
           <ButtonGroup alignment="is-centered">
@@ -45,6 +45,6 @@
           {/if}
         </div>
       </RequiresPermission>
-    {/if}
+    <!-- {/if} -->
   </SelectableList>
 </Column>
