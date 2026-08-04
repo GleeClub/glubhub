@@ -1,6 +1,7 @@
 mutation CreateSong($title: String!) {
   createSong(newSong: { 
-    title: $title 
+    title: $title,
+    info: ""
   }) {
     id
   }
