@@ -78,8 +78,6 @@
         title="Current"
         songs={$currentSongs}
         selectedId={songId}
-        {createState}
-        {createSong} 
       />
       <SongColumn title="A-G" songs={$songsAToG} selectedId={songId} />
       <SongColumn title="H-P" songs={$songsHToP} selectedId={songId} />
