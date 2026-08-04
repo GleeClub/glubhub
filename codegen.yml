@@ -1,4 +1,4 @@
-schema: https://api.glubhub.org
+schema: https://grease.fly.dev/
 documents: './src/**/*.graphql'
 generates:
   ./src/gql-operations.ts:
