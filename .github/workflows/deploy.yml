@@ -13,9 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install and Build
+      - name: Install and Generate
         run: |
           npm install
+          npm run gql-gen
+
+      - name: Build
+        run: |
           npm run build
 
       - name: Deploy to GitHub Pages
