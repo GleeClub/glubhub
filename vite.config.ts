@@ -7,7 +7,6 @@ import path from 'path'
 const production = process.env.NODE_ENV === 'production'
 // https://vitejs.dev/config/
 const config = defineConfig({
-  base: '/glubhub/',
   plugins: [
     svelte({
       emitCss: production,
