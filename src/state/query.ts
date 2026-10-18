@@ -14,9 +14,9 @@ import { getToken } from 'src/utils/token'
 
 export const gqlClient = getSdk(
   new GraphQLClient(API_URL, {
-    headers: () => {
+    headers: (): Record<string, string> => {
       const token = getToken()
-      return token ? { GREASE_TOKEN: token } : undefined
+      return token ? { GREASE_TOKEN: token } : {}
     },
   })
 )

@@ -37,10 +37,11 @@
   "devDependencies": {
     "@creativebulma/bulma-divider": "^1.1.0",
     "@creativebulma/bulma-tooltip": "^1.2.0",
-    "@graphql-codegen/cli": "^2.9.1",
-    "@graphql-codegen/typed-document-node": "^2.2.8",
-    "@graphql-codegen/typescript-graphql-request": "^4.5.2",
-    "@graphql-codegen/typescript-operations": "^2.3.5",
+    "@graphql-codegen/add": "^7.1.1",
+    "@graphql-codegen/cli": "^7.4.6",
+    "@graphql-codegen/typescript": "^6.1.2",
+    "@graphql-codegen/typescript-graphql-request": "^7.1.0",
+    "@graphql-codegen/typescript-operations": "^6.1.10",
     "@sveltejs/vite-plugin-svelte": "^1.0.1",
     "@tsconfig/svelte": "^2.0.0",
     "@types/d3": "^7.4.0",
@@ -64,7 +65,7 @@
     "d3": "^7.6.1",
     "dayjs": "^1.11.1",
     "graphql": "^16.5.0",
-    "graphql-request": "^4.3.0",
+    "graphql-request": "^7.4.0",
     "sirv-cli": "^2.0.0",
     "ts-md5": "^1.2.11"
   }

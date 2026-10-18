@@ -116,6 +116,7 @@ export interface HoveredEvent {
 }
 
 export interface CarpoolMember {
+  __typename: 'Member'
   email: string
   fullName: string
   location: string

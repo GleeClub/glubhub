@@ -1,5 +1,6 @@
 query EditCarpoolContext($eventId: Int!) {
   members {
+    __typename
     email
     fullName
     location
@@ -9,12 +10,14 @@ query EditCarpoolContext($eventId: Int!) {
     name
     carpools {
       driver {
+        __typename
         email
         fullName
         location
         passengers
       }
       passengers {
+        __typename
         email
         fullName
         location

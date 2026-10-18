@@ -63,12 +63,14 @@ query FullEvent($id: Int!) {
     }
     carpools {
       driver {
+        __typename
         email
         fullName
         location
         passengers
       }
       passengers {
+        __typename
         email
         fullName
         location

@@ -75,9 +75,9 @@ export const sectionType = (
   textType: 'text',
 })
 
-export const uniformType = (
-  uniforms: Uniform[]
-): FormInputType<Uniform | null> => ({
+export const uniformType = <T extends Uniform>(
+  uniforms: T[]
+): FormInputType<T | null> => ({
   toString: (u) => u?.name || '(no uniform)',
   fromString: (u) => uniforms.find((uniform) => uniform.name === u) || null,
   textType: 'text',

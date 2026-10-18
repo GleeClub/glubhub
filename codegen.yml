@@ -1,12 +1,22 @@
 schema: https://grease.fly.dev/
 documents: './src/**/*.graphql'
 generates:
-  ./src/gql-operations.ts:
+  ./src/gql-types.ts:
     plugins:
       - typescript
+    config:
+      scalars:
+        DateScalar: string
+        TimeScalar: string
+        UniformColor: string
+  ./src/gql-operations.ts:
+    plugins:
+      - add:
+          content: "export * from './gql-types'"
       - typescript-operations
       - typescript-graphql-request
     config:
+      importSchemaTypesFrom: './src/gql-types'
       scalars:
         DateScalar: string
         TimeScalar: string
